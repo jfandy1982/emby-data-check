@@ -1,0 +1,24 @@
+{
+  "name": "Emby Data Check",
+  "dockerFile": "Dockerfile",
+  "appPort": [3000],
+  "runArgs": ["-u", "node"],
+  "settings": {
+    "workbench.colorTheme": "Night Owl"
+  },
+  "postCreateCommand": "npm install",
+  "extensions": [
+    "42crunch.vscode-openapi",
+    "aaron-bond.better-comments",
+    "bierner.markdown-preview-github-styles",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "nrwl.angular-console",
+    "pflannery.vscode-versionlens",
+    "pkief.material-icon-theme",
+    "redhat.vscode-yaml",
+    "streetsidesoftware.code-spell-checker",
+    "streetsidesoftware.code-spell-checker-german",
+    "yzhang.markdown-all-in-one"
+  ]
+}

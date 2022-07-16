@@ -1,0 +1,23 @@
+{
+	"version": "0.2",
+	"language": "en",
+	"ignorePaths": [
+		"**/node_modules/**",
+		"**/vscode-extension/**",
+		"**/.git/**",
+		".vscode",
+		"dist",
+    "megalinter",
+		"package-lock.json",
+		"report"
+	],
+  "dictionaries": ["project-words"],
+  "dictionaryDefinitions": [
+    {
+        "name": "project-words",
+        "path": "./project-words.txt",
+        "addWords": true
+    }
+  ],
+	"words": ["Andreas", "jfandy"]
+}

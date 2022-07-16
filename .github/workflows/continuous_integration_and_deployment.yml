@@ -1,0 +1,188 @@
+name: Continuous Integration and Deployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build artifacts and run the test suite
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: build
+        with:
+          filters: |
+            build_sources:
+              - './src/**'
+              - added|modified: './package*.json'
+
+      - name: Setup Node.js
+
+        if: ${{ steps.build.outputs.build_sources == 'true' }}
+
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install dependencies
+
+        if: ${{ steps.build.outputs.build_sources == 'true' }}
+
+        run: npm install
+
+      - name: Build artifacts
+
+        if: ${{ steps.build.outputs.build_sources == 'true' }}
+
+        run: npm run build --if-present
+
+      # - name: Execute Tests
+      #   run: npm test
+
+  sonarcloud:
+    name: Static code checks
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Detect changes
+        uses: dorny/paths-filter@v2
+        id: sonarcloud
+        with:
+          filters: |
+            sonarcloud_sources:
+              - './src/**'
+
+      - name: Perform code scan on sonarcloud.io
+
+        if: ${{ steps.sonarcloud.outputs.sonarcloud_sources == 'true' }}
+
+        uses: sonarsource/sonarcloud-github-action@v1.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  lint:
+    name: Check linting settings
+
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Execute checks in 'MegaLinter'
+        id: ml
+        uses: oxsecurity/megalinter/flavors/javascript@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload MegaLinter Reports
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: MegaLinter reports
+          path: |
+            report
+            mega-linter.log
+
+  # docker-image-deploy:
+  #   name: Deploy new docker image version to Docker Hub Repository
+
+  #   runs-on: ubuntu-latest
+
+  #   needs: [lint, sonarcloud]
+
+  #   if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         fetch-depth: 0
+
+  #     - name: Detect changes
+  #       uses: dorny/paths-filter@v2
+  #       id: docker_image_deploy
+  #       with:
+  #         filters: |
+  #           docker_image_rebuild:
+  #             - './src/**'
+  #             - added|modified: './Dockerfile'
+  #             - added|modified: './package*.json'
+  #             - added|modified: './tsconfig.json'
+  #             - added|modified: './webpack.co*.js'
+
+  #     - name: Update Docker Image
+
+  #       if: ${{ steps.docker_image_deploy.outputs.docker_image_rebuild == 'true' }}
+
+  #       uses: elgohr/Publish-Docker-Github-Action@v4
+  #       with:
+  #         name: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}
+  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+  # docker-sync-readme:
+  #   name: Update README.md in Docker Hub Repository
+
+  #   runs-on: ubuntu-latest
+
+  #   needs: [lint, sonarcloud]
+
+  #   if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         fetch-depth: 0
+
+  #     - name: Detect changes
+  #       uses: dorny/paths-filter@v2
+  #       id: docker_sync_readme
+  #       with:
+  #         filters: |
+  #           docker_readme:
+  #             - added|modified: './docs/docker/docker.md'
+
+  #     - name: Sync README.md from file ./docs/docker/docker.md
+
+  #       if: ${{ steps.docker_sync_readme.outputs.docker_readme == 'true' }}
+
+  #       uses: meeDamian/sync-readme@v1.0.6
+  #       with:
+  #         readme: ./docs/docker/docker.md
+  #         slug: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}
+  #         user: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         pass: ${{ secrets.DOCKERHUB_PASSWORD }}

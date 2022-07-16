@@ -1,0 +1,21 @@
+name: Garbage Collection
+
+on:
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Retention Period (in days)'
+        required: true
+        default: '30'
+
+jobs:
+  del_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete outdated workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: ${{ github.event.inputs.days }}
+          keep_minimum_runs: 5
