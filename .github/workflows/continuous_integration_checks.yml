@@ -1,0 +1,291 @@
+name: Continuous Integration Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches-ignore:
+      - gh-pages
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  analyze:
+    name: 'Initialize Workflow Context'
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      base: ${{ steps.wf-ctx-value.outputs.base }}
+      head: ${{ steps.wf-ctx-value.outputs.head }}
+      is-merge: ${{ steps.wf-ctx-value.outputs.is-merge }}
+      is-pr: ${{ steps.wf-ctx-value.outputs.is-pr }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Fetch values for environment variables'
+        id: wf-ctx-value
+        uses: ./.github/actions/wf-ctx-value
+
+  build:
+    name: Build
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze]
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+      IS_MERGE: ${{ needs.analyze.outputs.is-merge }}
+      IS_PR: ${{ needs.analyze.outputs.is-pr }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        if: env.IS_PR == 'true' || env.IS_MERGE == 'true'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'PR: Build affected parts only'
+        if: env.IS_PR == 'true'
+        run: npm run build:affected
+
+      - name: 'MERGE into `main`: Build all projects'
+        if: env.IS_MERGE == 'true'
+        run: npm run build
+
+  lint-nx:
+    name: Lint with Nx Features
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, build]
+
+    if: needs.analyze.outputs.is-pr == 'true'
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Lint Nx Workspace'
+        run: npx nx workspace-lint
+
+      - name: 'Lint all projects'
+        run: npm run lint
+
+  lint:
+    name: 'Lint with MegaLinter tooling'
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze]
+
+    if: needs.analyze.outputs.is-pr == 'true'
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Execute checks in `MegaLinter`'
+        uses: oxsecurity/megalinter/flavors/javascript@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Upload reported failures from MegaLinter'
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: MegaLinter reports
+          path: |
+            report
+            mega-linter.log
+
+  sonarcloud:
+    name: 'Static code checks'
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze]
+
+    env:
+      IS_MERGE: ${{ needs.analyze.outputs.is-merge }}
+      IS_PR: ${{ needs.analyze.outputs.is-pr }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Run static code checks on `sonarcloud.io`'
+        uses: sonarsource/sonarcloud-github-action@v1.8
+        if: env.IS_PR == 'true' || env.IS_MERGE == 'true'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  test:
+    name: Test
+
+    environment: testing
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, build]
+
+    if: needs.analyze.outputs.is-pr == 'true'
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Run tests for all projects'
+        run: npm run test
+
+  e2e-test:
+    name: E2E Test
+
+    environment: testing
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, test]
+
+    if: needs.analyze.outputs.is-pr == 'true'
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Run E2E tests for all projects'
+        run: npm run e2e
+
+  publish-api:
+    name: 'Publish changes of API to DockerHub'
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, build]
+
+    if: needs.analyze.outputs.is-merge == 'true'
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+      NX_PROJECT_NAME: 'api-emby-data-check'
+      DOCKERFILE: './docker/Dockerfile.prod.api-edc'
+      READMEFILE: './docs/docker/docker.api.md'
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Detect changes'
+        id: detectedChanges
+        uses: ./.github/actions/detect-changes-to-docker
+        with:
+          nx-project-name: ${{ env.NX_PROJECT_NAME }}
+          docker-readme-file: ${{ env.READMEFILE }}
+
+      - name: 'Publish new image'
+        uses: ./.github/actions/publish-to-docker
+        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+        with:
+          docker-file: ${{ env.DOCKERFILE }}
+          docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          docker-hub-repository: ${{ secrets.DOCKERHUB_REPOSITORY_API }}
+          docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
+          need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
+          readme-file: ${{ env.READMEFILE }}
+
+  publish-ui:
+    name: 'Publish changes of UI to DockerHub'
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, build]
+
+    if: needs.analyze.outputs.is-merge == 'true'
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+      NX_PROJECT_NAME: 'angular-emby-data-check'
+      DOCKERFILE: './docker/Dockerfile.prod.angular-edc'
+      READMEFILE: './docs/docker/docker.ui.md'
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Detect changes'
+        id: detectedChanges
+        uses: ./.github/actions/detect-changes-to-docker
+        with:
+          nx-project-name: ${{ env.NX_PROJECT_NAME }}
+          docker-readme-file: ${{ env.READMEFILE }}
+
+      - name: 'Publish new image'
+        uses: ./.github/actions/publish-to-docker
+        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+        with:
+          docker-file: ${{ env.DOCKERFILE }}
+          docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          docker-hub-repository: ${{ secrets.DOCKERHUB_REPOSITORY_UI }}
+          docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+          need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
+          need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
+          readme-file: ${{ env.READMEFILE }}
