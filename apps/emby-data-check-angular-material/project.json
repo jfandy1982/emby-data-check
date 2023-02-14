@@ -18,7 +18,11 @@
           "apps/emby-data-check-angular-material/src/favicon.ico",
           "apps/emby-data-check-angular-material/src/assets"
         ],
-        "styles": ["apps/emby-data-check-angular-material/src/styles.css"],
+        "styles": [
+          "./node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
+          "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+          "apps/emby-data-check-angular-material/src/styles.css"
+        ],
         "scripts": []
       },
       "configurations": {
