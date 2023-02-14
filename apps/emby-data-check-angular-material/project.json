@@ -60,7 +60,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "port": 4201
+        "port": 4201,
+        "proxyConfig": "apps/emby-data-check-angular-material/proxy.conf.json"
       }
     },
     "extract-i18n": {
