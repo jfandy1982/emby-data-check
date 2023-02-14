@@ -1,16 +1,55 @@
 {
   "name": "emby-data-check",
-  "version": "0.0.0",
+  "version": "0.0.1-SNAPSHOT",
+  "description": "An (opinionated) Emby Data Check Tool",
   "license": "MIT",
+  "engines": {
+    "node": "18.14.0"
+  },
   "scripts": {
+    "build": "nx run-many --target=build --all",
+    "build:affected": "nx affected:build --configuration=production",
+    "cleanup": "npm-run-all --continue-on-error --parallel \"cleanup:*\" && npm install",
+    "cleanup:api": "rimraf ./dist",
+    "cleanup:deps": "rimraf ./node_modules",
+    "cleanup:package": "rimraf ./package-lock.json",
+    "cleanup:ui": "rimraf ./.angular",
+    "e2e": "nx run-many --target=e2e --all",
+    "e2e:affected": "nx affected:e2e",
+    "lint": "nx run-many --target=lint --all",
+    "lint:affected": "nx affected:lint --max-warnings=0",
+    "lint:all": "npm-run-all --continue-on-error --parallel \"lint:!(fix|megalinter)\"",
+    "lint:eslint": "nx lint",
+    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
+    "lint:megalinter": "npx mega-linter-runner --flavor javascript",
+    "lint:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
+    "lint:secretlint": "secretlint \"**/*\" --secretlintrc .github/linters/.secretlintrc.json",
+    "ng": "nx",
+    "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
+    "pre-commit": "lint-staged",
+    "prepare": "husky install",
+    "start": "nx serve",
+    "start:api:dev": "nx serve api-emby-data-check",
+    "start:ui:dev": "nx serve angular-emby-data-check --configuration development",
+    "test": "nx run-many --target=test --all",
+    "test:affected": "nx affected:test",
+    "upgrade": "nx migrate latest"
   },
   "private": true,
-  "dependencies": {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfandy1982/emby-data-check.git"
   },
+  "author": "Andreas Ziegler (dev@andreasziegler.net)",
+  "bugs": {
+    "url": "https://github.com/jfandy1982/emby-data-check/issues"
+  },
+  "homepage": "https://jfandy1982.github.io/emby-data-check/",
+  "dependencies": {},
   "devDependencies": {
-    "nx": "15.7.0",
     "@nrwl/workspace": "15.7.0",
-    "typescript": "~4.8.2",
-    "prettier": "^2.6.2"
+    "nx": "15.7.0",
+    "prettier": "^2.0.0",
+    "typescript": "^4.0.0"
   }
 }
