@@ -20,8 +20,11 @@
     "lint:megalinter": "npx mega-linter-runner --flavor javascript",
     "lint:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
     "lint:secretlint": "secretlint \"**/*\" --secretlintrc .github/linters/.secretlintrc.json",
+    "ng": "nx",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
+    "start:api:dev": "nx serve emby-data-check-api --configuration development",
+    "start:ui:dev": "nx serve emby-data-check-angular-material --configuration development",
     "upgrade": "nx migrate latest"
   },
   "private": true,
