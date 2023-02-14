@@ -45,8 +45,9 @@
     "url": "https://github.com/jfandy1982/emby-data-check/issues"
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
-  "dependencies": {},
   "devDependencies": {
+    "@nrwl/angular": "15.7.0",
+    "@nrwl/nest": "15.7.0",
     "@nrwl/workspace": "15.7.0",
     "nx": "15.7.0",
     "prettier": "^2.0.0",
