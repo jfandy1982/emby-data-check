@@ -1,7 +1,7 @@
 {
   "name": "emby-data-check",
   "version": "0.0.1-SNAPSHOT",
-  "description": "An (opinionated) Emby Data Check Tool",
+  "description": "An (opinionated) Emby Data Check Tools",
   "license": "MIT",
   "engines": {
     "node": "18.14.0"
