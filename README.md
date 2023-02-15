@@ -1,5 +1,3 @@
-
-
 # Emby Data Check Tool
 
 [![GitHub](https://img.shields.io/github/license/jfandy1982/emby-data-check?logo=GitHub)](https://github.com/jfandy1982/emby-data-check/blob/main/LICENSE.md)
@@ -46,17 +44,17 @@ Although the versions of the dependencies listed in file `package.json` are ~~fi
 These are the steps and requirements to start development:
 
 1. Make sure, you've installed required tools Node.js, Git, Docker, Docker-Compose on your development machine.
-    1. Globally installed NPM packages are:
-        1. @angular/cli
-        2. @nestjs/cli
-        3. mega-linter-runner
-        4. nodemon
-        5. npm
-        6. npm-check
-        7. nx
-        8. ts-node
-        9. typeorm
-        10. typescript
+   1. Globally installed NPM packages are:
+      1. @angular/cli
+      2. @nestjs/cli
+      3. mega-linter-runner
+      4. nodemon
+      5. npm
+      6. npm-check
+      7. nx
+      8. ts-node
+      9. typeorm
+      10. typescript
 2. Clone this repository into a folder of your choice.
 3. Navigate into that cloned folder (containing the file `package.json`).
 4. Run command `npm install`.
