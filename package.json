@@ -12,12 +12,7 @@
     "cleanup:deps": "rimraf ./node_modules",
     "cleanup:package": "rimraf ./package-lock.json",
     "cleanup:ui": "rimraf ./.angular",
-    "lint": "nx run-many --target=lint --all",
-    "lint:affected": "nx affected:lint --max-warnings=0",
-    "lint:all": "npm-run-all --continue-on-error --parallel \"lint:!(fix|megalinter)\"",
-    "lint:eslint": "nx lint",
-    "lint:fix": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*:fix",
-    "lint:megalinter": "npx mega-linter-runner --flavor javascript",
+    "format:affected:fix": "npx pretty-quick --staged",
     "lint:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
     "lint:secretlint": "secretlint \"**/*\" --secretlintrc .github/linters/.secretlintrc.json",
     "ng": "nx",
@@ -39,7 +34,8 @@
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "lint-staged": {
     "**/*.*": [
-      "npm run lint:secretlint"
+      "npm run lint:secretlint",
+      "npm run format:affected:fix"
     ],
     "**/package.json": [
       "npm run lint:npmPkgJsonLint"
@@ -83,6 +79,7 @@
     "npm-run-all": "^4.0.0",
     "nx": "15.7.0",
     "prettier": "^2.0.0",
+    "pretty-quick": "^3.0.0",
     "rimraf": "^4.0.0",
     "secretlint": "^6.0.0",
     "ts-jest": "^28.0.0",
