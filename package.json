@@ -1,7 +1,7 @@
 {
   "name": "emby-data-check",
   "version": "0.0.1-SNAPSHOT",
-  "description": "An (opinionated) Emby Data Check Tools",
+  "description": "An (opinionated) Emby Data Check Tool",
   "license": "MIT",
   "engines": {
     "node": "18.14.0"
@@ -12,9 +12,11 @@
     "cleanup:deps": "rimraf ./node_modules",
     "cleanup:package": "rimraf ./package-lock.json",
     "cleanup:ui": "rimraf ./.angular",
-    "format:affected:fix": "npx pretty-quick --staged",
-    "lint:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
-    "lint:secretlint": "secretlint \"**/*\" --secretlintrc .github/linters/.secretlintrc.json",
+    "format:check:all": "npx prettier --check --ignore-unknown \"**/*\"",
+    "format:fix:affected": "npx pretty-quick --staged",
+    "lint:check:megalinter": "npx mega-linter-runner --flavor javascript",
+    "lint:check:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
+    "lint:check:secretlint": "secretlint \"**/*\" --maskSecrets --secretlintrc .github/linters/.secretlintrc.json",
     "ng": "nx",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
@@ -34,11 +36,11 @@
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "lint-staged": {
     "**/*.*": [
-      "npm run lint:secretlint",
-      "npm run format:affected:fix"
+      "npm run lint:check:secretlint",
+      "npm run format:fix:affected"
     ],
     "**/package.json": [
-      "npm run lint:npmPkgJsonLint"
+      "npm run lint:check:npmPkgJsonLint"
     ]
   },
   "devDependencies": {
