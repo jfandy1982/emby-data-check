@@ -1,34 +1,34 @@
-version: "3.9"
+version: '3.9'
 
 name: edc-db-dev
 services:
   db:
     container_name: db
     hostname: postgresql
-    image: "postgres:${POSTGRES_VERSION}"
+    image: 'postgres:${POSTGRES_VERSION}'
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - "dbdata:/var/lib/postgresql/data"
+      - 'dbdata:/var/lib/postgresql/data'
     networks:
       - services
 
   dbadmin:
     container_name: dbadmin
     hostname: postgresql-admin
-    image: "dpage/pgadmin4:${PGADMIN_VERSION}"
+    image: 'dpage/pgadmin4:${PGADMIN_VERSION}'
     depends_on:
       - db
     ports:
-      - "5433:80"
+      - '5433:80'
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
       - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     volumes:
-      - "./dba_init/servers.json:/pgadmin4/servers.json"
-      - "dbadmin:/var/lib/pgadmin"
+      - './dba_init/servers.json:/pgadmin4/servers.json'
+      - 'dbadmin:/var/lib/pgadmin'
     networks:
       - services
 
@@ -37,16 +37,16 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: "$PWD/../../../../Docker_Content/edc/db"
+      device: '$PWD/../../../../Docker_Content/edc/db'
       o: bind
 
   dbadmin:
     driver: local
     driver_opts:
       type: none
-      device: "$PWD/../../../../Docker_Content/edc/dbadmin"
+      device: '$PWD/../../../../Docker_Content/edc/dbadmin'
       o: bind
 
 networks:
   services:
-    name: "emby-data-check"
+    name: 'emby-data-check'

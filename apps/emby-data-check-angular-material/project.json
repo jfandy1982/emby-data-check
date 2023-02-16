@@ -14,10 +14,7 @@
         "main": "apps/emby-data-check-angular-material/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/emby-data-check-angular-material/tsconfig.app.json",
-        "assets": [
-          "apps/emby-data-check-angular-material/src/favicon.ico",
-          "apps/emby-data-check-angular-material/src/assets"
-        ],
+        "assets": ["apps/emby-data-check-angular-material/src/favicon.ico", "apps/emby-data-check-angular-material/src/assets"],
         "styles": [
           "./node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
           "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
@@ -79,10 +76,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/emby-data-check-angular-material/**/*.ts",
-          "apps/emby-data-check-angular-material/**/*.html"
-        ]
+        "lintFilePatterns": ["apps/emby-data-check-angular-material/**/*.ts", "apps/emby-data-check-angular-material/**/*.html"]
       }
     },
     "test": {

@@ -7,11 +7,6 @@
     "prefer-alphabetical-scripts": "error",
     "require-author": "error",
     "require-description": "error",
-    "valid-values-author": [
-      "error",
-      [
-        "Andreas Ziegler (dev@andreasziegler.net)"
-      ]
-    ]
+    "valid-values-author": ["error", ["Andreas Ziegler (dev@andreasziegler.net)"]]
   }
 }

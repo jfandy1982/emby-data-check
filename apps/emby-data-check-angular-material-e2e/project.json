@@ -21,9 +21,7 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "apps/emby-data-check-angular-material-e2e/**/*.{js,ts}"
-        ]
+        "lintFilePatterns": ["apps/emby-data-check-angular-material-e2e/**/*.{js,ts}"]
       }
     }
   },
