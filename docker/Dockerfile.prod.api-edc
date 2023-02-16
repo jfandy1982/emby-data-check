@@ -26,7 +26,7 @@ RUN npm install --ignore-scripts
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
-RUN npx nx build --project=api-emby-data-check
+RUN npx nx build --project=emby-data-check-api
 
 # Remove unnecessary files from ./node_modules -> folder will be copied later
 RUN npm prune --production
@@ -45,7 +45,7 @@ EXPOSE 3000
 
 COPY --from=builder /home/node/package.json ./package.json
 COPY --from=builder /home/node/package-lock.json ./package-lock.json
-COPY --from=builder /home/node/dist/apps/api-emby-data-check ./dist
 COPY --from=builder /home/node/node_modules ./node_modules
+COPY --from=builder /home/node/dist/apps/emby-data-check-api ./dist
 
 CMD ["node", "./dist/main.js"]

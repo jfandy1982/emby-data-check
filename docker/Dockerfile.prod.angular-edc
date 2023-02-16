@@ -19,7 +19,7 @@ RUN npm install --ignore-scripts
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
-RUN npx nx build --project=angular-emby-data-check
+RUN npx nx build --project=emby-data-check-angular-material
 
 ## -------------------- ###
 FROM nginx:1.23.2-alpine
@@ -34,6 +34,6 @@ COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
 
 # Take generated output from BUILDER stage
-COPY --from=builder /home/node/dist/apps/angular-emby-data-check/* /usr/share/nginx/html/
+COPY --from=builder /home/node/dist/apps/emby-data-check-angular-material/* /usr/share/nginx/html/
 
 CMD ["nginx", "-g", "daemon off;"]
