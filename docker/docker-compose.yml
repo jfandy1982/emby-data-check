@@ -9,7 +9,7 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - 'POSTGRES_PASSWORD=${DATABASE_PASSWORD}'
     volumes:
       - 'dbdata:/var/lib/postgresql/data'
     networks:
@@ -24,8 +24,8 @@ services:
     ports:
       - '5433:80'
     environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - 'PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}'
+      - 'PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}'
     volumes:
       - './dba_init/servers.json:/pgadmin4/servers.json'
       - 'dbadmin:/var/lib/pgadmin'
