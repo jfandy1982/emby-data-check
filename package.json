@@ -13,6 +13,7 @@
     "cleanup:api": "rimraf ./dist",
     "cleanup:deps": "rimraf ./node_modules",
     "cleanup:package": "rimraf ./package-lock.json",
+    "cleanup:qa": "rimraf ./coverage",
     "cleanup:ui": "rimraf ./.angular",
     "e2e:affected": "nx affected:e2e --parallel --skip-nx-cache",
     "e2e:all": "nx run-many --target=e2e --parallel --skip-nx-cache --all",
