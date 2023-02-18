@@ -19,6 +19,8 @@
     "format:check:all": "npx prettier --check --ignore-unknown \"**/*\"",
     "format:fix:affected": "npx pretty-quick --staged",
     "format:fix:all": "npx prettier --write --ignore-unknown \"**/*\"",
+    "lint:affected": "nx affected:lint --parallel --skip-nx-cache",
+    "lint:all": "nx run-many --target=lint --all",
     "lint:check:megalinter": "npx mega-linter-runner --flavor javascript",
     "lint:check:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
     "lint:check:secretlint": "secretlint \"**/*\" --maskSecrets --secretlintrc .github/linters/.secretlintrc.json",
