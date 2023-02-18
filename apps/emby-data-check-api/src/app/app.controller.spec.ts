@@ -13,11 +13,11 @@ describe('AppController', () => {
     }).compile();
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to emby-data-check-api!"', () => {
+  describe('getHelloFromApi', () => {
+    it('should return "This is the API for the Emby Data Check project!"', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual({
-        message: 'Welcome to emby-data-check-api!',
+      expect(appController.getHelloFromApi()).toEqual({
+        message: 'This is the API for the Emby Data Check project!',
       });
     });
   });

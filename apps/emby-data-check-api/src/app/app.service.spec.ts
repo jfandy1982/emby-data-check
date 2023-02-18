@@ -13,10 +13,10 @@ describe('AppService', () => {
     service = app.get<AppService>(AppService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to emby-data-check-api!"', () => {
-      expect(service.getData()).toEqual({
-        message: 'Welcome to emby-data-check-api!',
+  describe('getHelloFromApi', () => {
+    it('should return "This is the API for the Emby Data Check project!"', () => {
+      expect(service.getHelloFromApi()).toEqual({
+        message: 'This is the API for the Emby Data Check project!',
       });
     });
   });
