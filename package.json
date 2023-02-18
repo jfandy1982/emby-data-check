@@ -14,6 +14,8 @@
     "cleanup:deps": "rimraf ./node_modules",
     "cleanup:package": "rimraf ./package-lock.json",
     "cleanup:ui": "rimraf ./.angular",
+    "e2e:affected": "nx affected:e2e --parallel --skip-nx-cache",
+    "e2e:all": "nx run-many --target=e2e --parallel --skip-nx-cache --all",
     "format:check:all": "npx prettier --check --ignore-unknown \"**/*\"",
     "format:fix:affected": "npx pretty-quick --staged",
     "format:fix:all": "npx prettier --write --ignore-unknown \"**/*\"",

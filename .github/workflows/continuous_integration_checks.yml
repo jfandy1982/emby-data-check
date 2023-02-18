@@ -200,7 +200,7 @@ jobs:
         uses: ./.github/actions/setup-nodejs
 
       - name: 'Run E2E tests for all projects'
-        run: npm run e2e
+        run: npm run e2e:all
 
   publish-api:
     name: 'Publish changes of API to DockerHub'
