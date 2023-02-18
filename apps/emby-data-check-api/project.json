@@ -15,7 +15,8 @@
         "tsConfig": "apps/emby-data-check-api/tsconfig.app.json",
         "assets": ["apps/emby-data-check-api/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/emby-data-check-api/webpack.config.js"
+        "webpackConfig": "apps/emby-data-check-api/webpack.config.js",
+        "babelUpwardRootMode": true
       },
       "configurations": {
         "production": {
