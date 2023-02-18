@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { MediaItemsService } from '../media-items.service';
 
 @Component({
-  selector: 'emby-data-check-media-type-list',
+  selector: 'edc-media-type-list',
   templateUrl: './media-type-list.component.html',
   styleUrls: ['./media-type-list.component.css'],
 })

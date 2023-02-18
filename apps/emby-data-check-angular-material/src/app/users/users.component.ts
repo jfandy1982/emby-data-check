@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'emby-data-check-users',
+  selector: 'edc-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
 })

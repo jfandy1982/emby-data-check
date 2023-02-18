@@ -4,7 +4,7 @@ import { UserDto } from '../user.model';
 import { UsersService } from '../users.service';
 
 @Component({
-  selector: 'emby-data-check-user-detail',
+  selector: 'edc-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.css'],
 })

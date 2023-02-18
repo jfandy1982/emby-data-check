@@ -6,7 +6,7 @@ import { ServerDto, ServerCreateDto } from '../server.model';
 import { ServersService } from '../servers.service';
 
 @Component({
-  selector: 'emby-data-check-server-create',
+  selector: 'edc-server-create',
   templateUrl: './server-create.component.html',
   styleUrls: ['./server-create.component.css'],
 })

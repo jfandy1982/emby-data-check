@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { ServersService } from '../servers/servers.service';
 
 @Component({
-  selector: 'emby-data-check-header',
+  selector: 'edc-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })

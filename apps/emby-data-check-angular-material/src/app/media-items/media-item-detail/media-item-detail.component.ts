@@ -4,7 +4,7 @@ import { MediaItemDto } from '../media-item.model';
 import { MediaItemsService } from '../media-items.service';
 
 @Component({
-  selector: 'emby-data-check-media-item-detail',
+  selector: 'edc-media-item-detail',
   templateUrl: './media-item-detail.component.html',
   styleUrls: ['./media-item-detail.component.css'],
 })

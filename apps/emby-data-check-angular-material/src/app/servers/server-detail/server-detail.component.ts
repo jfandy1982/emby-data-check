@@ -4,7 +4,7 @@ import { ServerDto, ServerDeleteDto } from '../server.model';
 import { ServersService } from '../servers.service';
 
 @Component({
-  selector: 'emby-data-check-server-detail',
+  selector: 'edc-server-detail',
   templateUrl: './server-detail.component.html',
   styleUrls: ['./server-detail.component.css'],
 })
