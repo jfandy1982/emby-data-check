@@ -65,7 +65,7 @@ jobs:
 
       - name: 'MERGE into `main`: Build all projects'
         if: env.IS_MERGE == 'true'
-        run: npm run build
+        run: npm run build:all
 
   lint-nx:
     name: Lint with Nx Features
