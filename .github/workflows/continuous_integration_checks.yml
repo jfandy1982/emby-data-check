@@ -89,9 +89,6 @@ jobs:
       - name: 'Setup Node.js and project dependencies'
         uses: ./.github/actions/setup-nodejs
 
-      - name: 'Lint Nx Workspace'
-        run: npx nx workspace-lint
-
       - name: 'Lint all projects'
         run: npm run lint:all
 
