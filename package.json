@@ -7,6 +7,8 @@
     "node": "18.14.0"
   },
   "scripts": {
+    "build:affected": "nx affected:build --configuration=production",
+    "build:all": "nx run-many --target=build --all",
     "cleanup": "npm-run-all --continue-on-error --parallel \"cleanup:*\" && npm install",
     "cleanup:api": "rimraf ./dist",
     "cleanup:deps": "rimraf ./node_modules",
