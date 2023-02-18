@@ -78,6 +78,26 @@
         "lintFilePatterns": ["apps/emby-data-check-angular-material/**/*.ts", "apps/emby-data-check-angular-material/**/*.html"]
       }
     },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "cd docker && docker compose down && docker compose --env-file ../.env up",
+            "description": "Spin up the DB docker container"
+          },
+          {
+            "command": "nx serve emby-data-check-api",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "nx serve emby-data-check-angular-material",
+            "description": "Start the Emby Data Check UI (Angular Material)"
+          }
+        ]
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
@@ -93,5 +113,5 @@
       }
     }
   },
-  "tags": []
+  "tags": ["scope:ui"]
 }

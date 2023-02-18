@@ -25,6 +25,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:e2e"],
   "implicitDependencies": ["emby-data-check-angular-material"]
 }

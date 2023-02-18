@@ -1,7 +1,6 @@
 {
   "name": "emby-data-check-api-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["emby-data-check-api"],
   "targets": {
     "e2e": {
       "executor": "@nrwl/jest:jest",
@@ -18,5 +17,7 @@
         "lintFilePatterns": ["apps/emby-data-check-api-e2e/**/*.{js,ts}"]
       }
     }
-  }
+  },
+  "tags": ["scope:e2e"],
+  "implicitDependencies": ["emby-data-check-api"]
 }
