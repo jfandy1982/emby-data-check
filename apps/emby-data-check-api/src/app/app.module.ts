@@ -1,4 +1,11 @@
+import { ConfigModule } from '@nestjs/config';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { TypeOrmConfigService } from './configuration/typeorm.service';
+import apiConfig from './configuration/api.config';
+import authConfig from './configuration/auth.config';
+import databaseConfig from './configuration/database.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -10,7 +17,20 @@ import { UserModule } from './user/user.module';
 import { WatchStateModule } from './watch-state/watch-state.module';
 
 @Module({
-  imports: [EmbyUserModule, InstallationModule, MediaItemModule, ServerModule, UserModule, WatchStateModule],
+  imports: [
+    ConfigModule.forRoot({
+      expandVariables: true,
+      isGlobal: true,
+      load: [apiConfig, authConfig, databaseConfig],
+    }),
+    TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    EmbyUserModule,
+    InstallationModule,
+    MediaItemModule,
+    ServerModule,
+    UserModule,
+    WatchStateModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
