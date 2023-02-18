@@ -1,0 +1,51 @@
+FROM node:18.14.0-alpine AS builder
+
+# install cURL and bash
+RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
+
+# install node-prune (https://github.com/tj/node-prune); requires admin access
+RUN curl -sfL https://gobinaries.com/tj/node-prune | bash -s -- -b /usr/local/bin
+
+# Switch into node.js environment
+USER node
+WORKDIR /home/node
+
+# Use Docker's layer concepts while copying some required files
+# tsconfig.json: How to transpile TS code to JavaScript
+COPY --chown=node:node tsconfig.base.json .
+COPY --chown=node:node angular.json .
+COPY --chown=node:node .nvmrc .
+
+# package*.json files to install dependencies
+COPY --chown=node:node package.json .
+COPY --chown=node:node package-lock.json .
+
+RUN npm install --ignore-scripts
+
+# upload the compiled data -> changes more often than versions
+COPY --chown=node:node ./apps ./apps
+COPY --chown=node:node ./libs ./libs
+
+RUN npx nx build --project=emby-data-check-api
+
+# Remove unnecessary files from ./node_modules -> folder will be copied later
+RUN npm prune --production
+RUN /usr/local/bin/node-prune
+
+### -------------------- ###
+FROM node:18.14.0-alpine
+
+LABEL name="Emby Data Check REST API"
+LABEL author="Andreas Ziegler (dev@andreasziegler.net)"
+LABEL version="0.0.1-SNAPSHOT"
+
+USER node
+WORKDIR /home/node
+EXPOSE 3000
+
+COPY --from=builder /home/node/package.json ./package.json
+COPY --from=builder /home/node/package-lock.json ./package-lock.json
+COPY --from=builder /home/node/node_modules ./node_modules
+COPY --from=builder /home/node/dist/apps/emby-data-check-api ./dist
+
+CMD ["node", "./dist/main.js"]

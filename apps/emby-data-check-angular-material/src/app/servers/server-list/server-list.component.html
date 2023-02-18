@@ -1,0 +1,6 @@
+<mat-nav-list>
+  <a mat-list-item *ngFor="let server of servers" [routerLink]="[server.serverId]">
+    <span matListItemTitle>{{ server.embyServerName }}</span>
+    <span matListItemLine>{{ server.embyServerIP }}</span>
+  </a>
+</mat-nav-list>
