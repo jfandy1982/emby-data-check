@@ -173,7 +173,7 @@ jobs:
         uses: ./.github/actions/setup-nodejs
 
       - name: 'Run tests for all projects'
-        run: npm run test
+        run: npm run test:all
 
   e2e-test:
     name: E2E Test
