@@ -1,1 +1,13 @@
-<p>servers works!</p>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <emby-data-check-server-list></emby-data-check-server-list>
+      <a mat-mini-fab matTooltip="Link" [routerLink]="['new']" aria-label="Create a new server">
+        <mat-icon>add_circle</mat-icon>
+      </a>
+    </div>
+    <div class="col-md-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

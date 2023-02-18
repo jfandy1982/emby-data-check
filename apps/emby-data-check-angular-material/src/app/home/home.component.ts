@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'emby-data-check-home',
+  selector: 'edc-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })

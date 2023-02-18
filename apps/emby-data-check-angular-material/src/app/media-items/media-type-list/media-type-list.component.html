@@ -1,1 +1,5 @@
-<p>media-type-list works!</p>
+<mat-nav-list>
+  <a mat-list-item *ngFor="let mediaType of mediaTypes" [routerLink]="['type', mediaType]" [queryParamsHandling]="'preserve'">
+    <span matListItemTitle>{{ mediaType }}</span>
+  </a>
+</mat-nav-list>
