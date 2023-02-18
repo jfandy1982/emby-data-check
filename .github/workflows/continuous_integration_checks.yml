@@ -211,7 +211,7 @@ jobs:
     env:
       NX_BASE: ${{ needs.analyze.outputs.base }}
       NX_HEAD: ${{ needs.analyze.outputs.head }}
-      NX_PROJECT_NAME: 'api-emby-data-check'
+      NX_PROJECT_NAME: 'emby-data-check-api'
       DOCKERFILE: './docker/Dockerfile.prod.api-edc'
       READMEFILE: './docs/docker/docker.api.md'
 
@@ -255,7 +255,7 @@ jobs:
     env:
       NX_BASE: ${{ needs.analyze.outputs.base }}
       NX_HEAD: ${{ needs.analyze.outputs.head }}
-      NX_PROJECT_NAME: 'angular-emby-data-check'
+      NX_PROJECT_NAME: 'emby-data-check-angular-material'
       DOCKERFILE: './docker/Dockerfile.prod.angular-edc'
       READMEFILE: './docs/docker/docker.ui.md'
 
