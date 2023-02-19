@@ -1,5 +1,5 @@
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { EmbyUserDto } from '../models/emby-user.interface';
 import { EmbyUserService } from '../service/emby-user.service';
@@ -17,10 +17,18 @@ export class EmbyUserController {
     return this.embyUserService.findAll({ page, limit, route: 'http://localhost:3000/api/embyusers' });
   }
 
-  // @Get(':id')
-  // findOneEmbyUser(@Param('id') id: string): Observable<EmbyUserDto> {
-  //   return this.embyUserService.findOne(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single Emby User on Emby Server Installation' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of Emby User in Backup DB',
+    required: true,
+    example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
+  })
+  @Get(':id')
+  findOneEmbyUser(@Param('id') id: string): Promise<EmbyUserDto> {
+    return this.embyUserService.findOne(id);
+  }
 
   // @ApiBearerAuth()
   // @ApiBody({ type: [EmbyUserCreateDto] })
