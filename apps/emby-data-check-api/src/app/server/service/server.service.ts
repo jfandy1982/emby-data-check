@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { ServerEntity } from '../models/server.entity';
-import { ServerDto } from '../models/server.interface';
+import { ServerCreateDto, ServerDto } from '../models/server.interface';
 
 @Injectable()
 export class ServerService {
@@ -12,11 +12,11 @@ export class ServerService {
     private readonly serverRepository: Repository<ServerEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<ServerDto>> {
+  async findAllServers(options: IPaginationOptions): Promise<Pagination<ServerDto>> {
     return paginate<ServerEntity>(this.serverRepository, options, { relations: ['installations'] });
   }
 
-  async findOne(id: string): Promise<ServerDto> {
+  async findOneServerById(id: string): Promise<ServerDto> {
     if (id) {
       return this.serverRepository.findOne({
         relations: ['installations'],
@@ -27,13 +27,14 @@ export class ServerService {
     }
   }
 
-  // createServer(newServer: ServerCreateDto): Observable<ServerDto> {
-  //   return from(this.serverRepository.save(newServer)).pipe(
-  //     map((createdServer) => {
-  //       return ServersMapper.mapServerEntityToDto(createdServer);
-  //     })
-  //   );
-  // }
+  async createNewServer(newServer: ServerCreateDto): Promise<ServerDto> {
+    try {
+      const createdServer = await this.serverRepository.save(this.serverRepository.create(newServer));
+      return this.findOneServerById(createdServer.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // updateServer(id: string, updatedServer: ServerUpdateDto): Observable<ServerDto> {
   //   return from(this.serverRepository.update(id, updatedServer)).pipe(switchMap(() => this.findOne(id)));

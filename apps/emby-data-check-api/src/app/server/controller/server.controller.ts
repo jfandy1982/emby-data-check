@@ -1,7 +1,7 @@
-import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
-import { ServerDto } from '../models/server.interface';
+import { ServerCreateDto, ServerDto } from '../models/server.interface';
 import { ServerService } from '../service/server.service';
 
 @ApiTags('servers')
@@ -12,29 +12,27 @@ export class ServerController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
   @Get()
-  async findAll(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<ServerDto>> {
+  async findAllServers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<ServerDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.serverService.findAll({ page, limit, route: 'http://localhost:3000/api/servers' });
+    return this.serverService.findAllServers({ page, limit, route: 'http://localhost:3000/api/servers' });
   }
 
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A single Server' })
   @ApiParam({ name: 'id', description: 'ID of Server in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Get(':id')
-  findOneServer(@Param('id') id: string): Promise<ServerDto> {
-    return this.serverService.findOne(id);
+  findOneServerById(@Param('id') id: string): Promise<ServerDto> {
+    return this.serverService.findOneServerById(id);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [ServerCreateDto] })
-  // @Post()
-  // createServer(@Body() newServer: ServerCreateDto): Observable<ServerDto> {
-  //   return this.serverService.createServer(newServer).pipe(
-  //     map((createdServer) => {
-  //       return createdServer;
-  //     })
-  //   );
-  // }
+  @ApiBearerAuth()
+  @ApiBody({ type: [ServerCreateDto] })
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Server saved in Backup DB' })
+  @Post()
+  async createNewServer(@Body() createServer: ServerCreateDto): Promise<ServerDto> {
+    const newServer = this.createDtoToEntity(createServer);
+    return this.serverService.createNewServer(newServer);
+  }
 
   // @ApiBearerAuth()
   // @ApiBody({ type: [ServerUpdateDto] })
@@ -48,4 +46,14 @@ export class ServerController {
   // deleteServer(@Param('id') id: string): Observable<ServerDto> {
   //   return this.serverService.deleteServer(id);
   // }
+
+  private createDtoToEntity(createDto: ServerCreateDto): ServerDto {
+    return {
+      apiKey: createDto.apiKey,
+      description: createDto.description,
+      ipAddress: createDto.ipAddress,
+      port: createDto.port,
+      servername: createDto.servername,
+    };
+  }
 }
