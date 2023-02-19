@@ -1,5 +1,5 @@
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { MediaItemDto } from '../models/media-item.interface';
 import { MediaItemService } from '../service/media-item.service';
@@ -17,10 +17,13 @@ export class MediaItemController {
     return this.mediaItemService.findAll({ page, limit, route: 'http://localhost:3000/api/mediaitems' });
   }
 
-  // @Get(':id')
-  // findOneMediaItem(@Param('id') id: string): Observable<MediaItemDto> {
-  //   return this.mediaItemService.findOne(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single Media Item' })
+  @ApiParam({ name: 'id', description: 'ID of Media Item in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Get(':id')
+  findOneServer(@Param('id') id: string): Promise<MediaItemDto> {
+    return this.mediaItemService.findOne(id);
+  }
 
   // @ApiBearerAuth()
   // @ApiBody({ type: [MediaItemCreateDto] })

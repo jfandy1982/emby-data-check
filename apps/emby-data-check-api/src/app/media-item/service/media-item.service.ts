@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
@@ -16,22 +16,16 @@ export class MediaItemService {
     return paginate<MediaItemEntity>(this.mediaItemRepository, options, { relations: ['watchStates'] });
   }
 
-  // findOne(id: string): Observable<MediaItemDto> {
-  //   return from(
-  //     this.mediaItemRepository.findOne({
-  //       relations: ['watchStates'],
-  //       where: { id },
-  //     })
-  //   ).pipe(
-  //     map((mediaItem) => {
-  //       if (mediaItem) {
-  //         return MediaItemsMapper.mapMediaItemEntityToDto(mediaItem);
-  //       } else {
-  //         throw new NotFoundException(`Media Item with ID [${id}] not found`);
-  //       }
-  //     })
-  //   );
-  // }
+  async findOne(id: string): Promise<MediaItemDto> {
+    if (id) {
+      return this.mediaItemRepository.findOne({
+        relations: ['watchStates'],
+        where: { id },
+      });
+    } else {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // createMediaItem(newMediaItem: MediaItemCreateDto): Observable<MediaItemDto> {
   //   return from(this.mediaItemRepository.save(newMediaItem)).pipe(
