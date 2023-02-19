@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
@@ -16,22 +16,16 @@ export class ServerService {
     return paginate<ServerEntity>(this.serverRepository, options, { relations: ['installations'] });
   }
 
-  // findOne(id: string): Observable<ServerDto> {
-  //   return from(
-  //     this.serverRepository.findOne({
-  //       relations: ['installations'],
-  //       where: { id },
-  //     })
-  //   ).pipe(
-  //     map((server) => {
-  //       if (server) {
-  //         return ServersMapper.mapServerEntityToDto(server);
-  //       } else {
-  //         throw new NotFoundException(`Server with ID [${id}] not found`);
-  //       }
-  //     })
-  //   );
-  // }
+  async findOne(id: string): Promise<ServerDto> {
+    if (id) {
+      return this.serverRepository.findOne({
+        relations: ['installations'],
+        where: { id },
+      });
+    } else {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // createServer(newServer: ServerCreateDto): Observable<ServerDto> {
   //   return from(this.serverRepository.save(newServer)).pipe(
