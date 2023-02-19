@@ -3,7 +3,7 @@ import { EmbyUserDto } from '../../emby-user/models/emby-user.interface';
 import { ServerDto } from '../../server/models/server.interface';
 
 export interface InstallationDto {
-  id: string;
+  id?: string;
   embyServerId: string;
   isActive: boolean;
   server: ServerDto;

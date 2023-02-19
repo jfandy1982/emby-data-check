@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { InstallationEntity } from '../models/installation.entity';
-import { InstallationDto } from '../models/installation.interface';
+import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
 
 @Injectable()
 export class InstallationService {
@@ -12,11 +12,11 @@ export class InstallationService {
     private readonly installationRepository: Repository<InstallationEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<InstallationDto>> {
+  async findAllInstallations(options: IPaginationOptions): Promise<Pagination<InstallationDto>> {
     return paginate<InstallationEntity>(this.installationRepository, options, { relations: ['server', 'embyUsers'] });
   }
 
-  async findOne(id: string): Promise<InstallationDto> {
+  async findOneInstallationById(id: string): Promise<InstallationDto> {
     if (id) {
       return this.installationRepository.findOne({
         relations: ['server', 'embyUsers'],
@@ -27,13 +27,14 @@ export class InstallationService {
     }
   }
 
-  // createInstallation(newInstallation: InstallationCreateDto): Observable<InstallationDto> {
-  //   return from(this.installationRepository.save(newInstallation)).pipe(
-  //     map((createdInstallation) => {
-  //       return InstallationsMapper.mapInstallationEntityToDto(createdInstallation);
-  //     })
-  //   );
-  // }
+  async createNewInstallation(newInstallation: InstallationCreateDto): Promise<InstallationDto> {
+    try {
+      const createdInstallation = await this.installationRepository.save(this.installationRepository.create(newInstallation));
+      return this.findOneInstallationById(createdInstallation.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // updateInstallation(id: string, updatedInstallation: InstallationUpdateDto): Observable<InstallationDto> {
   //   return from(this.installationRepository.update(id, updatedInstallation)).pipe(
