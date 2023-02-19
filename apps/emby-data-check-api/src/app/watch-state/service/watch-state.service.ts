@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Observable, from, map, switchMap } from 'rxjs';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
-import { WatchStatesMapper } from '../../utils/mapper/watch-statesMapper';
 import { WatchStateEntity } from '../models/watch-state.entity';
-import { WatchStateDto, WatchStateCreateDto, WatchStateUpdateDto } from '../models/watch-state.interface';
+import { WatchStateDto } from '../models/watch-state.interface';
 
 @Injectable()
 export class WatchStateService {
@@ -13,45 +12,42 @@ export class WatchStateService {
     private readonly watchStateRepository: Repository<WatchStateEntity>
   ) {}
 
-  findAll(): Observable<WatchStateDto[]> {
-    return from(this.watchStateRepository.find({ relations: ['embyUser', 'mediaItem'] })).pipe(
-      map((watchStates) => {
-        return WatchStatesMapper.mapWatchStateEntitiesToDtos(watchStates);
-      })
-    );
+  async findAll(options: IPaginationOptions): Promise<Pagination<WatchStateDto>> {
+    return paginate<WatchStateEntity>(this.watchStateRepository, options, { relations: ['embyUser', 'mediaItem'] });
   }
 
-  findOne(id: string): Observable<WatchStateDto> {
-    return from(
-      this.watchStateRepository.findOne({
-        relations: ['embyUser', 'mediaItem'],
-        where: { id },
-      })
-    ).pipe(
-      map((watchState) => {
-        if (watchState) {
-          return WatchStatesMapper.mapWatchStateEntityToDto(watchState);
-        } else {
-          throw new NotFoundException(`WatchState with ID [${id}] not found`);
-        }
-      })
-    );
-  }
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // async deleteWatchState(id: string): Promise<any> {
+  //   return this.watchStateRepository.delete(id);
+  // }
+  // async findOne(id: string): Promise<WatchStateDto> {
+  //   return this.watchStateRepository.findOne({
+  //     relations: ['embyUser', 'mediaItem'],
+  //     where: { id },
+  //   });
+  // }
 
-  createWatchState(newWatchState: WatchStateCreateDto): Observable<WatchStateDto> {
-    return from(this.watchStateRepository.save(newWatchState)).pipe(
-      map((createdWatchState) => {
-        return WatchStatesMapper.mapWatchStateEntityToDto(createdWatchState);
-      })
-    );
-  }
+  // async createWatchState(newWatchState: WatchStateCreateDto): Promise<WatchStateDto> {
+  //   try {
+  //     const watchState = await this.watchStateRepository.save(this.watchStateRepository.create(newWatchState));
+  //     return this.findOne(watchState.id);
+  //   } catch (error) {
+  //     throw new HttpException('Some error in WatchStateService - CREATE', HttpStatus.CONFLICT);
+  //   }
+  // }
 
-  updateWatchState(id: string, updatedWatchState: WatchStateUpdateDto): Observable<WatchStateDto> {
-    return from(this.watchStateRepository.update(id, updatedWatchState)).pipe(switchMap(() => this.findOne(id)));
-  }
+  // async updateWatchState(id: string, updatedWatchState: WatchStateUpdateDto): Promise<WatchStateDto> {
+  //   try {
+  //     // TODO: Find the existing record...
+  //     const watchState = await this.watchStateRepository.save(this.watchStateRepository.update(updatedWatchState));
+  //     return this.findOne(watchState[0].id);
+  //   } catch (error) {
+  //     throw new HttpException('Some error in WatchStateService - UPDATE', HttpStatus.CONFLICT);
+  //   }
+  // }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deleteWatchState(id: string): Observable<any> {
-    return from(this.watchStateRepository.delete(id));
-  }
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // async deleteWatchState(id: string): Promise<any> {
+  //   return this.watchStateRepository.delete(id);
+  // }
 }
