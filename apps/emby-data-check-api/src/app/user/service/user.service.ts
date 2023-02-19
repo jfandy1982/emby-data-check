@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
-import { UserDto } from '../models/user.interface';
+import { UserCreateDto, UserDto } from '../models/user.interface';
 
 @Injectable()
 export class UserService {
@@ -12,11 +12,11 @@ export class UserService {
     private readonly userRepository: Repository<UserEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<UserDto>> {
+  async findAllUsers(options: IPaginationOptions): Promise<Pagination<UserDto>> {
     return paginate<UserEntity>(this.userRepository, options, { relations: ['embyUsers'] });
   }
 
-  async findOne(id: string): Promise<UserDto> {
+  async findOneUserById(id: string): Promise<UserDto> {
     if (id) {
       return this.userRepository.findOne({
         relations: ['embyUsers'],
@@ -27,16 +27,14 @@ export class UserService {
     }
   }
 
-  // createUser(newUser: UserCreateDto): Observable<UserDto> {
-  //   // TODO:
-  //   //  Password still saved in plain text in the database.
-  //   //    It will be hashed when I add an AuthModule later!!
-  //   return from(this.userRepository.save(newUser)).pipe(
-  //     map((createdUser) => {
-  //       return UsersMapper.mapUserEntityToDto(createdUser);
-  //     })
-  //   );
-  // }
+  async createNewUser(newUser: UserCreateDto): Promise<UserDto> {
+    try {
+      const createdUser = await this.userRepository.save(this.userRepository.create(newUser));
+      return this.findOneUserById(createdUser.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // updateUser(id: string, updatedUser: UserUpdateDto): Observable<UserDto> {
   //   delete updatedUser.role;

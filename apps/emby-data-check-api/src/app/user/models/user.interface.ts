@@ -3,7 +3,7 @@ import { EmbyUserDto } from '../../emby-user/models/emby-user.interface';
 import { UserRole } from './user-role.enum';
 
 export interface UserDto {
-  id: string;
+  id?: string;
   username: string;
   name: string;
   password: string;
