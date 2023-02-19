@@ -1,5 +1,5 @@
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { InstallationDto } from '../models/installation.interface';
 import { InstallationService } from '../service/installation.service';
@@ -17,10 +17,18 @@ export class InstallationController {
     return this.installationService.findAll({ page, limit, route: 'http://localhost:3000/api/installations' });
   }
 
-  // @Get(':id')
-  // findOneInstallation(@Param('id') id: string): Observable<InstallationDto> {
-  //   return this.installationService.findOne(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single Emby Server Installation' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of Emby Server Installation in Backup DB',
+    required: true,
+    example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
+  })
+  @Get(':id')
+  findOneInstallation(@Param('id') id: string): Promise<InstallationDto> {
+    return this.installationService.findOne(id);
+  }
 
   // @ApiBearerAuth()
   // @ApiBody({ type: [InstallationCreateDto] })

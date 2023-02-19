@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
@@ -16,22 +16,16 @@ export class InstallationService {
     return paginate<InstallationEntity>(this.installationRepository, options, { relations: ['server', 'embyUsers'] });
   }
 
-  // findOne(id: string): Observable<InstallationDto> {
-  //   return from(
-  //     this.installationRepository.findOne({
-  //       relations: ['server', 'embyUsers'],
-  //       where: { id },
-  //     })
-  //   ).pipe(
-  //     map((installation) => {
-  //       if (installation) {
-  //         return InstallationsMapper.mapInstallationEntityToDto(installation);
-  //       } else {
-  //         throw new NotFoundException(`Installation with ID [${id}] not found`);
-  //       }
-  //     })
-  //   );
-  // }
+  async findOne(id: string): Promise<InstallationDto> {
+    if (id) {
+      return this.installationRepository.findOne({
+        relations: ['server', 'embyUsers'],
+        where: { id },
+      });
+    } else {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // createInstallation(newInstallation: InstallationCreateDto): Observable<InstallationDto> {
   //   return from(this.installationRepository.save(newInstallation)).pipe(
