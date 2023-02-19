@@ -1,5 +1,5 @@
-import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Controller, Get, HttpStatus, Param, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { UserDto } from '../models/user.interface';
 import { UserService } from '../service/user.service';
@@ -17,15 +17,13 @@ export class UserController {
     return this.userService.findAll({ page, limit, route: 'http://localhost:3000/api/users' });
   }
 
-  // @Get()
-  // findUsers(): Observable<UserDto[]> {
-  //   return this.userService.findAll();
-  // }
-
-  // @Get(':id')
-  // findOneUser(@Param('id') id: string): Observable<UserDto> {
-  //   return this.userService.findOne(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single User' })
+  @ApiParam({ name: 'id', description: 'ID of User in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Get(':id')
+  findOneUser(@Param('id') id: string): Promise<UserDto> {
+    return this.userService.findOne(id);
+  }
 
   // @ApiBearerAuth()
   // @ApiBody({ type: [UserCreateDto] })

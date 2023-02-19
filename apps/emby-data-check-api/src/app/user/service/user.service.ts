@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
@@ -16,22 +16,16 @@ export class UserService {
     return paginate<UserEntity>(this.userRepository, options, { relations: ['embyUsers'] });
   }
 
-  // findOne(id: string): Observable<UserDto> {
-  //   return from(
-  //     this.userRepository.findOne({
-  //       relations: ['embyUsers'],
-  //       where: { id },
-  //     })
-  //   ).pipe(
-  //     map((user) => {
-  //       if (user) {
-  //         return UsersMapper.mapUserEntityToDto(user);
-  //       } else {
-  //         throw new NotFoundException(`User with ID [${id}] not found`);
-  //       }
-  //     })
-  //   );
-  // }
+  async findOne(id: string): Promise<UserDto> {
+    if (id) {
+      return this.userRepository.findOne({
+        relations: ['embyUsers'],
+        where: { id },
+      });
+    } else {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // createUser(newUser: UserCreateDto): Observable<UserDto> {
   //   // TODO:
