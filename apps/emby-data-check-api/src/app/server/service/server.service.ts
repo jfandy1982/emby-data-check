@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { ServerEntity } from '../models/server.entity';
-import { ServerCreateDto, ServerDto } from '../models/server.interface';
+import { ServerDto } from '../models/server.interface';
 
 @Injectable()
 export class ServerService {
@@ -27,7 +27,7 @@ export class ServerService {
     }
   }
 
-  async createNewServer(newServer: ServerCreateDto): Promise<ServerDto> {
+  async createNewServer(newServer: ServerDto): Promise<ServerDto> {
     try {
       const createdServer = await this.serverRepository.save(this.serverRepository.create(newServer));
       return this.findOneServerById(createdServer.id);

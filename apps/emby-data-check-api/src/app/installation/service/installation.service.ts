@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { InstallationEntity } from '../models/installation.entity';
-import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
+import { InstallationDto } from '../models/installation.interface';
 
 @Injectable()
 export class InstallationService {
@@ -27,7 +27,7 @@ export class InstallationService {
     }
   }
 
-  async createNewInstallation(newInstallation: InstallationCreateDto): Promise<InstallationDto> {
+  async createNewInstallation(newInstallation: InstallationDto): Promise<InstallationDto> {
     try {
       const createdInstallation = await this.installationRepository.save(this.installationRepository.create(newInstallation));
       return this.findOneInstallationById(createdInstallation.id);

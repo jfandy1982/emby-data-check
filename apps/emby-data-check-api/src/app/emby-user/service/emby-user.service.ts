@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { EmbyUserEntity } from '../models/emby-user.entity';
-import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
+import { EmbyUserDto } from '../models/emby-user.interface';
 
 @Injectable()
 export class EmbyUserService {
@@ -27,7 +27,7 @@ export class EmbyUserService {
     }
   }
 
-  async createNewEmbyUser(newEmbyUser: EmbyUserCreateDto): Promise<EmbyUserDto> {
+  async createNewEmbyUser(newEmbyUser: EmbyUserDto): Promise<EmbyUserDto> {
     try {
       const createdEmbyUser = await this.embyUserRepository.save(this.embyUserRepository.create(newEmbyUser));
       return this.findOneEmbyUserById(createdEmbyUser.id);

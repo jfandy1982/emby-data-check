@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { MediaItemEntity } from '../models/media-item.entity';
-import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
+import { MediaItemDto } from '../models/media-item.interface';
 
 @Injectable()
 export class MediaItemService {
@@ -27,7 +27,7 @@ export class MediaItemService {
     }
   }
 
-  async createNewMediaItem(newMediaItem: MediaItemCreateDto): Promise<MediaItemDto> {
+  async createNewMediaItem(newMediaItem: MediaItemDto): Promise<MediaItemDto> {
     try {
       const createdMediaItem = await this.mediaItemRepository.save(this.mediaItemRepository.create(newMediaItem));
       return this.findOneMediaItemById(createdMediaItem.id);

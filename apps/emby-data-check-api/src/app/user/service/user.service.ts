@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
-import { UserCreateDto, UserDto } from '../models/user.interface';
+import { UserDto } from '../models/user.interface';
 
 @Injectable()
 export class UserService {
@@ -27,7 +27,7 @@ export class UserService {
     }
   }
 
-  async createNewUser(newUser: UserCreateDto): Promise<UserDto> {
+  async createNewUser(newUser: UserDto): Promise<UserDto> {
     try {
       const createdUser = await this.userRepository.save(this.userRepository.create(newUser));
       return this.findOneUserById(createdUser.id);
