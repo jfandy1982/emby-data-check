@@ -1,7 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
-import { Observable, map } from 'rxjs';
-import { ServerDto, ServerCreateDto, ServerUpdateDto } from '../models/server.interface';
+import { Controller, Get, HttpStatus, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { ServerDto } from '../models/server.interface';
 import { ServerService } from '../service/server.service';
 
 @ApiTags('servers')
@@ -9,37 +9,45 @@ import { ServerService } from '../service/server.service';
 export class ServerController {
   constructor(private serverService: ServerService) {}
 
+  @ApiBearerAuth()
+  @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
   @Get()
-  findServers(): Observable<ServerDto[]> {
-    return this.serverService.findAll();
+  async findAll(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<ServerDto>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.serverService.findAll({ page, limit, route: 'http://localhost:3000/api/servers' });
   }
 
-  @Get(':id')
-  findOneServer(@Param('id') id: string): Observable<ServerDto> {
-    return this.serverService.findOne(id);
-  }
+  // @Get()
+  // findServers(): Observable<ServerDto[]> {
+  //   return this.serverService.findAll();
+  // }
 
-  @ApiBearerAuth()
-  @ApiBody({ type: [ServerCreateDto] })
-  @Post()
-  createServer(@Body() newServer: ServerCreateDto): Observable<ServerDto> {
-    return this.serverService.createServer(newServer).pipe(
-      map((createdServer) => {
-        return createdServer;
-      })
-    );
-  }
+  // @Get(':id')
+  // findOneServer(@Param('id') id: string): Observable<ServerDto> {
+  //   return this.serverService.findOne(id);
+  // }
 
-  @ApiBearerAuth()
-  @ApiBody({ type: [ServerUpdateDto] })
-  @Put(':id')
-  updateServer(@Param('id') id: string, @Body() updatedServer: ServerUpdateDto): Observable<ServerDto> {
-    return this.serverService.updateServer(id, updatedServer);
-  }
+  // @ApiBearerAuth()
+  // @ApiBody({ type: [ServerCreateDto] })
+  // @Post()
+  // createServer(@Body() newServer: ServerCreateDto): Observable<ServerDto> {
+  //   return this.serverService.createServer(newServer).pipe(
+  //     map((createdServer) => {
+  //       return createdServer;
+  //     })
+  //   );
+  // }
 
-  @ApiBearerAuth()
-  @Delete(':id')
-  deleteServer(@Param('id') id: string): Observable<ServerDto> {
-    return this.serverService.deleteServer(id);
-  }
+  // @ApiBearerAuth()
+  // @ApiBody({ type: [ServerUpdateDto] })
+  // @Put(':id')
+  // updateServer(@Param('id') id: string, @Body() updatedServer: ServerUpdateDto): Observable<ServerDto> {
+  //   return this.serverService.updateServer(id, updatedServer);
+  // }
+
+  // @ApiBearerAuth()
+  // @Delete(':id')
+  // deleteServer(@Param('id') id: string): Observable<ServerDto> {
+  //   return this.serverService.deleteServer(id);
+  // }
 }
