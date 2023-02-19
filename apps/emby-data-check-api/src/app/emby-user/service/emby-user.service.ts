@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { EmbyUserEntity } from '../models/emby-user.entity';
-import { EmbyUserDto } from '../models/emby-user.interface';
+import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
 
 @Injectable()
 export class EmbyUserService {
@@ -12,11 +12,11 @@ export class EmbyUserService {
     private readonly embyUserRepository: Repository<EmbyUserEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<EmbyUserDto>> {
+  async findAllEmbyUsers(options: IPaginationOptions): Promise<Pagination<EmbyUserDto>> {
     return paginate<EmbyUserEntity>(this.embyUserRepository, options, { relations: ['user', 'installation', 'watchStates'] });
   }
 
-  async findOne(id: string): Promise<EmbyUserDto> {
+  async findOneEmbyUserById(id: string): Promise<EmbyUserDto> {
     if (id) {
       return this.embyUserRepository.findOne({
         relations: ['user', 'installation', 'watchStates'],
@@ -27,13 +27,14 @@ export class EmbyUserService {
     }
   }
 
-  // createEmbyUser(newEmbyUser: EmbyUserCreateDto): Observable<EmbyUserDto> {
-  //   return from(this.embyUserRepository.save(newEmbyUser)).pipe(
-  //     map((createdEmbyUser) => {
-  //       return EmbyUsersMapper.mapEmbyUserEntityToDto(createdEmbyUser);
-  //     })
-  //   );
-  // }
+  async createNewEmbyUser(newEmbyUser: EmbyUserCreateDto): Promise<EmbyUserDto> {
+    try {
+      const createdEmbyUser = await this.embyUserRepository.save(this.embyUserRepository.create(newEmbyUser));
+      return this.findOneEmbyUserById(createdEmbyUser.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // updateEmbyUser(id: string, updatedEmbyUser: EmbyUserUpdateDto): Observable<EmbyUserDto> {
   //   return from(this.embyUserRepository.update(id, updatedEmbyUser)).pipe(switchMap(() => this.findOne(id)));
