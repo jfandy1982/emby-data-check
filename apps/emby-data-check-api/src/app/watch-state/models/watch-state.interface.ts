@@ -3,7 +3,7 @@ import { EmbyUserDto } from '../../emby-user/models/emby-user.interface';
 import { MediaItemDto } from '../../media-item/models/media-item.interface';
 
 export interface WatchStateDto {
-  id: string;
+  id?: string;
   mediaItem: MediaItemDto;
   embyUser: EmbyUserDto;
   isWatched: boolean;

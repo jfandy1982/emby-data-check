@@ -12,11 +12,11 @@ export class WatchStateService {
     private readonly watchStateRepository: Repository<WatchStateEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<WatchStateDto>> {
+  async findAllWatchStates(options: IPaginationOptions): Promise<Pagination<WatchStateDto>> {
     return paginate<WatchStateEntity>(this.watchStateRepository, options, { relations: ['embyUser', 'mediaItem'] });
   }
 
-  async findOne(id: string): Promise<WatchStateDto> {
+  async findOneWatchStateById(id: string): Promise<WatchStateDto> {
     if (id) {
       return this.watchStateRepository.findOne({
         relations: ['embyUser', 'mediaItem'],
@@ -27,14 +27,14 @@ export class WatchStateService {
     }
   }
 
-  // async createWatchState(newWatchState: WatchStateCreateDto): Promise<WatchStateDto> {
-  //   try {
-  //     const watchState = await this.watchStateRepository.save(this.watchStateRepository.create(newWatchState));
-  //     return this.findOne(watchState.id);
-  //   } catch (error) {
-  //     throw new HttpException('Some error in WatchStateService - CREATE', HttpStatus.CONFLICT);
-  //   }
-  // }
+  async createNewWatchState(newWatchState: WatchStateDto): Promise<WatchStateDto> {
+    try {
+      const createdWatchState = await this.watchStateRepository.save(this.watchStateRepository.create(newWatchState));
+      return this.findOneWatchStateById(createdWatchState.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // async updateWatchState(id: string, updatedWatchState: WatchStateUpdateDto): Promise<WatchStateDto> {
   //   try {
