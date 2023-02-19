@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { MediaItemEntity } from '../models/media-item.entity';
-import { MediaItemDto } from '../models/media-item.interface';
+import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
 
 @Injectable()
 export class MediaItemService {
@@ -12,11 +12,11 @@ export class MediaItemService {
     private readonly mediaItemRepository: Repository<MediaItemEntity>
   ) {}
 
-  async findAll(options: IPaginationOptions): Promise<Pagination<MediaItemDto>> {
+  async findAllMediaItems(options: IPaginationOptions): Promise<Pagination<MediaItemDto>> {
     return paginate<MediaItemEntity>(this.mediaItemRepository, options, { relations: ['watchStates'] });
   }
 
-  async findOne(id: string): Promise<MediaItemDto> {
+  async findOneMediaItemById(id: string): Promise<MediaItemDto> {
     if (id) {
       return this.mediaItemRepository.findOne({
         relations: ['watchStates'],
@@ -27,13 +27,14 @@ export class MediaItemService {
     }
   }
 
-  // createMediaItem(newMediaItem: MediaItemCreateDto): Observable<MediaItemDto> {
-  //   return from(this.mediaItemRepository.save(newMediaItem)).pipe(
-  //     map((createdMediaItem) => {
-  //       return MediaItemsMapper.mapMediaItemEntityToDto(createdMediaItem);
-  //     })
-  //   );
-  // }
+  async createNewMediaItem(newMediaItem: MediaItemCreateDto): Promise<MediaItemDto> {
+    try {
+      const createdMediaItem = await this.mediaItemRepository.save(this.mediaItemRepository.create(newMediaItem));
+      return this.findOneMediaItemById(createdMediaItem.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
 
   // updateMediaItem(id: string, updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
   //   return from(this.mediaItemRepository.update(id, updatedMediaItem)).pipe(
