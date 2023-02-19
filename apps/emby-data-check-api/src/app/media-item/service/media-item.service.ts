@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Observable, from, map, switchMap } from 'rxjs';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
-import { MediaItemsMapper } from '../../utils/mapper/mediaItemsMapper';
 import { MediaItemEntity } from '../models/media-item.entity';
-import { MediaItemDto, MediaItemCreateDto, MediaItemUpdateDto } from '../models/media-item.interface';
+import { MediaItemDto } from '../models/media-item.interface';
 
 @Injectable()
 export class MediaItemService {
@@ -13,53 +12,45 @@ export class MediaItemService {
     private readonly mediaItemRepository: Repository<MediaItemEntity>
   ) {}
 
-  findAll(): Observable<MediaItemDto[]> {
-    return from(
-      this.mediaItemRepository.find({
-        relations: ['watchStates'],
-      })
-    ).pipe(
-      map((mediaItems) => {
-        return MediaItemsMapper.mapMediaItemEntitiesToDtos(mediaItems);
-      })
-    );
+  async findAll(options: IPaginationOptions): Promise<Pagination<MediaItemDto>> {
+    return paginate<MediaItemEntity>(this.mediaItemRepository, options, { relations: ['watchStates'] });
   }
 
-  findOne(id: string): Observable<MediaItemDto> {
-    return from(
-      this.mediaItemRepository.findOne({
-        relations: ['watchStates'],
-        where: { id },
-      })
-    ).pipe(
-      map((mediaItem) => {
-        if (mediaItem) {
-          return MediaItemsMapper.mapMediaItemEntityToDto(mediaItem);
-        } else {
-          throw new NotFoundException(`Media Item with ID [${id}] not found`);
-        }
-      })
-    );
-  }
+  // findOne(id: string): Observable<MediaItemDto> {
+  //   return from(
+  //     this.mediaItemRepository.findOne({
+  //       relations: ['watchStates'],
+  //       where: { id },
+  //     })
+  //   ).pipe(
+  //     map((mediaItem) => {
+  //       if (mediaItem) {
+  //         return MediaItemsMapper.mapMediaItemEntityToDto(mediaItem);
+  //       } else {
+  //         throw new NotFoundException(`Media Item with ID [${id}] not found`);
+  //       }
+  //     })
+  //   );
+  // }
 
-  createMediaItem(newMediaItem: MediaItemCreateDto): Observable<MediaItemDto> {
-    return from(this.mediaItemRepository.save(newMediaItem)).pipe(
-      map((createdMediaItem) => {
-        return MediaItemsMapper.mapMediaItemEntityToDto(createdMediaItem);
-      })
-    );
-  }
+  // createMediaItem(newMediaItem: MediaItemCreateDto): Observable<MediaItemDto> {
+  //   return from(this.mediaItemRepository.save(newMediaItem)).pipe(
+  //     map((createdMediaItem) => {
+  //       return MediaItemsMapper.mapMediaItemEntityToDto(createdMediaItem);
+  //     })
+  //   );
+  // }
 
-  updateMediaItem(id: string, updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
-    return from(this.mediaItemRepository.update(id, updatedMediaItem)).pipe(
-      switchMap(() => {
-        return this.findOne(id);
-      })
-    );
-  }
+  // updateMediaItem(id: string, updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
+  //   return from(this.mediaItemRepository.update(id, updatedMediaItem)).pipe(
+  //     switchMap(() => {
+  //       return this.findOne(id);
+  //     })
+  //   );
+  // }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deleteMediaItem(id: string): Observable<any> {
-    return from(this.mediaItemRepository.delete(id));
-  }
+  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // deleteMediaItem(id: string): Observable<any> {
+  //   return from(this.mediaItemRepository.delete(id));
+  // }
 }
