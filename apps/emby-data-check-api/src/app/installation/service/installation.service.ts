@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { InstallationEntity } from '../models/installation.entity';
 import { InstallationDto } from '../models/installation.interface';
 
@@ -44,8 +44,7 @@ export class InstallationService {
   //   );
   // }
 
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // deleteInstallation(id: string): Observable<any> {
-  //   return from(this.installationRepository.delete(id));
-  // }
+  async deleteInstallation(id: string): Promise<DeleteResult> {
+    return this.installationRepository.delete(id);
+  }
 }

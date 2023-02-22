@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
 import { InstallationService } from '../service/installation.service';
 
@@ -46,11 +47,18 @@ export class InstallationController {
   //   return this.installationService.updateInstallation(id, updatedInstallation);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // deleteInstallation(@Param('id') id: string): Observable<InstallationDto> {
-  //   return this.installationService.deleteInstallation(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'An Emby Server Installation deleted from Backup DB' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of Emby Server Installation in Backup DB',
+    required: true,
+    example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
+  })
+  @Delete(':id')
+  async deleteInstallation(@Param('id') id: string): Promise<DeleteResult> {
+    return this.installationService.deleteInstallation(id);
+  }
 
   private createDtoToEntity(createDto: InstallationCreateDto): InstallationDto {
     return {
