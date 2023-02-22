@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { ServerCreateDto, ServerDto } from '../models/server.interface';
 import { ServerService } from '../service/server.service';
 
@@ -41,11 +42,13 @@ export class ServerController {
   //   return this.serverService.updateServer(id, updatedServer);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // deleteServer(@Param('id') id: string): Observable<ServerDto> {
-  //   return this.serverService.deleteServer(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Server deleted from Backup DB' })
+  @ApiParam({ name: 'id', description: 'ID of Server in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Delete(':id')
+  async deleteServer(@Param('id') id: string): Promise<DeleteResult> {
+    return this.serverService.deleteServer(id);
+  }
 
   private createDtoToEntity(createDto: ServerCreateDto): ServerDto {
     return {
