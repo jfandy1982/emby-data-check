@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
 import { MediaItemService } from '../service/media-item.service';
 
@@ -43,11 +44,13 @@ export class MediaItemController {
   //   return this.mediaItemService.updateMediaItem(id, updatedMediaItem);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // deleteMediaItem(@Param('id') id: string): Observable<MediaItemDto> {
-  //   return this.mediaItemService.deleteMediaItem(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Media Item deleted from Backup DB' })
+  @ApiParam({ name: 'id', description: 'ID of Media Item in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Delete(':id')
+  async deleteMediaItem(@Param('id') id: string): Promise<DeleteResult> {
+    return this.mediaItemService.deleteMediaItem(id);
+  }
 
   private createDtoToEntity(createDto: MediaItemCreateDto): MediaItemDto {
     // TODO: Replace assignment of 'itemNameSlug' to slugified value from Path & Display Name

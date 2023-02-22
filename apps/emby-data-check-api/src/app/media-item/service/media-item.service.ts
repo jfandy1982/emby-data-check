@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { MediaItemEntity } from '../models/media-item.entity';
 import { MediaItemDto } from '../models/media-item.interface';
 
@@ -44,8 +44,7 @@ export class MediaItemService {
   //   );
   // }
 
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // deleteMediaItem(id: string): Observable<any> {
-  //   return from(this.mediaItemRepository.delete(id));
-  // }
+  async deleteMediaItem(id: string): Promise<DeleteResult> {
+    return this.mediaItemRepository.delete(id);
+  }
 }
