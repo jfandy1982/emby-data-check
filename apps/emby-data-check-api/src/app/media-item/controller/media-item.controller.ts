@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { ApiTags, ApiBearerAuth, ApiBody } from '@nestjs/swagger';
-import { Observable, map } from 'rxjs';
-import { MediaItemDto, MediaItemCreateDto, MediaItemUpdateDto } from '../models/media-item.interface';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
+import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
 import { MediaItemService } from '../service/media-item.service';
 
 @ApiTags('mediaitems')
@@ -9,39 +10,51 @@ import { MediaItemService } from '../service/media-item.service';
 export class MediaItemController {
   constructor(private mediaItemService: MediaItemService) {}
 
+  @ApiBearerAuth()
+  @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Media Items' })
   @Get()
-  findMediaItems(): Observable<MediaItemDto[]> {
-    return this.mediaItemService.findAll();
+  async findAllMediaItems(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<MediaItemDto>> {
+    limit = limit > 100 ? 100 : limit;
+    return this.mediaItemService.findAllMediaItems({ page, limit, route: 'http://localhost:3000/api/mediaitems' });
   }
 
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single Media Item' })
+  @ApiParam({ name: 'id', description: 'ID of Media Item in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Get(':id')
-  findOneMediaItem(@Param('id') id: string): Observable<MediaItemDto> {
-    return this.mediaItemService.findOne(id);
+  findOneMediaItemById(@Param('id') id: string): Promise<MediaItemDto> {
+    return this.mediaItemService.findOneMediaItemById(id);
   }
 
   @ApiBearerAuth()
   @ApiBody({ type: [MediaItemCreateDto] })
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Media Item saved in Backup DB' })
   @Post()
-  createMediaItem(@Body() newMediaItem: MediaItemCreateDto): Observable<MediaItemDto> {
+  async createNewMediaItem(@Body() createMediaItem: MediaItemCreateDto): Promise<MediaItemDto> {
     // TODO: 'path' sollte die Server-Information nicht haben -> neutralisiert das Ganze dann
     // TODO: Bei den 'TagItems' (bei uns 'CustomTags') extrahieren wir nur die Strings, nicht die IDs etc.
-    return this.mediaItemService.createMediaItem(newMediaItem).pipe(
-      map((createdInstallation) => {
-        return createdInstallation;
-      })
-    );
+    const newMediaItem = this.createDtoToEntity(createMediaItem);
+    return this.mediaItemService.createNewMediaItem(newMediaItem);
   }
 
   @ApiBearerAuth()
-  @ApiBody({ type: [MediaItemUpdateDto] })
-  @Put(':id')
-  updateMediaItem(@Param('id') id: string, @Body() updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
-    return this.mediaItemService.updateMediaItem(id, updatedMediaItem);
-  }
-
-  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Media Item deleted from Backup DB' })
+  @ApiParam({ name: 'id', description: 'ID of Media Item in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Delete(':id')
-  deleteMediaItem(@Param('id') id: string): Observable<MediaItemDto> {
+  async deleteMediaItem(@Param('id') id: string): Promise<DeleteResult> {
     return this.mediaItemService.deleteMediaItem(id);
+  }
+
+  private createDtoToEntity(createDto: MediaItemCreateDto): MediaItemDto {
+    // TODO: Replace assignment of 'itemNameSlug' to slugified value from Path & Display Name
+    return {
+      customTags: createDto.customTags,
+      displayName: createDto.displayName,
+      itemNameSlug: createDto.displayName,
+      path: createDto.path,
+      providerId: createDto.providerId,
+      providerType: createDto.providerType,
+      type: createDto.type,
+    };
   }
 }

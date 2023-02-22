@@ -2,7 +2,7 @@ import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { WatchStateDto } from '../../watch-state/models/watch-state.interface';
 
 export interface MediaItemDto {
-  id: string;
+  id?: string;
   type: string;
   providerType: string;
   providerId: string;

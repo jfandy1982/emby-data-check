@@ -4,7 +4,7 @@ import { UserDto } from '../../user/models/user.interface';
 import { WatchStateDto } from '../../watch-state/models/watch-state.interface';
 
 export interface EmbyUserDto {
-  id: string;
+  id?: string;
   embyUserId: string;
   isActive: boolean;
   user: UserDto;

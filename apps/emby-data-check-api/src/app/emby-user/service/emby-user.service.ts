@@ -1,10 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Observable, from, map, switchMap } from 'rxjs';
-import { Repository } from 'typeorm';
-import { EmbyUsersMapper } from '../../utils/mapper/emby-usersMapper';
+import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult, Repository } from 'typeorm';
 import { EmbyUserEntity } from '../models/emby-user.entity';
-import { EmbyUserDto, EmbyUserCreateDto, EmbyUserUpdateDto } from '../models/emby-user.interface';
+import { EmbyUserDto } from '../models/emby-user.interface';
 
 @Injectable()
 export class EmbyUserService {
@@ -13,49 +12,31 @@ export class EmbyUserService {
     private readonly embyUserRepository: Repository<EmbyUserEntity>
   ) {}
 
-  findAll(): Observable<EmbyUserDto[]> {
-    return from(
-      this.embyUserRepository.find({
-        relations: ['user', 'installation', 'watchStates'],
-      })
-    ).pipe(
-      map((embyUsers) => {
-        return EmbyUsersMapper.mapEmbyUserEntitiesToDtos(embyUsers);
-      })
-    );
+  async findAllEmbyUsers(options: IPaginationOptions): Promise<Pagination<EmbyUserDto>> {
+    return paginate<EmbyUserEntity>(this.embyUserRepository, options, { relations: ['user', 'installation', 'watchStates'] });
   }
 
-  findOne(id: string): Observable<EmbyUserDto> {
-    return from(
-      this.embyUserRepository.findOne({
+  async findOneEmbyUserById(id: string): Promise<EmbyUserDto> {
+    if (id) {
+      return this.embyUserRepository.findOne({
         relations: ['user', 'installation', 'watchStates'],
         where: { id },
-      })
-    ).pipe(
-      map((embyUser) => {
-        if (embyUser) {
-          return EmbyUsersMapper.mapEmbyUserEntityToDto(embyUser);
-        } else {
-          throw new NotFoundException(`EmbyUser with ID [${id}] not found`);
-        }
-      })
-    );
+      });
+    } else {
+      throw new BadRequestException('Bad Request');
+    }
   }
 
-  createEmbyUser(newEmbyUser: EmbyUserCreateDto): Observable<EmbyUserDto> {
-    return from(this.embyUserRepository.save(newEmbyUser)).pipe(
-      map((createdEmbyUser) => {
-        return EmbyUsersMapper.mapEmbyUserEntityToDto(createdEmbyUser);
-      })
-    );
+  async createNewEmbyUser(newEmbyUser: EmbyUserDto): Promise<EmbyUserDto> {
+    try {
+      const createdEmbyUser = await this.embyUserRepository.save(this.embyUserRepository.create(newEmbyUser));
+      return this.findOneEmbyUserById(createdEmbyUser.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
   }
 
-  updateEmbyUser(id: string, updatedEmbyUser: EmbyUserUpdateDto): Observable<EmbyUserDto> {
-    return from(this.embyUserRepository.update(id, updatedEmbyUser)).pipe(switchMap(() => this.findOne(id)));
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  deleteEmbyUser(id: string): Observable<any> {
-    return from(this.embyUserRepository.delete(id));
+  async deleteEmbyUser(id: string): Promise<DeleteResult> {
+    return this.embyUserRepository.delete(id);
   }
 }
