@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
 import { EmbyUserService } from '../service/emby-user.service';
 
@@ -46,11 +47,18 @@ export class EmbyUserController {
   //   return this.embyUserService.updateEmbyUser(id, updatedEmbyUser);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // deleteEmbyUser(@Param('id') id: string): Observable<EmbyUserDto> {
-  //   return this.embyUserService.deleteEmbyUser(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'An Emby User deleted from Backup DB' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of Emby User in Backup DB',
+    required: true,
+    example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
+  })
+  @Delete(':id')
+  async deleteEmbyUser(@Param('id') id: string): Promise<DeleteResult> {
+    return this.embyUserService.deleteEmbyUser(id);
+  }
 
   private createDtoToEntity(createDto: EmbyUserCreateDto): EmbyUserDto {
     return {

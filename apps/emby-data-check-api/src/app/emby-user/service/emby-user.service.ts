@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { EmbyUserEntity } from '../models/emby-user.entity';
 import { EmbyUserDto } from '../models/emby-user.interface';
 
@@ -40,8 +40,7 @@ export class EmbyUserService {
   //   return from(this.embyUserRepository.update(id, updatedEmbyUser)).pipe(switchMap(() => this.findOne(id)));
   // }
 
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // deleteEmbyUser(id: string): Observable<any> {
-  //   return from(this.embyUserRepository.delete(id));
-  // }
+  async deleteEmbyUser(id: string): Promise<DeleteResult> {
+    return this.embyUserRepository.delete(id);
+  }
 }
