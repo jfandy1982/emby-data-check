@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
 import { UserDto } from '../models/user.interface';
 
@@ -48,8 +48,7 @@ export class UserService {
   //   return from(this.userRepository.update(id, updatedUser)).pipe(switchMap(() => this.findOne(id)));
   // }
 
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // deleteUser(id: string): Observable<any> {
-  //   return from(this.userRepository.delete(id));
-  // }
+  async deleteUser(id: string): Promise<DeleteResult> {
+    return this.userRepository.delete(id);
+  }
 }

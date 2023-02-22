@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { UserCreateDto, UserDto } from '../models/user.interface';
 import { UserService } from '../service/user.service';
 
@@ -53,11 +54,13 @@ export class UserController {
   //   return this.userService.updateRoleOfUser(id, updatedUser);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // deleteUser(@Param('id') id: string): Observable<UserDto> {
-  //   return this.userService.deleteUser(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A User deleted from Backup DB' })
+  @ApiParam({ name: 'id', description: 'ID of User in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Delete(':id')
+  async deleteUser(@Param('id') id: string): Promise<DeleteResult> {
+    return this.userService.deleteUser(id);
+  }
 
   private createDtoToEntity(createDto: UserCreateDto): UserDto {
     return {
