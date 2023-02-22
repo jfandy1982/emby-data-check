@@ -1,6 +1,7 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { DeleteResult } from 'typeorm';
 import { WatchStateCreateDto, WatchStateDto } from '../models/watch-state.interface';
 import { WatchStateService } from '../service/watch-state.service';
 
@@ -41,11 +42,13 @@ export class WatchStateController {
   //   return this.watchStateService.updateWatchState(id, updatedWatchState);
   // }
 
-  // @ApiBearerAuth()
-  // @Delete(':id')
-  // async deleteWatchState(@Param('id') id: string): Promise<WatchStateDto> {
-  //   return this.watchStateService.deleteWatchState(id);
-  // }
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Watchstate deleted from Backup DB' })
+  @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
+  @Delete(':id')
+  async deleteWatchState(@Param('id') id: string): Promise<DeleteResult> {
+    return this.watchStateService.deleteWatchState(id);
+  }
 
   private createDtoToEntity(createDto: WatchStateCreateDto): WatchStateDto {
     return {

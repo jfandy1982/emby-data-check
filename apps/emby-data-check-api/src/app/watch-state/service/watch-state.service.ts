@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { WatchStateEntity } from '../models/watch-state.entity';
 import { WatchStateDto } from '../models/watch-state.interface';
 
@@ -46,8 +46,7 @@ export class WatchStateService {
   //   }
   // }
 
-  // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  // async deleteWatchState(id: string): Promise<any> {
-  //   return this.watchStateRepository.delete(id);
-  // }
+  async deleteWatchState(id: string): Promise<DeleteResult> {
+    return this.watchStateRepository.delete(id);
+  }
 }
