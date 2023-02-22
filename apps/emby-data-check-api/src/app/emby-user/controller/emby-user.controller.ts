@@ -40,13 +40,6 @@ export class EmbyUserController {
     return this.embyUserService.createNewEmbyUser(newEmbyUser);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [EmbyUserUpdateDto] })
-  // @Put(':id')
-  // updateEmbyUser(@Param('id') id: string, @Body() updatedEmbyUser: EmbyUserUpdateDto): Observable<EmbyUserDto> {
-  //   return this.embyUserService.updateEmbyUser(id, updatedEmbyUser);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'An Emby User deleted from Backup DB' })
   @ApiParam({

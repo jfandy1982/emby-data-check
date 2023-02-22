@@ -36,18 +36,6 @@ export class UserService {
     }
   }
 
-  // updateUser(id: string, updatedUser: UserUpdateDto): Observable<UserDto> {
-  //   delete updatedUser.role;
-
-  //   return from(this.userRepository.update(id, updatedUser)).pipe(switchMap(() => this.findOne(id)));
-  // }
-
-  // updateRoleOfUser(id: string, updatedUser: UserUpdateDto): Observable<UserDto> {
-  //   delete updatedUser.name;
-
-  //   return from(this.userRepository.update(id, updatedUser)).pipe(switchMap(() => this.findOne(id)));
-  // }
-
   async deleteUser(id: string): Promise<DeleteResult> {
     return this.userRepository.delete(id);
   }

@@ -36,10 +36,6 @@ export class ServerService {
     }
   }
 
-  // updateServer(id: string, updatedServer: ServerUpdateDto): Observable<ServerDto> {
-  //   return from(this.serverRepository.update(id, updatedServer)).pipe(switchMap(() => this.findOne(id)));
-  // }
-
   async deleteServer(id: string): Promise<DeleteResult> {
     return this.serverRepository.delete(id);
   }

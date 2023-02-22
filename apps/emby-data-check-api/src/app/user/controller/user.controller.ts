@@ -38,22 +38,6 @@ export class UserController {
     return this.userService.createNewUser(newUser);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [UserUpdateDto] })
-  // @Put(':id')
-  // updateUser(@Param('id') id: string, @Body() updatedUser: UserUpdateDto): Observable<UserDto> {
-  //   return this.userService.updateUser(id, updatedUser);
-  // }
-
-  // // TODO:
-  // // This endpoint will be protected by AuthGuard 'IS_ADMIN' or similar
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [UserUpdateDto] })
-  // @Put(':id/role')
-  // updateRoleOfUser(@Param('id') id: string, @Body() updatedUser: UserUpdateDto): Observable<UserDto> {
-  //   return this.userService.updateRoleOfUser(id, updatedUser);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A User deleted from Backup DB' })
   @ApiParam({ name: 'id', description: 'ID of User in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })

@@ -37,13 +37,6 @@ export class MediaItemController {
     return this.mediaItemService.createNewMediaItem(newMediaItem);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [MediaItemUpdateDto] })
-  // @Put(':id')
-  // updateMediaItem(@Param('id') id: string, @Body() updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
-  //   return this.mediaItemService.updateMediaItem(id, updatedMediaItem);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A Media Item deleted from Backup DB' })
   @ApiParam({ name: 'id', description: 'ID of Media Item in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })

@@ -36,10 +36,6 @@ export class EmbyUserService {
     }
   }
 
-  // updateEmbyUser(id: string, updatedEmbyUser: EmbyUserUpdateDto): Observable<EmbyUserDto> {
-  //   return from(this.embyUserRepository.update(id, updatedEmbyUser)).pipe(switchMap(() => this.findOne(id)));
-  // }
-
   async deleteEmbyUser(id: string): Promise<DeleteResult> {
     return this.embyUserRepository.delete(id);
   }

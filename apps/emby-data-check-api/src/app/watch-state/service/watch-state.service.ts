@@ -36,16 +36,6 @@ export class WatchStateService {
     }
   }
 
-  // async updateWatchState(id: string, updatedWatchState: WatchStateUpdateDto): Promise<WatchStateDto> {
-  //   try {
-  //     // TODO: Find the existing record...
-  //     const watchState = await this.watchStateRepository.save(this.watchStateRepository.update(updatedWatchState));
-  //     return this.findOne(watchState[0].id);
-  //   } catch (error) {
-  //     throw new HttpException('Some error in WatchStateService - UPDATE', HttpStatus.CONFLICT);
-  //   }
-  // }
-
   async deleteWatchState(id: string): Promise<DeleteResult> {
     return this.watchStateRepository.delete(id);
   }

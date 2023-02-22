@@ -40,13 +40,6 @@ export class InstallationController {
     return this.installationService.createNewInstallation(newInstallation);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [InstallationUpdateDto] })
-  // @Put(':id')
-  // updateInstallation(@Param('id') id: string, @Body() updatedInstallation: InstallationUpdateDto): Observable<InstallationDto> {
-  //   return this.installationService.updateInstallation(id, updatedInstallation);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'An Emby Server Installation deleted from Backup DB' })
   @ApiParam({

@@ -36,14 +36,6 @@ export class InstallationService {
     }
   }
 
-  // updateInstallation(id: string, updatedInstallation: InstallationUpdateDto): Observable<InstallationDto> {
-  //   return from(this.installationRepository.update(id, updatedInstallation)).pipe(
-  //     switchMap(() => {
-  //       return this.findOne(id);
-  //     })
-  //   );
-  // }
-
   async deleteInstallation(id: string): Promise<DeleteResult> {
     return this.installationRepository.delete(id);
   }

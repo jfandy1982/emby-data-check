@@ -35,13 +35,6 @@ export class ServerController {
     return this.serverService.createNewServer(newServer);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [ServerUpdateDto] })
-  // @Put(':id')
-  // updateServer(@Param('id') id: string, @Body() updatedServer: ServerUpdateDto): Observable<ServerDto> {
-  //   return this.serverService.updateServer(id, updatedServer);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A Server deleted from Backup DB' })
   @ApiParam({ name: 'id', description: 'ID of Server in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })

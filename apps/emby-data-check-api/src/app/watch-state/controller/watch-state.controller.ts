@@ -35,13 +35,6 @@ export class WatchStateController {
     return this.watchStateService.createNewWatchState(newWatchState);
   }
 
-  // @ApiBearerAuth()
-  // @ApiBody({ type: [WatchStateUpdateDto] })
-  // @Put(':id')
-  // updateWatchState(@Param('id') id: string, @Body() updatedWatchState: WatchStateUpdateDto): Observable<WatchStateDto> {
-  //   return this.watchStateService.updateWatchState(id, updatedWatchState);
-  // }
-
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A Watchstate deleted from Backup DB' })
   @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })

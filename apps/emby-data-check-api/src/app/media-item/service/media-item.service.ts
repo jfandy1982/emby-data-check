@@ -36,14 +36,6 @@ export class MediaItemService {
     }
   }
 
-  // updateMediaItem(id: string, updatedMediaItem: MediaItemUpdateDto): Observable<MediaItemDto> {
-  //   return from(this.mediaItemRepository.update(id, updatedMediaItem)).pipe(
-  //     switchMap(() => {
-  //       return this.findOne(id);
-  //     })
-  //   );
-  // }
-
   async deleteMediaItem(id: string): Promise<DeleteResult> {
     return this.mediaItemRepository.delete(id);
   }
