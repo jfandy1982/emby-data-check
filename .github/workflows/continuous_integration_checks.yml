@@ -36,6 +36,9 @@ jobs:
         id: wf-ctx-value
         uses: ./.github/actions/wf-ctx-value
 
+      - name: 'Print context VARS'
+        run: echo ${{ vars }}
+
   build:
     name: Build
 
@@ -237,7 +240,7 @@ jobs:
         with:
           docker-file: ${{ env.DOCKERFILE }}
           docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-hub-repository: ${{ secrets.DOCKERHUB_REPOSITORY_API }}
+          docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_API }}
           docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
           need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
           need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
@@ -281,7 +284,7 @@ jobs:
         with:
           docker-file: ${{ env.DOCKERFILE }}
           docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-hub-repository: ${{ secrets.DOCKERHUB_REPOSITORY_UI }}
+          docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_UI }}
           docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
           need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
           need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
