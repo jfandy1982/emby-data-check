@@ -36,9 +36,6 @@ jobs:
         id: wf-ctx-value
         uses: ./.github/actions/wf-ctx-value
 
-      - name: 'Print context VARS'
-        run: echo "${{ vars.DOCKERHUB_REPOSITORY_API }}"
-
   build:
     name: Build
 
