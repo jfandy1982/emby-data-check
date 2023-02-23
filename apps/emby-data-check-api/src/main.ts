@@ -31,7 +31,7 @@ async function bootstrap() {
     customSiteTitle: 'Emby Data Check - API Docs',
   };
   const document = SwaggerModule.createDocument(app, config, options);
-  SwaggerModule.setup('api', app, document, customOptions);
+  SwaggerModule.setup('swagger', app, document, customOptions);
 
   await app.listen(port);
   Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
