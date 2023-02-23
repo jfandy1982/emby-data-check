@@ -6,7 +6,6 @@ WORKDIR /home/node
 # Use Docker's layer concepts while copying some required files
 # tsconfig.json: How to transpile TS code to JavaScript
 COPY --chown=node:node tsconfig.base.json .
-COPY --chown=node:node angular.json .
 COPY --chown=node:node .nvmrc .
 
 # package*.json files to install dependencies
