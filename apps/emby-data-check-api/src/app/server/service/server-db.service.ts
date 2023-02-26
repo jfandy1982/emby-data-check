@@ -6,7 +6,7 @@ import { ServerEntity } from '../models/server.entity';
 import { ServerDto } from '../models/server.interface';
 
 @Injectable()
-export class ServerService {
+export class ServerDbService {
   constructor(
     @InjectRepository(ServerEntity)
     private readonly serverRepository: Repository<ServerEntity>

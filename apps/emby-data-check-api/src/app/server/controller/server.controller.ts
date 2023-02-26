@@ -3,12 +3,12 @@ import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { ServerCreateDto, ServerDto } from '../models/server.interface';
-import { ServerService } from '../service/server.service';
+import { ServerDbService } from '../service/server-db.service';
 
 @ApiTags('servers')
 @Controller('servers')
 export class ServerController {
-  constructor(private serverService: ServerService) {}
+  constructor(private serverService: ServerDbService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
