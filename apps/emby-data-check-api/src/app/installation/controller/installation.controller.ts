@@ -3,19 +3,19 @@ import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
-import { InstallationService } from '../service/installation.service';
+import { InstallationDbService } from '../service/installation-db.service';
 
 @ApiTags('installations')
 @Controller('installations')
 export class InstallationController {
-  constructor(private installationService: InstallationService) {}
+  constructor(private installationDbService: InstallationDbService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Server Installations' })
   @Get()
   async findAllInstallations(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<InstallationDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.installationService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
+    return this.installationDbService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
   }
 
   @ApiBearerAuth()
@@ -28,7 +28,7 @@ export class InstallationController {
   })
   @Get(':id')
   findOneInstallationById(@Param('id') id: string): Promise<InstallationDto> {
-    return this.installationService.findOneInstallationById(id);
+    return this.installationDbService.findOneInstallationById(id);
   }
 
   @ApiBearerAuth()
@@ -37,7 +37,7 @@ export class InstallationController {
   @Post()
   async createNewInstallation(@Body() createInstallation: InstallationCreateDto): Promise<InstallationDto> {
     const newInstallation = this.createDtoToEntity(createInstallation);
-    return this.installationService.createNewInstallation(newInstallation);
+    return this.installationDbService.createNewInstallation(newInstallation);
   }
 
   @ApiBearerAuth()
@@ -50,7 +50,7 @@ export class InstallationController {
   })
   @Delete(':id')
   async deleteInstallation(@Param('id') id: string): Promise<DeleteResult> {
-    return this.installationService.deleteInstallation(id);
+    return this.installationDbService.deleteInstallation(id);
   }
 
   private createDtoToEntity(createDto: InstallationCreateDto): InstallationDto {

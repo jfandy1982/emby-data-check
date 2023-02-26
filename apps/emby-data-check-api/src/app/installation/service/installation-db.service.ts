@@ -6,7 +6,7 @@ import { InstallationEntity } from '../models/installation.entity';
 import { InstallationDto } from '../models/installation.interface';
 
 @Injectable()
-export class InstallationService {
+export class InstallationDbService {
   constructor(
     @InjectRepository(InstallationEntity)
     private readonly installationRepository: Repository<InstallationEntity>
