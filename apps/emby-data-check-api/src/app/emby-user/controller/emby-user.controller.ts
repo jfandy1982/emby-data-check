@@ -3,19 +3,19 @@ import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
-import { EmbyUserService } from '../service/emby-user.service';
+import { EmbyUserDbService } from '../service/emby-user-db.service';
 
 @ApiTags('embyusers')
 @Controller('embyusers')
 export class EmbyUserController {
-  constructor(private embyUserService: EmbyUserService) {}
+  constructor(private embyUserDbService: EmbyUserDbService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Users on Emby Server Installations' })
   @Get()
   async findAllEmbyUsers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<EmbyUserDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.embyUserService.findAllEmbyUsers({ page, limit, route: 'http://localhost:3000/api/embyusers' });
+    return this.embyUserDbService.findAllEmbyUsers({ page, limit, route: 'http://localhost:3000/api/embyusers' });
   }
 
   @ApiBearerAuth()
@@ -28,7 +28,7 @@ export class EmbyUserController {
   })
   @Get(':id')
   findOneEmbyUserById(@Param('id') id: string): Promise<EmbyUserDto> {
-    return this.embyUserService.findOneEmbyUserById(id);
+    return this.embyUserDbService.findOneEmbyUserById(id);
   }
 
   @ApiBearerAuth()
@@ -37,7 +37,7 @@ export class EmbyUserController {
   @Post()
   async createNewEmbyUser(@Body() createEmbyUser: EmbyUserCreateDto): Promise<EmbyUserDto> {
     const newEmbyUser = this.createDtoToEntity(createEmbyUser);
-    return this.embyUserService.createNewEmbyUser(newEmbyUser);
+    return this.embyUserDbService.createNewEmbyUser(newEmbyUser);
   }
 
   @ApiBearerAuth()
@@ -50,7 +50,7 @@ export class EmbyUserController {
   })
   @Delete(':id')
   async deleteEmbyUser(@Param('id') id: string): Promise<DeleteResult> {
-    return this.embyUserService.deleteEmbyUser(id);
+    return this.embyUserDbService.deleteEmbyUser(id);
   }
 
   private createDtoToEntity(createDto: EmbyUserCreateDto): EmbyUserDto {

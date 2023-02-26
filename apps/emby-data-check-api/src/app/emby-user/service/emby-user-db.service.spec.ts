@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { EmbyUserService } from './emby-user.service';
+import { EmbyUserDbService } from './emby-user-db.service';
 
-describe('EmbyUserService', () => {
-  let service: EmbyUserService;
+describe('EmbyUserDbService', () => {
+  let service: EmbyUserDbService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [EmbyUserService],
+      providers: [EmbyUserDbService],
     }).compile();
 
-    service = module.get<EmbyUserService>(EmbyUserService);
+    service = module.get<EmbyUserDbService>(EmbyUserDbService);
   });
 
   it('should be defined', () => {

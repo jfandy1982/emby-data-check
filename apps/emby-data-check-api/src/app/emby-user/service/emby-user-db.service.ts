@@ -6,7 +6,7 @@ import { EmbyUserEntity } from '../models/emby-user.entity';
 import { EmbyUserDto } from '../models/emby-user.interface';
 
 @Injectable()
-export class EmbyUserService {
+export class EmbyUserDbService {
   constructor(
     @InjectRepository(EmbyUserEntity)
     private readonly embyUserRepository: Repository<EmbyUserEntity>
