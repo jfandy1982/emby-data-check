@@ -8,14 +8,14 @@ import { ServerDbService } from '../service/server-db.service';
 @ApiTags('servers')
 @Controller('servers')
 export class ServerController {
-  constructor(private serverService: ServerDbService) {}
+  constructor(private serverDbService: ServerDbService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
   @Get()
   async findAllServers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<ServerDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.serverService.findAllServers({ page, limit, route: 'http://localhost:3000/api/servers' });
+    return this.serverDbService.findAllServers({ page, limit, route: 'http://localhost:3000/api/servers' });
   }
 
   @ApiBearerAuth()
@@ -23,7 +23,7 @@ export class ServerController {
   @ApiParam({ name: 'id', description: 'ID of Server in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Get(':id')
   findOneServerById(@Param('id') id: string): Promise<ServerDto> {
-    return this.serverService.findOneServerById(id);
+    return this.serverDbService.findOneServerById(id);
   }
 
   @ApiBearerAuth()
@@ -32,7 +32,7 @@ export class ServerController {
   @Post()
   async createNewServer(@Body() createServer: ServerCreateDto): Promise<ServerDto> {
     const newServer = this.createDtoToEntity(createServer);
-    return this.serverService.createNewServer(newServer);
+    return this.serverDbService.createNewServer(newServer);
   }
 
   @ApiBearerAuth()
@@ -40,7 +40,7 @@ export class ServerController {
   @ApiParam({ name: 'id', description: 'ID of Server in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Delete(':id')
   async deleteServer(@Param('id') id: string): Promise<DeleteResult> {
-    return this.serverService.deleteServer(id);
+    return this.serverDbService.deleteServer(id);
   }
 
   private createDtoToEntity(createDto: ServerCreateDto): ServerDto {
