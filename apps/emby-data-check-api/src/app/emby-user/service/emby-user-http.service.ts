@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { catchError, firstValueFrom, map, tap } from 'rxjs';
+import { catchError, firstValueFrom, map } from 'rxjs';
 import { ServerDto } from '../../server/models/server.interface';
 import { UserDto } from '../../user/models/user.interface';
 import { EmbyUserInfoDto, PublicUserInfoEmbyDto } from '../models/emby-user-emby.interface';
@@ -15,9 +15,6 @@ export class EmbyUserHttpService {
 
     await firstValueFrom(
       this.httpService.get<PublicUserInfoEmbyDto[]>(url).pipe(
-        tap((fetchedData) => {
-          console.log(fetchedData);
-        }),
         map((userDetails) => {
           const filteredUserDetail = userDetails.data.filter((userDetail) => userDetail.Name === user.username);
 
