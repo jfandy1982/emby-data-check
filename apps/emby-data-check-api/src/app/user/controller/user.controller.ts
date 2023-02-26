@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { UserCreateDto, UserDto } from '../models/user.interface';
 import { UserDbService } from '../service/user-db.service';
+import { UserHttpService } from '../service/user-http.service';
 
 @ApiTags('users')
 @Controller('users')
 export class UserController {
-  constructor(private userDbService: UserDbService) {}
+  constructor(private userDbService: UserDbService, private userHttpService: UserHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Users' })

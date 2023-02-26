@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
 import { MediaItemDbService } from '../service/media-item-db.service';
+import { MediaItemHttpService } from '../service/media-item-http.service';
 
 @ApiTags('mediaitems')
 @Controller('mediaitems')
 export class MediaItemController {
-  constructor(private mediaItemDbService: MediaItemDbService) {}
+  constructor(private mediaItemDbService: MediaItemDbService, private mediaItemHttpService: MediaItemHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Media Items' })

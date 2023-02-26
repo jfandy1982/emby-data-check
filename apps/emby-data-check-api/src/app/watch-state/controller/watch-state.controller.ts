@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { WatchStateCreateDto, WatchStateDto } from '../models/watch-state.interface';
 import { WatchStateDbService } from '../service/watch-state-db.service';
+import { WatchStateHttpService } from '../service/watch-state-http.service';
 
 @ApiTags('watchstates')
 @Controller('watchstates')
 export class WatchStateController {
-  constructor(private watchStateDbService: WatchStateDbService) {}
+  constructor(private watchStateDbService: WatchStateDbService, private watchStateHttpService: WatchStateHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Watchstates' })

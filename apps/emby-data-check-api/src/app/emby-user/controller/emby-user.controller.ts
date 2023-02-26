@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
 import { EmbyUserDbService } from '../service/emby-user-db.service';
+import { EmbyUserHttpService } from '../service/emby-user-http.service';
 
 @ApiTags('embyusers')
 @Controller('embyusers')
 export class EmbyUserController {
-  constructor(private embyUserDbService: EmbyUserDbService) {}
+  constructor(private embyUserDbService: EmbyUserDbService, private embyUserHttpService: EmbyUserHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Users on Emby Server Installations' })

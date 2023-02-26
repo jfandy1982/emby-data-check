@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
 import { InstallationDbService } from '../service/installation-db.service';
+import { InstallationHttpService } from '../service/installation-http.service';
 
 @ApiTags('installations')
 @Controller('installations')
 export class InstallationController {
-  constructor(private installationDbService: InstallationDbService) {}
+  constructor(private installationDbService: InstallationDbService, private installationHttpService: InstallationHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Server Installations' })

@@ -4,11 +4,12 @@ import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { ServerCreateDto, ServerDto } from '../models/server.interface';
 import { ServerDbService } from '../service/server-db.service';
+import { ServerHttpService } from '../service/server-http.service';
 
 @ApiTags('servers')
 @Controller('servers')
 export class ServerController {
-  constructor(private serverDbService: ServerDbService) {}
+  constructor(private serverDbService: ServerDbService, private serverHttpService: ServerHttpService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
