@@ -47,8 +47,8 @@ export class InstallationController {
     example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
   })
   @Get('emby/:serverid')
-  async getInstallationDetailsForServer(@Param('serverid') id: string): Promise<InstallationInfoDto> {
-    const foundServer = await this.serverDbService.findOneServerById(id);
+  async getInstallationDetailsForServer(@Param('serverid') serverid: string): Promise<InstallationInfoDto> {
+    const foundServer = await this.serverDbService.findOneServerById(serverid);
     return this.installationHttpService.getInstallationDetails(foundServer);
   }
 
