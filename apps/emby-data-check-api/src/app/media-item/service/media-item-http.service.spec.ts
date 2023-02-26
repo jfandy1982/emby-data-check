@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { MediaItemService } from './media-item.service';
+import { MediaItemHttpService } from './media-item-http.service';
 
-describe('MediaItemService', () => {
-  let service: MediaItemService;
+describe('MediaItemHttpService', () => {
+  let service: MediaItemHttpService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MediaItemService],
+      providers: [MediaItemHttpService],
     }).compile();
 
-    service = module.get<MediaItemService>(MediaItemService);
+    service = module.get<MediaItemHttpService>(MediaItemHttpService);
   });
 
   it('should be defined', () => {
