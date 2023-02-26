@@ -10,7 +10,7 @@ export class InstallationHttpService {
   constructor(private readonly httpService: HttpService) {}
   async getInstallationDetails(server: ServerDto): Promise<InstallationInfoDto> {
     const url = `http://${server.ipAddress}:${server.port}/emby/System/Info/Public`;
-    const installationDetail: InstallationInfoDto = null;
+    const installationDetail = new InstallationInfoDto();
 
     await firstValueFrom(
       this.httpService.get<PublicSystemInfoEmbyDto>(url).pipe(
