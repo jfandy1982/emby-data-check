@@ -6,10 +6,11 @@ import { InstallationHttpService } from './service/installation-http.service';
 import { InstallationController } from './controller/installation.controller';
 import { ServerEntity } from '../server/models/server.entity';
 import { InstallationEntity } from './models/installation.entity';
+import { ServerDbService } from '../server/service/server-db.service';
 
 @Module({
   imports: [HttpModule, TypeOrmModule.forFeature([InstallationEntity, ServerEntity])],
-  providers: [InstallationDbService, InstallationHttpService],
+  providers: [InstallationDbService, InstallationHttpService, ServerDbService],
   controllers: [InstallationController],
 })
 export class InstallationModule {}
