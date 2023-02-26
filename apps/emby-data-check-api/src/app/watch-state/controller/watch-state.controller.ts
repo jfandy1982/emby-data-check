@@ -13,7 +13,7 @@ export class WatchStateController {
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Watchstates' })
-  @Get()
+  @Get('db')
   async findAllWatchStates(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<WatchStateDto>> {
     limit = limit > 100 ? 100 : limit;
     return this.watchStateDbService.findAllWatchStates({ page, limit, route: 'http://localhost:3000/api/watchstates' });
@@ -22,7 +22,7 @@ export class WatchStateController {
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A single Watchstate' })
   @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
-  @Get(':id')
+  @Get('db/:id')
   findOneWatchStateById(@Param('id') id: string): Promise<WatchStateDto> {
     return this.watchStateDbService.findOneWatchStateById(id);
   }
@@ -30,7 +30,7 @@ export class WatchStateController {
   @ApiBearerAuth()
   @ApiBody({ type: [WatchStateCreateDto] })
   @ApiResponse({ status: HttpStatus.OK, description: 'A Watchstate saved in Backup DB' })
-  @Post()
+  @Post('db')
   async createNewWatchState(@Body() createWatchState: WatchStateCreateDto): Promise<WatchStateDto> {
     const newWatchState = this.createDtoToEntity(createWatchState);
     return this.watchStateDbService.createNewWatchState(newWatchState);
@@ -39,7 +39,7 @@ export class WatchStateController {
   @ApiBearerAuth()
   @ApiResponse({ status: HttpStatus.OK, description: 'A Watchstate deleted from Backup DB' })
   @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
-  @Delete(':id')
+  @Delete('db/:id')
   async deleteWatchState(@Param('id') id: string): Promise<DeleteResult> {
     return this.watchStateDbService.deleteWatchState(id);
   }
