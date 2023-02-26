@@ -3,19 +3,19 @@ import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { WatchStateCreateDto, WatchStateDto } from '../models/watch-state.interface';
-import { WatchStateService } from '../service/watch-state.service';
+import { WatchStateDbService } from '../service/watch-state-db.service';
 
 @ApiTags('watchstates')
 @Controller('watchstates')
 export class WatchStateController {
-  constructor(private watchStateService: WatchStateService) {}
+  constructor(private watchStateDbService: WatchStateDbService) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Watchstates' })
   @Get()
   async findAllWatchStates(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<WatchStateDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.watchStateService.findAllWatchStates({ page, limit, route: 'http://localhost:3000/api/watchstates' });
+    return this.watchStateDbService.findAllWatchStates({ page, limit, route: 'http://localhost:3000/api/watchstates' });
   }
 
   @ApiBearerAuth()
@@ -23,7 +23,7 @@ export class WatchStateController {
   @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Get(':id')
   findOneWatchStateById(@Param('id') id: string): Promise<WatchStateDto> {
-    return this.watchStateService.findOneWatchStateById(id);
+    return this.watchStateDbService.findOneWatchStateById(id);
   }
 
   @ApiBearerAuth()
@@ -32,7 +32,7 @@ export class WatchStateController {
   @Post()
   async createNewWatchState(@Body() createWatchState: WatchStateCreateDto): Promise<WatchStateDto> {
     const newWatchState = this.createDtoToEntity(createWatchState);
-    return this.watchStateService.createNewWatchState(newWatchState);
+    return this.watchStateDbService.createNewWatchState(newWatchState);
   }
 
   @ApiBearerAuth()
@@ -40,7 +40,7 @@ export class WatchStateController {
   @ApiParam({ name: 'id', description: 'ID of Watchstate in Backup DB', required: true, example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000' })
   @Delete(':id')
   async deleteWatchState(@Param('id') id: string): Promise<DeleteResult> {
-    return this.watchStateService.deleteWatchState(id);
+    return this.watchStateDbService.deleteWatchState(id);
   }
 
   private createDtoToEntity(createDto: WatchStateCreateDto): WatchStateDto {

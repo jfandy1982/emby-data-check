@@ -6,7 +6,7 @@ import { WatchStateEntity } from '../models/watch-state.entity';
 import { WatchStateDto } from '../models/watch-state.interface';
 
 @Injectable()
-export class WatchStateService {
+export class WatchStateDbService {
   constructor(
     @InjectRepository(WatchStateEntity)
     private readonly watchStateRepository: Repository<WatchStateEntity>
