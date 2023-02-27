@@ -1,13 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { InstallationService } from './service/installation.service';
+import { HttpModule } from '@nestjs/axios';
+import { InstallationDbService } from './service/installation-db.service';
+import { InstallationHttpService } from './service/installation-http.service';
 import { InstallationController } from './controller/installation.controller';
 import { ServerEntity } from '../server/models/server.entity';
 import { InstallationEntity } from './models/installation.entity';
+import { ServerDbService } from '../server/service/server-db.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([InstallationEntity, ServerEntity])],
-  providers: [InstallationService],
+  imports: [HttpModule, TypeOrmModule.forFeature([InstallationEntity, ServerEntity])],
+  providers: [InstallationDbService, InstallationHttpService, ServerDbService],
   controllers: [InstallationController],
 })
 export class InstallationModule {}

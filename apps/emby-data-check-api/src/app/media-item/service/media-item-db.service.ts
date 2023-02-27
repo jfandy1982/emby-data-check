@@ -6,7 +6,7 @@ import { MediaItemEntity } from '../models/media-item.entity';
 import { MediaItemDto } from '../models/media-item.interface';
 
 @Injectable()
-export class MediaItemService {
+export class MediaItemDbService {
   constructor(
     @InjectRepository(MediaItemEntity)
     private readonly mediaItemRepository: Repository<MediaItemEntity>

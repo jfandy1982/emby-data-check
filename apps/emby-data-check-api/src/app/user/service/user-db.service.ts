@@ -6,7 +6,7 @@ import { UserEntity } from '../models/user.entity';
 import { UserDto } from '../models/user.interface';
 
 @Injectable()
-export class UserService {
+export class UserDbService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>

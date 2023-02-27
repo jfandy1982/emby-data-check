@@ -2,20 +2,27 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
+import { ServerDbService } from '../../server/service/server-db.service';
+import { InstallationInfoDto } from '../models/installation-emby.interface';
 import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
-import { InstallationService } from '../service/installation.service';
+import { InstallationDbService } from '../service/installation-db.service';
+import { InstallationHttpService } from '../service/installation-http.service';
 
 @ApiTags('installations')
 @Controller('installations')
 export class InstallationController {
-  constructor(private installationService: InstallationService) {}
+  constructor(
+    private installationDbService: InstallationDbService,
+    private installationHttpService: InstallationHttpService,
+    private serverDbService: ServerDbService
+  ) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Server Installations' })
-  @Get()
+  @Get('db')
   async findAllInstallations(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<InstallationDto>> {
     limit = limit > 100 ? 100 : limit;
-    return this.installationService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
+    return this.installationDbService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
   }
 
   @ApiBearerAuth()
@@ -26,18 +33,32 @@ export class InstallationController {
     required: true,
     example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
   })
-  @Get(':id')
+  @Get('db/:id')
   findOneInstallationById(@Param('id') id: string): Promise<InstallationDto> {
-    return this.installationService.findOneInstallationById(id);
+    return this.installationDbService.findOneInstallationById(id);
+  }
+
+  @ApiBearerAuth()
+  @ApiResponse({ status: HttpStatus.OK, description: 'A single Server' })
+  @ApiParam({
+    name: 'serverid',
+    description: 'ID of Server in Backup DB',
+    required: true,
+    example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
+  })
+  @Get('emby/:serverid')
+  async getInstallationDetailsForServer(@Param('serverid') serverid: string): Promise<InstallationInfoDto> {
+    const foundServer = await this.serverDbService.findOneServerById(serverid);
+    return this.installationHttpService.getInstallationDetails(foundServer);
   }
 
   @ApiBearerAuth()
   @ApiBody({ type: [InstallationCreateDto] })
   @ApiResponse({ status: HttpStatus.OK, description: 'An Emby Server Installation saved in Backup DB' })
-  @Post()
+  @Post('db')
   async createNewInstallation(@Body() createInstallation: InstallationCreateDto): Promise<InstallationDto> {
     const newInstallation = this.createDtoToEntity(createInstallation);
-    return this.installationService.createNewInstallation(newInstallation);
+    return this.installationDbService.createNewInstallation(newInstallation);
   }
 
   @ApiBearerAuth()
@@ -48,9 +69,9 @@ export class InstallationController {
     required: true,
     example: '11bf5b37-e0b8-42e0-8dcf-dc8c4aefc000',
   })
-  @Delete(':id')
+  @Delete('db/:id')
   async deleteInstallation(@Param('id') id: string): Promise<DeleteResult> {
-    return this.installationService.deleteInstallation(id);
+    return this.installationDbService.deleteInstallation(id);
   }
 
   private createDtoToEntity(createDto: InstallationCreateDto): InstallationDto {
