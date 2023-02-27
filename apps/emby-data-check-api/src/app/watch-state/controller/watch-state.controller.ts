@@ -2,6 +2,9 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
+import { EmbyUserDbService } from '../../emby-user/service/emby-user-db.service';
+import { ServerDbService } from '../../server/service/server-db.service';
+import { PublicWatchStatesEmbyDto } from '../models/watch-state-emby.interface';
 import { WatchStateCreateDto, WatchStateDto } from '../models/watch-state.interface';
 import { WatchStateDbService } from '../service/watch-state-db.service';
 import { WatchStateHttpService } from '../service/watch-state-http.service';
@@ -9,7 +12,12 @@ import { WatchStateHttpService } from '../service/watch-state-http.service';
 @ApiTags('watchstates')
 @Controller('watchstates')
 export class WatchStateController {
-  constructor(private watchStateDbService: WatchStateDbService, private watchStateHttpService: WatchStateHttpService) {}
+  constructor(
+    private watchStateDbService: WatchStateDbService,
+    private watchStateHttpService: WatchStateHttpService,
+    private serverDbService: ServerDbService,
+    private embyUserDbService: EmbyUserDbService
+  ) {}
 
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Watchstates' })
@@ -25,6 +33,19 @@ export class WatchStateController {
   @Get('db/:id')
   findOneWatchStateById(@Param('id') id: string): Promise<WatchStateDto> {
     return this.watchStateDbService.findOneWatchStateById(id);
+  }
+
+  @ApiBearerAuth()
+  @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Media Items' })
+  @Get('emby/:serverid/:embyuserid')
+  async findAllWatchStatesForUser(
+    @Param('serverid') serverid: string,
+    @Param('embyuserid') embyuserid: string
+  ): Promise<PublicWatchStatesEmbyDto> {
+    const foundServer = await this.serverDbService.findOneServerById(serverid);
+    const foundEmbyUser = await this.embyUserDbService.findOneEmbyUserById(embyuserid);
+
+    return this.watchStateHttpService.findAllWatchStatesForUser(foundServer, foundEmbyUser);
   }
 
   @ApiBearerAuth()

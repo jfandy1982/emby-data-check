@@ -1,7 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosError } from 'axios';
-import { Server } from 'http';
 import { catchError, firstValueFrom, map } from 'rxjs';
 import { ServerDto } from '../../server/models/server.interface';
 import { PublicItemsEmbyDto } from '../models/media-item-emby.interface';
