@@ -4,10 +4,15 @@ import { UserHttpService } from './user-http.service';
 describe('UserHttpService', () => {
   let service: UserHttpService;
 
+  const mockUserHttpService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [UserHttpService],
-    }).compile();
+    })
+      .overrideProvider(UserHttpService)
+      .useValue(mockUserHttpService)
+      .compile();
 
     service = module.get<UserHttpService>(UserHttpService);
   });

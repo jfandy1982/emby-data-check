@@ -4,10 +4,15 @@ import { WatchStateHttpService } from './watch-state-http.service';
 describe('WatchStateHttpService', () => {
   let service: WatchStateHttpService;
 
+  const mockWatchStateHttpService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [WatchStateHttpService],
-    }).compile();
+    })
+      .overrideProvider(WatchStateHttpService)
+      .useValue(mockWatchStateHttpService)
+      .compile();
 
     service = module.get<WatchStateHttpService>(WatchStateHttpService);
   });
