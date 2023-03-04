@@ -9,6 +9,7 @@ import databaseConfig from './configuration/database.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { BackupModule } from './backup/backup.module';
 import { EmbyUserModule } from './emby-user/emby-user.module';
 import { InstallationModule } from './installation/installation.module';
 import { MediaItemModule } from './media-item/media-item.module';
@@ -24,6 +25,7 @@ import { WatchStateModule } from './watch-state/watch-state.module';
       load: [apiConfig, authConfig, databaseConfig],
     }),
     TypeOrmModule.forRootAsync({ useClass: TypeOrmConfigService }),
+    BackupModule,
     EmbyUserModule,
     InstallationModule,
     MediaItemModule,
