@@ -1,18 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { MediaItemEntity } from '../models/media-item.entity';
 import { MediaItemDbService } from './media-item-db.service';
 
 describe('MediaItemService', () => {
   let service: MediaItemDbService;
 
-  const mockMediaItemDbService = {};
+  const mockMediaItemEntityRepository = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [MediaItemDbService],
-    })
-      .overrideProvider(MediaItemDbService)
-      .useValue(mockMediaItemDbService)
-      .compile();
+      providers: [MediaItemDbService, { provide: getRepositoryToken(MediaItemEntity), useValue: mockMediaItemEntityRepository }],
+    }).compile();
 
     service = module.get<MediaItemDbService>(MediaItemDbService);
   });
