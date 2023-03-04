@@ -1,18 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { ServerEntity } from '../models/server.entity';
 import { ServerDbService } from './server-db.service';
 
 describe('ServerDbService', () => {
   let service: ServerDbService;
 
-  const mockServerDbService = {};
+  const mockServerEntityRepository = {};
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ServerDbService],
-    })
-      .overrideProvider(ServerDbService)
-      .useValue(mockServerDbService)
-      .compile();
+      providers: [ServerDbService, { provide: getRepositoryToken(ServerEntity), useValue: mockServerEntityRepository }],
+    }).compile();
 
     service = module.get<ServerDbService>(ServerDbService);
   });
