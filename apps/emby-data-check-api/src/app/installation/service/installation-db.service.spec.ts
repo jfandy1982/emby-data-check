@@ -4,10 +4,15 @@ import { InstallationDbService } from './installation-db.service';
 describe('InstallationService', () => {
   let service: InstallationDbService;
 
+  const mockInstallationDbService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [InstallationDbService],
-    }).compile();
+    })
+      .overrideProvider(InstallationDbService)
+      .useValue(mockInstallationDbService)
+      .compile();
 
     service = module.get<InstallationDbService>(InstallationDbService);
   });

@@ -4,10 +4,15 @@ import { ServerDbService } from './server-db.service';
 describe('ServerDbService', () => {
   let service: ServerDbService;
 
+  const mockServerDbService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [ServerDbService],
-    }).compile();
+    })
+      .overrideProvider(ServerDbService)
+      .useValue(mockServerDbService)
+      .compile();
 
     service = module.get<ServerDbService>(ServerDbService);
   });

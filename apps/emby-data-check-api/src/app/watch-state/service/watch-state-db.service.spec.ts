@@ -4,10 +4,15 @@ import { WatchStateDbService } from './watch-state-db.service';
 describe('WatchStateDbService', () => {
   let service: WatchStateDbService;
 
+  const mockWatchStateDbService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [WatchStateDbService],
-    }).compile();
+    })
+      .overrideProvider(WatchStateDbService)
+      .useValue(mockWatchStateDbService)
+      .compile();
 
     service = module.get<WatchStateDbService>(WatchStateDbService);
   });

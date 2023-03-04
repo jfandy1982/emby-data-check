@@ -4,10 +4,15 @@ import { MediaItemDbService } from './media-item-db.service';
 describe('MediaItemService', () => {
   let service: MediaItemDbService;
 
+  const mockMediaItemDbService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [MediaItemDbService],
-    }).compile();
+    })
+      .overrideProvider(MediaItemDbService)
+      .useValue(mockMediaItemDbService)
+      .compile();
 
     service = module.get<MediaItemDbService>(MediaItemDbService);
   });

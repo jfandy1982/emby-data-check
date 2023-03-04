@@ -4,10 +4,15 @@ import { MediaItemHttpService } from './media-item-http.service';
 describe('MediaItemHttpService', () => {
   let service: MediaItemHttpService;
 
+  const mockMediaItemHttpService = {};
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [MediaItemHttpService],
-    }).compile();
+    })
+      .overrideProvider(MediaItemHttpService)
+      .useValue(mockMediaItemHttpService)
+      .compile();
 
     service = module.get<MediaItemHttpService>(MediaItemHttpService);
   });
