@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { UserDbService } from '../../user/service/user-db.service';
 import { ServerDbService } from '../../server/service/server-db.service';
 import { EmbyUserInfoDto } from '../models/emby-user-emby.interface';
-import { EmbyUserCreateDto, EmbyUserDto } from '../models/emby-user.interface';
+import { EmbyUserCreateDto, EmbyUserDto, EmbyUserUpdateDto } from '../models/emby-user.interface';
 import { EmbyUserDbService } from '../service/emby-user-db.service';
 import { EmbyUserHttpService } from '../service/emby-user-http.service';
 
@@ -68,6 +68,16 @@ export class EmbyUserController {
   async createNewEmbyUser(@Body() createEmbyUser: EmbyUserCreateDto): Promise<EmbyUserDto> {
     const newEmbyUser = this.createDtoToEntity(createEmbyUser);
     return this.embyUserDbService.createNewEmbyUser(newEmbyUser);
+  }
+
+  @ApiBearerAuth()
+  @ApiBody({ type: [EmbyUserUpdateDto] })
+  @ApiResponse({ status: HttpStatus.OK, description: 'An Emby User saved in Backup DB' })
+  @Put('db/:id')
+  async updateExistingEmbyUser(@Param('id') id: string, @Body() updateEmbyUser: EmbyUserUpdateDto): Promise<EmbyUserDto> {
+    const existingEmbyUser = await this.embyUserDbService.findOneEmbyUserById(id);
+    existingEmbyUser.isActive = updateEmbyUser.isActive;
+    return this.embyUserDbService.updateExistingEmbyUser(existingEmbyUser);
   }
 
   @ApiBearerAuth()

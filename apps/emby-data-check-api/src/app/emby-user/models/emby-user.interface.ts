@@ -3,7 +3,7 @@ import { InstallationDto } from '../../installation/models/installation.interfac
 import { UserDto } from '../../user/models/user.interface';
 import { WatchStateDto } from '../../watch-state/models/watch-state.interface';
 
-export interface EmbyUserDto {
+export class EmbyUserDto {
   id?: string;
   embyUserId: string;
   isActive: boolean;
@@ -33,6 +33,17 @@ export class EmbyUserCreateDto {
   installation: InstallationDto;
 }
 
-export class EmbyUserUpdateDto extends PickType(EmbyUserCreateDto, ['isActive'] as const) {}
+export class EmbyUserUpdateDto {
+  id?: string;
+  @ApiProperty({
+    name: 'isActive',
+    type: 'boolean',
+    default: false,
+    description: 'The active user on the Emby Server Installation',
+    required: false,
+  })
+  isActive?: boolean;
+  //extends PickType(EmbyUserCreateDto, ['isActive'] as const) {}
+}
 
 export class EmbyUserFilterDto extends PartialType(EmbyUserCreateDto) {}

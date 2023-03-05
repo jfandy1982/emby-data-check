@@ -2,9 +2,12 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { catchError, firstValueFrom, map } from 'rxjs';
+import { EmbyUserInfoDto } from '../../emby-user/models/emby-user-emby.interface';
+import { EmbyUserCreateDto, EmbyUserDto, EmbyUserUpdateDto } from '../../emby-user/models/emby-user.interface';
 import { InstallationInfoDto } from '../../installation/models/installation-emby.interface';
 import { InstallationCreateDto, InstallationDto, InstallationUpdateDto } from '../../installation/models/installation.interface';
 import { ServerDto } from '../../server/models/server.interface';
+import { UserDto } from '../../user/models/user.interface';
 
 @Injectable()
 export class BackupHttpService {
@@ -25,6 +28,23 @@ export class BackupHttpService {
       )
     );
     return server;
+  }
+
+  async getAllInstallations(): Promise<InstallationDto[]> {
+    const url = `http://localhost:3000/api/installations/db/`;
+    let installations: InstallationDto[] = [];
+
+    await firstValueFrom(
+      this.httpService.get<InstallationDto[]>(url).pipe(
+        map((installationDetails) => {
+          installations = installationDetails.data;
+        }),
+        catchError((error: AxiosError) => {
+          throw new Error(error.toString());
+        })
+      )
+    );
+    return installations;
   }
 
   async getInstallationInfoForServer(server: ServerDto): Promise<InstallationInfoDto> {
@@ -76,5 +96,73 @@ export class BackupHttpService {
       )
     );
     return installation;
+  }
+
+  async getUserDetails(userId: string): Promise<UserDto> {
+    const url = `http://localhost:3000/api/users/db/${userId}`;
+    let user = new UserDto();
+
+    await firstValueFrom(
+      this.httpService.get<UserDto>(url).pipe(
+        map((userDetails) => {
+          user = userDetails.data;
+        }),
+        catchError((error: AxiosError) => {
+          throw new Error(error.toString());
+        })
+      )
+    );
+    return user;
+  }
+
+  async getEmbyUserInfoForUser(user: UserDto, server: ServerDto): Promise<EmbyUserInfoDto> {
+    const url = `http://localhost:3000/api/embyusers/emby/${user.id}/${server.id}`;
+    let embyUserInfo = new EmbyUserInfoDto();
+
+    await firstValueFrom(
+      this.httpService.get<EmbyUserInfoDto>(url).pipe(
+        map((embyUserInfoResult) => {
+          embyUserInfo = embyUserInfoResult.data;
+        }),
+        catchError((error: AxiosError) => {
+          throw new Error(error.toString());
+        })
+      )
+    );
+    return embyUserInfo;
+  }
+
+  async backupEmbyUser(newEmbyUser: EmbyUserCreateDto): Promise<EmbyUserDto> {
+    const url = `http://localhost:3000/api/embyusers/db/`;
+    let embyUser = new EmbyUserDto();
+
+    await firstValueFrom(
+      this.httpService.post<EmbyUserDto>(url, newEmbyUser).pipe(
+        map((embyUserDetails) => {
+          embyUser = embyUserDetails.data;
+        }),
+        catchError((error: AxiosError) => {
+          throw new Error(error.toString());
+        })
+      )
+    );
+    return embyUser;
+  }
+
+  async updateEmbyUser(existingEmbyUser: EmbyUserUpdateDto): Promise<EmbyUserDto> {
+    const url = `http://localhost:3000/api/embyusers/db/${existingEmbyUser.id}`;
+    let embyUser = new EmbyUserDto();
+
+    await firstValueFrom(
+      this.httpService.put<EmbyUserDto>(url, existingEmbyUser).pipe(
+        map((embyUserDetails) => {
+          embyUser = embyUserDetails.data;
+        }),
+        catchError((error: AxiosError) => {
+          throw new Error(error.toString());
+        })
+      )
+    );
+    return embyUser;
   }
 }

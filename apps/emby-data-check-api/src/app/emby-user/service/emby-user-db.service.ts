@@ -36,6 +36,15 @@ export class EmbyUserDbService {
     }
   }
 
+  async updateExistingEmbyUser(existingEmbyUser: EmbyUserDto): Promise<EmbyUserDto> {
+    try {
+      await this.embyUserRepository.save(existingEmbyUser);
+      return this.findOneEmbyUserById(existingEmbyUser.id);
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
+  }
+
   async deleteEmbyUser(id: string): Promise<DeleteResult> {
     return this.embyUserRepository.delete(id);
   }
