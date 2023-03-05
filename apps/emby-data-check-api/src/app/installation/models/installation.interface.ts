@@ -2,7 +2,7 @@ import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { EmbyUserDto } from '../../emby-user/models/emby-user.interface';
 import { ServerDto } from '../../server/models/server.interface';
 
-export interface InstallationDto {
+export class InstallationDto {
   id?: string;
   embyServerId: string;
   isActive: boolean;
@@ -29,6 +29,17 @@ export class InstallationCreateDto {
   server: ServerDto;
 }
 
-export class InstallationUpdateDto extends PickType(InstallationCreateDto, ['embyServerId', 'isActive'] as const) {}
+export class InstallationUpdateDto {
+  id?: string;
+  @ApiProperty({
+    name: 'isActive',
+    type: 'boolean',
+    default: false,
+    description: 'The active installation of the Emby Server',
+    required: false,
+  })
+  isActive: boolean;
+  //extends PickType(InstallationCreateDto, ['embyServerId', 'isActive'] as const) {}
+}
 
 export class InstallationFilterDto extends PartialType(InstallationCreateDto) {}
