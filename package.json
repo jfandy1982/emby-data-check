@@ -38,7 +38,7 @@
     "start:ui:dev": "nx serve emby-data-check-angular-material --configuration development",
     "test:affected": "nx affected:test --parallel --skip-nx-cache",
     "test:all": "nx run-many --target=test --parallel --skip-nx-cache --all",
-    "upgrade": "nx migrate latest"
+    "upgrade": "nx migrate latest --interactive"
   },
   "private": true,
   "repository": {
