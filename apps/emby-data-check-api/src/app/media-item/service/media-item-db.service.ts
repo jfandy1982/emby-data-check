@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult, Repository } from 'typeorm';
 import { MediaItemEntity } from '../models/media-item.entity';
 import { MediaItemDto } from '../models/media-item.interface';
@@ -12,8 +11,8 @@ export class MediaItemDbService {
     private readonly mediaItemRepository: Repository<MediaItemEntity>
   ) {}
 
-  async findAllMediaItems(options: IPaginationOptions): Promise<Pagination<MediaItemDto>> {
-    return paginate<MediaItemEntity>(this.mediaItemRepository, options, { relations: ['watchStates'] });
+  async findAllMediaItems(): Promise<MediaItemDto[]> {
+    return this.mediaItemRepository.find({ relations: ['watchStates'] });
   }
 
   async findOneMediaItemById(id: string): Promise<MediaItemDto> {
