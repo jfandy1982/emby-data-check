@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult, Repository } from 'typeorm';
 import { EmbyUserEntity } from '../models/emby-user.entity';
 import { EmbyUserDto } from '../models/emby-user.interface';
@@ -12,8 +11,8 @@ export class EmbyUserDbService {
     private readonly embyUserRepository: Repository<EmbyUserEntity>
   ) {}
 
-  async findAllEmbyUsers(options: IPaginationOptions): Promise<Pagination<EmbyUserDto>> {
-    return paginate<EmbyUserEntity>(this.embyUserRepository, options, { relations: ['user', 'installation', 'watchStates'] });
+  async findAllEmbyUsers(): Promise<EmbyUserDto[]> {
+    return this.embyUserRepository.find({ relations: ['user', 'installation', 'watchStates'] });
   }
 
   async findOneEmbyUserById(id: string): Promise<EmbyUserDto> {

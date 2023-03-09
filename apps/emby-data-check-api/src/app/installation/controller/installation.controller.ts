@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { ServerDbService } from '../../server/service/server-db.service';
 import { InstallationInfoDto } from '../models/installation-emby.interface';
@@ -20,9 +19,8 @@ export class InstallationController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Server Installations' })
   @Get('db')
-  async findAllInstallations(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<InstallationDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.installationDbService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
+  async findAllInstallations(): Promise<InstallationDto[]> {
+    return this.installationDbService.findAllInstallations();
   }
 
   @ApiBearerAuth()

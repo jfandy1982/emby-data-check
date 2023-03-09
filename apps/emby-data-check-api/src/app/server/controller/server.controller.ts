@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { ServerCreateDto, ServerDto } from '../models/server.interface';
 import { ServerDbService } from '../service/server-db.service';
@@ -14,9 +13,8 @@ export class ServerController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Servers' })
   @Get('db')
-  async findAllServers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<ServerDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.serverDbService.findAllServers({ page, limit, route: 'http://localhost:3000/api/servers' });
+  async findAllServers(): Promise<ServerDto[]> {
+    return this.serverDbService.findAllServers();
   }
 
   @ApiBearerAuth()

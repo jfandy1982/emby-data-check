@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult, Repository } from 'typeorm';
 import { InstallationEntity } from '../models/installation.entity';
 import { InstallationDto, InstallationUpdateDto } from '../models/installation.interface';
@@ -12,8 +11,8 @@ export class InstallationDbService {
     private readonly installationRepository: Repository<InstallationEntity>
   ) {}
 
-  async findAllInstallations(options: IPaginationOptions): Promise<Pagination<InstallationDto>> {
-    return paginate<InstallationEntity>(this.installationRepository, options, { relations: ['server', 'embyUsers'] });
+  async findAllInstallations(): Promise<InstallationDto[]> {
+    return this.installationRepository.find({ relations: ['server', 'embyUsers'] });
   }
 
   async findOneInstallationById(id: string): Promise<InstallationDto> {

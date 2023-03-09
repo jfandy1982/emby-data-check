@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { UserDbService } from '../../user/service/user-db.service';
 import { ServerDbService } from '../../server/service/server-db.service';
@@ -22,9 +21,8 @@ export class EmbyUserController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Users on Emby Server Installations' })
   @Get('db')
-  async findAllEmbyUsers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<EmbyUserDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.embyUserDbService.findAllEmbyUsers({ page, limit, route: 'http://localhost:3000/api/embyusers' });
+  async findAllEmbyUsers(): Promise<EmbyUserDto[]> {
+    return this.embyUserDbService.findAllEmbyUsers();
   }
 
   @ApiBearerAuth()

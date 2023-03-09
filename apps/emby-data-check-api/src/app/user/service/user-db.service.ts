@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult, Repository } from 'typeorm';
 import { UserEntity } from '../models/user.entity';
 import { UserDto } from '../models/user.interface';
@@ -12,8 +11,8 @@ export class UserDbService {
     private readonly userRepository: Repository<UserEntity>
   ) {}
 
-  async findAllUsers(options: IPaginationOptions): Promise<Pagination<UserDto>> {
-    return paginate<UserEntity>(this.userRepository, options, { relations: ['embyUsers'] });
+  async findAllUsers(): Promise<UserDto[]> {
+    return this.userRepository.find({ relations: ['embyUsers'] });
   }
 
   async findOneUserById(id: string): Promise<UserDto> {
