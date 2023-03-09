@@ -1,12 +1,10 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../../watch-state/models/abstract.entity';
 import { EmbyUserEntity } from '../../emby-user/models/emby-user.entity';
 import { UserRole } from './user-role.enum';
 
 @Entity('user')
-export class UserEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class UserEntity extends AbstractEntity {
   @Column({ unique: true })
   username: string;
 
@@ -18,12 +16,6 @@ export class UserEntity {
 
   @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  changedAt: Date;
 
   @OneToMany(() => EmbyUserEntity, (embyUser) => embyUser.user, {
     onDelete: 'SET NULL',

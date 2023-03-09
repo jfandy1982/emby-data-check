@@ -1,11 +1,9 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../../watch-state/models/abstract.entity';
 import { InstallationEntity } from '../../installation/models/installation.entity';
 
 @Entity('server')
-export class ServerEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class ServerEntity extends AbstractEntity {
   @Column({ unique: true })
   servername: string;
 
@@ -20,12 +18,6 @@ export class ServerEntity {
 
   @Column({ default: 0 })
   port: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  changedAt: Date;
 
   @OneToMany(() => InstallationEntity, (installation) => installation.server, {
     onDelete: 'SET NULL',

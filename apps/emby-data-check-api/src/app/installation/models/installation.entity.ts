@@ -1,23 +1,15 @@
-import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../../watch-state/models/abstract.entity';
 import { EmbyUserEntity } from '../../emby-user/models/emby-user.entity';
 import { ServerEntity } from '../../server/models/server.entity';
 
 @Entity('installation')
-export class InstallationEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class InstallationEntity extends AbstractEntity {
   @Column({ unique: true })
   embyServerId: string;
 
   @Column({ default: false })
   isActive: boolean;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  changedAt: Date;
 
   @ManyToOne(() => ServerEntity, (server) => server.installations, {
     onDelete: 'CASCADE',

@@ -1,11 +1,9 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
+import { AbstractEntity } from '../../watch-state/models/abstract.entity';
 import { WatchStateEntity } from '../../watch-state/models/watch-state.entity';
 
 @Entity('media-item')
-export class MediaItemEntity {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
+export class MediaItemEntity extends AbstractEntity {
   @Column()
   type: string;
 
@@ -26,12 +24,6 @@ export class MediaItemEntity {
 
   @Column({ nullable: true })
   customTags: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  changedAt: Date;
 
   @OneToMany(() => WatchStateEntity, (watchState) => watchState.mediaItem, {
     onDelete: 'CASCADE',
