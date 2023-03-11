@@ -1,10 +1,9 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { ServerDbService } from '../../server/service/server-db.service';
 import { InstallationInfoDto } from '../models/installation-emby.interface';
-import { InstallationCreateDto, InstallationDto } from '../models/installation.interface';
+import { InstallationCreateDto, InstallationDto, InstallationUpdateDto } from '../models/installation.interface';
 import { InstallationDbService } from '../service/installation-db.service';
 import { InstallationHttpService } from '../service/installation-http.service';
 
@@ -20,9 +19,8 @@ export class InstallationController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Emby Server Installations' })
   @Get('db')
-  async findAllInstallations(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<InstallationDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.installationDbService.findAllInstallations({ page, limit, route: 'http://localhost:3000/api/installations' });
+  async findAllInstallations(): Promise<InstallationDto[]> {
+    return this.installationDbService.findAllInstallations();
   }
 
   @ApiBearerAuth()
@@ -59,6 +57,16 @@ export class InstallationController {
   async createNewInstallation(@Body() createInstallation: InstallationCreateDto): Promise<InstallationDto> {
     const newInstallation = this.createDtoToEntity(createInstallation);
     return this.installationDbService.createNewInstallation(newInstallation);
+  }
+
+  @ApiBearerAuth()
+  @ApiBody({ type: [InstallationUpdateDto] })
+  @ApiResponse({ status: HttpStatus.OK, description: 'An Emby Server Installation saved in Backup DB' })
+  @Put('db/:id')
+  async updateExistingInstallation(@Param('id') id: string, @Body() updateInstallation: InstallationUpdateDto): Promise<InstallationDto> {
+    const existingInstallation = await this.installationDbService.findOneInstallationById(id);
+    existingInstallation.isActive = updateInstallation.isActive;
+    return this.installationDbService.updateExistingInstallation(existingInstallation);
   }
 
   @ApiBearerAuth()

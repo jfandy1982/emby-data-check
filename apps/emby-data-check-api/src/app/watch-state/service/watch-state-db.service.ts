@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult, Repository } from 'typeorm';
 import { WatchStateEntity } from '../models/watch-state.entity';
 import { WatchStateDto } from '../models/watch-state.interface';
@@ -12,8 +11,8 @@ export class WatchStateDbService {
     private readonly watchStateRepository: Repository<WatchStateEntity>
   ) {}
 
-  async findAllWatchStates(options: IPaginationOptions): Promise<Pagination<WatchStateDto>> {
-    return paginate<WatchStateEntity>(this.watchStateRepository, options, { relations: ['embyUser', 'mediaItem'] });
+  async findAllWatchStates(): Promise<WatchStateDto[]> {
+    return this.watchStateRepository.find({ relations: ['embyUser', 'mediaItem'] });
   }
 
   async findOneWatchStateById(id: string): Promise<WatchStateDto> {

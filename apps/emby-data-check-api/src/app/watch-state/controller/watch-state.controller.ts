@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { EmbyUserDbService } from '../../emby-user/service/emby-user-db.service';
 import { ServerDbService } from '../../server/service/server-db.service';
@@ -22,9 +21,8 @@ export class WatchStateController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Watchstates' })
   @Get('db')
-  async findAllWatchStates(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<WatchStateDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.watchStateDbService.findAllWatchStates({ page, limit, route: 'http://localhost:3000/api/watchstates' });
+  async findAllWatchStates(): Promise<WatchStateDto[]> {
+    return this.watchStateDbService.findAllWatchStates();
   }
 
   @ApiBearerAuth()

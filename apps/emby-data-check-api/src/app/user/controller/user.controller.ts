@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { UserCreateDto, UserDto } from '../models/user.interface';
 import { UserDbService } from '../service/user-db.service';
@@ -14,9 +13,8 @@ export class UserController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Users' })
   @Get('db')
-  async findAllUsers(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<UserDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.userDbService.findAllUsers({ page, limit, route: 'http://localhost:3000/api/users' });
+  async findAllUsers(): Promise<UserDto[]> {
+    return this.userDbService.findAllUsers();
   }
 
   @ApiBearerAuth()

@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { InstallationDto } from '../../installation/models/installation.interface';
 
-export interface ServerDto {
+export class ServerDto {
   id?: string;
   servername: string;
   description: string;

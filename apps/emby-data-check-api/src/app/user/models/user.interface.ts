@@ -2,7 +2,7 @@ import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { EmbyUserDto } from '../../emby-user/models/emby-user.interface';
 import { UserRole } from './user-role.enum';
 
-export interface UserDto {
+export class UserDto {
   id?: string;
   username: string;
   name: string;

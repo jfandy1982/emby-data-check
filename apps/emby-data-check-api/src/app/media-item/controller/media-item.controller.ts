@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
-import { Pagination } from 'nestjs-typeorm-paginate';
 import { DeleteResult } from 'typeorm';
 import { MediaItemCreateDto, MediaItemDto } from '../models/media-item.interface';
 import { MediaItemDbService } from '../service/media-item-db.service';
@@ -20,9 +19,8 @@ export class MediaItemController {
   @ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of Media Items' })
   @Get('db')
-  async findAllMediaItems(@Query('page') page = 1, @Query('limit') limit = 10): Promise<Pagination<MediaItemDto>> {
-    limit = limit > 100 ? 100 : limit;
-    return this.mediaItemDbService.findAllMediaItems({ page, limit, route: 'http://localhost:3000/api/mediaitems' });
+  async findAllMediaItems(): Promise<MediaItemDto[]> {
+    return this.mediaItemDbService.findAllMediaItems();
   }
 
   @ApiBearerAuth()
