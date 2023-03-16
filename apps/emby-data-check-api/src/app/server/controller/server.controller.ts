@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth, ApiResponse, ApiParam, ApiBody } from '@nestjs/swagger';
 import { DeleteResult } from 'typeorm';
 import { ServerCreateDto, ServerDto } from '../models/server.interface';
