@@ -7,7 +7,7 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": "18.14.0"
+    "node": "18.15.0"
   },
   "scripts": {
     "build:affected": "nx affected:build --configuration=production",

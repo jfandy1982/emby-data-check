@@ -1,4 +1,4 @@
-FROM node:18.14.0-alpine AS builder
+FROM node:18.15.0-alpine AS builder
 
 # install cURL and bash
 RUN apk update && apk add curl bash && rm -rf /var/cache/apk/*
@@ -32,7 +32,7 @@ RUN npm prune --production
 RUN /usr/local/bin/node-prune
 
 ### -------------------- ###
-FROM node:18.14.0-alpine
+FROM node:18.15.0-alpine
 
 LABEL name="Emby Data Check REST API"
 LABEL author="Andreas Ziegler (dev@andreasziegler.net)"
