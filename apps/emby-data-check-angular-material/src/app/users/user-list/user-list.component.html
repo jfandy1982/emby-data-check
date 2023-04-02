@@ -1,5 +1,0 @@
-<mat-nav-list>
-  <a mat-list-item *ngFor="let user of users" [routerLink]="[user.userId]" [queryParams]="{ serverId: user.serverId }">
-    <span matListItemTitle>{{ user.embyUserName }}</span>
-  </a>
-</mat-nav-list>
