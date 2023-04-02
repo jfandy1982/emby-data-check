@@ -6,6 +6,8 @@ import { MediaItemDbService } from '../service/media-item-db.service';
 import { ServerDbService } from '../../server/service/server-db.service';
 import { MediaItemHttpService } from '../service/media-item-http.service';
 import { PublicItemsEmbyDto } from '../models/media-item-emby.interface';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const slugify = require('slugify');
 
 @ApiTags('mediaitems')
 @Controller('mediaitems')
@@ -70,11 +72,16 @@ export class MediaItemController {
   }
 
   private createDtoToEntity(createDto: MediaItemCreateDto): MediaItemDto {
-    // TODO: Replace assignment of 'itemNameSlug' to slugified value from Path & Display Name
+    const slugifiedItemName = slugify(createDto.path + `-` + createDto.displayName, {
+      lower: true, // convert to lower case, defaults to `false`
+      strict: false, // strip special characters except replacement, defaults to `false`
+      trim: true, // trim leading and trailing replacement chars, defaults to `true`
+    });
+
     return {
       customTags: createDto.customTags,
       displayName: createDto.displayName,
-      itemNameSlug: createDto.displayName,
+      itemNameSlug: slugifiedItemName,
       path: createDto.path,
       providerId: createDto.providerId,
       providerType: createDto.providerType,
