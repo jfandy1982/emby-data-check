@@ -88,7 +88,7 @@
             "forwardAllArgs": false
           },
           {
-            "command": "nx serve eedc-ui-fundamentals",
+            "command": "nx serve edc-ui-fundamentals",
             "description": "Start the Emby Data Check UI (Fundamentals-Ngx)"
           }
         ]
