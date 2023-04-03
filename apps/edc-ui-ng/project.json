@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "edc",
   "sourceRoot": "apps/edc-ui-ng/src",
-  "tags": ["scope:app"],
+  "tags": ["scope:ui"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -40,6 +40,21 @@
           ],
           "outputHashing": "all"
         },
+        "test": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
         "development": {
           "buildOptimizer": false,
           "optimization": false,
@@ -50,6 +65,20 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "cypress": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx serve edc-ui-fundamentals --port=5001 --configuration=test",
+            "forwardAllArgs": false
+          },
+          { "command": "wait-on http://localhost:5001 && echo 'READY'" }
+        ],
+        "parallel": true,
+        "readyWhen": "READY"
+      }
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",

@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "edc",
   "sourceRoot": "apps/edc-ui-fundamentals/src",
-  "tags": ["scope:app"],
+  "tags": ["scope:ui"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -16,11 +16,32 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
         "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
-        "styles": ["./node_modules/fundamental-styles/dist/icon.css", "apps/edc-ui-fundamentals/src/styles.scss"],
+        "styles": [
+          "./node_modules/fundamental-styles/dist/icon.css",
+          "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
+          "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
+          "./node_modules/fundamental-styles/dist/fundamental-styles.css",
+          "apps/edc-ui-fundamentals/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
         "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "test": {
           "budgets": [
             {
               "type": "initial",
@@ -45,6 +66,20 @@
         }
       },
       "defaultConfiguration": "production"
+    },
+    "cypress": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx serve edc-ui-fundamentals --port=5002 --configuration=test",
+            "forwardAllArgs": false
+          },
+          { "command": "wait-on http://localhost:5002 && echo 'READY'" }
+        ],
+        "parallel": true,
+        "readyWhen": "READY"
+      }
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
