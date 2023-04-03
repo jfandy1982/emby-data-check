@@ -117,15 +117,16 @@
             "description": "Spin up the DB docker container"
           },
           {
-            "command": "nx serve edc-api",
+            "command": "wait-on tcp:5432 && nx serve edc-api",
             "description": "Start the Emby Data Check API",
             "forwardAllArgs": false
           },
           {
-            "command": "nx serve edc-ui-ng",
+            "command": "wait-on tcp:3000 && nx serve edc-ui-ng",
             "description": "Start the Emby Data Check UI (Angular Material)"
           }
-        ]
+        ],
+        "parallel": true
       }
     },
     "test": {

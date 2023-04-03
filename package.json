@@ -34,8 +34,8 @@
     "qa:affected": "npm-run-all --continue-on-error \"lint:affected\" \"test:affected\" \"e2e:affected\"",
     "qa:all": "npm-run-all --continue-on-error \"format:check:all\" \"lint:all\" \"lint:check:megalinter\" \"lint:check:npmPkgJsonLint\" \"lint:check:secretlint\" \"test:all\" \"e2e:all\"",
     "start:api:dev": "nx serve edc-api --configuration development",
-    "start:stack:fundamentals": "nx run edc-ui-fundamentals:stack --no-parallel",
-    "start:stack:ng": "nx run edc-ui-ng:stack --no-parallel",
+    "start:stack:fundamentals": "nx run edc-ui-fundamentals:stack",
+    "start:stack:ng": "nx run edc-ui-ng:stack",
     "start:ui:fundamentals:dev": "nx serve edc-ui-fundamentals --configuration development",
     "start:ui:ng:dev": "nx serve edc-ui-ng --configuration development",
     "test:affected": "nx affected:test --parallel --skip-nx-cache",
@@ -111,7 +111,8 @@
     "secretlint": "6.2.3",
     "ts-jest": "29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "4.9.5"
+    "typescript": "4.9.5",
+    "wait-on": "7.0.1"
   },
   "dependencies": {
     "@angular/animations": "15.2.5",
