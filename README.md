@@ -3,8 +3,9 @@
 [![GitHub](https://img.shields.io/github/license/jfandy1982/emby-data-check?logo=GitHub)](https://github.com/jfandy1982/emby-data-check/blob/main/LICENSE.md)
 [![CI Pipeline](https://github.com/jfandy1982/emby-data-check/actions/workflows/continuous_integration_checks.yml/badge.svg?branch=main&event=push)](https://github.com/jfandy1982/emby-data-check/actions/workflows/continuous_integration_checks.yml)
 [![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/jfandy1982_emby-data-check/main?server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/overview?id=jfandy1982_emby-data-check)
-[![Docker Image Size](https://img.shields.io/docker/image-size/jfandy1982/emby-data-check-api/latest?label=API&logo=docker)](https://hub.docker.com/repository/docker/jfandy1982/emby-data-check-api)
-[![Docker Image Size](https://img.shields.io/docker/image-size/jfandy1982/emby-data-check-angular-ui/latest?label=UI&logo=docker)](https://hub.docker.com/repository/docker/jfandy1982/emby-data-check-angular-ui)
+[![Docker Image Size](https://img.shields.io/docker/image-size/jfandy1982/edc-api/latest?label=API&logo=docker)](https://hub.docker.com/repository/docker/jfandy1982/edc-api)
+[![Docker Image Size](https://img.shields.io/docker/image-size/jfandy1982/edc-ui-ng/latest?label=UI&logo=docker)](https://hub.docker.com/repository/docker/jfandy1982/edc-ui-ng)
+[![Docker Image Size](https://img.shields.io/docker/image-size/jfandy1982/edc-ui-ngx/latest?label=UI&logo=docker)](https://hub.docker.com/repository/docker/jfandy1982/edc-ui-ngx)
 
 The project contains an Angular Material Web Frontend component and a NestJS Backend API. The NestJS Backend API itself interacts with the API of concrete Emby Media Server available in the local network. Data is backed up in a separate postgres database.
 

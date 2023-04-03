@@ -1,4 +1,4 @@
-# Emby Data Check Tool - API
+# Emby Data Check Tool - UI (Angular Material)
 
 For detailed information, check out the repository [jfandy1982/emby-data-check](https://github.com/jfandy1982/emby-data-check/) hosted on Github.
 
@@ -10,7 +10,7 @@ It requires a running Emby Media Server within the LAN.
 Spawn a container by:
 
 ```bash
-docker run -p 3000:3000 jfandy1982/emby-data-check-api:latest
+docker run -p 4200:4200 jfandy1982/edc-ui-ng:latest
 ```
 
 ## License
