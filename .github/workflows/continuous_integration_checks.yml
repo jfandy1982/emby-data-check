@@ -210,8 +210,8 @@ jobs:
         with:
           name: Failing E2E tests
           path: |
-            cypress/screenshots
-            cypress/videos
+            dist/cypress/apps/**/screenshots
+            dist/cypress/apps/**/videos
 
   publish-api:
     name: 'Publish changes of API to DockerHub'
