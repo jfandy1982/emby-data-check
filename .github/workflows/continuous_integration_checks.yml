@@ -204,6 +204,15 @@ jobs:
       - name: 'Run E2E tests for all projects'
         run: npm run e2e:all
 
+      - name: 'Upload reported failures from Cypress E2E tests'
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Failing E2E tests
+          path: |
+            cypress/screenshots
+            cypress/videos
+
   publish-api:
     name: 'Publish changes of API to DockerHub'
 
