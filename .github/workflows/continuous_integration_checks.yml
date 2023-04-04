@@ -196,6 +196,11 @@ jobs:
       - name: 'Setup Node.js and project dependencies'
         uses: ./.github/actions/setup-nodejs
 
+      - name: 'Check Cypress binary'
+        run: |
+          npx cypress cache path
+          npx cypress cache list
+
       - name: 'Run E2E tests for all projects'
         run: npm run e2e:all
 
