@@ -1,27 +1,27 @@
 {
-  "name": "edc-ui-fundamentals",
+  "name": "fundamentals-ui-edc2",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "edc",
-  "sourceRoot": "apps/edc-ui-fundamentals/src",
+  "sourceRoot": "apps/fundamentals-ui-edc2/src",
   "tags": ["scope:ui"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/edc-ui-fundamentals",
-        "index": "apps/edc-ui-fundamentals/src/index.html",
-        "main": "apps/edc-ui-fundamentals/src/main.ts",
+        "outputPath": "dist/apps/fundamentals-ui-edc2",
+        "index": "apps/fundamentals-ui-edc2/src/index.html",
+        "main": "apps/fundamentals-ui-edc2/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
-        "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
+        "tsConfig": "apps/fundamentals-ui-edc2/tsconfig.app.json",
+        "assets": ["apps/fundamentals-ui-edc2/src/favicon.ico", "apps/fundamentals-ui-edc2/src/assets"],
         "styles": [
           "./node_modules/fundamental-styles/dist/icon.css",
           "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
           "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
           "./node_modules/fundamental-styles/dist/fundamental-styles.css",
-          "apps/edc-ui-fundamentals/src/styles.scss"
+          "apps/fundamentals-ui-edc2/src/styles.scss"
         ],
         "scripts": []
       },
@@ -75,7 +75,9 @@
             "command": "nx serve edc-ui-fundamentals --port=5002 --configuration=test",
             "forwardAllArgs": false
           },
-          { "command": "wait-on http://localhost:5002 && echo 'READY'" }
+          {
+            "command": "wait-on http://localhost:5002 && echo 'READY'"
+          }
         ],
         "parallel": true,
         "readyWhen": "READY"
@@ -85,28 +87,28 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "browserTarget": "edc-ui-fundamentals:build:production"
+          "browserTarget": "fundamentals-ui-edc2:build:production"
         },
         "development": {
-          "browserTarget": "edc-ui-fundamentals:build:development"
+          "browserTarget": "fundamentals-ui-edc2:build:development"
         }
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
+        "proxyConfig": "apps/fundamentals-ui-edc2/proxy.conf.json"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "edc-ui-fundamentals:build"
+        "browserTarget": "fundamentals-ui-edc2:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/edc-ui-fundamentals/**/*.ts", "apps/edc-ui-fundamentals/**/*.html"]
+        "lintFilePatterns": ["apps/fundamentals-ui-edc2/**/*.ts", "apps/fundamentals-ui-edc2/**/*.html"]
       }
     },
     "stack": {
@@ -134,7 +136,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts",
+        "jestConfig": "apps/fundamentals-ui-edc2/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
@@ -147,7 +149,7 @@
     "serve-static": {
       "executor": "@nrwl/web:file-server",
       "options": {
-        "buildTarget": "edc-ui-fundamentals:build"
+        "buildTarget": "fundamentals-ui-edc2:build"
       }
     }
   }
