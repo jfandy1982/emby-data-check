@@ -213,6 +213,37 @@ jobs:
             dist/cypress/apps/**/screenshots
             dist/cypress/apps/**/videos
 
+  build-docker:
+    name: Test Docker Build Process
+
+    runs-on: ubuntu-latest
+
+    needs: [analyze, e2e-test]
+
+    if: needs.analyze.outputs.is-pr == 'true' && ${{ github.triggering_actor != 'dependabot[bot]' }}
+
+    env:
+      NX_BASE: ${{ needs.analyze.outputs.base }}
+      NX_HEAD: ${{ needs.analyze.outputs.head }}
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Node.js and project dependencies'
+        uses: ./.github/actions/setup-nodejs
+
+      - name: 'Build docker image for app EDC-API'
+        run: npm run docker:api
+
+      - name: 'Build docker image for app EDC-UI-NG'
+        run: npm run docker:ui:ng
+
+      - name: 'Build docker image for app EDC-UI-NGX'
+        run: npm run docker:ui:ngx
+
   publish-api:
     name: 'Publish changes of API to DockerHub'
 
