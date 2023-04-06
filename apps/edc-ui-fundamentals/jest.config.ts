@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'fundamentals-ui-edc2',
+  displayName: 'edc-ui-fundamentals',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/fundamentals-ui-edc2',
+  coverageDirectory: '../../coverage/apps/edc-ui-fundamentals',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
