@@ -1,9 +1,8 @@
 # Add files here to ignore them from prettier formatting
-
 /dist
 /coverage
+.angular
 
 # Custom files and folders
-.angular
+/megalinter-reports
 .husky
-megalinter-reports

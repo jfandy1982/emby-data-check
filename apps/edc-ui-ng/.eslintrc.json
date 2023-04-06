@@ -9,7 +9,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "edc",
+            "prefix": "embyDataCheck",
             "style": "camelCase"
           }
         ],
@@ -17,7 +17,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "edc",
+            "prefix": "emby-data-check",
             "style": "kebab-case"
           }
         ]
