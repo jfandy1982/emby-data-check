@@ -21,7 +21,7 @@
           "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
           "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
           "./node_modules/fundamental-styles/dist/fundamental-styles.css",
-          "apps/fundamentals-ui-edc2/src/styles.scss"
+          "apps/edc-ui-fundamentals/src/styles.scss"
         ],
         "scripts": []
       },

@@ -37,10 +37,10 @@
     "qa:affected": "npm-run-all --continue-on-error \"lint:affected\" \"test:affected\" \"e2e:affected\"",
     "qa:all": "npm-run-all --continue-on-error \"format:check:all\" \"lint:all\" \"lint:check:megalinter\" \"lint:check:npmPkgJsonLint\" \"lint:check:secretlint\" \"test:all\" \"e2e:all\"",
     "start:api:dev": "nx serve edc-api --configuration development",
-    "start:stack:fundamentals": "nx run edc-ui-fundamentals:stack",
     "start:stack:ng": "nx run edc-ui-ng:stack",
-    "start:ui:fundamentals:dev": "nx serve edc-ui-fundamentals --configuration development",
+    "start:stack:ngx": "nx run edc-ui-fundamentals:stack",
     "start:ui:ng:dev": "nx serve edc-ui-ng --configuration development",
+    "start:ui:ngx:dev": "nx serve edc-ui-fundamentals --configuration development",
     "test:affected": "nx affected:test --parallel --skip-nx-cache",
     "test:all": "nx run-many --target=test --parallel --skip-nx-cache --all",
     "upgrade": "nx migrate latest --interactive"
