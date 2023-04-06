@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'emby-data-check-root',
+  selector: 'edc-ngx-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'edc-ui-fundamentals';
-}
+export class AppComponent {}
