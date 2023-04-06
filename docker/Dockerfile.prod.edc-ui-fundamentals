@@ -7,6 +7,7 @@ WORKDIR /home/node
 # tsconfig.json: How to transpile TS code to JavaScript
 COPY --chown=node:node tsconfig.base.json .
 COPY --chown=node:node .nvmrc .
+COPY --chown=node:node nx.json .
 
 # package*.json files to install dependencies
 COPY --chown=node:node package.json .
@@ -18,7 +19,7 @@ RUN npm install --ignore-scripts
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
-RUN npx nx build --project=edc-ui-fundamentals
+RUN npx nx build --project=edc-ui-fundamentals --verbose
 
 ## -------------------- ###
 FROM nginx:1.23.2-alpine
