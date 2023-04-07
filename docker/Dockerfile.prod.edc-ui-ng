@@ -13,13 +13,16 @@ COPY --chown=node:node nx.json .
 COPY --chown=node:node package.json .
 COPY --chown=node:node package-lock.json .
 
-RUN npm install --ignore-scripts
+RUN npm install --ignore-scripts --production
 
 # upload the compiled data -> changes more often than versions
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
 RUN npx nx build --project=edc-ui-ng --verbose
+
+# List file sizes of ./node_modules/* content
+RUN du -sh ./node_modules/* | sort -nr
 
 ## -------------------- ###
 FROM nginx:1.23.2-alpine

@@ -20,7 +20,7 @@ COPY --chown=node:node nx.json .
 COPY --chown=node:node package.json .
 COPY --chown=node:node package-lock.json .
 
-RUN npm install --ignore-scripts
+RUN npm install --ignore-scripts --production
 
 # upload the compiled data -> changes more often than versions
 COPY --chown=node:node ./apps ./apps
@@ -31,6 +31,9 @@ RUN npx nx build --project=edc-api --verbose
 # Remove unnecessary files from ./node_modules -> folder will be copied later
 RUN npm prune --production
 RUN /usr/local/bin/node-prune
+
+# List file sizes of ./node_modules/* content
+RUN du -sh ./node_modules/* | sort -nr
 
 ### -------------------- ###
 FROM node:18.15.0-alpine
