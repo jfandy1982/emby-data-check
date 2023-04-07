@@ -61,10 +61,18 @@ Finally, there is nothing left to say than "Happy coding..."
 
 ## Usage
 
-After performing the steps described in section [Installation](#installation), you may start a development stack by this command:
+After performing the steps described in section [Installation](#installation), you may start a development stack by one the following commands. Only one stack can run at once locally.
+
+Angular Material UI:
 
 ```bash
-npm run start:stack:dev
+npm run start:stack:ng:dev
+```
+
+SAP Fundamentals UI:
+
+```bash
+npm run start:stack:ngx:dev
 ```
 
 This starts the development stack comprising of:
@@ -72,10 +80,10 @@ This starts the development stack comprising of:
 1. Postgres Database Container
 2. PgAdmin Container (UI to manage the Postgres Database)
 3. NestJs Backend API
-   1. Use http://localhost:3000/api/ to access the API endpoints
-   2. A Swagger API documentation is available at http://localhost:3000/api/swagger/
+   1. Use [http://localhost:3000/api/](http://localhost:3000/api/) to access the API endpoints
+   2. A Swagger API documentation is available at [http://localhost:3000/api/swagger/](http://localhost:3000/api/swagger/)
 4. Angular Web UI
-   1. Use http://localhost:4200/ to access the UI locally
+   1. Use [http://localhost:4200/](http://localhost:4200/) to access the UI locally
 
 The development server restarts after each saved change of a source code file. Changing configuration files may require to stop the development server (usually [CTRL+C]) and start it again.
 
