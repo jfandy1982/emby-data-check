@@ -218,7 +218,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    needs: [analyze, e2e-test]
+    needs: [analyze, build]
 
     if: needs.analyze.outputs.is-pr == 'true' && ${{ github.triggering_actor != 'dependabot[bot]' }}
 
