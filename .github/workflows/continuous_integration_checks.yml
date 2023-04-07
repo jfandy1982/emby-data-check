@@ -278,7 +278,7 @@ jobs:
 
       - name: 'Publish new image'
         uses: ./.github/actions/publish-to-docker
-        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+        #        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
         with:
           docker-file: ${{ env.DOCKERFILE }}
           docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
