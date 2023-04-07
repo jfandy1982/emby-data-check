@@ -26,14 +26,11 @@ RUN npm install --ignore-scripts --production
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
-RUN npx nx build --project=edc-api --verbose
+RUN npx nx build --project=edc-api
 
 # Remove unnecessary files from ./node_modules -> folder will be copied later
 RUN npm prune --production
 RUN /usr/local/bin/node-prune
-
-# List file sizes of ./node_modules/* content
-RUN du -sh ./node_modules/* | sort -nr
 
 ### -------------------- ###
 FROM node:18.15.0-alpine

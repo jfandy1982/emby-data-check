@@ -19,10 +19,7 @@ RUN npm install --ignore-scripts --production
 COPY --chown=node:node ./apps ./apps
 COPY --chown=node:node ./libs ./libs
 
-RUN npx nx build --project=edc-ui-ng --verbose
-
-# List file sizes of ./node_modules/* content
-RUN du -sh ./node_modules/* | sort -nr
+RUN npx nx build --project=edc-ui-ng
 
 ## -------------------- ###
 FROM nginx:1.23.2-alpine
