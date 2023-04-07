@@ -81,7 +81,7 @@ This starts the development stack comprising of:
 2. PgAdmin Container (UI to manage the Postgres Database)
 3. NestJs Backend API
    1. Use [http://localhost:3000/api/](http://localhost:3000/api/) to access the API endpoints
-   2. A Swagger API documentation is available at [http://localhost:3000/api/swagger/](http://localhost:3000/api/swagger/)
+   2. A Swagger API documentation is available at [http://localhost:3000/swagger/](http://localhost:3000/swagger/)
 4. Angular Web UI
    1. Use [http://localhost:4200/](http://localhost:4200/) to access the UI locally
 
