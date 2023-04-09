@@ -1,7 +1,7 @@
 import { Column, Entity } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 
-@Entity('edc-server')
+@Entity('server')
 export class ServerEntity extends AbstractEntity {
   @Column({ unique: true })
   servername: string;
