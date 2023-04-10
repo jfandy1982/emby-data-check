@@ -2,11 +2,11 @@ import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'type
 
 export abstract class AbstractEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id?: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  changedAt: Date;
+  changedAt?: Date;
 }

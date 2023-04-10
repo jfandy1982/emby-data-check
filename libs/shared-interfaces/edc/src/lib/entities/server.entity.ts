@@ -4,17 +4,17 @@ import { AbstractEntity } from './abstract.entity';
 @Entity('server')
 export class ServerEntity extends AbstractEntity {
   @Column({ unique: true })
-  servername: string;
+  servername?: string;
 
   @Column({ nullable: true })
-  description: string;
+  description?: string;
 
   @Column({ nullable: true })
-  apiKey: string;
+  apiKey?: string;
 
   @Column({ nullable: true })
-  ipAddress: string;
+  ipAddress?: string;
 
   @Column({ default: 0 })
-  port: number;
+  port?: number;
 }
