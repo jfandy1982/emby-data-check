@@ -6,7 +6,7 @@ import { appRoutes } from './app.routes';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' })],
+  imports: [BrowserModule, RouterModule.forRoot(appRoutes, { enableTracing: false, initialNavigation: 'enabledBlocking' })],
   providers: [],
   bootstrap: [AppComponent],
 })
