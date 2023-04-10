@@ -15,6 +15,8 @@ export class ServersComponent implements OnInit, OnDestroy {
     return;
   }
   ngOnInit(): void {
-    this.serversService.fetchServers().subscribe();
+    this.serversService.fetchServers().subscribe((servers: Server[]) => {
+      this.loadedServers = servers;
+    });
   }
 }

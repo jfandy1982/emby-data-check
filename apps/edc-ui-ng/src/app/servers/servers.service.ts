@@ -10,6 +10,7 @@ export class ServersService {
   constructor(private readonly http: HttpClient) {}
 
   fetchServers() {
+    // TODO: Replace hostname & port by environment configuration
     return this.http.get<Server>('http://localhost:3000/api/servers').pipe(
       map((responseData: any) => {
         const serversArray: Server[] = [];
