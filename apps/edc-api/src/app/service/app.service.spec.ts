@@ -13,9 +13,9 @@ describe('AppService', () => {
     service = app.get<AppService>(AppService);
   });
 
-  describe('getData', () => {
-    it('should return "Hello API"', () => {
-      expect(service.getData()).toEqual({ message: 'Hello API' });
+  describe('getHelloFromApi', () => {
+    it('should return a Greeting', () => {
+      expect(service.getHelloFromApi()).toEqual({ message: 'This is the API for the Emby Data Check project!' });
     });
   });
 });
