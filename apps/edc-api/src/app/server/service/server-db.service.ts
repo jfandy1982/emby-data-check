@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -10,5 +10,14 @@ export class ServerDbService {
 
   async findAllServers(): Promise<Server[]> {
     return this.serverRepository.find();
+  }
+
+  async createNewServer(newServer: Server): Promise<Server> {
+    try {
+      const createdServer = await this.serverRepository.save(this.serverRepository.create(newServer));
+      return createdServer;
+    } catch {
+      throw new BadRequestException('Bad Request');
+    }
   }
 }

@@ -1,7 +1,7 @@
-import { Controller, Get, HttpStatus } from '@nestjs/common';
-import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpStatus, Post } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ServerDbService } from '../service/server-db.service';
-import { Server } from '@shared-interfaces/edc';
+import { Server, ServerEntity } from '@shared-interfaces/edc';
 
 @ApiTags('servers')
 @Controller('servers')
@@ -13,5 +13,13 @@ export class ServerController {
   @Get()
   async findAllServers(): Promise<Server[]> {
     return this.serverDbService.findAllServers();
+  }
+
+  @ApiBearerAuth()
+  @ApiBody({ type: [ServerEntity] })
+  @ApiResponse({ status: HttpStatus.OK, description: 'A Server saved in Backup DB' })
+  @Post('create')
+  async createNewServer(@Body() createServer: Server): Promise<Server> {
+    return this.serverDbService.createNewServer(createServer);
   }
 }
