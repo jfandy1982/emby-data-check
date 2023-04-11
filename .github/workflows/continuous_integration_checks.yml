@@ -220,7 +220,7 @@ jobs:
 
     needs: [analyze, build]
 
-    if: needs.analyze.outputs.is-pr == 'true' && ${{ github.triggering_actor != 'dependabot[bot]' }}
+    if: needs.analyze.outputs.is-pr == 'true'
 
     env:
       NX_BASE: ${{ needs.analyze.outputs.base }}
