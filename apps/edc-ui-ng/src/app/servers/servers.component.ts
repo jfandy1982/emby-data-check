@@ -8,15 +8,17 @@ import { ServersService } from './servers.service';
   styleUrls: ['./servers.component.scss'],
 })
 export class ServersComponent implements OnInit, OnDestroy {
-  loadedServers: Server[] = [];
+  loadedServers$: Server[] = [];
 
   constructor(private readonly serversService: ServersService) {}
+
   ngOnDestroy(): void {
     return;
   }
+
   ngOnInit(): void {
     this.serversService.fetchServers().subscribe((servers: Server[]) => {
-      this.loadedServers = servers;
+      this.loadedServers$ = servers;
     });
   }
 }
