@@ -17,8 +17,9 @@
         "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
         "assets": ["apps/edc-ui-ng/src/favicon.ico", "apps/edc-ui-ng/src/assets"],
         "styles": [
-          "./node_modules/bootstrap/dist/css/bootstrap-reboot.min.css",
-          "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
+          "./node_modules/bootstrap/scss/bootstrap.scss",
+          "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
+          "./node_modules/bootstrap/scss/bootstrap-grid.scss",
           "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
           "apps/edc-ui-ng/src/styles.scss"
         ],

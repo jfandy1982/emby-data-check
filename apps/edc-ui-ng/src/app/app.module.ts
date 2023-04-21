@@ -7,9 +7,11 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
 import { ServersComponent } from './servers/servers.component';
+import { HeaderComponent } from './header/header.component';
+import { ServerCreateComponent } from './servers/server-create/server-create.component';
 
 @NgModule({
-  declarations: [AppComponent, ServersComponent],
+  declarations: [AppComponent, ServersComponent, HeaderComponent, ServerCreateComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
