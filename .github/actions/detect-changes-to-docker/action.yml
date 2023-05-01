@@ -25,16 +25,13 @@ runs:
       id: findAffectedFromNx
       shell: bash
       run: |
-        npx nx print-affected --base=${{ env.BASE }} --head=${{ env.HEAD }} --select=projects >> $GITHUB_OUTPUT
+        npx nx print-affected --base=${{ env.BASE }} --head=${{ env.HEAD }} --type=app --select=projects >> $GITHUB_OUTPUT
 
     - name: 'Is a new image required?'
       id: need-new-image
       shell: bash
-      env:
-        LIST_OF_AFFECTED: ${{ steps.findAffectedFromNx.outputs.affected }}
-        NX_PROJECT_NAME: ${{ inputs.nx-project-name }}
       run: |
-        echo "need-new-image=${{ contains(env.LIST_OF_AFFECTED, env.NX_PROJECT_NAME) }}" >> $GITHUB_OUTPUT
+        echo "need-new-image=true" >> $GITHUB_OUTPUT
 
     - name: 'Detect changes of specific files'
       uses: dorny/paths-filter@v2
