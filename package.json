@@ -32,6 +32,7 @@
     "lint:check:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
     "lint:check:secretlint": "secretlint \"**/*\" --maskSecrets --secretlintrc .github/linters/.secretlintrc.json",
     "ng": "nx",
+    "nx": "nx",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
     "qa:affected": "npm-run-all --continue-on-error \"lint:affected\" \"test:affected\" \"e2e:affected\"",
