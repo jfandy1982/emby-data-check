@@ -1,8 +1,11 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
+import { MatInputModule } from '@angular/material/input';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
@@ -17,6 +20,8 @@ import { ServerCreateComponent } from './servers/server-create/server-create.com
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatInputModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false, initialNavigation: 'enabledBlocking' }),
   ],
   providers: [],

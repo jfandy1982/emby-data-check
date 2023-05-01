@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ServersService } from '../servers.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ServersService } from '../servers.service';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'edc-ng-server-create',
@@ -8,15 +9,23 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./server-create.component.scss'],
 })
 export class ServerCreateComponent implements OnInit, OnDestroy {
-  constructor(private serversService: ServersService, private route: ActivatedRoute, private router: Router) {}
+  form = this.fb.group({ name: ['', [Validators.required]] });
+
+  constructor(private fb: FormBuilder, private serversService: ServersService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
+
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
+
   onCreateServer() {
-    return;
+    this.serversService.createNewServer(this.serverName.value).subscribe();
+  }
+
+  get serverName() {
+    return this.form.controls['name'] as FormControl<string>;
   }
 }
