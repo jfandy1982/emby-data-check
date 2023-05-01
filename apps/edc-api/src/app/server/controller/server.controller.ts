@@ -8,15 +8,15 @@ import { Server, ServerEntity } from '@shared-interfaces/edc';
 export class ServerController {
   constructor(private readonly serverDbService: ServerDbService) {}
 
-  @ApiBearerAuth()
+  //@ApiBearerAuth()
   @ApiResponse({ isArray: true, status: HttpStatus.OK, description: 'List of managed Servers' })
   @Get()
   async findAllServers(): Promise<Server[]> {
     return this.serverDbService.findAllServers();
   }
 
-  @ApiBearerAuth()
-  @ApiBody({ type: [ServerEntity] })
+  //@ApiBearerAuth()
+  //@ApiBody({ type: [ServerEntity] })
   @ApiResponse({ status: HttpStatus.OK, description: 'A Server saved in Backup DB' })
   @Post('create')
   async createNewServer(@Body() createServer: Server): Promise<Server> {

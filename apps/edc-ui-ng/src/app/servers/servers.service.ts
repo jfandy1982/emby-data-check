@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Server } from '@shared-interfaces/edc';
 import { catchError, map, throwError } from 'rxjs';
@@ -8,6 +8,19 @@ import { catchError, map, throwError } from 'rxjs';
 })
 export class ServersService {
   constructor(private readonly http: HttpClient) {}
+
+  createNewServer(serverName: string, serverDescription: string, ipAddress: string, port: number, apiKey: string) {
+    const newServer: Server = { servername: serverName, description: serverDescription, ipAddress: ipAddress, port: port, apiKey: apiKey };
+    // TODO: Replace hostname & port by environment configuration
+    return this.http.post<Server>('http://localhost:3000/api/servers/create', newServer).pipe(
+      catchError((errorResponse) => {
+        console.log(errorResponse);
+        return throwError(() => {
+          return new Error(errorResponse.message);
+        });
+      })
+    );
+  }
 
   fetchServers() {
     // TODO: Replace hostname & port by environment configuration

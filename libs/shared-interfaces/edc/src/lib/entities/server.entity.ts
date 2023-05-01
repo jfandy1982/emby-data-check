@@ -6,15 +6,15 @@ export class ServerEntity extends AbstractEntity {
   @Column({ unique: true })
   servername?: string;
 
-  @Column({ nullable: true })
+  @Column()
   description?: string;
 
-  @Column({ nullable: true })
+  @Column()
   apiKey?: string;
 
-  @Column({ nullable: true })
+  @Column()
   ipAddress?: string;
 
-  @Column({ default: 0 })
+  @Column({ default: 8096 })
   port?: number;
 }
