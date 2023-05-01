@@ -16,17 +16,16 @@ outputs:
     value: ${{ steps.need-new-image.outputs.need-new-image }}
   need-sync-readme:
     description: 'The value identifies, if the provided `README.md`-file for the image on DockerHub needs to be updated'
-    value: '<tbd>'
+    value: ${{ steps.need-sync-readme.outputs.need-sync-readme }}
 
 runs:
   using: 'composite'
   steps:
     - name: 'Find affected apps and projects'
-      uses: dkhunt27/action-nx-affected-list@v4.1
       id: findAffectedFromNx
-      with:
-        base: ${{ env.BASE }}
-        head: ${{ env.HEAD }}
+      shell: bash
+      run: |
+        echo "npx nx print-affected --base=${{ env.BASE }} --head=${{ env.HEAD }} --select=projects" >> $GITHUB_OUTPUT
 
     - name: 'Is a new image required?'
       id: need-new-image
