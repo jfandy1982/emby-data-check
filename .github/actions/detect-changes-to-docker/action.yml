@@ -16,7 +16,7 @@ outputs:
     value: ${{ steps.need-new-image.outputs.need-new-image }}
   need-sync-readme:
     description: 'The value identifies, if the provided `README.md`-file for the image on DockerHub needs to be updated'
-    value: '<tbd>'
+    value: ${{ steps.need-sync-readme.outputs.need-sync-readme }}
 
 runs:
   using: 'composite'
