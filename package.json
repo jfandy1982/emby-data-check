@@ -44,7 +44,9 @@
     "start:ui:ngx:dev": "nx serve edc-ui-fundamentals --configuration development",
     "test:affected": "nx affected:test --parallel --skip-nx-cache",
     "test:all": "nx run-many --target=test --parallel --skip-nx-cache --all",
-    "upgrade": "nx migrate latest --interactive"
+    "upgrade": "nx migrate latest --interactive",
+    "watch:e2e:ng": "nx e2e edc-ui-ng-e2e --watch",
+    "watch:e2e:ngx": "nx e2e edc-ui-fundamentals-e2e --watch"
   },
   "private": true,
   "repository": {
