@@ -9,7 +9,8 @@
       "options": {
         "cypressConfig": "apps/edc-ui-ng-e2e/cypress.config.ts",
         "devServerTarget": "edc-ui-ng:serve:development",
-        "testingType": "e2e"
+        "testingType": "e2e",
+        "port": "cypress-auto"
       },
       "configurations": {
         "production": {
