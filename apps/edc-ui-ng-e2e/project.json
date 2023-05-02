@@ -9,16 +9,15 @@
       "options": {
         "cypressConfig": "apps/edc-ui-ng-e2e/cypress.config.ts",
         "devServerTarget": "edc-ui-ng:serve:development",
-        "testingType": "e2e"
+        "testingType": "e2e",
+        "port": "cypress-auto"
       },
       "configurations": {
         "production": {
-          "devServerTarget": "edc-ui-ng:serve:production",
-          "baseUrl": "http://localhost:5003"
+          "devServerTarget": "edc-ui-ng:serve:production"
         },
         "ci": {
-          "devServerTarget": "edc-ui-ng:serve-static",
-          "baseUrl": "http://localhost:6003"
+          "devServerTarget": "edc-ui-ng:serve-static"
         }
       }
     },
