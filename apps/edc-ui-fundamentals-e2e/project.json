@@ -13,10 +13,12 @@
       },
       "configurations": {
         "production": {
-          "devServerTarget": "edc-ui-fundamentals:serve:production"
+          "devServerTarget": "edc-ui-fundamentals:serve:production",
+          "baseUrl": "http://localhost:5004"
         },
         "ci": {
-          "devServerTarget": "edc-ui-fundamentals:serve-static"
+          "devServerTarget": "edc-ui-fundamentals:serve-static",
+          "baseUrl": "http://localhost:6004"
         }
       }
     },
