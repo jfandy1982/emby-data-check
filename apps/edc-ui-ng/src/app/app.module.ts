@@ -6,20 +6,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 
 import { ServersComponent } from './servers/servers.component';
 import { HeaderComponent } from './header/header.component';
-import { ServerCreateComponent } from './servers/server-create/server-create.component';
+import { ServerCardComponent } from './servers/server-card/server-card.component';
+import { ServerEditComponent } from './servers/server-edit/server-edit.component';
 
 @NgModule({
-  declarations: [AppComponent, ServersComponent, HeaderComponent, ServerCreateComponent],
+  declarations: [AppComponent, ServersComponent, HeaderComponent, ServerCardComponent, ServerEditComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { enableTracing: false, initialNavigation: 'enabledBlocking' }),

@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 import { ServersComponent } from './servers/servers.component';
-import { ServerCreateComponent } from './servers/server-create/server-create.component';
+import { ServerEditComponent } from './servers/server-edit/server-edit.component';
 
 export const appRoutes: Route[] = [
   {
@@ -9,7 +9,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'new',
-        component: ServerCreateComponent,
+        component: ServerEditComponent,
       },
     ],
   },
