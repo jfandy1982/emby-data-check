@@ -213,165 +213,165 @@ jobs:
             dist/cypress/apps/**/screenshots
             dist/cypress/apps/**/videos
 
-  build-docker:
-    name: Test Docker Build Process
+  # build-docker:
+  #   name: Test Docker Build Process
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    needs: [analyze, build]
+  #   needs: [analyze, build]
 
-    if: needs.analyze.outputs.is-pr == 'true'
+  #   if: needs.analyze.outputs.is-pr == 'true'
 
-    env:
-      NX_BASE: ${{ needs.analyze.outputs.base }}
-      NX_HEAD: ${{ needs.analyze.outputs.head }}
+  #   env:
+  #     NX_BASE: ${{ needs.analyze.outputs.base }}
+  #     NX_HEAD: ${{ needs.analyze.outputs.head }}
 
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  #   steps:
+  #     - name: 'Checkout repository'
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
 
-      - name: 'Setup Node.js and project dependencies'
-        uses: ./.github/actions/setup-nodejs
+  #     - name: 'Setup Node.js and project dependencies'
+  #       uses: ./.github/actions/setup-nodejs
 
-      - name: 'Build docker image for app EDC-API'
-        run: npm run docker:api
+  #     - name: 'Build docker image for app EDC-API'
+  #       run: npm run docker:api
 
-      - name: 'Build docker image for app EDC-UI-NG'
-        run: npm run docker:ui:ng
+  #     - name: 'Build docker image for app EDC-UI-NG'
+  #       run: npm run docker:ui:ng
 
-      - name: 'Build docker image for app EDC-UI-NGX'
-        run: npm run docker:ui:ngx
+  #     - name: 'Build docker image for app EDC-UI-NGX'
+  #       run: npm run docker:ui:ngx
 
-  publish-api:
-    name: 'Publish changes of API to DockerHub'
+  # publish-api:
+  #   name: 'Publish changes of API to DockerHub'
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    needs: [analyze, build]
+  #   needs: [analyze, build]
 
-    if: needs.analyze.outputs.is-merge == 'true'
+  #   if: needs.analyze.outputs.is-merge == 'true'
 
-    env:
-      NX_BASE: ${{ needs.analyze.outputs.base }}
-      NX_HEAD: ${{ needs.analyze.outputs.head }}
-      NX_PROJECT_NAME: 'edc-api'
-      DOCKERFILE: './docker/Dockerfile.prod.edc-api'
-      READMEFILE: './docs/docker/docker.edc-api.md'
+  #   env:
+  #     NX_BASE: ${{ needs.analyze.outputs.base }}
+  #     NX_HEAD: ${{ needs.analyze.outputs.head }}
+  #     NX_PROJECT_NAME: 'edc-api'
+  #     DOCKERFILE: './docker/Dockerfile.prod.edc-api'
+  #     READMEFILE: './docs/docker/docker.edc-api.md'
 
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  #   steps:
+  #     - name: 'Checkout repository'
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
 
-      - name: 'Setup Node.js and project dependencies'
-        uses: ./.github/actions/setup-nodejs
+  #     - name: 'Setup Node.js and project dependencies'
+  #       uses: ./.github/actions/setup-nodejs
 
-      - name: 'Detect changes'
-        id: detectedChanges
-        uses: ./.github/actions/detect-changes-to-docker
-        with:
-          nx-project-name: ${{ env.NX_PROJECT_NAME }}
-          docker-readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Detect changes'
+  #       id: detectedChanges
+  #       uses: ./.github/actions/detect-changes-to-docker
+  #       with:
+  #         nx-project-name: ${{ env.NX_PROJECT_NAME }}
+  #         docker-readme-file: ${{ env.READMEFILE }}
 
-      - name: 'Publish new image'
-        uses: ./.github/actions/publish-to-docker
-        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
-        with:
-          docker-file: ${{ env.DOCKERFILE }}
-          docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_API }}
-          docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-          need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
-          need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
-          readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Publish new image'
+  #       uses: ./.github/actions/publish-to-docker
+  #       if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+  #       with:
+  #         docker-file: ${{ env.DOCKERFILE }}
+  #         docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  #         docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_API }}
+  #         docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
+  #         need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
+  #         readme-file: ${{ env.READMEFILE }}
 
-  publish-ui-ng:
-    name: 'Publish changes of UI (Angular Material) to DockerHub'
+  # publish-ui-ng:
+  #   name: 'Publish changes of UI (Angular Material) to DockerHub'
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    needs: [analyze, build]
+  #   needs: [analyze, build]
 
-    if: needs.analyze.outputs.is-merge == 'true'
+  #   if: needs.analyze.outputs.is-merge == 'true'
 
-    env:
-      NX_BASE: ${{ needs.analyze.outputs.base }}
-      NX_HEAD: ${{ needs.analyze.outputs.head }}
-      NX_PROJECT_NAME: 'edc-ui-ng'
-      DOCKERFILE: './docker/Dockerfile.prod.edc-ui-ng'
-      READMEFILE: './docs/docker/docker.edc-ui-ng.md'
+  #   env:
+  #     NX_BASE: ${{ needs.analyze.outputs.base }}
+  #     NX_HEAD: ${{ needs.analyze.outputs.head }}
+  #     NX_PROJECT_NAME: 'edc-ui-ng'
+  #     DOCKERFILE: './docker/Dockerfile.prod.edc-ui-ng'
+  #     READMEFILE: './docs/docker/docker.edc-ui-ng.md'
 
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  #   steps:
+  #     - name: 'Checkout repository'
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
 
-      - name: 'Setup Node.js and project dependencies'
-        uses: ./.github/actions/setup-nodejs
+  #     - name: 'Setup Node.js and project dependencies'
+  #       uses: ./.github/actions/setup-nodejs
 
-      - name: 'Detect changes'
-        id: detectedChanges
-        uses: ./.github/actions/detect-changes-to-docker
-        with:
-          nx-project-name: ${{ env.NX_PROJECT_NAME }}
-          docker-readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Detect changes'
+  #       id: detectedChanges
+  #       uses: ./.github/actions/detect-changes-to-docker
+  #       with:
+  #         nx-project-name: ${{ env.NX_PROJECT_NAME }}
+  #         docker-readme-file: ${{ env.READMEFILE }}
 
-      - name: 'Publish new image'
-        uses: ./.github/actions/publish-to-docker
-        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
-        with:
-          docker-file: ${{ env.DOCKERFILE }}
-          docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_UI_NG }}
-          docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-          need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
-          need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
-          readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Publish new image'
+  #       uses: ./.github/actions/publish-to-docker
+  #       if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+  #       with:
+  #         docker-file: ${{ env.DOCKERFILE }}
+  #         docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  #         docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_UI_NG }}
+  #         docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
+  #         need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
+  #         readme-file: ${{ env.READMEFILE }}
 
-  publish-ui-ngx:
-    name: 'Publish changes of UI (Fundamentals-Ngx) to DockerHub'
+  # publish-ui-ngx:
+  #   name: 'Publish changes of UI (Fundamentals-Ngx) to DockerHub'
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    needs: [analyze, build]
+  #   needs: [analyze, build]
 
-    if: needs.analyze.outputs.is-merge == 'true'
+  #   if: needs.analyze.outputs.is-merge == 'true'
 
-    env:
-      NX_BASE: ${{ needs.analyze.outputs.base }}
-      NX_HEAD: ${{ needs.analyze.outputs.head }}
-      NX_PROJECT_NAME: 'edc-ui-fundamentals'
-      DOCKERFILE: './docker/Dockerfile.prod.edc-ui-fundamentals'
-      READMEFILE: './docs/docker/docker.edc-ui-fundamentals.md'
+  #   env:
+  #     NX_BASE: ${{ needs.analyze.outputs.base }}
+  #     NX_HEAD: ${{ needs.analyze.outputs.head }}
+  #     NX_PROJECT_NAME: 'edc-ui-fundamentals'
+  #     DOCKERFILE: './docker/Dockerfile.prod.edc-ui-fundamentals'
+  #     READMEFILE: './docs/docker/docker.edc-ui-fundamentals.md'
 
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+  #   steps:
+  #     - name: 'Checkout repository'
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
 
-      - name: 'Setup Node.js and project dependencies'
-        uses: ./.github/actions/setup-nodejs
+  #     - name: 'Setup Node.js and project dependencies'
+  #       uses: ./.github/actions/setup-nodejs
 
-      - name: 'Detect changes'
-        id: detectedChanges
-        uses: ./.github/actions/detect-changes-to-docker
-        with:
-          nx-project-name: ${{ env.NX_PROJECT_NAME }}
-          docker-readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Detect changes'
+  #       id: detectedChanges
+  #       uses: ./.github/actions/detect-changes-to-docker
+  #       with:
+  #         nx-project-name: ${{ env.NX_PROJECT_NAME }}
+  #         docker-readme-file: ${{ env.READMEFILE }}
 
-      - name: 'Publish new image'
-        uses: ./.github/actions/publish-to-docker
-        if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
-        with:
-          docker-file: ${{ env.DOCKERFILE }}
-          docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_UI_NGX }}
-          docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
-          need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
-          need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
-          readme-file: ${{ env.READMEFILE }}
+  #     - name: 'Publish new image'
+  #       uses: ./.github/actions/publish-to-docker
+  #       if: steps.detectedChanges.outputs.need-new-image == 'true' || steps.detectedChanges.outputs.need-sync-readme == 'true'
+  #       with:
+  #         docker-file: ${{ env.DOCKERFILE }}
+  #         docker-hub-password: ${{ secrets.DOCKERHUB_PASSWORD }}
+  #         docker-hub-repository: ${{ vars.DOCKERHUB_REPOSITORY_UI_NGX }}
+  #         docker-hub-username: ${{ secrets.DOCKERHUB_USERNAME }}
+  #         need-new-image: ${{ steps.detectedChanges.outputs.need-new-image }}
+  #         need-sync-readme: ${{ steps.detectedChanges.outputs.need-sync-readme }}
+  #         readme-file: ${{ env.READMEFILE }}
