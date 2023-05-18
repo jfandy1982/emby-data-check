@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Server } from '@shared-interfaces/edc';
-import { catchError, map, throwError } from 'rxjs';
+import { Subject, catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ServersService {
+  serversChanged = new Subject<Server[]>();
+
   constructor(private readonly http: HttpClient) {}
 
   createNewServer(serverName: string, serverDescription: string, ipAddress: string, port: number, apiKey: string) {

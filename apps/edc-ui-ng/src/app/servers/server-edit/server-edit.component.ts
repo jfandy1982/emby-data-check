@@ -4,11 +4,11 @@ import { ServersService } from '../servers.service';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'edc-ng-server-create',
-  templateUrl: './server-create.component.html',
-  styleUrls: ['./server-create.component.scss'],
+  selector: 'edc-ng-server-card',
+  templateUrl: './server-edit.component.html',
+  styleUrls: ['./server-edit.component.scss'],
 })
-export class ServerCreateComponent implements OnInit, OnDestroy {
+export class ServerEditComponent implements OnInit, OnDestroy {
   form = this.fb.group({
     name: ['', [Validators.required]],
     description: ['', [Validators.required]],
