@@ -2,9 +2,9 @@
   "name": "edc-ui-fundamentals",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "edc-ngx",
+  "prefix": "edc-fundamentals",
   "sourceRoot": "apps/edc-ui-fundamentals/src",
-  "tags": ["scope:ui"],
+  "tags": ["type:app", "scope:ui", "ui:fundamentals"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -16,13 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
         "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
-        "styles": [
-          "./node_modules/fundamental-styles/dist/icon.css",
-          "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
-          "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
-          "./node_modules/fundamental-styles/dist/fundamental-styles.css",
-          "apps/edc-ui-fundamentals/src/styles.scss"
-        ],
+        "styles": ["apps/edc-ui-fundamentals/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -31,22 +25,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "2mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "outputHashing": "all"
-        },
-        "test": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "2mb"
+              "maximumError": "1mb"
             },
             {
               "type": "anyComponentStyle",
@@ -67,21 +46,21 @@
       },
       "defaultConfiguration": "production"
     },
-    "cypress": {
-      "executor": "nx:run-commands",
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "commands": [
-          {
-            "command": "nx serve edc-ui-fundamentals --port=5002 --configuration=test",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "wait-on http://localhost:5002 && echo 'READY'"
-          }
-        ],
-        "parallel": true,
-        "readyWhen": "READY"
-      }
+        "port": 4201,
+        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "edc-ui-fundamentals:build:production"
+        },
+        "development": {
+          "browserTarget": "edc-ui-fundamentals:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -94,42 +73,6 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/edc-ui-fundamentals/**/*.ts", "apps/edc-ui-fundamentals/**/*.html"]
-      }
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "edc-ui-fundamentals:build:production"
-        },
-        "development": {
-          "browserTarget": "edc-ui-fundamentals:build:development"
-        }
-      },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
-      }
-    },
-    "stack": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "cd docker && docker compose down && docker compose --env-file ../.env up",
-            "description": "Spin up the DB docker container"
-          },
-          {
-            "command": "wait-on tcp:5432 && nx serve edc-api",
-            "description": "Start the Emby Data Check API",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "wait-on tcp:3000 && nx serve edc-ui-fundamentals",
-            "description": "Start the Emby Data Check UI (Fundamentals-Ngx)"
-          }
-        ],
-        "parallel": true
       }
     },
     "test": {
@@ -149,7 +92,8 @@
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "edc-ui-fundamentals:build"
+        "buildTarget": "edc-ui-fundamentals:build",
+        "port": 4201
       }
     }
   }

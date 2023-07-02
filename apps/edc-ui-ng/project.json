@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "edc-ng",
   "sourceRoot": "apps/edc-ui-ng/src",
-  "tags": ["scope:ui"],
+  "tags": ["type:app", "scope:ui", "ui:angular"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -16,32 +16,11 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
         "assets": ["apps/edc-ui-ng/src/favicon.ico", "apps/edc-ui-ng/src/assets"],
-        "styles": [
-          "./node_modules/bootstrap/scss/bootstrap.scss",
-          "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
-          "./node_modules/bootstrap/scss/bootstrap-grid.scss",
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/edc-ui-ng/src/styles.scss"
-        ],
+        "styles": ["apps/edc-ui-ng/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
-          "outputHashing": "all"
-        },
-        "test": {
           "budgets": [
             {
               "type": "initial",
@@ -67,21 +46,21 @@
       },
       "defaultConfiguration": "production"
     },
-    "cypress": {
-      "executor": "nx:run-commands",
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "commands": [
-          {
-            "command": "nx serve edc-ui-ng --port=5001 --configuration=test",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "wait-on http://localhost:5001 && echo 'READY'"
-          }
-        ],
-        "parallel": true,
-        "readyWhen": "READY"
-      }
+        "port": 4200,
+        "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "edc-ui-ng:build:production"
+        },
+        "development": {
+          "browserTarget": "edc-ui-ng:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -94,42 +73,6 @@
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/edc-ui-ng/**/*.ts", "apps/edc-ui-ng/**/*.html"]
-      }
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "configurations": {
-        "production": {
-          "browserTarget": "edc-ui-ng:build:production"
-        },
-        "development": {
-          "browserTarget": "edc-ui-ng:build:development"
-        }
-      },
-      "defaultConfiguration": "development",
-      "options": {
-        "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
-      }
-    },
-    "stack": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "cd docker && docker compose down && docker compose --env-file ../.env up",
-            "description": "Spin up the DB docker container"
-          },
-          {
-            "command": "wait-on tcp:5432 && nx serve edc-api",
-            "description": "Start the Emby Data Check API",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "wait-on tcp:3000 && nx serve edc-ui-ng",
-            "description": "Start the Emby Data Check UI (Angular Material)"
-          }
-        ],
-        "parallel": true
       }
     },
     "test": {
@@ -149,7 +92,8 @@
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "edc-ui-ng:build"
+        "buildTarget": "edc-ui-ng:build",
+        "port": 4200
       }
     }
   }
