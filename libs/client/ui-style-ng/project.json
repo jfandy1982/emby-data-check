@@ -1,0 +1,24 @@
+{
+  "name": "client-ui-style-ng",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/ui-style-ng/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/client/ui-style-ng/**/*.ts"]
+      }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/client/ui-style-ng/**/*.css", "libs/client/ui-style-ng/**/*.scss"],
+        "formatter": "compact"
+      }
+    }
+  },
+  "tags": ["type:ui", "scope:client"]
+}

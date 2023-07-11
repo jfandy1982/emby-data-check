@@ -8,15 +8,7 @@ module.exports = {
     'scope-enum': async (ctx) => [
       2,
       'always',
-      [
-        ...(await getProjects(
-          ctx,
-          ({ name, projectType }) => !name.includes('e2e')
-        )),
-        'k8s',
-        'repo',
-        'docs',
-      ],
+      [...(await getProjects(ctx, ({ name, projectType }) => !name.includes('e2e'))), 'k8s', 'repo', 'docs'],
     ],
   },
 };

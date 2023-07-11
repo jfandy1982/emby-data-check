@@ -17,6 +17,9 @@
         "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
         "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
         "styles": ["apps/edc-ui-fundamentals/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/client/ui-style-fundamentals/src/lib/scss"]
+        },
         "scripts": []
       },
       "configurations": {

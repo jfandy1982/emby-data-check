@@ -17,6 +17,9 @@
         "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
         "assets": ["apps/edc-ui-nord/src/favicon.ico", "apps/edc-ui-nord/src/assets"],
         "styles": ["apps/edc-ui-nord/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/client/ui-style-nord/src/lib/scss"]
+        },
         "scripts": []
       },
       "configurations": {

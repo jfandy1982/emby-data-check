@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "client/ui-style-fundamentals": ["libs/client/ui-style-fundamentals/src/index.ts"],
+      "client/ui-style-ng": ["libs/client/ui-style-ng/src/index.ts"],
+      "client/ui-style-nord": ["libs/client/ui-style-nord/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
