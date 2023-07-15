@@ -32,9 +32,10 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "nx/tasks-runners/default",
+      "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e", "stylelint"]
+        "cacheableOperations": ["build", "lint", "test", "e2e", "stylelint"],
+        "accessToken": "ZDExMGNjM2ItMTYyZC00ZjU5LWFlYTYtMmRhMTJhNDU2NDUyfHJlYWQtd3JpdGU="
       }
     }
   },
