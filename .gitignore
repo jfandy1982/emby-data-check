@@ -39,6 +39,3 @@ testem.log
 Thumbs.db
 
 .angular
-
-# Custom files and folders
-megalinter-reports

@@ -2,7 +2,3 @@
 /dist
 /coverage
 .angular
-
-# Custom files and folders
-/megalinter-reports
-.husky

@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
-  selector: 'edc-ngx-root',
+  standalone: true,
+  imports: [NxWelcomeComponent, RouterModule],
+  selector: 'edc-fundamentals-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {}
+export class AppComponent {
+  title = 'edc-ui-fundamentals';
+}

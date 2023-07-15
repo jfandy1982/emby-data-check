@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/edc-api/src",
   "projectType": "application",
+  "tags": ["type:app", "scope:api"],
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
@@ -59,6 +60,5 @@
         }
       }
     }
-  },
-  "tags": ["scope:api"]
+  }
 }

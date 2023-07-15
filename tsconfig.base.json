@@ -10,12 +10,14 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@shared-interfaces/edc": ["libs/shared-interfaces/edc/src/index.ts"]
+      "client/ui-style-fundamentals": ["libs/client/ui-style-fundamentals/src/index.ts"],
+      "client/ui-style-ng": ["libs/client/ui-style-ng/src/index.ts"],
+      "client/ui-style-nord": ["libs/client/ui-style-nord/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
