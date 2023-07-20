@@ -59,7 +59,7 @@
     "@angular/cli": "~16.1.0",
     "@angular/compiler-cli": "~16.1.0",
     "@angular/language-service": "~16.1.0",
-    "@commitlint/cli": "^17.6.6",
+    "@commitlint/cli": "^17.6.7",
     "@commitlint/config-conventional": "^17.6.6",
     "@commitlint/config-nx-scopes": "^17.6.4",
     "@commitlint/cz-commitlint": "^17.5.0",
