@@ -21,7 +21,9 @@
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "scripts": {
-    "prepare": "husky install"
+    "cleanup:all": "rimraf ./dist && rimraf ./angular && rimraf ./package-lock.json && rimraf ./node_modules && npm install",
+    "prepare": "husky install",
+    "upgrade": "nx migrate latest --interactive"
   },
   "config": {
     "commitizen": {
@@ -76,6 +78,7 @@
     "@nx/webpack": "16.5.5",
     "@nx/workspace": "16.5.5",
     "@schematics/angular": "^16.0.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^7.0.3",
     "@types/jest": "^29.0.0",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
@@ -95,6 +98,8 @@
     "nx-cloud": "16.1.1",
     "nx-stylelint": "^15.0.0",
     "prettier": "^2.0.0",
+    "rimraf": "^5.0.1",
+    "secretlint": "^7.0.3",
     "stylelint": "^15.0.0",
     "stylelint-config-standard": "^34.0.0",
     "stylelint-config-standard-scss": "^10.0.0",
