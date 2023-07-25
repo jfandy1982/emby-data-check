@@ -1,0 +1,5 @@
+{
+  "{apps,libs}/**/*.{ts,js,html,json,scss,css,md}": "nx affected:lint --uncommitted --fix true",
+  "{apps,libs}/**/*.{scss,css}": "nx affected:stylelint --uncommitted --fix true",
+  "*.{ts,js,html,json,scss,css,md,yaml,yml}": "nx format:write --base=main --head=HEAD"
+}
