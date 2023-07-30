@@ -21,7 +21,9 @@
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "scripts": {
-    "cleanup:all": "rimraf ./dist && rimraf ./angular && rimraf ./package-lock.json && rimraf ./node_modules && npm install",
+    "cleanup:all": "npm-run-all --continue-on-error --parallel \"cleanup:!(all)\" && npm install",
+    "cleanup:deps": "rimraf ./package-lock.json && rimraf ./node_modules",
+    "cleanup:generated": "rimraf ./dist && rimraf ./angular",
     "prepare": "husky install",
     "upgrade": "nx migrate latest --interactive"
   },
@@ -94,6 +96,8 @@
     "jest-environment-node": "^29.0.0",
     "jest-preset-angular": "^13.0.0",
     "lint-staged": "^13.0.0",
+    "npm-package-json-lint": "^7.0.0",
+    "npm-run-all": "^4.0.0",
     "nx": "16.5.5",
     "nx-cloud": "16.1.1",
     "nx-stylelint": "^15.0.0",
