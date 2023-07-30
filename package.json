@@ -21,13 +21,22 @@
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "scripts": {
+    "build:affected": "nx affected:build --configuration=production",
+    "build:all": "nx run-many --target=build --all",
     "cleanup:all": "npm-run-all --continue-on-error --parallel \"cleanup:!(all)\" && npm install",
     "cleanup:deps": "rimraf ./package-lock.json && rimraf ./node_modules",
     "cleanup:generated": "rimraf ./dist && rimraf ./angular",
+    "e2e:affected": "nx affected:e2e --parallel",
+    "e2e:all": "nx run-many --target=e2e --parallel --all",
+    "lint:affected": "nx affected:lint --parallel",
+    "lint:all": "nx run-many --target=lint --all",
+    "lint:check:megalinter": "npx mega-linter-runner --flavor javascript",
     "ng": "nx",
     "nx": "nx",
     "prepare": "husky install",
     "pretty-quick": "pretty-quick",
+    "test:affected": "nx affected:test --parallel",
+    "test:all": "nx run-many --target=test --parallel --all",
     "upgrade": "nx migrate latest --interactive"
   },
   "config": {
