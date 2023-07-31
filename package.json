@@ -90,7 +90,7 @@
     "@nx/node": "16.5.5",
     "@nx/web": "16.5.5",
     "@nx/webpack": "16.5.5",
-    "@nx/workspace": "16.5.5",
+    "@nx/workspace": "16.6.0",
     "@schematics/angular": "^16.0.0",
     "@secretlint/secretlint-rule-preset-recommend": "^7.0.0",
     "@types/jest": "^29.0.0",
