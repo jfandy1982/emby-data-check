@@ -108,7 +108,7 @@ jobs:
           fetch-depth: 0
 
       - name: 'Execute checks in `MegaLinter`'
-        uses: oxsecurity/megalinter/flavors/javascript@v6
+        uses: oxsecurity/megalinter/flavors/javascript@v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
