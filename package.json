@@ -120,7 +120,7 @@
     "npm-package-json-lint": "^7.0.0",
     "npm-run-all": "^4.0.0",
     "nx": "16.6.0",
-    "nx-cloud": "16.2.0",
+    "nx-cloud": "16.3.0",
     "nx-stylelint": "^15.0.0",
     "prettier": "^2.0.0",
     "pretty-quick": "^3.0.0",
