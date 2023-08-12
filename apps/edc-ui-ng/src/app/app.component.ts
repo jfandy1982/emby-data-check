@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, MatButtonModule],
   selector: 'edc-ng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
