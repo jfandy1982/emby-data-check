@@ -15,16 +15,33 @@
         "main": "apps/edc-ui-ng/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
-        "assets": ["apps/edc-ui-ng/src/favicon.ico", "apps/edc-ui-ng/src/assets"],
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-ng/src/assets/",
+            "output": "assets/"
+          },
+          {
+            "glob": "favicon.ico",
+            "input": "src/",
+            "output": "/"
+          }
+        ],
         "styles": [
-          "./node_modules/bootstrap/scss/bootstrap.scss",
-          "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
-          "./node_modules/bootstrap/scss/bootstrap-grid.scss",
+          "apps/edc-ui-ng/src/styles.scss",
           "@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/edc-ui-ng/src/styles.scss"
+          "./node_modules/bootstrap/scss/bootstrap-grid.scss",
+          "./node_modules/bootstrap/scss/bootstrap-reboot.scss",
+          "./node_modules/bootstrap/scss/bootstrap.scss"
         ],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style-ng/src/lib/scss"]
+        },
+        "sourceMap": {
+          "hidden": true,
+          "scripts": true,
+          "styles": true
         },
         "scripts": []
       },
