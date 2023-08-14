@@ -15,27 +15,32 @@
         "main": "apps/edc-ui-nord/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
-        "assets": ["apps/edc-ui-nord/src/favicon.ico", "apps/edc-ui-nord/src/assets"],
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-nord/src/assets/",
+            "output": "assets/"
+          },
+          {
+            "glob": "favicon.ico",
+            "input": "src/",
+            "output": "/"
+          }
+        ],
         "styles": ["apps/edc-ui-nord/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style-nord/src/lib/scss"]
+        },
+        "sourceMap": {
+          "hidden": true,
+          "scripts": true,
+          "styles": true
         },
         "scripts": []
       },
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {

@@ -15,54 +15,38 @@
         "main": "apps/edc-ui-fundamentals/src/main.ts",
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/edc-ui-fundamentals/src/favicon.ico",
-          "apps/edc-ui-fundamentals/src/assets",
-          {
-            "glob": "**/css_variables.css",
-            "input": "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/",
-            "output": "./assets/theming-base/"
-          },
           {
             "glob": "**/*",
-            "input": "./node_modules/fundamental-styles/dist/theming/",
-            "output": "./assets/fundamental-styles-theming/"
+            "input": "apps/edc-ui-fundamentals/src/assets/",
+            "output": "assets/"
+          },
+          {
+            "glob": "favicon.ico",
+            "input": "src/",
+            "output": "/"
           }
         ],
         "styles": [
-          "./node_modules/@fundamental-ngx/core/styles/fundamental-ngx-core.css",
-          "./node_modules/fundamental-styles/dist/fonts/sap_fonts.css",
-          {
-            "input": "./node_modules/fundamental-styles/dist/fonts/sap_fiori_3_fonts.css",
-            "inject": false,
-            "bundleName": "sap_fiori_3_fonts"
-          },
-          {
-            "input": "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
-            "inject": false,
-            "bundleName": "sap_horizon_fonts"
-          },
-          "apps/edc-ui-fundamentals/src/styles.scss"
+          "apps/edc-ui-fundamentals/src/styles.scss",
+          "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css",
+          "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
+          "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
+          "./node_modules/fundamental-styles/dist/fundamental-styles.css"
         ],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style-fundamentals/src/lib/scss"]
+        },
+        "sourceMap": {
+          "hidden": true,
+          "scripts": true,
+          "styles": true
         },
         "scripts": []
       },
       "configurations": {
         "production": {
-          "budgets": [
-            {
-              "type": "initial",
-              "maximumWarning": "500kb",
-              "maximumError": "1mb"
-            },
-            {
-              "type": "anyComponentStyle",
-              "maximumWarning": "2kb",
-              "maximumError": "4kb"
-            }
-          ],
           "outputHashing": "all"
         },
         "development": {

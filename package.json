@@ -65,6 +65,7 @@
     "@nx/angular": "16.6.0",
     "@sap-theming/theming-base-content": "^11.0.0",
     "axios": "^1.0.0",
+    "bootstrap": "^5.0.0",
     "fundamental-styles": "^0.30.0",
     "lodash-es": "^4.0.0",
     "nord": "^0.2.0",
