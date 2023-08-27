@@ -19,7 +19,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Emby Data Check')
     .setDescription(
-      '<p>The Emby Data Check API is the backend for an opinionated check tool of an Emby server. Please refer to <a href="https://github.com/jfandy1982/emby-data-check">this GitHub repository</a> for more context information.</p>'
+      '<p>The Emby Data Check API is the backend for an opinionated check tool of an Emby server. Please refer to <a href="https://github.com/jfandy1982/emby-data-check">this GitHub repository</a> for more context information.</p>',
     )
     .setVersion('v1')
     .addBearerAuth()
