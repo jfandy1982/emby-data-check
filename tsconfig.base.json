@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "api/feature-health": ["libs/api/feature-health/src/index.ts"],
       "client/ui-style-fundamentals": ["libs/client/ui-style-fundamentals/src/index.ts"],
       "client/ui-style-ng": ["libs/client/ui-style-ng/src/index.ts"],
       "client/ui-style-nord": ["libs/client/ui-style-nord/src/index.ts"]
