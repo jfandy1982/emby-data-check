@@ -1,5 +1,5 @@
 {
-  "**/*.*": ["secretlint \"**/*\" --maskSecrets --secretlintrc .github/linters/.secretlintrc.json", "pretty-quick --staged"],
+  "**/*.*": ["secretlint \"**/*\" --maskSecrets --secretlintrc .github/linters/.secretlintrc.json"],
   "{apps,libs}/**/*.{ts,js,html,json,scss,css,md}": "nx affected:lint --uncommitted --fix true",
   "libs/**/*.{scss,css}": "nx affected:stylelint --uncommitted --fix true",
   "**/package.json": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
