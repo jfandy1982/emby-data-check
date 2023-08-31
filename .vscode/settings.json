@@ -1,9 +1,19 @@
 {
   "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
   "editor.formatOnSave": true,
   "editor.formatOnPaste": false,
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "json.format.enable": false
+  "json.format.enable": false,
+  "css.validate": false,
+  "scss.validate": false,
+  "prettier.configPath": ".prettierrc",
+  "prettier.prettierPath": "node_modules/prettier",
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss"]
 }
