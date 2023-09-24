@@ -8,6 +8,20 @@ updates:
     target-branch: 'main'
     labels:
       - 'dependencies'
+    groups:
+      angular:
+        patterns:
+          - '@angular*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      nx:
+        patterns:
+          - '@nx*'
+          - 'nx*'
+        update-types:
+          - 'minor'
+          - 'patch'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
