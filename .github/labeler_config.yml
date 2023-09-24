@@ -1,5 +1,0 @@
-dependencies:
-  - package.json
-  - package-lock.json
-  - .nvmrc
-  - .npmrc
