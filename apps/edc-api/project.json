@@ -59,6 +59,10 @@
           "codeCoverage": true
         }
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/edc-api/Dockerfile . -t edc-api"
     }
   }
 }

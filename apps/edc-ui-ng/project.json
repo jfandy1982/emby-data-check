@@ -109,6 +109,10 @@
         "buildTarget": "edc-ui-ng:build",
         "port": 4200
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/edc-ui-ng/Dockerfile . -t edc-ui-ng"
     }
   }
 }
