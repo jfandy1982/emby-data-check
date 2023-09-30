@@ -103,6 +103,10 @@
         "buildTarget": "edc-ui-nord:build",
         "port": 4202
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/edc-ui-nord/Dockerfile . -t edc-ui-nord"
     }
   }
 }

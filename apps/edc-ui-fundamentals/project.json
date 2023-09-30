@@ -109,6 +109,10 @@
         "buildTarget": "edc-ui-fundamentals:build",
         "port": 4201
       }
+    },
+    "docker-build": {
+      "dependsOn": ["build"],
+      "command": "docker build -f apps/edc-ui-fundamentals/Dockerfile . -t edc-ui-fundamentals"
     }
   }
 }
