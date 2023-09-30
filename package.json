@@ -38,7 +38,8 @@
     "prepare": "husky install",
     "test:affected": "nx affected:test --parallel",
     "test:all": "nx run-many --target=test --parallel --all",
-    "upgrade": "nx migrate latest --interactive"
+    "upgrade": "nx migrate latest --interactive",
+    "upgrade:doit": "npm install && nx migrate --run-migrations"
   },
   "config": {
     "commitizen": {
