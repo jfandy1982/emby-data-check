@@ -107,6 +107,27 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/edc-ui-nord/Dockerfile . -t edc-ui-nord"
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down && docker compose --env-file .env up",
+            "description": "Spin up the DB docker container"
+          },
+          {
+            "command": "wait-on tcp:5432 && nx serve edc-api",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "wait-on tcp:3000 && nx serve edc-ui-nord",
+            "description": "Start the Emby Data Check UI (Nord UI Style)"
+          }
+        ],
+        "parallel": true
+      }
     }
   }
 }
