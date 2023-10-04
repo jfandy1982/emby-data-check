@@ -63,6 +63,23 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/edc-api/Dockerfile . -t edc-api"
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down && docker compose --env-file .env up",
+            "description": "Spin up the DB docker container"
+          },
+          {
+            "command": "wait-on tcp:5432 && nx serve edc-api",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": true
+      }
     }
   }
 }

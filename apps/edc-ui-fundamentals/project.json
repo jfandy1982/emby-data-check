@@ -113,6 +113,27 @@
     "docker-build": {
       "dependsOn": ["build"],
       "command": "docker build -f apps/edc-ui-fundamentals/Dockerfile . -t edc-ui-fundamentals"
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "docker compose down && docker compose --env-file .env up",
+            "description": "Spin up the DB docker container"
+          },
+          {
+            "command": "wait-on tcp:5432 && nx serve edc-api",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "wait-on tcp:3000 && nx serve edc-ui-fundamentals",
+            "description": "Start the Emby Data Check UI (Fundamentals Library)"
+          }
+        ],
+        "parallel": true
+      }
     }
   }
 }

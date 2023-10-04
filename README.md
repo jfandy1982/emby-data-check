@@ -19,6 +19,66 @@ My main target is checking some selected values of my media items against a snap
 It might be wrong to implement that on my own, because there might be already tons of other implementation projects covering the same topic.
 But I see that as a learning opportunity to develop in the area of the "cool new stuff" using 'modern' technologies like Node.js, Typescript as well as Angular UI.
 
+## Local development
+
+After cloning the repository locally, navigate into the new folder containing the file `package.json`. Run an initial
+
+```sh
+npm install
+```
+
+Create an environment configuration file `.env` in the root folder. Use the provided file `.env.sample` as a template to configure some settings.
+
+_Remark:_ The applications can't be started in parallel. A running database container is shutdown and _NOT_ reused.
+
+### edc-api
+
+Emby Data Check API application exposes a REST API and connects to a PostgreSQL container executed locally. Use it, when working on the API only.
+
+The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger).
+
+Start this stack using the script from `package.json`:
+
+```sh
+npm run stack:api
+```
+
+### edc-ui-ng
+
+Emby Data Check UI application using Angular Material design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+
+The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4200](http://localhost:4200)
+
+Start this stack using the script from `package.json`:
+
+```sh
+npm run stack:ng
+```
+
+### edc-ui-ngx
+
+Emby Data Check UI application using SAP Fundamentals design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+
+The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4201](http://localhost:4201)
+
+Start this stack using the script from `package.json`:
+
+```sh
+npm run stack:ngx
+```
+
+### edc-ui-nord
+
+Emby Data Check UI application using SAP Fundamentals design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+
+The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4202](http://localhost:4202)
+
+Start this stack using the script from `package.json`:
+
+```sh
+npm run stack:nord
+```
+
 ## License
 
 Check-out the license in the file [LICENSE.md](LICENSE.md) within this repository.
