@@ -78,7 +78,7 @@
             "forwardAllArgs": false
           }
         ],
-        "parallel": false
+        "parallel": true
       }
     }
   }
