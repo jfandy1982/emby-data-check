@@ -40,11 +40,6 @@
       "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "edc-api:build"
-      },
       "configurations": {
         "development": {
           "buildTarget": "edc-api:build:development"
@@ -55,6 +50,12 @@
         "production": {
           "buildTarget": "edc-api:build:production"
         }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "edc-api:build",
+        "port": 9229
       }
     },
     "lint": {

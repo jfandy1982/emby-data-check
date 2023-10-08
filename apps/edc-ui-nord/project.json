@@ -79,20 +79,24 @@
       "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "options": {
-        "port": 4202,
-        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json"
-      },
       "configurations": {
-        "production": {
-          "browserTarget": "edc-ui-nord:build:production"
-        },
         "development": {
           "browserTarget": "edc-ui-nord:build:development"
+        },
+        "test": {
+          "browserTarget": "edc-ui-nord:build:test"
+        },
+        "production": {
+          "browserTarget": "edc-ui-nord:build:production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "edc-ui-nord:build",
+        "port": 4202,
+        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
