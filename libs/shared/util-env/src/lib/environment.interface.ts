@@ -1,4 +1,5 @@
 export interface IEnvironment {
-  production: boolean;
   apiUrl: string;
+  landscape: string;
+  production: boolean;
 }
