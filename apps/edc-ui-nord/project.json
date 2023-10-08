@@ -7,15 +7,44 @@
   "tags": ["type:app", "scope:ui", "ui:nord"],
   "targets": {
     "build": {
+      "configurations": {
+        "development": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.development.ts"
+            }
+          ],
+          "namedChunks": true,
+          "outputHashing": "none",
+          "optimization": false,
+          "sourceMap": {
+            "hidden": true,
+            "scripts": true,
+            "styles": true
+          },
+          "vendorChunk": true
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.test.ts"
+            }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.production.ts"
+            }
+          ]
+        }
+      },
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/edc-ui-nord",
-        "index": "apps/edc-ui-nord/src/index.html",
-        "main": "apps/edc-ui-nord/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
@@ -28,47 +57,46 @@
             "output": "/"
           }
         ],
+        "buildOptimizer": true,
+        "extractLicenses": true,
+        "index": "apps/edc-ui-nord/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "main": "apps/edc-ui-nord/src/main.ts",
+        "namedChunks": false,
+        "outputHashing": "all",
+        "outputPath": "dist/apps/edc-ui-nord",
+        "polyfills": ["zone.js"],
         "styles": ["apps/edc-ui-nord/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style-nord/src/lib/scss"]
         },
-        "sourceMap": {
-          "hidden": true,
-          "scripts": true,
-          "styles": true
-        },
-        "scripts": []
+        "sourceMap": false,
+        "scripts": [],
+        "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
+        "optimization": true,
+        "vendorChunk": false
       },
-      "configurations": {
-        "production": {
-          "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      },
-      "defaultConfiguration": "production"
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "options": {
-        "port": 4202,
-        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json"
-      },
       "configurations": {
-        "production": {
-          "browserTarget": "edc-ui-nord:build:production"
-        },
         "development": {
           "browserTarget": "edc-ui-nord:build:development"
+        },
+        "test": {
+          "browserTarget": "edc-ui-nord:build:test"
+        },
+        "production": {
+          "browserTarget": "edc-ui-nord:build:production"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "browserTarget": "edc-ui-nord:build",
+        "port": 4202,
+        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json"
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",

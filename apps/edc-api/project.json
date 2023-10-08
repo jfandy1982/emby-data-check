@@ -6,37 +6,56 @@
   "tags": ["type:app", "scope:api"],
   "targets": {
     "build": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "configurations": {
+        "development": {
+          "fileReplacements": [
+            { "replace": "libs/shared/util-env/src/lib/environment.ts", "with": "libs/shared/util-env/src/lib/environment.development.ts" }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            { "replace": "libs/shared/util-env/src/lib/environment.ts", "with": "libs/shared/util-env/src/lib/environment.test.ts" }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            { "replace": "libs/shared/util-env/src/lib/environment.ts", "with": "libs/shared/util-env/src/lib/environment.production.ts" }
+          ]
+        }
+      },
       "defaultConfiguration": "production",
+      "executor": "@nx/webpack:webpack",
       "options": {
-        "target": "node",
-        "compiler": "tsc",
-        "outputPath": "dist/apps/edc-api",
-        "main": "apps/edc-api/src/main.ts",
-        "tsConfig": "apps/edc-api/tsconfig.app.json",
         "assets": ["apps/edc-api/src/assets"],
+        "compiler": "tsc",
+        "extractLicenses": true,
         "isolatedConfig": true,
+        "main": "apps/edc-api/src/main.ts",
+        "optimization": false,
+        "outputPath": "dist/apps/edc-api",
+        "target": "node",
+        "tsConfig": "apps/edc-api/tsconfig.app.json",
         "webpackConfig": "apps/edc-api/webpack.config.js"
       },
-      "configurations": {
-        "development": {},
-        "production": {}
-      }
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "edc-api:build"
-      },
       "configurations": {
         "development": {
           "buildTarget": "edc-api:build:development"
         },
+        "test": {
+          "buildTarget": "edc-api:build:test"
+        },
         "production": {
           "buildTarget": "edc-api:build:production"
         }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "edc-api:build",
+        "port": 9229
       }
     },
     "lint": {
