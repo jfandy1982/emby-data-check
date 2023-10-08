@@ -42,6 +42,13 @@
     "stack:nord": "nx run edc-ui-nord:stack",
     "test:affected": "nx affected:test --parallel",
     "test:all": "nx run-many --target=test --parallel --all",
+    "typeorm": "ts-node -P tsconfig.orm.json ./node_modules/typeorm/cli",
+    "typeorm:config": "npm run typeorm -- -d ./apps/edc-api/db/migrations.config.ts",
+    "typeorm:migration:create": "npm run typeorm -- migration:create ./apps/edc-api/db/migrations/$npm_config_name",
+    "typeorm:migration:generate": "npm run typeorm -- migration:generate -d ./apps/edc-api/db/migrations.config.ts ./apps/edc-api/db/migrations/$npm_config_name",
+    "typeorm:migration:revert": "npm run typeorm:config -- migration:revert",
+    "typeorm:migration:run": "npm run typeorm:config -- migration:run",
+    "typeorm:migration:show": "npm run typeorm:config -- migration:show",
     "upgrade": "nx migrate latest --interactive",
     "upgrade:doit": "npm install && nx migrate --run-migrations"
   },

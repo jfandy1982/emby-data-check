@@ -12,6 +12,7 @@ import { AppConfig, DatabaseConfig } from './config';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
+      expandVariables: true,
       load: [AppConfig, DatabaseConfig],
     }),
     TypeOrmModule.forRootAsync({
