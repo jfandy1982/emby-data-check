@@ -7,15 +7,44 @@
   "tags": ["type:app", "scope:ui", "ui:angular"],
   "targets": {
     "build": {
+      "configurations": {
+        "development": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.development.ts"
+            }
+          ],
+          "namedChunks": true,
+          "outputHashing": "none",
+          "optimization": false,
+          "sourceMap": {
+            "hidden": true,
+            "scripts": true,
+            "styles": true
+          },
+          "vendorChunk": true
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.test.ts"
+            }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/util-env/src/lib/environment.ts",
+              "with": "libs/shared/util-env/src/lib/environment.production.ts"
+            }
+          ]
+        }
+      },
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/edc-ui-ng",
-        "index": "apps/edc-ui-ng/src/index.html",
-        "main": "apps/edc-ui-ng/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
@@ -28,6 +57,15 @@
             "output": "/"
           }
         ],
+        "buildOptimizer": true,
+        "extractLicenses": true,
+        "index": "apps/edc-ui-ng/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "main": "apps/edc-ui-ng/src/main.ts",
+        "namedChunks": false,
+        "outputHashing": "all",
+        "outputPath": "dist/apps/edc-ui-ng",
+        "polyfills": ["zone.js"],
         "styles": [
           "apps/edc-ui-ng/src/styles.scss",
           "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -38,27 +76,13 @@
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style-ng/src/lib/scss"]
         },
-        "sourceMap": {
-          "hidden": true,
-          "scripts": true,
-          "styles": true
-        },
-        "scripts": []
+        "sourceMap": false,
+        "scripts": [],
+        "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
+        "optimization": true,
+        "vendorChunk": false
       },
-      "configurations": {
-        "production": {
-          "outputHashing": "all"
-        },
-        "development": {
-          "buildOptimizer": false,
-          "optimization": false,
-          "vendorChunk": true,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "namedChunks": true
-        }
-      },
-      "defaultConfiguration": "production"
+      "outputs": ["{options.outputPath}"]
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
