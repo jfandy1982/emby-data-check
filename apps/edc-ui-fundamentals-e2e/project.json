@@ -28,6 +28,6 @@
       }
     }
   },
-  "tags": [],
+  "tags": ["scope:e2e"],
   "implicitDependencies": ["edc-ui-fundamentals"]
 }
