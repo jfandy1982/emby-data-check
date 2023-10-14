@@ -22,6 +22,7 @@
   "words": [
     "Andreas",
     "CODEOWNERS",
+    "commitlint",
     "dbaeumer",
     "dkhunt",
     "dorny",
@@ -32,6 +33,10 @@
     "nrwl",
     "oxsecurity",
     "postgres",
-    "sonarcloud"
+    "secretlint",
+    "sonarcloud",
+    "stylelint",
+    "theming",
+    "typeorm"
   ]
 }
