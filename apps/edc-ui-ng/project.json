@@ -111,7 +111,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/edc-ui-ng/**/*.ts", "apps/edc-ui-ng/**/*.html"]
