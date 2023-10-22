@@ -13,7 +13,7 @@ const dataSourceConfig: DataSourceOptions = {
   username: configService.get<string>('DATABASE_USERNAME'),
   password: configService.get<string>('DATABASE_PASSWORD'),
   database: configService.get<string>('DATABASE_NAME'),
-  entities: [`${__dirname}/../src/**/*.entity{.ts,.js}`],
+  entities: [`${__dirname}/../../../../libs/shared-interfaces/db-interface/src/**/*.entity{.ts,.js}`],
   synchronize: configService.get<string>('tier') === 'development',
   logging: configService.get<string>('tier') === 'development',
   migrations: [`${__dirname}/migrations/*{.ts,.js}`],
