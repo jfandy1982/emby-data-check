@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerCustomOptions, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
 
-import { environment } from 'shared/util-env';
+import { environment } from '@edc/shared-util/environment';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {

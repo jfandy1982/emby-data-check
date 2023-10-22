@@ -61,11 +61,11 @@ jobs:
 
       - name: 'PR: Build affected parts only'
         if: env.IS_PR == 'true'
-        run: npm run build:affected
+        run: npx nx affected --parallel --targets build
 
       - name: 'MERGE into `main`: Build all projects'
         if: env.IS_MERGE == 'true'
-        run: npm run build:all
+        run: npx nx run-many --parallel --target=build
 
   lint-nx:
     name: Lint with Nx Features
@@ -90,7 +90,7 @@ jobs:
         uses: ./.github/actions/setup-nodejs
 
       - name: 'Lint all projects'
-        run: npm run lint:all
+        run: npx nx run-many --parallel --targets=lint,stylelint
 
   lint:
     name: 'Lint with MegaLinter tooling'
@@ -168,7 +168,7 @@ jobs:
         uses: ./.github/actions/setup-nodejs
 
       - name: 'Run tests for all projects'
-        run: npm run test:all
+        run: npx nx run-many --parallel --target=test
 
   e2e-test:
     name: E2E Test
@@ -198,7 +198,7 @@ jobs:
           npx cypress cache list
 
       - name: 'Run E2E tests for all projects'
-        run: npm run e2e:all
+        run: npx nx run-many --parallel --target=e2e
 
       - name: 'Upload reported failures from Cypress E2E tests'
         if: failure()

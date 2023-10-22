@@ -11,8 +11,8 @@
         "development": {
           "fileReplacements": [
             {
-              "replace": "libs/shared/util-env/src/lib/environment.ts",
-              "with": "libs/shared/util-env/src/lib/environment.development.ts"
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.development.ts"
             }
           ],
           "namedChunks": true,
@@ -28,16 +28,16 @@
         "test": {
           "fileReplacements": [
             {
-              "replace": "libs/shared/util-env/src/lib/environment.ts",
-              "with": "libs/shared/util-env/src/lib/environment.test.ts"
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.test.ts"
             }
           ]
         },
         "production": {
           "fileReplacements": [
             {
-              "replace": "libs/shared/util-env/src/lib/environment.ts",
-              "with": "libs/shared/util-env/src/lib/environment.production.ts"
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.production.ts"
             }
           ]
         }
@@ -68,7 +68,7 @@
         "polyfills": ["zone.js"],
         "styles": ["apps/edc-ui-nord/src/styles.scss"],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/client/ui-style-nord/src/lib/scss"]
+          "includePaths": ["libs/client/ui-style/nord/src/lib/scss"]
         },
         "sourceMap": false,
         "scripts": [],
