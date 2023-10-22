@@ -1,1 +1,1 @@
-export * from './lib/shared-interfaces-edc-api-to-db';
+export * from './lib/dummy';

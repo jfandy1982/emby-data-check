@@ -1,1 +1,1 @@
-export * from './lib/shared-interfaces-edc-api-to-emby';
+export * from './lib/dummy';
