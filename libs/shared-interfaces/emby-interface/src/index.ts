@@ -1,1 +1,1 @@
-export * from './lib/system.dto';
+export * from './lib/dtos/system.dto';
