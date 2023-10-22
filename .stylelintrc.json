@@ -9,7 +9,9 @@
     {
       "files": ["**/*.scss"],
       "extends": ["stylelint-config-standard-scss"],
-      "rules": {}
+      "rules": {
+        "no-empty-source": null
+      }
     }
   ],
   "rules": {}

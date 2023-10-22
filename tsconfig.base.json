@@ -15,11 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "api/feature-health": ["libs/api/feature-health/src/index.ts"],
-      "client/ui-style-fundamentals": ["libs/client/ui-style-fundamentals/src/index.ts"],
-      "client/ui-style-ng": ["libs/client/ui-style-ng/src/index.ts"],
-      "client/ui-style-nord": ["libs/client/ui-style-nord/src/index.ts"],
-      "shared/util-env": ["libs/shared/util-env/src/index.ts"]
+      "@edc/api/feature-health": ["libs/api/feature-health/src/index.ts"],
+      "@edc/client/ui-style-fundamentals": ["libs/client/ui-style/fundamentals/src/index.ts"],
+      "@edc/client/ui-style-ng": ["libs/client/ui-style/ng/src/index.ts"],
+      "@edc/client/ui-style-nord": ["libs/client/ui-style/nord/src/index.ts"],
+      "@edc/shared-interfaces/api-interface": ["libs/shared-interfaces/api-interface/src/index.ts"],
+      "@edc/shared-interfaces/db-interface": ["libs/shared-interfaces/db-interface/src/index.ts"],
+      "@edc/shared-interfaces/emby-interface": ["libs/shared-interfaces/emby-interface/src/index.ts"],
+      "@edc/shared-util/environment": ["libs/shared-util/environment/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
