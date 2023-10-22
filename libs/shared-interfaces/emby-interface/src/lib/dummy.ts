@@ -1,3 +1,3 @@
 export interface Dummy {
-  id:string;
+  id: string;
 }
