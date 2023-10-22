@@ -4,8 +4,8 @@
 # Tip: Modify "docker-build" options in project.json to change docker build args.
 #
 # Run the container with `docker run -p 3000:3000 -t edc-api`.
-#FROM docker.io/node:18.18.0-alpine AS builder
-FROM docker.io/node:18.18.0-alpine
+#FROM docker.io/node:18.18.2-alpine AS builder
+FROM docker.io/node:18.18.2-alpine
 
 ENV HOST=0.0.0.0
 ENV PORT=3000
