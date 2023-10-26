@@ -5,7 +5,7 @@ import { MediaItemEntity } from './media-item.entity';
 
 @Entity('watch-state')
 export class WatchStateEntity extends AbstractEntity {
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   isWatched: boolean;
 
   @Column({ nullable: true })

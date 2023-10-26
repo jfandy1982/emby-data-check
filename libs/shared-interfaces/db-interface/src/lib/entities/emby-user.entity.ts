@@ -6,10 +6,10 @@ import { WatchStateEntity } from './watch-state.entity';
 
 @Entity('emby-user')
 export class EmbyUserEntity extends AbstractEntity {
-  @Column({ unique: true })
+  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
   userIdFromEmbyDb: string;
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   isActive: boolean;
 
   @ManyToOne(() => UserEntity, (user) => user.embyUsers, {

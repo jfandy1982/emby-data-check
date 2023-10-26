@@ -1,21 +1,21 @@
 import { Column, Entity, OneToMany } from 'typeorm';
-import { UserRole } from '../user-role.enum';
+// import { UserRole } from '../user-role.enum';
 import { AbstractEntity } from './abstract.entity';
 import { EmbyUserEntity } from './emby-user.entity';
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
-  @Column({ unique: true })
+  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
   username: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true, length: 100 })
   name: string;
 
-  @Column({ nullable: true, select: false })
+  @Column({ type: 'varchar', nullable: false, length: 32, select: false })
   password: string;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  role: UserRole;
+  // @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+  // role: UserRole;
 
   @OneToMany(() => EmbyUserEntity, (embyUser) => embyUser.user, {
     onDelete: 'SET NULL',

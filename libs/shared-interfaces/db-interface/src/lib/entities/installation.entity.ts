@@ -5,10 +5,10 @@ import { ServerEntity } from './server.entity';
 
 @Entity('installation')
 export class InstallationEntity extends AbstractEntity {
-  @Column({ unique: true })
-  embyServerId: string;
+  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
+  serverIdFromEmbyDb: string;
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   isActive: boolean;
 
   @ManyToOne(() => ServerEntity, (server) => server.installations, {
