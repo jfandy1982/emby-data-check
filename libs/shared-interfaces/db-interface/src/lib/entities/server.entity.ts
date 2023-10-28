@@ -1,4 +1,4 @@
-import { IsIP, IsInt, IsString, Length, Max, MaxLength, Min } from 'class-validator';
+import { IsIP, IsPort, IsString, Length, MaxLength } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { InstallationEntity } from './installation.entity';
@@ -42,15 +42,7 @@ export class ServerEntity extends AbstractEntity {
   ipAddress: string;
 
   @Column({ type: 'smallint', nullable: true })
-  @IsInt({
-    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0009' },
-  })
-  @Min(1024, {
-    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0010' },
-  })
-  @Max(65535, {
-    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0011' },
-  })
+  @IsPort({ context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0009' } })
   port: number;
 
   @OneToMany(() => InstallationEntity, (installation) => installation.server, {
