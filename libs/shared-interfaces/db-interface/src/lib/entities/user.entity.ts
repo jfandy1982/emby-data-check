@@ -1,11 +1,14 @@
+// import { UserRole } from '@edc/shared-interfaces/enums';
 import { IsEnum, IsLowercase, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
-/**
- * The import statement has to use relative path definition here. The beautiful mechanism of Nx is not supported while generating migrations.
- */
-import { UserRole } from '@edc/shared-interfaces/enums';
 import { AbstractEntity } from './abstract.entity';
 import { EmbyUserEntity } from './emby-user.entity';
+
+/* Keep in sync with enum UserRole in lib '@edc/shared-interfaces/enums' */
+enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
