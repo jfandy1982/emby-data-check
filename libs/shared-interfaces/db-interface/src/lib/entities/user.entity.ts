@@ -1,6 +1,9 @@
-import { IsLowercase, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
+import { IsEnum, IsLowercase, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
-// import { UserRole } from '../user-role.enum';
+/**
+ * The import statement has to use relative path definition here. The beautiful mechanism of Nx is not supported while generating migrations.
+ */
+import { UserRole } from '@edc/shared-interfaces/enums';
 import { AbstractEntity } from './abstract.entity';
 import { EmbyUserEntity } from './emby-user.entity';
 
@@ -45,8 +48,14 @@ export class UserEntity extends AbstractEntity {
   })
   password: string;
 
-  // @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  // role: UserRole;
+  @Column({ type: 'enum', nullable: false, enum: UserRole, default: UserRole.USER })
+  @IsEnum(
+    { UserRole },
+    {
+      context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0010' },
+    },
+  )
+  role: UserRole;
 
   @OneToMany(() => EmbyUserEntity, (embyUser) => embyUser.user, {
     onDelete: 'SET NULL',
