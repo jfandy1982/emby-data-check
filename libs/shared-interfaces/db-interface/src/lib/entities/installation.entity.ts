@@ -6,7 +6,7 @@ import { ServerEntity } from './server.entity';
 
 @Entity('installation')
 export class InstallationEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
+  @Column({ type: 'nvarchar', nullable: false, length: 32, unique: true })
   @IsString({
     context: { entity: 'installation', className: 'InstallationEntity', errorCode: 'validation-0001' },
   })

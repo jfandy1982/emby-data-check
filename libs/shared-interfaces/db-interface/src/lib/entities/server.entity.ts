@@ -5,7 +5,7 @@ import { InstallationEntity } from './installation.entity';
 
 @Entity('server')
 export class ServerEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
+  @Column({ type: 'nvarchar', nullable: false, length: 50, unique: true })
   @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0001' },
   })
@@ -14,7 +14,7 @@ export class ServerEntity extends AbstractEntity {
   })
   servername: string;
 
-  @Column({ type: 'varchar', nullable: true, length: 100 })
+  @Column({ type: 'nvarchar', nullable: true, length: 100 })
   @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0003' },
   })
@@ -23,7 +23,7 @@ export class ServerEntity extends AbstractEntity {
   })
   description: string;
 
-  @Column({ type: 'varchar', nullable: true, length: 32 })
+  @Column({ type: 'nvarchar', nullable: true, length: 32 })
   @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0005' },
   })

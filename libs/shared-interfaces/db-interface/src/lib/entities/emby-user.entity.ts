@@ -7,7 +7,7 @@ import { WatchStateEntity } from './watch-state.entity';
 
 @Entity('emby-user')
 export class EmbyUserEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
+  @Column({ type: 'nvarchar', nullable: false, length: 32, unique: true })
   @IsString({
     context: { entity: 'emby-user', className: 'EmbyUserEntity', errorCode: 'validation-0001' },
   })

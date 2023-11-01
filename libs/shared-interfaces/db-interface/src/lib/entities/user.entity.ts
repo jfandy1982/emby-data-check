@@ -12,7 +12,7 @@ enum UserRole {
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
+  @Column({ type: 'nvarchar', nullable: false, length: 50, unique: true })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0001' },
   })
@@ -24,7 +24,7 @@ export class UserEntity extends AbstractEntity {
   })
   username: string;
 
-  @Column({ type: 'varchar', nullable: true, length: 100 })
+  @Column({ type: 'nvarchar', nullable: true, length: 100 })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0004' },
   })
@@ -33,7 +33,7 @@ export class UserEntity extends AbstractEntity {
   })
   name: string;
 
-  @Column({ type: 'varchar', nullable: false, length: 32, select: false })
+  @Column({ type: 'nvarchar', nullable: false, length: 32, select: false })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0006' },
   })
