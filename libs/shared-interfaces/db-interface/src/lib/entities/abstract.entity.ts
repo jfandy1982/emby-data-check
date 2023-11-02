@@ -1,8 +1,8 @@
 import { IsDate, IsString, IsUUID } from 'class-validator';
-import { CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class AbstractEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn('uuid', { name: 'uuid', comment: 'Unique Identifier for the record' })
   @IsString({
     context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0001' },
   })
@@ -11,15 +11,21 @@ export abstract class AbstractEntity {
   })
   id: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at', comment: 'UTC timestamp, when record was created' })
   @IsDate({
     context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0003' },
   })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at', comment: 'UTC timestamp, when record was updated' })
   @IsDate({
     context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0004' },
   })
   changedAt: Date;
+
+  @DeleteDateColumn({ name: 'deleted_at', comment: 'UTC timestamp, when record was soft-deleted' })
+  @IsDate({
+    context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0005' },
+  })
+  deletedAt: Date;
 }

@@ -1,11 +1,11 @@
-import { IsIP, IsPort, IsString, Length, MaxLength } from 'class-validator';
+import { IsBoolean, IsIP, IsPort, IsString, Length, MaxLength } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { InstallationEntity } from './installation.entity';
+import { ServerInstanceEntity } from './serverinstance.entity';
 
 @Entity('server')
 export class ServerEntity extends AbstractEntity {
-  @Column({ type: 'nvarchar', nullable: false, length: 50, unique: true })
+  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
   @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0001' },
   })
@@ -14,7 +14,7 @@ export class ServerEntity extends AbstractEntity {
   })
   servername: string;
 
-  @Column({ type: 'nvarchar', nullable: true, length: 100 })
+  @Column({ type: 'varchar', nullable: true, length: 100 })
   @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0003' },
   })
@@ -23,30 +23,37 @@ export class ServerEntity extends AbstractEntity {
   })
   description: string;
 
-  @Column({ type: 'nvarchar', nullable: true, length: 32 })
-  @IsString({
+  @Column({ type: 'boolean', default: false })
+  @IsBoolean({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0005' },
   })
-  @Length(32, 32, {
+  isMainServer: boolean;
+
+  @Column({ type: 'varchar', nullable: true, length: 32 })
+  @IsString({
     context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0006' },
+  })
+  @Length(32, 32, {
+    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0007' },
   })
   apiKey: string;
 
   @Column({ type: 'inet', nullable: true })
   @IsString({
-    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0007' },
+    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0008' },
   })
   @IsIP('4', {
-    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0008' },
+    context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0009' },
   })
   ipAddress: string;
 
   @Column({ type: 'smallint', nullable: true })
-  @IsPort({ context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0009' } })
+  @IsPort({ context: { entity: 'server', className: 'ServerEntity', errorCode: 'validation-0010' } })
   port: number;
 
-  @OneToMany(() => InstallationEntity, (installation) => installation.server, {
-    onDelete: 'SET NULL',
+  @OneToMany(() => ServerInstanceEntity, (serverinstance) => serverinstance.server, {
+    onDelete: 'NO ACTION',
+    nullable: true,
   })
-  installations: InstallationEntity[];
+  serverinstances: ServerInstanceEntity[];
 }

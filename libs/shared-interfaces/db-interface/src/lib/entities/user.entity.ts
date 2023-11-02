@@ -2,7 +2,7 @@
 import { IsEnum, IsLowercase, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
 import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { EmbyUserEntity } from './emby-user.entity';
+import { UserInstanceEntity } from './userinstance.entity';
 
 /* Keep in sync with enum UserRole in lib '@edc/shared-interfaces/enums' */
 enum UserRole {
@@ -12,7 +12,7 @@ enum UserRole {
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
-  @Column({ type: 'nvarchar', nullable: false, length: 50, unique: true })
+  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0001' },
   })
@@ -24,7 +24,7 @@ export class UserEntity extends AbstractEntity {
   })
   username: string;
 
-  @Column({ type: 'nvarchar', nullable: true, length: 100 })
+  @Column({ type: 'varchar', nullable: true, length: 100 })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0004' },
   })
@@ -33,7 +33,7 @@ export class UserEntity extends AbstractEntity {
   })
   name: string;
 
-  @Column({ type: 'nvarchar', nullable: false, length: 32, select: false })
+  @Column({ type: 'varchar', nullable: false, length: 32, select: false })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0006' },
   })
@@ -60,8 +60,9 @@ export class UserEntity extends AbstractEntity {
   )
   role: UserRole;
 
-  @OneToMany(() => EmbyUserEntity, (embyUser) => embyUser.user, {
-    onDelete: 'SET NULL',
+  @OneToMany(() => UserInstanceEntity, (userinstance) => userinstance.user, {
+    onDelete: 'NO ACTION',
+    nullable: true,
   })
-  embyUsers: EmbyUserEntity[];
+  userinstances: UserInstanceEntity[];
 }

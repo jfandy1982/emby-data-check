@@ -1,5 +1,16 @@
 emby
 embyusers
+imdb
 kodi
+iteminstance
+iteminstances
+musicvideo
+serverinstance
+serverinstances
 trakt
+tmdb
 tvdb
+userinstance
+userinstances
+watchedinstance
+watchedinstances
