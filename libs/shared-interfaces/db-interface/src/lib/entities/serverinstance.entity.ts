@@ -7,7 +7,14 @@ import { UserInstanceEntity } from './userinstance.entity';
 
 @Entity('serverinstance')
 export class ServerInstanceEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    length: 32,
+    unique: true,
+    name: 'server_id_from_emby_db',
+    comment: 'Identifier of the Emby Server taken from the concrete installation',
+  })
   @IsString({
     context: { entity: 'serverinstance', className: 'ServerInstanceEntity', errorCode: 'validation-0001' },
   })
@@ -16,11 +23,11 @@ export class ServerInstanceEntity extends AbstractEntity {
   })
   serverIdFromEmbyDb: string;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: false, name: 'active', comment: 'This server is still relevant and managed' })
   @IsBoolean({
     context: { entity: 'serverinstance', className: 'ServerInstanceEntity', errorCode: 'validation-0003' },
   })
-  isActive: boolean;
+  active: boolean;
 
   @ManyToOne(() => ServerEntity, (server) => server.serverinstances, {
     onDelete: 'NO ACTION',

@@ -7,14 +7,21 @@ import { WatchedInstanceEntity } from './watchedinstance.entity';
 
 @Entity('iteminstance')
 export class ItemInstanceEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 32, unique: true })
+  @Column({
+    type: 'varchar',
+    nullable: false,
+    length: 32,
+    unique: true,
+    name: 'item_id_from_emby_db',
+    comment: 'Identifier as stored in the Emby DB assigned to the Server',
+  })
   @IsString({
     context: { entity: 'iteminstance', className: 'ItemInstanceEntity', errorCode: 'validation-0001' },
   })
   @Length(32, 32, {
     context: { entity: 'iteminstance', className: 'ItemInstanceEntity', errorCode: 'validation-0002' },
   })
-  mediaItemIdFromEmbyDb: string;
+  itemIdFromEmbyDb: string;
 
   @ManyToOne(() => ItemEntity, (item) => item.iteminstances, {
     onDelete: 'NO ACTION',
