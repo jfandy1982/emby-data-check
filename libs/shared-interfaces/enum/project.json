@@ -1,0 +1,16 @@
+{
+  "name": "shared-interfaces-enums",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-interfaces/enum/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared-interfaces/enum/**/*.ts"]
+      }
+    }
+  },
+  "tags": ["scope:shared-interfaces"]
+}

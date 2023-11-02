@@ -13,6 +13,7 @@
     "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "@edc/api/feature-health": ["libs/api/feature-health/src/index.ts"],
@@ -22,6 +23,7 @@
       "@edc/shared-interfaces/api-interface": ["libs/shared-interfaces/api-interface/src/index.ts"],
       "@edc/shared-interfaces/db-interface": ["libs/shared-interfaces/db-interface/src/index.ts"],
       "@edc/shared-interfaces/emby-interface": ["libs/shared-interfaces/emby-interface/src/index.ts"],
+      "@edc/shared-interfaces/enums": ["libs/shared-interfaces/enum/src/index.ts"],
       "@edc/shared-util/environment": ["libs/shared-util/environment/src/index.ts"]
     }
   },
