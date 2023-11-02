@@ -12,7 +12,7 @@ enum UserRole {
 
 @Entity('user')
 export class UserEntity extends AbstractEntity {
-  @Column({ type: 'varchar', nullable: false, length: 50, unique: true })
+  @Column({ type: 'varchar', nullable: false, length: 50, unique: true, name: 'user_id', comment: 'Unique user name' })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0001' },
   })
@@ -22,18 +22,18 @@ export class UserEntity extends AbstractEntity {
   @IsLowercase({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0003' },
   })
-  username: string;
+  userId: string;
 
-  @Column({ type: 'varchar', nullable: true, length: 100 })
+  @Column({ type: 'varchar', nullable: true, length: 100, name: 'user_name', comment: 'Display Name of a user' })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0004' },
   })
   @MaxLength(100, {
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0005' },
   })
-  name: string;
+  userName: string;
 
-  @Column({ type: 'varchar', nullable: false, length: 32, select: false })
+  @Column({ type: 'varchar', nullable: false, length: 32, select: false, name: 'password', comment: 'encrypted password of a user' })
   @IsString({
     context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0006' },
   })
@@ -51,14 +51,14 @@ export class UserEntity extends AbstractEntity {
   })
   password: string;
 
-  @Column({ type: 'enum', nullable: false, enum: UserRole, default: UserRole.USER })
+  @Column({ type: 'enum', nullable: false, enum: UserRole, default: UserRole.USER, name: 'user_role', comment: 'User Role Identifier' })
   @IsEnum(
     { UserRole },
     {
       context: { entity: 'user', className: 'UserEntity', errorCode: 'validation-0010' },
     },
   )
-  role: UserRole;
+  userRole: UserRole;
 
   @OneToMany(() => UserInstanceEntity, (userinstance) => userinstance.user, {
     onDelete: 'NO ACTION',

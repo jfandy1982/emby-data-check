@@ -17,13 +17,13 @@ export abstract class AbstractEntity {
   })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', comment: 'UTC timestamp, when record was updated' })
+  @UpdateDateColumn({ nullable: true, name: 'updated_at', comment: 'UTC timestamp, when record was updated' })
   @IsDate({
     context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0004' },
   })
   changedAt: Date;
 
-  @DeleteDateColumn({ name: 'deleted_at', comment: 'UTC timestamp, when record was soft-deleted' })
+  @DeleteDateColumn({ nullable: true, select: false, name: 'deleted_at', comment: 'UTC timestamp, when record was soft-deleted' })
   @IsDate({
     context: { entity: 'abstract', className: 'AbstractEntity', errorCode: 'validation-0005' },
   })
