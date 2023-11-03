@@ -1,8 +1,9 @@
 // import { ItemType, ProviderType } from '@edc/shared-interfaces/enums';
 import { IsEnum, IsString, MaxLength } from 'class-validator';
-import { Column, Entity, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { ItemInstanceEntity } from './iteminstance.entity';
+import { TagEntity } from './tag.entity';
 
 /* Keep in sync with enum MediaItemType in lib '@edc/shared-interfaces/enums' */
 enum ItemType {
@@ -105,12 +106,23 @@ export class ItemEntity extends AbstractEntity {
   })
   path: string;
 
-  // @Column({ type: 'varchar', nullable: true, length: 2048 })
-  // customTags: string;
-
   @OneToMany(() => ItemInstanceEntity, (iteminstance) => iteminstance.item, {
     onDelete: 'NO ACTION',
     nullable: true,
   })
   iteminstances: ItemEntity[];
+
+  @ManyToMany(() => TagEntity, (tag) => tag.items, { onDelete: 'NO ACTION' })
+  @JoinTable({
+    name: 'item_tag',
+    joinColumn: {
+      name: 'uuid_tag',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'uuid_item',
+      referencedColumnName: 'id',
+    },
+  })
+  tags: TagEntity[];
 }
