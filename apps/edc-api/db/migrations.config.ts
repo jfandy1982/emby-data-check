@@ -1,13 +1,15 @@
 import { ConfigService } from '@nestjs/config';
 import { config } from 'dotenv';
-import { DataSource, DataSourceOptions } from 'typeorm';
+import { DataSource } from 'typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 config();
 
 const configService = new ConfigService();
 
-const dataSourceConfig: DataSourceOptions = {
+const dataSourceConfig: PostgresConnectionOptions = {
   type: 'postgres',
+  schema: configService.get<string>('DATABASE_SCHEMA'),
   host: configService.get<string>('DATABASE_HOST'),
   port: configService.get<number>('DATABASE_PORT'),
   username: configService.get<string>('DATABASE_USERNAME'),
