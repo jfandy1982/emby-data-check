@@ -4,7 +4,7 @@ import { AbstractEntity } from './abstract.entity';
 import { ItemInstanceEntity } from './iteminstance.entity';
 import { UserInstanceEntity } from './userinstance.entity';
 
-@Entity('watchedinstance')
+@Entity('edc_watchedinstance')
 export class WatchedInstanceEntity extends AbstractEntity {
   @Column({
     type: 'boolean',

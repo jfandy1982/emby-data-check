@@ -23,7 +23,7 @@ export enum ProviderType {
   UNKNOWN = 'Unknown',
 }
 
-@Entity('item')
+@Entity('edc_item')
 export class ItemEntity extends AbstractEntity {
   @Column({
     type: 'enum',
@@ -114,7 +114,7 @@ export class ItemEntity extends AbstractEntity {
 
   @ManyToMany(() => TagEntity, (tag) => tag.items, { onDelete: 'NO ACTION' })
   @JoinTable({
-    name: 'item_tag',
+    name: 'edc_item_tag',
     joinColumn: {
       name: 'uuid_tag',
       referencedColumnName: 'id',

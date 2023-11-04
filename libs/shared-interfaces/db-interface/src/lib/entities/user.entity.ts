@@ -10,7 +10,7 @@ enum UserRole {
   USER = 'user',
 }
 
-@Entity('user')
+@Entity('edc_user')
 export class UserEntity extends AbstractEntity {
   @Column({ type: 'varchar', nullable: false, length: 50, unique: true, name: 'user_id', comment: 'Unique user name' })
   @IsString({
