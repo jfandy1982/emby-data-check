@@ -7,8 +7,8 @@
   ],
   "license": "MIT",
   "engines": {
-    "node": "18.18.2",
-    "npm": "10.2.1"
+    "node": "20.9.0",
+    "npm": "10.1.0"
   },
   "private": true,
   "repository": {
@@ -30,6 +30,8 @@
     "cleanup:all": "npm run cleanup:generated && npm run cleanup:deps && npm install",
     "cleanup:deps": "rimraf ./package-lock.json && rimraf ./node_modules",
     "cleanup:generated": "rimraf ./angular && rimraf ./coverage && rimraf ./dist && rimraf ./.nx",
+    "cspell": "cspell --unique --words-only --config ./.github/linters/.cspell.json",
+    "cspell:trace": "cspell trace --all --config ./.github/linters/.cspell.json",
     "e2e:affected": "nx affected:e2e --parallel",
     "e2e:all": "nx run-many --target=e2e --parallel",
     "format:all": "nx format:write --all",
@@ -112,6 +114,7 @@
     "@commitlint/config-conventional": "^18.0.0",
     "@commitlint/config-nx-scopes": "^18.0.0",
     "@commitlint/cz-commitlint": "^18.0.0",
+    "@cspell/dict-de-de": "^3.0.0",
     "@eslint/eslintrc": "^2.0.0",
     "@eslint/js": "^8.0.0",
     "@nestjs/schematics": "^10.0.0",
@@ -138,6 +141,7 @@
     "@typescript-eslint/parser": "^6.0.0",
     "babel-jest": "^29.0.0",
     "commitizen": "^4.0.0",
+    "cspell": "^8.0.0",
     "cypress": "^13.0.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
