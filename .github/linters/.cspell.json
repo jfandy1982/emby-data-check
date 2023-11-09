@@ -1,44 +1,46 @@
 {
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
-  "language": "en",
-  "ignorePaths": [
-    "**/node_modules/**",
-    "**/vscode-extension/**",
-    "**/.git/**",
-    ".vscode",
-    "dist",
-    "megalinter",
-    "package-lock.json",
-    "report"
+  "dictionaries": [
+    "css",
+    "dictionary-edc",
+    "docker",
+    "en-common-misspellings",
+    "fonts",
+    "fullstack",
+    "html",
+    "html-symbol-entities",
+    "npm",
+    "sql",
+    "typescript"
   ],
-  "dictionaries": ["german", "misc", "npm", "project-words", "softwareTerms"],
   "dictionaryDefinitions": [
     {
-      "name": "project-words",
-      "path": "./project-words.txt",
-      "addWords": true
+      "addWords": true,
+      "description": "",
+      "name": "dictionary-edc",
+      "path": "./dictionary-edc.txt"
     }
   ],
-  "words": [
-    "Andreas",
-    "CODEOWNERS",
-    "commitlint",
+  "flagWords": [],
+  "ignorePaths": ["**/.git/**", ".cspell.json", "dictionary-edc.txt"],
+  "ignoreWords": [
+    "buildable",
+    "codeowners",
     "dbaeumer",
     "dkhunt",
     "dorny",
+    "dpage",
     "elgohr",
-    "esbenp",
-    "inet",
     "jfandy",
-    "nestjs",
-    "nord",
     "nrwl",
-    "oxsecurity",
-    "postgres",
-    "secretlint",
+    "pgadmin",
     "sonarcloud",
-    "stylelint",
-    "theming",
+    "stylelintrc",
     "typeorm"
-  ]
+  ],
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "language": "en-US,en-GB,de-DE",
+  "useGitignore": true,
+  "words": []
 }
