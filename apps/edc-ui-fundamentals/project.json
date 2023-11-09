@@ -87,27 +87,27 @@
     "serve": {
       "configurations": {
         "development": {
-          "browserTarget": "edc-ui-fundamentals:build:development"
+          "buildTarget": "edc-ui-fundamentals:build:development"
         },
         "test": {
-          "browserTarget": "edc-ui-fundamentals:build:test"
+          "buildTarget": "edc-ui-fundamentals:build:test"
         },
         "production": {
-          "browserTarget": "edc-ui-fundamentals:build:production"
+          "buildTarget": "edc-ui-fundamentals:build:production"
         }
       },
       "defaultConfiguration": "production",
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "browserTarget": "edc-ui-fundamentals:build",
         "port": 4201,
-        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
+        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json",
+        "buildTarget": "edc-ui-fundamentals:build"
       }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "edc-ui-fundamentals:build"
+        "buildTarget": "edc-ui-fundamentals:build"
       }
     },
     "lint": {
@@ -121,14 +121,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts",
-        "passWithNoTests": true
-      },
-      "configurations": {
-        "ci": {
-          "ci": true,
-          "codeCoverage": true
-        }
+        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts"
       }
     },
     "serve-static": {
