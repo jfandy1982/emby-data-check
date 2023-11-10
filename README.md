@@ -45,7 +45,7 @@ npm run stack:api
 
 ### edc-ui-ng
 
-Emby Data Check UI application using Angular Material design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+Emby Data Check UI application using [Angular Material](https://material.angular.io/) design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
 
 The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4200](http://localhost:4200)
 
@@ -57,7 +57,7 @@ npm run stack:ng
 
 ### edc-ui-ngx
 
-Emby Data Check UI application using SAP Fundamentals design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+Emby Data Check UI application using [SAP Fundamentals](https://sap.github.io/fundamental-ngx/) design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
 
 The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4201](http://localhost:4201)
 
@@ -69,7 +69,7 @@ npm run stack:ngx
 
 ### edc-ui-nord
 
-Emby Data Check UI application using SAP Fundamentals design system. It also spins up the REST API and connects to a PostgreSQL container executed locally.
+Emby Data Check UI application using an arctic, north-bluish color palette, the [Nord theme](https://www.nordtheme.com/). It also spins up the REST API and connects to a PostgreSQL container executed locally.
 
 The API is exposed via [http://localhost:3000/api](http://localhost:3000/api). A swagger API documentation can be reached via [http://localhost:3000/api/swagger](http://localhost:3000/api/swagger). The UI is available via [http://localhost:4202](http://localhost:4202)
 
@@ -78,6 +78,43 @@ Start this stack using the script from `package.json`:
 ```sh
 npm run stack:nord
 ```
+
+### Upgrading to newer versions
+
+As this repository is setup with Nx, upgrades for dependencies can be done using the Nx tooling itself.
+
+Start the upgrade procedure using the script from `package.json`:
+
+```sh
+npm run upgrade
+```
+
+After completion of the first step, you're asked to check the file `package.json`. Sometimes, a file `migrations.json` is generated. If it is available, you may run the second upgrade script from `package.json`:
+
+```sh
+npm run upgrade:doit
+```
+
+If the file `migrations.json` was not created, you simply run an `npm install` command.
+
+But a lot of the other dependencies are not updated automatically, but only manually.
+
+### Cleanup scripts
+
+As there are a lot of files generated or downloaded and cached, it sometimes helps to vanish these generated artifacts completed with a fresh `npm install` command. It makes sense to run this script from file `package.json`.
+
+```sh
+npm run cleanup:all
+```
+
+### Spellchecker scripts
+
+This repository enables the [cSpell](https://cspell.org/) spellchecker tool. The domain-specific words for this project are recorded in an own dictionary. But a lot of default dictionaries are configured for the validation itself. There are two relevant scripts in the file `package.json`.
+
+- Run the spell check itself: `npm run spell:check`
+- Search a word in all dictionaries: `npm run spell:search:dict [word]`
+
+The search option might identify a dictionary, which should be enabled for the project.
 
 ## License
 
