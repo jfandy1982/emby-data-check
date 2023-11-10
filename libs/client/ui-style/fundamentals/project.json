@@ -1,16 +1,9 @@
 {
   "name": "client-ui-style-fundamentals",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/client/ui-style/fundamentals/src",
   "projectType": "library",
   "targets": {
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/client/ui-style/fundamentals/**/*.ts"]
-      }
-    },
     "stylelint": {
       "executor": "nx-stylelint:lint",
       "outputs": ["{options.outputFile}"],
