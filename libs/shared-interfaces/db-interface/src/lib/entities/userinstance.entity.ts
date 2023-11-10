@@ -5,7 +5,7 @@ import { ServerInstanceEntity } from './serverinstance.entity';
 import { UserEntity } from './user.entity';
 import { WatchedInstanceEntity } from './watchedinstance.entity';
 
-@Entity('userinstance')
+@Entity('edc_userinstance')
 export class UserInstanceEntity extends AbstractEntity {
   @Column({
     type: 'varchar',

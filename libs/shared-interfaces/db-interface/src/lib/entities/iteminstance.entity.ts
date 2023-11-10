@@ -5,7 +5,7 @@ import { ItemEntity } from './item.entity';
 import { ServerInstanceEntity } from './serverinstance.entity';
 import { WatchedInstanceEntity } from './watchedinstance.entity';
 
-@Entity('iteminstance')
+@Entity('edc_iteminstance')
 export class ItemInstanceEntity extends AbstractEntity {
   @Column({
     type: 'varchar',

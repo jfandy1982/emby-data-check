@@ -2,7 +2,7 @@ import { IsString, IsUUID, MaxLength } from 'class-validator';
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { ItemEntity } from './item.entity';
 
-@Entity('tag')
+@Entity('edc_tag')
 export class TagEntity {
   @PrimaryGeneratedColumn('uuid', { name: 'uuid', comment: 'Unique Identifier for the record' })
   @IsString({

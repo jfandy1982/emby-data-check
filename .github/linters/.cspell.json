@@ -1,44 +1,61 @@
 {
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
-  "language": "en",
-  "ignorePaths": [
-    "**/node_modules/**",
-    "**/vscode-extension/**",
-    "**/.git/**",
-    ".vscode",
-    "dist",
-    "megalinter",
-    "package-lock.json",
-    "report"
+  "dictionaries": [
+    "css",
+    "dictionary-edc",
+    "docker",
+    "en-common-misspellings",
+    "fonts",
+    "fullstack",
+    "html",
+    "html-symbol-entities",
+    "lorem-ipsum",
+    "npm",
+    "sql",
+    "typescript"
   ],
-  "dictionaries": ["german", "misc", "npm", "project-words", "softwareTerms"],
   "dictionaryDefinitions": [
     {
-      "name": "project-words",
-      "path": "./project-words.txt",
-      "addWords": true
+      "addWords": true,
+      "description": "Dictionary with terms from context 'Emby Data Check' (EDC)",
+      "name": "dictionary-edc",
+      "path": "./dictionary-edc.txt"
     }
   ],
-  "words": [
-    "Andreas",
-    "CODEOWNERS",
-    "commitlint",
+  "files": ["**/{*,.*}/**/*.*"],
+  "flagWords": [],
+  "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", "dictionary-edc.txt", ".jscpd.json"],
+  "ignoreWords": [
+    "buildable",
+    "codecov",
+    "codecoverage",
+    "codeowners",
     "dbaeumer",
     "dkhunt",
+    "dockerhub",
     "dorny",
+    "dpage",
     "elgohr",
-    "esbenp",
-    "inet",
+    "healthcheck",
     "jfandy",
-    "nestjs",
+    "mattraks",
+    "megalinter",
     "nord",
     "nrwl",
     "oxsecurity",
+    "pgadmin",
     "postgres",
+    "readmefile",
     "secretlint",
     "sonarcloud",
-    "stylelint",
-    "theming",
+    "sonarsource",
+    "stylelintrc",
     "typeorm"
-  ]
+  ],
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "language": "en-US,de-DE",
+  "loadDefaultConfiguration": true,
+  "useGitignore": true,
+  "words": []
 }

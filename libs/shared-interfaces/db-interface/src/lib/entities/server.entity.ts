@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { ServerInstanceEntity } from './serverinstance.entity';
 
-@Entity('server')
+@Entity('edc_server')
 export class ServerEntity extends AbstractEntity {
   @Column({ type: 'varchar', nullable: false, length: 50, unique: true, name: 'name', comment: 'Unique server name' })
   @IsString({
