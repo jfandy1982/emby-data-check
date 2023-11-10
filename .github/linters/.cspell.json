@@ -10,6 +10,7 @@
     "fullstack",
     "html",
     "html-symbol-entities",
+    "lorem-ipsum",
     "npm",
     "sql",
     "typescript"
@@ -17,30 +18,44 @@
   "dictionaryDefinitions": [
     {
       "addWords": true,
-      "description": "",
+      "description": "Dictionary with terms from context 'Emby Data Check' (EDC)",
       "name": "dictionary-edc",
       "path": "./dictionary-edc.txt"
     }
   ],
+  "files": ["**/{*,.*}/**/*.*"],
   "flagWords": [],
-  "ignorePaths": ["**/.git/**", ".cspell.json", "dictionary-edc.txt"],
+  "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", "dictionary-edc.txt", ".jscpd.json"],
   "ignoreWords": [
     "buildable",
+    "codecov",
+    "codecoverage",
     "codeowners",
     "dbaeumer",
     "dkhunt",
+    "dockerhub",
     "dorny",
     "dpage",
     "elgohr",
+    "healthcheck",
     "jfandy",
+    "mattraks",
+    "megalinter",
+    "nord",
     "nrwl",
+    "oxsecurity",
     "pgadmin",
+    "postgres",
+    "readmefile",
+    "secretlint",
     "sonarcloud",
+    "sonarsource",
     "stylelintrc",
     "typeorm"
   ],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
-  "language": "en-US,en-GB,de-DE",
+  "language": "en-US,de-DE",
+  "loadDefaultConfiguration": true,
   "useGitignore": true,
   "words": []
 }
