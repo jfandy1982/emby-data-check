@@ -31,6 +31,7 @@
     "codecov",
     "codecoverage",
     "codeowners",
+    "commitlint",
     "dbaeumer",
     "dkhunt",
     "dockerhub",
@@ -41,7 +42,7 @@
     "jfandy",
     "mattraks",
     "megalinter",
-    "nord",
+    "nord",    
     "nrwl",
     "oxsecurity",
     "pgadmin",
@@ -51,7 +52,7 @@
     "sonarcloud",
     "sonarsource",
     "stylelintrc",
-    "typeorm"
+    "typeorm"    
   ],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
   "language": "en-US,de-DE",
