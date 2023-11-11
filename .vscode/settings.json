@@ -15,5 +15,5 @@
   "prettier.configPath": ".prettierrc",
   "prettier.prettierPath": "node_modules/prettier/index.cjs",
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "less", "postcss", "scss"],
+  "stylelint.validate": ["css", "less", "postcss", "scss"]
 }
