@@ -12,7 +12,7 @@
   "json.format.enable": false,
   "css.validate": false,
   "scss.validate": false,
-  "prettier.configPath": ".prettierrc",
+  "prettier.configPath": ".prettierrc.json",
   "prettier.prettierPath": "node_modules/prettier/index.cjs",
   "stylelint.enable": true,
   "stylelint.validate": ["css", "less", "postcss", "scss"]
