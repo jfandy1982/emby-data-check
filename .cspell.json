@@ -31,6 +31,7 @@
     "codecov",
     "codecoverage",
     "codeowners",
+    "commitlint",
     "dbaeumer",
     "dkhunt",
     "dockerhub",

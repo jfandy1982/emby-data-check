@@ -12,19 +12,8 @@
   "json.format.enable": false,
   "css.validate": false,
   "scss.validate": false,
-  "prettier.configPath": ".prettierrc",
+  "prettier.configPath": ".prettierrc.json",
   "prettier.prettierPath": "node_modules/prettier/index.cjs",
   "stylelint.enable": true,
-  "stylelint.validate": ["css", "less", "postcss", "scss"],
-  "cSpell.language": "en-US,de-DE",
-  "cSpell.useGitignore": true,
-  "cSpell.dictionaries": ["dictionary-edc", "docker", "typescript", "npm"],
-  "cSpell.customDictionaries": {
-    "dictionary-edc": {
-      "addWords": true,
-      "description": "Dictionary with terms from context 'Emby Data Check' (EDC)",
-      "name": "dictionary-edc",
-      "path": "${workspaceFolder}/.github/linters/dictionary-edc.txt"
-    }
-  }
+  "stylelint.validate": ["css", "less", "postcss", "scss"]
 }
