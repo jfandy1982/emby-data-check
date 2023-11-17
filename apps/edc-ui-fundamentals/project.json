@@ -139,6 +139,10 @@
       "options": {
         "commands": [
           {
+            "command": "npm run cleanup:cache:angular",
+            "description": "Remove Angular cache"
+          },
+          {
             "command": "docker compose down && docker compose --env-file .env up",
             "description": "Spin up the DB docker container"
           },
