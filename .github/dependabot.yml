@@ -1,5 +1,23 @@
 version: 2
 updates:
+  - package-ecosystem: 'docker'
+    directory: '/apps/**/Dockerfile'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 3
+    target-branch: 'main'
+    labels:
+      - 'dependencies'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+    open-pull-requests-limit: 3
+    target-branch: 'main'
+    labels:
+      - 'dependencies'
+
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:
@@ -22,12 +40,3 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
-
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    schedule:
-      interval: 'monthly'
-    open-pull-requests-limit: 3
-    target-branch: 'main'
-    labels:
-      - 'dependencies'
