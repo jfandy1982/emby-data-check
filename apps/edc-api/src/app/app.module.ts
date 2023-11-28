@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { ServerFeatureHealthModule } from '@edc/api/feature-health';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AppConfig, DatabaseConfig } from './config';
@@ -22,7 +21,6 @@ import { AppConfig, DatabaseConfig } from './config';
       }),
       inject: [ConfigService],
     }),
-    ServerFeatureHealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
