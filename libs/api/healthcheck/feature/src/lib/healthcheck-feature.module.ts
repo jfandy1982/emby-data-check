@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
+import { TerminusModule } from '@nestjs/terminus';
 import { HealthcheckFeatureController } from './healthcheck-feature.controller';
-import { HealthcheckFeatureService } from './healthcheck-feature.service';
 
 @Module({
+  imports: [TerminusModule],
   controllers: [HealthcheckFeatureController],
-  providers: [HealthcheckFeatureService],
-  exports: [HealthcheckFeatureService],
+  providers: [],
+  exports: [],
 })
 export class HealthcheckFeatureModule {}
