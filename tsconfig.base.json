@@ -16,6 +16,11 @@
     "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
+      "@edc/api/healthcheck/feature": ["libs/api/healthcheck/feature/src/index.ts"],
+      "@edc/api/server-edc/data-access": ["libs/api/server-edc/data-access/src/index.ts"],
+      "@edc/api/server-edc/feature": ["libs/api/server-edc/feature/src/index.ts"],
+      "@edc/api/server-emby/data-access": ["libs/api/server-emby/data-access/src/index.ts"],
+      "@edc/api/server-emby/feature": ["libs/api/server-emby/feature/src/index.ts"],
       "@edc/client/ui-style-fundamentals": ["libs/client/ui-style/fundamentals/src/index.ts"],
       "@edc/client/ui-style-ng": ["libs/client/ui-style/ng/src/index.ts"],
       "@edc/client/ui-style-nord": ["libs/client/ui-style/nord/src/index.ts"],
