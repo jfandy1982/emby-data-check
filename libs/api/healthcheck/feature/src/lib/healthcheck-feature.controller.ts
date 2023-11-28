@@ -1,7 +1,9 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs/terminus';
 
-@Controller('healthcheck-feature')
+@ApiTags('health')
+@Controller({ path: 'health' })
 export class HealthcheckFeatureController {
   constructor(
     private health: HealthCheckService,
