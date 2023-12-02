@@ -4,7 +4,7 @@ import { HealthCheck, HealthCheckService, TypeOrmHealthIndicator } from '@nestjs
 
 @ApiTags('health')
 @Controller({ path: 'health' })
-export class ServerFeatureHealthController {
+export class HealthcheckFeatureController {
   constructor(
     private health: HealthCheckService,
     private db: TypeOrmHealthIndicator,

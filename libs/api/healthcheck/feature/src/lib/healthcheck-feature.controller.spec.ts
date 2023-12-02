@@ -1,9 +1,9 @@
 import { LoggerService } from '@nestjs/common';
 import { TerminusModule, TypeOrmHealthIndicator } from '@nestjs/terminus';
+import { HealthCheckExecutor } from '@nestjs/terminus/dist/health-check/health-check-executor.service';
 import { TERMINUS_LOGGER } from '@nestjs/terminus/dist/health-check/logger/logger.provider';
 import { Test } from '@nestjs/testing';
-import { ServerFeatureHealthController } from './server-feature-health.controller';
-import { HealthCheckExecutor } from '@nestjs/terminus/dist/health-check/health-check-executor.service';
+import { HealthcheckFeatureController } from './healthcheck-feature.controller';
 
 const loggerMock: Partial<LoggerService> = {
   log: jest.fn(),
@@ -16,8 +16,8 @@ const healthCheckExecutorMock: Partial<HealthCheckExecutor> = {
   execute: jest.fn(),
 };
 
-describe('ServerFeatureHealthController', () => {
-  let controller: ServerFeatureHealthController;
+describe('HealthcheckFeatureController', () => {
+  let controller: HealthcheckFeatureController;
 
   beforeEach(async () => {
     const module = await Test.createTestingModule({
@@ -34,10 +34,10 @@ describe('ServerFeatureHealthController', () => {
           useValue: loggerMock,
         },
       ],
-      controllers: [ServerFeatureHealthController],
+      controllers: [HealthcheckFeatureController],
     }).compile();
 
-    controller = module.get(ServerFeatureHealthController);
+    controller = module.get(HealthcheckFeatureController);
   });
 
   it('should be defined', () => {
