@@ -40,3 +40,10 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      sap-fundamentals:
+        patterns:
+          - '@fundamental-ngx*'
+          - '@sap-theming*'
+        update-types:
+          - 'minor'
+          - 'patch'
