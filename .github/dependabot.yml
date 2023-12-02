@@ -44,6 +44,14 @@ updates:
         patterns:
           - '@fundamental-ngx*'
           - '@sap-theming*'
+          - 'fundamental-styles'
+        update-types:
+          - 'minor'
+          - 'patch'
+      secretlint:
+        patterns:
+          - '@secretlint*'
+          - 'secretlint'
         update-types:
           - 'minor'
           - 'patch'
