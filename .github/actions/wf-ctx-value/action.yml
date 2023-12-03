@@ -25,6 +25,7 @@ runs:
   using: 'composite'
   steps:
     - name: 'Print some github context values (temp.)'
+      shell: bash
       run: |
         echo "gh-context=${{ github }}" >> $GITHUB_OUTPUT
     - name: 'Derive appropriate SHAs'
