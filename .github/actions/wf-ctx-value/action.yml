@@ -31,7 +31,6 @@ runs:
       id: get-shas
       uses: nrwl/nx-set-shas@v3
       env:
-        NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
         MAIN_BRANCH_NAME: ${{ inputs.main-branch-name }}
       with:
         error-on-no-successful-workflow: false
