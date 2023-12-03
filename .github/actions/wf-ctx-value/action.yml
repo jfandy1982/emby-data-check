@@ -29,10 +29,13 @@ runs:
       uses: nrwl/nx-set-shas@v3
       env:
         MAIN_BRANCH_NAME: ${{ inputs.main-branch-name }}
+        NX_BRANCH: ${{ github.event.number || github.ref_name }}
       with:
+        error-on-no-successful-workflow: false
+        last-successful-event: push
         main-branch-name: ${{ env.MAIN_BRANCH_NAME }}
-        set-environment-variables-for-job: false
-
+        set-environment-variables-for-job: true
+        working-directory: .
     - name: 'Is it a `Merge`-request?'
       id: is-merge
       shell: bash
