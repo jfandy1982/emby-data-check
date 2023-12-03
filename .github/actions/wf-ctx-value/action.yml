@@ -24,15 +24,21 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: 'Print some github context values (temp.)'
+      run: |
+        echo ${{ github }}
     - name: 'Derive appropriate SHAs'
       id: get-shas
       uses: nrwl/nx-set-shas@v3
       env:
+        NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
         MAIN_BRANCH_NAME: ${{ inputs.main-branch-name }}
       with:
+        error-on-no-successful-workflow: false
+        last-successful-event: push
         main-branch-name: ${{ env.MAIN_BRANCH_NAME }}
-        set-environment-variables-for-job: false
-
+        set-environment-variables-for-job: true
+        working-directory: .
     - name: 'Is it a `Merge`-request?'
       id: is-merge
       shell: bash
