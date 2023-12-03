@@ -24,15 +24,12 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: 'Print some github context values (temp.)'
-      shell: bash
-      run: |
-        echo "gh-context=${{ github }}" >> $GITHUB_OUTPUT
     - name: 'Derive appropriate SHAs'
       id: get-shas
       uses: nrwl/nx-set-shas@v3
       env:
         MAIN_BRANCH_NAME: ${{ inputs.main-branch-name }}
+        NX_BRANCH: ${{ github.event.number || github.ref_name }}
       with:
         error-on-no-successful-workflow: false
         last-successful-event: push
