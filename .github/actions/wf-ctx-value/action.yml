@@ -26,7 +26,7 @@ runs:
   steps:
     - name: 'Print some github context values (temp.)'
       run: |
-        echo ${{ github }}
+        echo "gh-context=${{ github }}" >> $GITHUB_OUTPUT
     - name: 'Derive appropriate SHAs'
       id: get-shas
       uses: nrwl/nx-set-shas@v3
