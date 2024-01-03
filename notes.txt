@@ -1,0 +1,16 @@
+// Metadaten für Foreign Keys und Tabellen? Ist das möglich?
+// DB SCHEMA not created during migration ->
+// - ABER: die Migrationsskripte berücksichtigen bei postgres das gewünschte Schema nicht gut genug. Da scheint Nacharbeit erforderlich zu sein...
+// => Lösung gefunden... Die Migrationsscripts immer auf einem anderen Schema als 'public' ausführen. Dann bekommt man den Schema-Identifier mit rein generiert und kann das durch die Variable ersetzen.
+
+
+
+
+
+CREATE USER $DATABASE_USERNAME IF NOT EXISTS;
+CREATE DATABASE $DATABASE_NAME IF NOT EXISTS;
+CREATE SCHEMA $DATABASE_SCHEMA IF NOT EXISTS;
+GRANT ALL PRIVILEGES ON DATABASE $DATABASE_NAME TO $DATABASE_USERNAME;
+GRANT ALL PRIVILEGES ON SCHEMA $DATABASE_SCHEMA TO $DATABASE_USERNAME;
+
+
