@@ -119,7 +119,7 @@
     "@commitlint/cz-commitlint": "^18.0.0",
     "@cspell/dict-de-de": "^3.0.0",
     "@eslint/eslintrc": "^2.0.0",
-    "@eslint/js": "8.55.0",
+    "@eslint/js": "^8.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
     "@nx/cypress": "17.2.8",
