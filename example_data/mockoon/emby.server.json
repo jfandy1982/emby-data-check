@@ -1,0 +1,418 @@
+{
+  "uuid": "751d42b2-a2b6-4ebc-9353-bb009e198b9f",
+  "lastMigration": 32,
+  "name": "Emby Server",
+  "endpointPrefix": "emby",
+  "latency": 0,
+  "port": 8096,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "5d4f64d0-6525-40c2-9b16-6801d561249d",
+      "type": "http",
+      "documentation": "Get Public System Info of Emby Server 'Zugspitze'",
+      "method": "get",
+      "endpoint": "System/Info/Public",
+      "responses": [
+        {
+          "uuid": "fed72de3-c086-4d16-84cd-da2cb9273a86",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "fd4r",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "75779130-96c5-4006-9e89-269b8a65b8b7",
+      "type": "http",
+      "documentation": "Get a list of Emby Users",
+      "method": "get",
+      "endpoint": "Users",
+      "responses": [
+        {
+          "uuid": "541aaba8-62ac-4e0e-9a9e-af7fc86b7437",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Available Emby Users",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "m75s",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fb3c1329-3079-4d9d-b6ce-243921038f39",
+          "body": "Access token is invalid or expired.",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "API Access Key is missing",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "text/html"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "cfe25a70-2b85-42b3-8f4b-cfa97d2cd654",
+      "type": "http",
+      "documentation": "Get a list of recorded Items",
+      "method": "get",
+      "endpoint": "Items",
+      "responses": [
+        {
+          "uuid": "1dc89827-aac2-4440-8be1-4990d953907f",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Available Emby Items for checking the meta data status",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "erfu",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "Recursive",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "IsMissing",
+              "value": "false",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "EnableImages",
+              "value": "false",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "d88a760d-cc9d-48dd-987c-baa4f8aecf6d",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "All items watched by Emby User ID b0000000000000000000000000000001",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "fu06",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "Recursive",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "IsPlayed",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "UserId",
+              "value": "b0000000000000000000000000000001",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e1bc5da6-4afc-4c9b-a190-858148ffea45",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Missing Emby Items",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "7cuo",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "Recursive",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "IsMissing",
+              "value": "true",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "query",
+              "modifier": "EnableImages",
+              "value": "false",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "27b5e72d-9e4a-4f12-9b28-3c0756f0ecc5",
+          "body": "Access token is invalid or expired.",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "No authorization",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "text/html"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "api_key",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "fabc1fda-8136-4dcc-aec1-115019e02ad8",
+          "body": "{\n    \"Items\": [],\n    \"TotalRecordCount\": 0\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Empty Response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "5d4f64d0-6525-40c2-9b16-6801d561249d"
+    },
+    {
+      "type": "route",
+      "uuid": "75779130-96c5-4006-9e89-269b8a65b8b7"
+    },
+    {
+      "type": "route",
+      "uuid": "cfe25a70-2b85-42b3-8f4b-cfa97d2cd654"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "2794eaef-e30c-48b1-9ec2-9647972f95b6",
+      "id": "fd4r",
+      "name": "Emby Server 'Zugspitze'",
+      "documentation": "Static Emby Server Definition",
+      "value": "{\n    \"LocalAddress\": \"http://127.0.0.1:8096\",\n    \"ServerName\": \"zugspitze\",\n    \"Id\": \"a0000000000000000000000000000001\"\n}"
+    },
+    {
+      "uuid": "9a43afff-696c-40d3-a5ca-0b80edaa2e81",
+      "id": "m75s",
+      "name": "Emby Users",
+      "documentation": "Existing Emby Users for static Emby Server",
+      "value": "[\n    {\n      \"Id\": \"b0000000000000000000000000000001\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Name\": \"{{faker 'person.firstName'}}\",\n      \"LastLoginDate\": \"{{faker 'date.past'}}\",\n      \"LastActivityDate\": \"{{faker 'date.past'}}\",\n    },\n    {\n      \"Id\": \"b0000000000000000000000000000002\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Name\": \"{{faker 'person.firstName'}}\",\n      \"LastLoginDate\": \"{{faker 'date.past'}}\",\n      \"LastActivityDate\": \"{{faker 'date.past'}}\",\n    }    \n]"
+    },
+    {
+      "uuid": "f7135980-21f8-4196-b0f4-7ae470219f76",
+      "id": "erfu",
+      "name": "Emby existing Items",
+      "documentation": "Existing Items with all relevant attributes",
+      "value": "{\n  \"Items\": [\n    {\n      \"Name\": \"Airspeed - Rettung in letzter Sekunde\",\n      \"OriginalTitle\": \"Airspeed\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"29\",\n      \"SortName\": \"airspeed  rettung in letzter sekunde\",\n      \"ExternalUrls\": [\n        {\n          \"Name\": \"IMDb\",\n          \"Url\": \"https://www.imdb.com/title/tt0171049\"\n        },\n        {\n          \"Name\": \"TheMovieDb\",\n          \"Url\": \"https://www.themoviedb.org/movie/19568\"\n        },\n        {\n          \"Name\": \"Trakt\",\n          \"Url\": \"https://trakt.tv/movies/tt0171049\"\n        }\n      ],\n      \"Path\": \"\\\\\\\\127.0.0.1\\\\filme\\\\Airspeed_-_Rettung_in_letzter_Sekunde_(1998)\\\\Airspeed_-_Rettung_in_letzter_Sekunde_(1998).mp4\",\n      \"Taglines\": [],\n      \"ProviderIds\": {\n        \"Tmdb\": \"19568\",\n        \"Imdb\": \"tt0171049\"\n      },\n      \"IsFolder\": false,\n      \"Type\": \"Movie\",\n      \"TagItems\": [],\n      \"Tags\": [],\n      \"MediaType\": \"Video\"\n    },\n    {\n      \"Name\": \"Gefangen\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"37948\",\n      \"SortName\": \"019 - 0003 - Gefangen\",\n      \"ExternalUrls\": [\n        {\n          \"Name\": \"IMDb\",\n          \"Url\": \"https://www.imdb.com/title/tt11687612\"\n        },\n        {\n          \"Name\": \"TheTVDB\",\n          \"Url\": \"https://thetvdb.com/?tab=episode&id=7590279\"\n        }\n      ],\n      \"Path\": \"\\\\\\\\127.0.0.1\\\\serien\\\\Soko_Kitzbuehel\\\\Soko_Kitzbuehel.S19.E03.mp4\",\n      \"Taglines\": [],\n      \"ProviderIds\": {\n        \"Tvdb\": \"7590279\",\n        \"Imdb\": \"tt11687612\"\n      },\n      \"IsFolder\": false,\n      \"ParentId\": \"33570\",\n      \"Type\": \"Episode\",\n      \"TagItems\": [],\n      \"SeriesName\": \"SOKO Kitzbühel\",\n      \"SeriesId\": \"3732\",\n      \"SeasonId\": \"33570\",\n      \"Tags\": [],\n      \"SeasonName\": \"Staffel 19\",\n      \"MediaType\": \"Video\"\n    },    \n    {\n      \"Name\": \"Staffel 19\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"33570\",\n      \"SortName\": \"0019\",\n      \"ExternalUrls\": [],\n      \"Taglines\": [],\n      \"IndexNumber\": 19,\n      \"ProviderIds\": {},\n      \"IsFolder\": true,\n      \"ParentId\": \"3732\",\n      \"Type\": \"Season\",\n      \"TagItems\": [],\n      \"SeriesName\": \"SOKO Kitzbühel\",\n      \"SeriesId\": \"3732\",\n      \"Tags\": []\n    },\n    {\n      \"Name\": \"SOKO Kitzbühel\",\n      \"OriginalTitle\": \"SOKO Kitzbühel\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"3732\",\n      \"SortName\": \"soko kitzbuhel\",\n      \"ExternalUrls\": [\n        {\n          \"Name\": \"IMDb\",\n          \"Url\": \"https://www.imdb.com/title/tt0295620\"\n        },\n        {\n          \"Name\": \"TheMovieDb\",\n          \"Url\": \"https://www.themoviedb.org/tv/41451\"\n        },\n        {\n          \"Name\": \"TheTVDB\",\n          \"Url\": \"https://thetvdb.com/?tab=series&id=101241\"\n        },\n        {\n          \"Name\": \"Trakt\",\n          \"Url\": \"https://trakt.tv/shows/tt0295620\"\n        }\n      ],\n      \"Path\": \"\\\\\\\\127.0.0.1\\\\serien\\\\Soko_Kitzbuehel\",\n      \"Taglines\": [],\n      \"ProviderIds\": {\n        \"Tmdb\": \"41451\",\n        \"Tvdb\": \"101241\",\n        \"Imdb\": \"tt0295620\"\n      },\n      \"IsFolder\": true,\n      \"ParentId\": \"18\",\n      \"Type\": \"Series\",\n      \"TagItems\": [],\n      \"Tags\": []\n    },\n    {\n      \"Name\": \"{{faker 'lorem.sentence' 10}}\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"10905\",\n      \"SortName\": \"{{faker 'lorem.sentence' 10}}\",\n      \"ExternalUrls\": [\n        {\n          \"Name\": \"IMDb\",\n          \"Url\": \"https://www.imdb.com/title/tt0167034\"\n        },\n        {\n          \"Name\": \"TheMovieDb\",\n          \"Url\": \"https://www.themoviedb.org/movie/303807\"\n        }\n      ],\n      \"Path\": \"\\\\\\\\127.0.0.1\\\\music\\\\Bee_Gees_One_For_All_Tour_Live_(1991)\\\\Bee_Gees_One_For_All_Tour_Live_(1991).mp4\",\n      \"Taglines\": [],\n      \"ProviderIds\": {\n        \"Tmdb\": \"303807\",\n        \"Imdb\": \"tt0167034\"\n      },\n      \"IsFolder\": false,\n      \"ParentId\": \"21\",\n      \"Type\": \"MusicVideo\",\n      \"TagItems\": [],\n      \"Tags\": [],\n      \"MediaType\": \"Video\"\n    },\n    {\n      \"Name\": \"An interesting presentation\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"13807\",\n      \"SortName\": \"an interesting presentation\",\n      \"ExternalUrls\": [],\n      \"Path\": \"\\\\\\\\127.0.0.1\\\\video\\\\private_videos\\\\An_interesting_presentation_(2018)\\\\An_interesting_presentation_(2018).mp4\",\n      \"Taglines\": [\n        \"{{faker 'lorem.sentence' 50}}\"\n      ],\n      \"ProductionYear\": 2018,\n      \"IsFolder\": false,\n      \"ParentId\": \"26\",\n      \"Type\": \"Video\",\n      \"TagItems\": [\n        {\n          \"Name\": \"Vortrag\",\n          \"Id\": 13808\n        }\n      ],\n      \"Tags\": [],\n      \"MediaType\": \"Video\"\n    },\n    {\n      \"Name\": \"Vortrag\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"13808\",\n      \"SortName\": \"vortrag\",\n      \"Type\": \"Tag\"\n    }\n  ],\n  \"TotalRecordCount\": 7\n}"
+    },
+    {
+      "uuid": "e164824d-af05-4d23-ab1a-2e7cd75a0fb2",
+      "id": "7cuo",
+      "name": "Emby missing items",
+      "documentation": "Missing Items (Seasons, Episodes) with all relevant attributes",
+      "value": "{\n  \"Items\": [\n    {\n      \"Name\": \"Staffel 5\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"68039\",\n      \"SortName\": \"0005\",\n      \"ExternalUrls\": [],\n      \"IndexNumber\": 5,\n      \"IsFolder\": true,\n      \"Type\": \"Season\",\n      \"SeriesName\": \"SOKO Kitzbühel\",\n      \"SeriesId\": \"3732\"\n    },\n    {\n      \"Name\": \"Episode 2\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"49033\",\n      \"SortName\": \"013 - 0002 - Episode 2\",\n      \"ExternalUrls\": [],\n      \"IndexNumber\": 2,\n      \"ParentIndexNumber\": 13,\n      \"IsFolder\": false,\n      \"Type\": \"Episode\",\n      \"SeriesName\": \"SOKO Kitzbühel\",\n      \"SeriesId\": \"3732\",\n      \"SeasonId\": \"13619\",\n      \"SeasonName\": \"Staffel 13\",\n      \"LocationType\": \"Virtual\",\n      \"MediaType\": \"Video\"\n    }\n  ],\n  \"TotalRecordCount\": 2\n}\n"
+    },
+    {
+      "uuid": "79a9be5c-427d-4b5a-926c-4fe57f29ffac",
+      "id": "fu06",
+      "name": "Emby watched items (User b0000000000000000000000000000001)",
+      "documentation": "Watched items for a defined Emby User",
+      "value": "{\n  \"Items\": [\n    {\n      \"Name\": \"An interesting presentation\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"13807\",\n      \"IsFolder\": false,\n      \"Type\": \"Video\",\n      \"UserData\": {\n        \"LastPlayedDate\": \"{{faker 'date.past'}}\",\n        \"Played\": true\n      },\n      \"MediaType\": \"Video\"\n    },\n    {\n      \"Name\": \"Gefangen\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"37948\",\n      \"IndexNumber\": 19,\n      \"IsFolder\": false,\n      \"Type\": \"Episode\",\n      \"UserData\": {\n        \"LastPlayedDate\": \"{{faker 'date.past'}}\",\n        \"Played\": true\n      },\n      \"SeriesName\": \"SOKO Kitzbühel\",\n      \"SeriesId\": \"3732\",\n      \"SeasonId\": \"33570\",\n      \"SeasonName\": \"Staffel 19\",\n      \"MediaType\": \"Video\"\n    },\n    {\n      \"Name\": \"Airspeed - Rettung in letzter Sekunde\",\n      \"ServerId\": \"a0000000000000000000000000000001\",\n      \"Id\": \"29\",\n      \"IsFolder\": false,\n      \"Type\": \"Movie\",\n      \"UserData\": {\n        \"LastPlayedDate\": \"{{faker 'date.past'}}\",\n        \"Played\": true\n      },\n      \"MediaType\": \"Video\"\n    }\n  ],\n  \"TotalRecordCount\": 3\n}"
+    }
+  ],
+  "callbacks": []
+}
