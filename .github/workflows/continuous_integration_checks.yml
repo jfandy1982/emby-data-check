@@ -139,7 +139,7 @@ jobs:
           fetch-depth: 0
 
       - name: 'Run static code checks on `sonarcloud.io`'
-        uses: sonarsource/sonarcloud-github-action@v1.9
+        uses: sonarsource/sonarcloud-github-action@v2.1
         if: env.IS_PR == 'true' || env.IS_MERGE == 'true'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
