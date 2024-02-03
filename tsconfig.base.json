@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "hugo-test-nest-lib": ["libs/hugo-test-nest-lib/src/index.ts"],
+      "hugo-test-node-library": ["libs/hugo-test/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

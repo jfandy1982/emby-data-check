@@ -1,0 +1,8 @@
+{
+  "name": "hugo-test-node-library",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/hugo-test/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:hugo"]
+}
