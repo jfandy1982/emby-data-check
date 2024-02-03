@@ -44,3 +44,6 @@ Thumbs.db
 # project-specific settings
 megalinter-reports/
 notes.txt
+
+
+storybook-static
