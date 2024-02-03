@@ -33,6 +33,10 @@
     "prepare": "husky",
     "spell:check": "cspell lint --dot --show-suggestions --no-progress --config ./.cspell.json",
     "spell:search:dict": "cspell trace --all --config ./.cspell.json",
+    "stack:api": "nx run edc-api:stack",
+    "stack:ng": "nx run edc-ui-ng:stack",
+    "stack:ngx": "nx run edc-ui-fundamentals:stack",
+    "stack:nord": "nx run edc-ui-nord:stack",
     "upgrade": "nx migrate latest --interactive",
     "upgrade:doit": "npm install && nx migrate --run-migrations"
   },
@@ -102,6 +106,7 @@
     "storybook": "^7.0.0",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.0.0",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "wait-on": "^7.0.0"
   }
 }
