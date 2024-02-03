@@ -1,0 +1,83 @@
+{
+  "name": "edc-ui-fundamentals",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "edc-fundamentals",
+  "sourceRoot": "apps/edc-ui-fundamentals/src",
+  "tags": ["type:app", "scope:ui", "ui:fundamentals"],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/edc-ui-fundamentals",
+        "index": "apps/edc-ui-fundamentals/src/index.html",
+        "browser": "apps/edc-ui-fundamentals/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
+        "styles": ["apps/edc-ui-fundamentals/src/styles.scss"],
+        "scripts": [],
+        "server": "apps/edc-ui-fundamentals/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/edc-ui-fundamentals/server.ts"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4201,
+        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "edc-ui-fundamentals:build:production"
+        },
+        "development": {
+          "buildTarget": "edc-ui-fundamentals:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "edc-ui-fundamentals:build"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "edc-ui-fundamentals:build",
+        "port": 4201,
+        "staticFilePath": "dist/apps/edc-ui-fundamentals/browser"
+      }
+    }
+  }
+}
