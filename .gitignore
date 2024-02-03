@@ -40,3 +40,7 @@ Thumbs.db
 
 .nx/cache
 .angular
+
+# project-specific definitions
+megalinter-reports
+notes.txt
