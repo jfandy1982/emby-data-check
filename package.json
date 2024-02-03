@@ -21,6 +21,8 @@
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "scripts": {
+    "format:check": "nx format:check --all",
+    "format:write": "nx format:write --all",
     "ng": "nx",
     "nx": "nx",
     "prepare": "husky",
@@ -81,7 +83,7 @@
     "jest-preset-angular": "^14.0.0",
     "jsonc-eslint-parser": "^2.0.0",
     "nx": "18.0.0",
-    "prettier": "^3.0.0",
+    "prettier": "^2.0.0",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.0.0",
     "typescript": "5.3.3"
