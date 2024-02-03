@@ -1,0 +1,24 @@
+{
+  "name": "edc-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/edc-api/src",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "edc-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "edc-api:build:development"
+        },
+        "production": {
+          "buildTarget": "edc-api:build:production"
+        }
+      }
+    }
+  },
+  "tags": ["type:app", "scope:api"]
+}
