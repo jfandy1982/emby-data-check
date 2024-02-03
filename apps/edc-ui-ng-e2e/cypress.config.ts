@@ -7,10 +7,10 @@ export default defineConfig({
     ...nxE2EPreset(__filename, {
       cypressDir: 'src',
       webServerCommands: {
-        default: 'nx run edc-ng-ui:serve:development',
-        production: 'nx run edc-ng-ui:serve:production',
+        default: 'nx run edc-ui-ng:serve:development',
+        production: 'nx run edc-ui-ng:serve:production',
       },
-      ciWebServerCommand: 'nx run edc-ng-ui:serve-static',
+      ciWebServerCommand: 'nx run edc-ui-ng:serve-static',
     }),
     baseUrl: 'http://localhost:4200',
   },

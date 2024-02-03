@@ -15,13 +15,13 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome edc-ng-ui'
+      'Welcome edc-ui-ng'
     );
   });
 
-  it(`should have as title 'edc-ng-ui'`, () => {
+  it(`should have as title 'edc-ui-ng'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('edc-ng-ui');
+    expect(app.title).toEqual('edc-ui-ng');
   });
 });

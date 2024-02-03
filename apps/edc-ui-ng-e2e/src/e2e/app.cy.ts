@@ -1,6 +1,6 @@
 import { getGreeting } from '../support/app.po';
 
-describe('edc-ng-ui-e2e', () => {
+describe('edc-ui-ng-e2e', () => {
   beforeEach(() => cy.visit('/'));
 
   it('should display welcome message', () => {

@@ -1,26 +1,26 @@
 {
-  "name": "edc-ng-ui",
+  "name": "edc-ui-ng",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "emby-data-check",
-  "sourceRoot": "apps/edc-ng-ui/src",
+  "sourceRoot": "apps/edc-ui-ng/src",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/edc-ng-ui/browser",
-        "index": "apps/edc-ng-ui/src/index.html",
-        "main": "apps/edc-ng-ui/src/main.ts",
+        "outputPath": "dist/apps/edc-ui-ng/browser",
+        "index": "apps/edc-ui-ng/src/index.html",
+        "main": "apps/edc-ui-ng/src/main.ts",
         "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ng-ui/tsconfig.app.json",
+        "tsConfig": "apps/edc-ui-ng/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/edc-ng-ui/src/favicon.ico",
-          "apps/edc-ng-ui/src/assets"
+          "apps/edc-ui-ng/src/favicon.ico",
+          "apps/edc-ui-ng/src/assets"
         ],
-        "styles": ["apps/edc-ng-ui/src/styles.scss"],
+        "styles": ["apps/edc-ui-ng/src/styles.scss"],
         "scripts": []
       },
       "configurations": {
@@ -54,10 +54,10 @@
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
         "production": {
-          "buildTarget": "edc-ng-ui:build:production"
+          "buildTarget": "edc-ui-ng:build:production"
         },
         "development": {
-          "buildTarget": "edc-ng-ui:build:development"
+          "buildTarget": "edc-ui-ng:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -65,22 +65,22 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "edc-ng-ui:build"
+        "buildTarget": "edc-ui-ng:build"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
-        "buildTarget": "edc-ng-ui:build"
+        "buildTarget": "edc-ui-ng:build"
       }
     },
     "server": {
       "dependsOn": ["build"],
       "executor": "@angular-devkit/build-angular:server",
       "options": {
-        "outputPath": "dist/apps/edc-ng-ui/server",
-        "main": "apps/edc-ng-ui/server.ts",
-        "tsConfig": "apps/edc-ng-ui/tsconfig.server.json",
+        "outputPath": "dist/apps/edc-ui-ng/server",
+        "main": "apps/edc-ui-ng/server.ts",
+        "tsConfig": "apps/edc-ui-ng/tsconfig.server.json",
         "inlineStyleLanguage": "scss"
       },
       "configurations": {
@@ -101,12 +101,12 @@
       "executor": "@angular-devkit/build-angular:ssr-dev-server",
       "configurations": {
         "development": {
-          "browserTarget": "edc-ng-ui:build:development",
-          "serverTarget": "edc-ng-ui:server:development"
+          "browserTarget": "edc-ui-ng:build:development",
+          "serverTarget": "edc-ui-ng:server:development"
         },
         "production": {
-          "browserTarget": "edc-ng-ui:build:production",
-          "serverTarget": "edc-ng-ui:server:production"
+          "browserTarget": "edc-ui-ng:build:production",
+          "serverTarget": "edc-ui-ng:server:production"
         }
       },
       "defaultConfiguration": "development"
@@ -118,12 +118,12 @@
       },
       "configurations": {
         "development": {
-          "browserTarget": "edc-ng-ui:build:development",
-          "serverTarget": "edc-ng-ui:server:development"
+          "browserTarget": "edc-ui-ng:build:development",
+          "serverTarget": "edc-ui-ng:server:development"
         },
         "production": {
-          "browserTarget": "edc-ng-ui:build:production",
-          "serverTarget": "edc-ng-ui:server:production"
+          "browserTarget": "edc-ui-ng:build:production",
+          "serverTarget": "edc-ui-ng:server:production"
         }
       },
       "defaultConfiguration": "production"
