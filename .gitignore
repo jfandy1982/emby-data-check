@@ -40,10 +40,8 @@ Thumbs.db
 
 .nx/cache
 .angular
+storybook-static
 
 # project-specific settings
 megalinter-reports/
 notes.txt
-
-
-storybook-static
