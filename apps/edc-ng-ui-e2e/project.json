@@ -1,0 +1,9 @@
+{
+  "name": "edc-ng-ui-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/edc-ng-ui-e2e/src",
+  "targets": {},
+  "tags": [],
+  "implicitDependencies": ["edc-ng-ui"]
+}

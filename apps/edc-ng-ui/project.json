@@ -1,0 +1,132 @@
+{
+  "name": "edc-ng-ui",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "emby-data-check",
+  "sourceRoot": "apps/edc-ng-ui/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/edc-ng-ui/browser",
+        "index": "apps/edc-ng-ui/src/index.html",
+        "main": "apps/edc-ng-ui/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/edc-ng-ui/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/edc-ng-ui/src/favicon.ico",
+          "apps/edc-ng-ui/src/assets"
+        ],
+        "styles": ["apps/edc-ng-ui/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "edc-ng-ui:build:production"
+        },
+        "development": {
+          "buildTarget": "edc-ng-ui:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "edc-ng-ui:build"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "edc-ng-ui:build"
+      }
+    },
+    "server": {
+      "dependsOn": ["build"],
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/apps/edc-ng-ui/server",
+        "main": "apps/edc-ng-ui/server.ts",
+        "tsConfig": "apps/edc-ng-ui/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false,
+          "vendorChunk": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@angular-devkit/build-angular:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "edc-ng-ui:build:development",
+          "serverTarget": "edc-ng-ui:server:development"
+        },
+        "production": {
+          "browserTarget": "edc-ng-ui:build:production",
+          "serverTarget": "edc-ng-ui:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@angular-devkit/build-angular:prerender",
+      "options": {
+        "routes": ["/"]
+      },
+      "configurations": {
+        "development": {
+          "browserTarget": "edc-ng-ui:build:development",
+          "serverTarget": "edc-ng-ui:server:development"
+        },
+        "production": {
+          "browserTarget": "edc-ng-ui:build:production",
+          "serverTarget": "edc-ng-ui:server:production"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}
