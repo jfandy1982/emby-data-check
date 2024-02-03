@@ -14,9 +14,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(
-      'Welcome edc-ui-ng'
-    );
+    expect(compiled.querySelector('h1')?.textContent).toContain('Welcome edc-ui-ng');
   });
 
   it(`should have as title 'edc-ui-ng'`, () => {

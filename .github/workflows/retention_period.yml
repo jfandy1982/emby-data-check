@@ -1,32 +1,32 @@
-name: Garbage Collection	
+name: Garbage Collection
 
-on:	
-  schedule:	
-    - cron: '04 03 * * 1'	
+on:
+  schedule:
+    - cron: '04 03 * * 1'
 
-  workflow_dispatch:	
-    inputs:	
-      days:	
-        description: 'Retention Period (in days)'	
-        required: true	
-        default: '30'	
+  workflow_dispatch:
+    inputs:
+      days:
+        description: 'Retention Period (in days)'
+        required: true
+        default: '30'
 
-permissions:	
-  actions: write	
+permissions:
+  actions: write
 
-jobs:	
-  del_runs:	
-    runs-on: ubuntu-latest	
-    steps:	
-      - name: 'Delete outdated workflow runs'	
-        uses: Mattraks/delete-workflow-runs@v2	
+jobs:
+  del_runs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Delete outdated workflow runs'
+        uses: Mattraks/delete-workflow-runs@v2
 
-        env:	
-          GITHUB_REPOSITORY: ${{ github.repository }}	
-          RETAIN_DAYS: ${{ github.event.inputs.days }}	
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          RETAIN_DAYS: ${{ github.event.inputs.days }}
 
-        with:	
-          token: ${{ secrets.GITHUB_TOKEN }}	
-          repository: ${{ env.GITHUB_REPOSITORY }}	
-          retain_days: ${{ env.RETAIN_DAYS }}	
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ env.GITHUB_REPOSITORY }}
+          retain_days: ${{ env.RETAIN_DAYS }}
           keep_minimum_runs: 5
