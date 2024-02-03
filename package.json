@@ -83,6 +83,7 @@
     "jest-preset-angular": "^14.0.0",
     "jsonc-eslint-parser": "^2.0.0",
     "lint-staged": "^15.0.0",
+    "npm-package-json-lint": "^7.1.0",
     "nx": "18.0.0",
     "prettier": "^2.0.0",
     "ts-jest": "^29.0.0",
