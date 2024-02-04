@@ -1,5 +1,0 @@
-{
-  "{apps,libs,tools}/**/*.{css,js,json,md,scss,ts,tsx}": "nx affected:lint",
-  "**/package.json": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
-  "*.{css,htm,html,js,json,md,scss,ts,tsx,yml,yaml}": "npm run format:write"
-}

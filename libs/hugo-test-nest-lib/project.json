@@ -1,8 +1,0 @@
-{
-  "name": "hugo-test-nest-lib",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/hugo-test-nest-lib/src",
-  "projectType": "library",
-  "targets": {},
-  "tags": ["test:hugo"]
-}
