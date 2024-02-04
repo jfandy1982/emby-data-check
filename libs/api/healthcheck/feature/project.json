@@ -1,0 +1,8 @@
+{
+  "name": "healthcheck",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/healthcheck/feature/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["type:feature", "scope:api"]
+}

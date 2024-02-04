@@ -1,0 +1,20 @@
+{
+  "name": "client-ui-style-nord",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/ui-style/nord/src",
+  "projectType": "library",
+  "targets": {
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/client/ui-style/nord/**/*.css",
+          "libs/client/ui-style/nord/**/*.scss"
+        ],
+        "formatter": "compact"
+      }
+    }
+  },
+  "tags": ["type:ui", "scope:client"]
+}

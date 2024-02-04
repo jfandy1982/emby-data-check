@@ -1,0 +1,8 @@
+{
+  "name": "shared-interfaces-enum",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-interfaces/enum/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:shared-interfaces"]
+}

@@ -1,0 +1,8 @@
+{
+  "name": "shared-interfaces-emby",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-interfaces/emby-interface/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:shared-interfaces"]
+}
