@@ -13,5 +13,6 @@ export default defineConfig({
       ciWebServerCommand: 'nx run edc-ui-ng:serve-static',
     }),
     baseUrl: 'http://localhost:4200',
+    video: false,
   },
 });
