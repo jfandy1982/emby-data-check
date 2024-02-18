@@ -3,12 +3,13 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerCustomOptions, SwaggerDocumentOptions, SwaggerModule } from '@nestjs/swagger';
+import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 
 import { environment } from '@edc/shared-util/environment';
+
+import { setupSwagger } from './util';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -23,28 +24,11 @@ async function bootstrap() {
   environment.production === true
     ? app.enableCors()
     : app.enableCors({
-        origin: ['http://localhost:4200'],
+        origin: ['http://localhost:4200', 'http://localhost:4201', 'http://localhost:4202'],
         credentials: true,
       });
 
-  const config = new DocumentBuilder()
-    .setTitle('Emby Data Check')
-    .setDescription(
-      '<p>The Emby Data Check API is the backend for an opinionated check tool of an Emby server. Please refer to <a href="https://github.com/jfandy1982/emby-data-check">this GitHub repository</a> for more context information.</p>',
-    )
-    .setVersion('1.0')
-    .addBearerAuth()
-    .addTag('Emby')
-    .build();
-
-  const options: SwaggerDocumentOptions = {
-    deepScanRoutes: true,
-  };
-  const customOptions: SwaggerCustomOptions = {
-    customSiteTitle: 'Emby Data Check - API Docs',
-  };
-  const document = SwaggerModule.createDocument(app, config, options);
-  SwaggerModule.setup(globalPrefix + '/swagger', app, document, customOptions);
+  setupSwagger(app, globalPrefix);
 
   await app.listen(port, () => {
     Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);

@@ -99,6 +99,40 @@ If the file `migrations.json` was not created, you simply run an `npm install` c
 
 But a lot of the other dependencies are not updated automatically, but only manually.
 
+### Generate new TypeORM migrations
+
+There are a few scripts starting with name `typeorm:migration:` defined in `package.json`, so that TypeORM migrations can be processed easily. Generated migration files are stored within the `edc-api`-application.
+
+- Create a new migration with name 'test'
+
+```sh
+npm run typeorm:migration:create --name=test
+```
+
+- Generate a new migration from the existing DB schema with name 'test'
+
+```sh
+npm run typeorm:migration:generate --name=test
+```
+
+- List pending migrations
+
+```sh
+npm run typeorm:migration:show
+```
+
+- Run pending migrations
+
+```sh
+npm run typeorm:migration:run
+```
+
+- Revert already processed migrations
+
+```sh
+npm run typeorm:migration:revert
+```
+
 ### Cleanup scripts
 
 As there are a lot of files generated or downloaded and cached, it sometimes helps to vanish these generated artifacts completed with a fresh `npm install` command. It makes sense to run this script from file `package.json`.
