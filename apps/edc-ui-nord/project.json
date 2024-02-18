@@ -7,23 +7,56 @@
   "tags": ["type:app", "scope:ui", "ui:nord"],
   "targets": {
     "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/edc-ui-nord",
+        "index": "apps/edc-ui-nord/src/index.html",
+        "browser": "apps/edc-ui-nord/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/edc-ui-nord/src/favicon.ico", "apps/edc-ui-nord/src/assets"],
+        "styles": ["apps/edc-ui-nord/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/client/ui-style/nord/src/lib/scss"]
+        },
+        "scripts": [],
+        "server": "apps/edc-ui-nord/src/main.server.ts",
+        "prerender": true,
+        "ssr": {
+          "entry": "apps/edc-ui-nord/server.ts"
+        }
+      },
       "configurations": {
-        "development": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
           "fileReplacements": [
             {
               "replace": "libs/shared-util/environment/src/lib/environment.ts",
-              "with": "libs/shared-util/environment/src/lib/environment.development.ts"
+              "with": "libs/shared-util/environment/src/lib/environment.production.ts"
             }
           ],
-          "namedChunks": true,
-          "outputHashing": "none",
-          "optimization": false,
-          "sourceMap": {
-            "hidden": true,
-            "scripts": true,
-            "styles": true
-          },
-          "vendorChunk": true
+          "outputHashing": "all"
+        },
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.ci.ts"
+            }
+          ]
         },
         "test": {
           "fileReplacements": [
@@ -33,70 +66,41 @@
             }
           ]
         },
-        "production": {
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true,
           "fileReplacements": [
             {
               "replace": "libs/shared-util/environment/src/lib/environment.ts",
-              "with": "libs/shared-util/environment/src/lib/environment.production.ts"
+              "with": "libs/shared-util/environment/src/lib/environment.development.ts"
             }
           ]
         }
       },
-      "executor": "@angular-devkit/build-angular:browser",
-      "defaultConfiguration": "production",
-      "options": {
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/edc-ui-nord/src/assets/",
-            "output": "assets/"
-          },
-          {
-            "glob": "favicon.ico",
-            "input": "src/",
-            "output": "/"
-          }
-        ],
-        "buildOptimizer": true,
-        "extractLicenses": true,
-        "index": "apps/edc-ui-nord/src/index.html",
-        "inlineStyleLanguage": "scss",
-        "main": "apps/edc-ui-nord/src/main.ts",
-        "namedChunks": false,
-        "outputHashing": "all",
-        "outputPath": "dist/apps/edc-ui-nord",
-        "polyfills": ["zone.js"],
-        "styles": ["apps/edc-ui-nord/src/styles.scss"],
-        "stylePreprocessorOptions": {
-          "includePaths": ["libs/client/ui-style/nord/src/lib/scss"]
-        },
-        "sourceMap": false,
-        "scripts": [],
-        "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
-        "optimization": true,
-        "vendorChunk": false
-      },
-      "outputs": ["{options.outputPath}"]
+      "defaultConfiguration": "production"
     },
     "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4202,
+        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json"
+      },
       "configurations": {
-        "development": {
-          "buildTarget": "edc-ui-nord:build:development"
+        "production": {
+          "buildTarget": "edc-ui-nord:build:production"
+        },
+        "ci": {
+          "buildTarget": "edc-ui-nord:build:ci"
         },
         "test": {
           "buildTarget": "edc-ui-nord:build:test"
         },
-        "production": {
-          "buildTarget": "edc-ui-nord:build:production"
+        "development": {
+          "buildTarget": "edc-ui-nord:build:development"
         }
       },
-      "defaultConfiguration": "production",
-      "executor": "@angular-devkit/build-angular:dev-server",
-      "options": {
-        "port": 4202,
-        "proxyConfig": "apps/edc-ui-nord/proxy.conf.json",
-        "buildTarget": "edc-ui-nord:build"
-      }
+      "defaultConfiguration": "development"
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -104,27 +108,13 @@
         "buildTarget": "edc-ui-nord:build"
       }
     },
-    "lint": {
-      "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"]
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/edc-ui-nord/jest.config.ts"
-      }
-    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-nord:build",
-        "port": 4202
+        "port": 4202,
+        "staticFilePath": "dist/apps/edc-ui-nord/browser"
       }
-    },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f apps/edc-ui-nord/Dockerfile . -t edc-ui-nord"
     },
     "stack": {
       "executor": "nx:run-commands",
@@ -135,16 +125,12 @@
             "description": "Remove Angular cache"
           },
           {
-            "command": "docker compose down && docker compose --env-file .env up",
-            "description": "Spin up the DB docker container"
-          },
-          {
-            "command": "wait-on tcp:5432 && nx serve edc-api",
-            "description": "Start the Emby Data Check API",
+            "command": "npm run stack:api",
+            "description": "Start API Stack (as prerequisite)",
             "forwardAllArgs": false
           },
           {
-            "command": "wait-on tcp:3000 && nx serve edc-ui-nord",
+            "command": "wait-on tcp:3000 && nx run edc-ui-nord:serve:development",
             "description": "Start the Emby Data Check UI (Nord UI Style)"
           }
         ],

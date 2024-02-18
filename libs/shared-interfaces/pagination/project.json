@@ -1,0 +1,8 @@
+{
+  "name": "shared-interfaces-pagination",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared-interfaces/pagination/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["scope:shared"]
+}

@@ -7,6 +7,6 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [RouterModule, MatButtonModule],
   selector: 'edc-ng-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {}

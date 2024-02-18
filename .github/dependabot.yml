@@ -18,6 +18,15 @@ updates:
     labels:
       - 'dependencies'
 
+  - package-ecosystem: 'devcontainers'
+    directory: '/'
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    target-branch: 'main'
+    labels:
+      - 'dependencies'
+
   - package-ecosystem: 'npm'
     directory: '/'
     schedule:

@@ -6,6 +6,6 @@ import { RouterModule } from '@angular/router';
   imports: [RouterModule],
   selector: 'edc-nord-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {}

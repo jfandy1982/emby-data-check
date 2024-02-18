@@ -1,5 +1,7 @@
+/// <reference types="cypress" />
+
 // ***********************************************
-// This example commands.js shows you how to
+// This example commands.ts shows you how to
 // create various custom commands and overwrite
 // existing commands.
 //
@@ -15,7 +17,7 @@ declare namespace Cypress {
     login(email: string, password: string): void;
   }
 }
-//
+
 // -- This is a parent command --
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 Cypress.Commands.add('login', (email, password) => {

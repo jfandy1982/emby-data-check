@@ -2,11 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
-import { ServerEmbyFeatureModule } from '@edc/api/server-emby/feature';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AppConfig, DatabaseConfig } from './config';
+import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
 
 @Module({
   imports: [
@@ -24,9 +21,8 @@ import { AppConfig, DatabaseConfig } from './config';
       inject: [ConfigService],
     }),
     HealthcheckFeatureModule,
-    ServerEmbyFeatureModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

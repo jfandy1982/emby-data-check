@@ -4,6 +4,11 @@
   "sourceRoot": "libs/client/ui-style/fundamentals/src",
   "projectType": "library",
   "targets": {
+    "lint": {
+      "options": {
+        "args": ["--no-error-on-unmatched-pattern"]
+      }
+    },
     "stylelint": {
       "executor": "nx-stylelint:lint",
       "outputs": ["{options.outputFile}"],
