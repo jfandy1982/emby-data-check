@@ -96,7 +96,7 @@
     "pg": "^8.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "reflect-metadata": "^0.1.0",
+    "reflect-metadata": "^0.2.1",
     "rxjs": "^7.0.0",
     "slugify": "^1.0.0",
     "tslib": "^2.0.0",
