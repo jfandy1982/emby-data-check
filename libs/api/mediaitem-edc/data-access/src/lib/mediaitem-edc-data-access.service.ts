@@ -5,5 +5,5 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class MediaitemEdcDataAccessService {
-  constructor(@InjectRepository(ItemEntity) private readonly serverRepository: Repository<ItemEntity>) {}
+  constructor(@InjectRepository(ItemEntity) private readonly mediaitemRepository: Repository<ItemEntity>) {}
 }
