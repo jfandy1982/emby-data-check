@@ -1,5 +1,5 @@
-import { MediaitemEdcDataAccessService } from '@edc/api/mediaitem-edc/data-access';
-import { MediaitemEmbyDataAccessService } from '@edc/api/mediaitem-emby/data-access';
+import { MediaitemEdcDataAccessService } from '@edc/api/mediaitem/data-access/edc';
+import { MediaitemEmbyDataAccessService } from '@edc/api/mediaitem/data-access/emby';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

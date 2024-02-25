@@ -1,5 +1,5 @@
-import { UserEdcDataAccessService } from '@edc/api/user-edc/data-access';
-import { UserEmbyDataAccessService } from '@edc/api/user-emby/data-access';
+import { UserEdcDataAccessService } from '@edc/api/user/data-access/edc';
+import { UserEmbyDataAccessService } from '@edc/api/user/data-access/emby';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
