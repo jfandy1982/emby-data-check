@@ -4,5 +4,5 @@
   "sourceRoot": "libs/api/mediaitem/data-access/edc/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["type:feature", "scope:api"]
+  "tags": ["type:data-access", "scope:api"]
 }

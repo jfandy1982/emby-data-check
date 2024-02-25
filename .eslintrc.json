@@ -23,6 +23,14 @@
               {
                 "sourceTag": "scope:ui",
                 "onlyDependOnLibsWithTags": ["scope:ui", "scope:shared"]
+              },
+              {
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:util"]
               }
             ]
           }
