@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ServerEdcDataAccessController } from './server-edc-data-access.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServerEdcDataAccessService } from './server-edc-data-access.service';
+import { ServerEntity } from '@edc/shared-interfaces/db-interface';
 
 @Module({
-  controllers: [ServerEdcDataAccessController],
+  imports: [TypeOrmModule.forFeature([ServerEntity])],
   providers: [ServerEdcDataAccessService],
   exports: [ServerEdcDataAccessService],
 })

@@ -1,7 +1,7 @@
 {
-  "name": "server-emby-feature",
+  "name": "server-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/server-emby/feature/src",
+  "sourceRoot": "libs/api/server/feature/src",
   "projectType": "library",
   "targets": {},
   "tags": ["type:feature", "scope:api"]

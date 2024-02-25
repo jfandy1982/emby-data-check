@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppConfig, DatabaseConfig } from './config';
 import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
+import { ServerFeatureModule } from '@edc/api/server/feature';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
       inject: [ConfigService],
     }),
     HealthcheckFeatureModule,
+    ServerFeatureModule,
   ],
   controllers: [],
   providers: [],
