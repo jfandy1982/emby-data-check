@@ -1,7 +1,7 @@
 {
-  "name": "user-edc-feature",
+  "name": "user-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/user-edc/feature/src",
+  "sourceRoot": "libs/api/user/feature/src",
   "projectType": "library",
   "targets": {},
   "tags": ["type:feature", "scope:api"]
