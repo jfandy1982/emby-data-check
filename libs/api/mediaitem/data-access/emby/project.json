@@ -1,0 +1,8 @@
+{
+  "name": "mediaitem-data-access-emby",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/mediaitem/data-access/emby/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["type:feature", "scope:api"]
+}

@@ -16,8 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@edc/api/healthcheck/feature": ["libs/api/healthcheck/feature/src/index.ts"],
-      "@edc/api/mediaitem-edc/data-access": ["libs/api/mediaitem-edc/data-access/src/index.ts"],
-      "@edc/api/mediaitem-emby/data-access": ["libs/api/mediaitem-emby/data-access/src/index.ts"],
+      "@edc/api/mediaitem/data-access/edc": ["libs/api/mediaitem/data-access/edc/src/index.ts"],
+      "@edc/api/mediaitem/data-access/emby": ["libs/api/mediaitem/data-access/emby/src/index.ts"],
       "@edc/api/mediaitem/feature": ["libs/api/mediaitem/feature/src/index.ts"],
       "@edc/api/server/data-access/edc": ["libs/api/server/data-access/edc/src/index.ts"],
       "@edc/api/server/data-access/emby": ["libs/api/server/data-access/emby/src/index.ts"],
