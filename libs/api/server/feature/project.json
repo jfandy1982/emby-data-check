@@ -1,0 +1,8 @@
+{
+  "name": "server-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/server/feature/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["type:feature", "scope:api"]
+}

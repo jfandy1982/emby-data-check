@@ -9,6 +9,7 @@ iteminstance
 iteminstances
 kodi
 mediaitem
+mediaitems
 musicvideo
 serverinstance
 serverinstances

@@ -1,0 +1,8 @@
+{
+  "name": "server-data-access-edc",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/server/data-access/edc/src",
+  "projectType": "library",
+  "targets": {},
+  "tags": ["type:data-access", "scope:api"]
+}
