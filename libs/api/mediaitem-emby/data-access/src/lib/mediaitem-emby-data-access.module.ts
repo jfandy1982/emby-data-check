@@ -1,9 +1,9 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
-import { MediaitemEmbyDataAccessController } from './mediaitem-emby-data-access.controller';
 import { MediaitemEmbyDataAccessService } from './mediaitem-emby-data-access.service';
 
 @Module({
-  controllers: [MediaitemEmbyDataAccessController],
+  imports: [HttpModule],
   providers: [MediaitemEmbyDataAccessService],
   exports: [MediaitemEmbyDataAccessService],
 })

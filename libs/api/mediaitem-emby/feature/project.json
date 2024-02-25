@@ -1,8 +1,0 @@
-{
-  "name": "mediaitem-emby-feature",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/mediaitem-emby/feature/src",
-  "projectType": "library",
-  "targets": {},
-  "tags": ["type:feature", "scope:api"]
-}

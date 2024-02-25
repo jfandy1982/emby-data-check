@@ -1,7 +1,7 @@
 {
-  "name": "mediaitem-edc-feature",
+  "name": "mediaitem-feature",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/mediaitem-edc/feature/src",
+  "sourceRoot": "libs/api/mediaitem/feature/src",
   "projectType": "library",
   "targets": {},
   "tags": ["type:feature", "scope:api"]

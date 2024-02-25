@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { MediaitemEdcDataAccessController } from './mediaitem-edc-data-access.controller';
 import { MediaitemEdcDataAccessService } from './mediaitem-edc-data-access.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ItemEntity } from '@edc/shared-interfaces/db-interface';
 
 @Module({
-  controllers: [MediaitemEdcDataAccessController],
+  imports: [TypeOrmModule.forFeature([ItemEntity])],
   providers: [MediaitemEdcDataAccessService],
   exports: [MediaitemEdcDataAccessService],
 })
