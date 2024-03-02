@@ -15,6 +15,30 @@ permissions:
   pull-requests: write
 
 jobs:
+  build:
+    name: 'Build'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup project-specific Node.js version'
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install dependencies (via npm)'
+        shell: bash
+        run: |
+          npm install
+
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --target=build
+
   sonarcloud:
     name: 'Static code checks'
 
