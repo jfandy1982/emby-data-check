@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
-import { IsBoolean, IsIP, IsOptional, IsPort, IsString, IsUUID, Length, MaxLength } from 'class-validator';
+import { IsBoolean, IsIP, IsPort, IsString, IsUUID, Length, MaxLength } from 'class-validator';
 import { ServerInterface } from '../interfaces/server.interface';
 
 export class ServerDto implements ServerInterface {
