@@ -4,5 +4,5 @@
   "sourceRoot": "libs/shared-interfaces/emby-interface/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:shared"]
+  "tags": ["type:types_emby", "scope:shared"]
 }

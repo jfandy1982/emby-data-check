@@ -1,7 +1,7 @@
 {
   "name": "edc-api-e2e",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "tags": ["scope:e2e"],
+  "tags": ["type:e2e", "scope:e2e"],
   "implicitDependencies": ["edc-api"],
   "projectType": "application",
   "targets": {

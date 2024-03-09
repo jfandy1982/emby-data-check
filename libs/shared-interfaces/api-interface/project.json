@@ -4,5 +4,5 @@
   "sourceRoot": "libs/shared-interfaces/api-interface/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:shared"]
+  "tags": ["type:util", "scope:shared"]
 }

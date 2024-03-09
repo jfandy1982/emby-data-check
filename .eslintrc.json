@@ -29,8 +29,20 @@
                 "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
               },
               {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:types", "type:types_edc", "type:types_emby", "type:util"]
+              },
+              {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": ["type:app"]
+              },
+              {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:data-access", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:types", "type:util"]
+              },
+              {
+                "sourceTag": "type:types",
+                "onlyDependOnLibsWithTags": ["type:e2e", "type:app", "type:data-access", "type:feature", "type:types", "type:util"]
               }
             ]
           }

@@ -4,5 +4,5 @@
   "sourceRoot": "libs/shared-interfaces/enum/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:shared"]
+  "tags": ["type:types", "scope:shared"]
 }
