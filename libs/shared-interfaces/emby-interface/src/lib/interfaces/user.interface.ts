@@ -1,4 +1,4 @@
-export interface EmbyUserDto {
+export interface EmbyUserInterface {
   Id: string;
   ServerId: string;
   Name: string;
