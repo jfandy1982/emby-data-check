@@ -5,15 +5,15 @@ export interface UserWatchedInterface {
   id: string;
   isWatched: boolean;
   lastWatchedAt: Date;
-  mediaitem: MediaItemDto;
+  mediaItem: MediaItemDto;
 }
 
 export interface UserInterface {
   id: string;
   userIdFromEmbyDb: string;
-  userid: string;
-  username: string;
+  userId: string;
+  userName: string;
   password: string;
-  userrole: UserRole;
-  watched: UserWatchedInterface[];
+  userRole: UserRole;
+  watchedItems: UserWatchedInterface[];
 }

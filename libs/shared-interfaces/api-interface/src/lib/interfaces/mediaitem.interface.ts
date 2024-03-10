@@ -7,12 +7,12 @@ export interface MediaItemTags {
 
 export interface MediaItemInterface {
   id: string;
-  itemidfromembydb: string;
-  itemtype: ItemType;
-  providertype: ProviderType;
-  providerid: string;
-  displayname: string;
-  itemnameslug: string;
+  itemIdFromEmbyDb: string;
+  itemType: ItemType;
+  providerType: ProviderType;
+  providerId: string;
+  displayName: string;
+  itemNameSlug: string;
   path: string;
   tags: MediaItemTags[];
 }

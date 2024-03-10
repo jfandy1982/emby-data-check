@@ -1,9 +1,9 @@
 export interface ServerInterface {
   id: string;
   serverIdFromEmbyDb: string;
-  servername: string;
+  serverName: string;
   description: string;
-  mainServer: boolean;
+  isMainServer: boolean;
   isActive: boolean;
   apiKey: string;
   ipAddress: string;

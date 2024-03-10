@@ -1,6 +1,6 @@
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { IsEnum, IsString, IsStrongPassword, IsUUID, Length, MaxLength } from 'class-validator';
-import { UserInterface, UserWatchedInterface } from '../interfaces/user.interface';
+import { UserInterface } from '../interfaces/user.interface';
 import { UserRole } from '@edc/shared-interfaces/enum';
 
 export class UserDto implements UserInterface {
@@ -19,12 +19,12 @@ export class UserDto implements UserInterface {
   @IsString()
   @MaxLength(50)
   @ApiProperty({ description: 'Unique user name' })
-  userid: UserInterface['userid'];
+  userId: UserInterface['userId'];
 
   @IsString()
   @MaxLength(100)
   @ApiProperty({ description: 'Display Name of a user' })
-  username: UserInterface['username'];
+  userName: UserInterface['userName'];
 
   @IsString()
   @IsStrongPassword({ minLength: 8 })
@@ -34,12 +34,12 @@ export class UserDto implements UserInterface {
 
   @IsEnum(UserRole)
   @ApiProperty({ description: 'User Role Identifier', enum: UserRole, default: UserRole.USER, nullable: false })
-  userrole: UserInterface['userrole'];
+  userRole: UserInterface['userRole'];
 
   @ApiProperty({ description: 'Items, the user has watched already', isArray: true, nullable: true })
-  watched: UserInterface['watched'];
+  watchedItems: UserInterface['watchedItems'];
 }
 
-export class CreateUserDto extends PickType(UserDto, ['userid', 'username', 'password', 'userrole']) {}
+export class CreateUserDto extends PickType(UserDto, ['userId', 'userName', 'password', 'userRole']) {}
 export class UpdateUserDto extends OmitType(UserDto, ['id']) {}
 export class FilterUserDto extends PartialType(UpdateUserDto) {}

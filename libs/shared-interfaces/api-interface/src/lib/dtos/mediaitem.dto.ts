@@ -14,7 +14,7 @@ export class MediaItemDto implements MediaItemInterface {
   @IsString()
   @Length(32, 32)
   @ApiProperty({ description: 'Identifier as stored in the Emby DB assigned to the Server' })
-  itemidfromembydb: MediaItemInterface['itemidfromembydb'];
+  itemIdFromEmbyDb: MediaItemInterface['itemIdFromEmbyDb'];
 
   @IsEnum(ItemType)
   @ApiProperty({
@@ -22,7 +22,7 @@ export class MediaItemDto implements MediaItemInterface {
     enum: ItemType,
     default: ItemType.VIDEO,
   })
-  itemtype: MediaItemInterface['itemtype'];
+  itemType: MediaItemInterface['itemType'];
 
   @IsEnum(ProviderType)
   @ApiProperty({
@@ -30,22 +30,22 @@ export class MediaItemDto implements MediaItemInterface {
     enum: ProviderType,
     default: ProviderType.UNKNOWN,
   })
-  providertype: MediaItemInterface['providertype'];
+  providerType: MediaItemInterface['providerType'];
 
   @IsString()
   @MaxLength(20)
   @ApiProperty({ description: 'Value points to a record from the Provider Type, where the item information is taken from', maxLength: 20 })
-  providerid: MediaItemInterface['providerid'];
+  providerId: MediaItemInterface['providerId'];
 
   @IsString()
   @MaxLength(100)
   @ApiProperty({ description: 'Display value of the Item (e.g. a film title)', nullable: true, maxLength: 100 })
-  displayname: MediaItemInterface['displayname'];
+  displayName: MediaItemInterface['displayName'];
 
   @IsString()
   @MaxLength(100)
   @ApiProperty({ description: 'Slugified display name and/or file path information', nullable: true, maxLength: 100, uniqueItems: true })
-  itemnameslug: MediaItemInterface['itemnameslug'];
+  itemNameSlug: MediaItemInterface['itemNameSlug'];
 
   @IsString()
   @MaxLength(2048)
@@ -58,13 +58,13 @@ export class MediaItemDto implements MediaItemInterface {
 }
 
 export class CreateMediaItemDto extends PickType(MediaItemDto, [
-  'itemtype',
-  'providertype',
-  'providerid',
+  'itemType',
+  'providerType',
+  'providerId',
   'path',
-  'displayname',
-  'itemnameslug',
-  'itemidfromembydb',
+  'displayName',
+  'itemNameSlug',
+  'itemIdFromEmbyDb',
 ]) {}
 export class UpdateMediaItemDto extends OmitType(MediaItemDto, ['id']) {}
 export class FilterMediaItemDto extends PartialType(UpdateMediaItemDto) {}

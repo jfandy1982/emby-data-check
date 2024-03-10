@@ -18,7 +18,7 @@ export class ServerDto implements ServerInterface {
   @IsString()
   @MaxLength(50)
   @ApiProperty({ description: 'Server Name' })
-  servername: ServerInterface['servername'];
+  serverName: ServerInterface['serverName'];
 
   @IsString()
   @MaxLength(100)
@@ -27,7 +27,7 @@ export class ServerDto implements ServerInterface {
 
   @IsBoolean()
   @ApiProperty({ description: 'This server is the one with the truth' })
-  mainServer: ServerInterface['mainServer'];
+  isMainServer: ServerInterface['isMainServer'];
 
   @IsBoolean()
   @ApiProperty({ description: 'This server is still relevant and managed' })
@@ -49,6 +49,6 @@ export class ServerDto implements ServerInterface {
   portNumber: ServerInterface['portNumber'];
 }
 
-export class CreateServerDto extends PickType(ServerDto, ['description', 'servername', 'apiKey', 'ipAddress', 'portNumber']) {}
+export class CreateServerDto extends PickType(ServerDto, ['description', 'serverName', 'apiKey', 'ipAddress', 'portNumber']) {}
 export class UpdateServerDto extends OmitType(ServerDto, ['id']) {}
 export class FilterServerDto extends PartialType(UpdateServerDto) {}
