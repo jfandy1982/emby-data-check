@@ -5,11 +5,16 @@ import { MediaitemFeatureService } from './mediaitem-feature.service';
 describe('MediaitemFeatureController', () => {
   let controller: MediaitemFeatureController;
 
+  const mockMediaitemFeatureService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [MediaitemFeatureService],
       controllers: [MediaitemFeatureController],
-    }).compile();
+    })
+      .overrideProvider(MediaitemFeatureService)
+      .useValue(mockMediaitemFeatureService)
+      .compile();
 
     controller = module.get(MediaitemFeatureController);
   });

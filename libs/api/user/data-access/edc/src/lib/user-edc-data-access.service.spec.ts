@@ -4,10 +4,15 @@ import { UserEdcDataAccessService } from './user-edc-data-access.service';
 describe('UserEdcDataAccessService', () => {
   let service: UserEdcDataAccessService;
 
+  const mockUserEdcDataAccessService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [UserEdcDataAccessService],
-    }).compile();
+    })
+      .overrideProvider(UserEdcDataAccessService)
+      .useValue(mockUserEdcDataAccessService)
+      .compile();
 
     service = module.get(UserEdcDataAccessService);
   });

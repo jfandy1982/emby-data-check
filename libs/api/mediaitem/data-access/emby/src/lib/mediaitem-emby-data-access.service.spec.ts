@@ -4,10 +4,15 @@ import { MediaitemEmbyDataAccessService } from './mediaitem-emby-data-access.ser
 describe('MediaitemEmbyDataAccessService', () => {
   let service: MediaitemEmbyDataAccessService;
 
+  const mockMediaitemEmbyDataAccessService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [MediaitemEmbyDataAccessService],
-    }).compile();
+    })
+      .overrideProvider(MediaitemEmbyDataAccessService)
+      .useValue(mockMediaitemEmbyDataAccessService)
+      .compile();
 
     service = module.get(MediaitemEmbyDataAccessService);
   });

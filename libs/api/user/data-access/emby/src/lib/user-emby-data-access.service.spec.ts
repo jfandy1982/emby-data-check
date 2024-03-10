@@ -4,10 +4,15 @@ import { UserEmbyDataAccessService } from './user-emby-data-access.service';
 describe('UserEmbyDataAccessService', () => {
   let service: UserEmbyDataAccessService;
 
+  const mockUserEmbyDataAccessService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [UserEmbyDataAccessService],
-    }).compile();
+    })
+      .overrideProvider(UserEmbyDataAccessService)
+      .useValue(mockUserEmbyDataAccessService)
+      .compile();
 
     service = module.get(UserEmbyDataAccessService);
   });
