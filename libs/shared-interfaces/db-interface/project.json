@@ -4,5 +4,5 @@
   "sourceRoot": "libs/shared-interfaces/db-interface/src",
   "projectType": "library",
   "targets": {},
-  "tags": ["scope:shared"]
+  "tags": ["type:types_edc", "scope:shared"]
 }

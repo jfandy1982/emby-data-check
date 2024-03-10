@@ -16,7 +16,7 @@ enum ItemType {
 }
 
 /* Keep in sync with enum ProviderType in lib '@edc/shared-interfaces/enums' */
-export enum ProviderType {
+enum ProviderType {
   IMDB = 'Imdb',
   TMDB = 'Tmdb',
   TVDB = 'Tvdb',

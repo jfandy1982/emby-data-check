@@ -4,6 +4,6 @@
   "projectType": "application",
   "sourceRoot": "apps/edc-ui-fundamentals-e2e/src",
   "targets": {},
-  "tags": ["scope:e2e"],
+  "tags": ["type:e2e", "scope:e2e"],
   "implicitDependencies": ["edc-ui-fundamentals"]
 }

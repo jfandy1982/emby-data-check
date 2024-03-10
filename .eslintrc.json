@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nx"],
+  "plugins": ["@nx", "unused-imports"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -29,10 +29,33 @@
                 "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
               },
               {
+                "sourceTag": "type:data-access",
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:types", "type:types_edc", "type:types_emby", "type:util"]
+              },
+              {
+                "sourceTag": "type:e2e",
+                "onlyDependOnLibsWithTags": ["type:app"]
+              },
+              {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:data-access", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:data-access", "type:types", "type:util"]
+              },
+              {
+                "sourceTag": "type:types",
+                "onlyDependOnLibsWithTags": ["type:e2e", "type:app", "type:data-access", "type:feature", "type:types", "type:util"]
               }
             ]
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+          "warn",
+          {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
           }
         ]
       }

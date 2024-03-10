@@ -1,3 +1,3 @@
-export * from './lib/dtos/item.dto';
-export * from './lib/dtos/system.dto';
-export * from './lib/dtos/user.dto';
+export * from './lib/interfaces/item.interface';
+export * from './lib/interfaces/system.interface';
+export * from './lib/interfaces/user.interface';

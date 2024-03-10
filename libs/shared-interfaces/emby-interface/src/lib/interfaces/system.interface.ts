@@ -1,4 +1,4 @@
-export interface EmbyPublicSystemInfoDto {
+export interface EmbyPublicSystemInfoInterface {
   Id: string;
   LocalAddress: string;
   ServerName: string;
