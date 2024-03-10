@@ -5,11 +5,16 @@ import { ServerFeatureService } from './server-feature.service';
 describe('ServerFeatureController', () => {
   let controller: ServerFeatureController;
 
+  const mockServerFeatureService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [ServerFeatureService],
       controllers: [ServerFeatureController],
-    }).compile();
+    })
+      .overrideProvider(ServerFeatureService)
+      .useValue(mockServerFeatureService)
+      .compile();
 
     controller = module.get(ServerFeatureController);
   });

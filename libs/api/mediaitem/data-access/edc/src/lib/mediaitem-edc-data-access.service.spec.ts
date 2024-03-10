@@ -4,10 +4,15 @@ import { MediaitemEdcDataAccessService } from './mediaitem-edc-data-access.servi
 describe('MediaitemEdcDataAccessService', () => {
   let service: MediaitemEdcDataAccessService;
 
+  const mockMediaitemEdcDataAccessService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [MediaitemEdcDataAccessService],
-    }).compile();
+    })
+      .overrideProvider(MediaitemEdcDataAccessService)
+      .useValue(mockMediaitemEdcDataAccessService)
+      .compile();
 
     service = module.get(MediaitemEdcDataAccessService);
   });

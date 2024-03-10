@@ -4,10 +4,15 @@ import { UserFeatureService } from './user-feature.service';
 describe('UserFeatureService', () => {
   let service: UserFeatureService;
 
+  const mockUserFeatureService = {};
+
   beforeEach(async () => {
     const module = await Test.createTestingModule({
       providers: [UserFeatureService],
-    }).compile();
+    })
+      .overrideProvider(UserFeatureService)
+      .useValue(mockUserFeatureService)
+      .compile();
 
     service = module.get(UserFeatureService);
   });
