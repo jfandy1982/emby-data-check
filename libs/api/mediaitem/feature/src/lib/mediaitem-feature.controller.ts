@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
-import { MediaitemFeatureService } from './mediaitem-feature.service';
 import { ApiTags } from '@nestjs/swagger';
+import { MediaitemFeatureService } from './mediaitem-feature.service';
 
 @ApiTags('mediaitems')
 @Controller('mediaitems')

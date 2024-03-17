@@ -3,14 +3,12 @@
  * This is only a minimal backend to get started.
  */
 
-import { NestFactory } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
-import { Logger } from '@nestjs/common';
-
 import { environment } from '@edc/shared-util/environment';
-
-import { setupSwagger } from './util';
+import { Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
+import { setupSwagger } from './util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
