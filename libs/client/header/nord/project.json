@@ -1,0 +1,17 @@
+{
+  "name": "client-header-nord",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/header/nord/src",
+  "prefix": "lib",
+  "tags": ["type:ui", "scope:client", "ui:nord"],
+  "projectType": "library",
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/client/header/nord/jest.config.ts"
+      }
+    }
+  }
+}

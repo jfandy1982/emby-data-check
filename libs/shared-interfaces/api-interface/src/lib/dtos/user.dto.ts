@@ -1,7 +1,7 @@
+import { UserRole } from '@edc/shared-interfaces/enum';
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { IsEnum, IsString, IsStrongPassword, IsUUID, Length, MaxLength } from 'class-validator';
 import { UserInterface } from '../interfaces/user.interface';
-import { UserRole } from '@edc/shared-interfaces/enum';
 
 export class UserDto implements UserInterface {
   @IsString()

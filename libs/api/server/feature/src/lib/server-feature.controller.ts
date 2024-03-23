@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
-import { ServerFeatureService } from './server-feature.service';
 import { ApiTags } from '@nestjs/swagger';
+import { ServerFeatureService } from './server-feature.service';
 
 @ApiTags('servers')
 @Controller('servers')
