@@ -3,6 +3,12 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/healthcheck/feature/src",
   "projectType": "library",
-  "targets": {},
+  "targets": {
+    "test": {
+      "options": {
+        "args": ["--coverage"]
+      }
+    }
+  },
   "tags": ["type:feature", "scope:api"]
 }
