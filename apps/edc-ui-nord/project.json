@@ -108,6 +108,11 @@
         "buildTarget": "edc-ui-nord:build"
       }
     },
+    "test": {
+      "options": {
+        "args": ["--passWithNoTests", "--coverage"]
+      }
+    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {

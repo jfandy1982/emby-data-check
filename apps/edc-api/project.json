@@ -27,7 +27,7 @@
     },
     "test": {
       "options": {
-        "args": ["--passWithNoTests"]
+        "args": ["--passWithNoTests", "--coverage"]
       }
     },
     "stack": {
