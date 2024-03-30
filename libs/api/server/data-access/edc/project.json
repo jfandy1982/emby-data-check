@@ -3,12 +3,6 @@
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/server/data-access/edc/src",
   "projectType": "library",
-  "targets": {
-    "test": {
-      "options": {
-        "args": ["--coverage"]
-      }
-    }
-  },
+  "targets": {},
   "tags": ["type:data-access", "scope:api"]
 }

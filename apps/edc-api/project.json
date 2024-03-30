@@ -25,11 +25,6 @@
         }
       }
     },
-    "test": {
-      "options": {
-        "args": ["--passWithNoTests", "--coverage"]
-      }
-    },
     "stack": {
       "executor": "nx:run-commands",
       "options": {

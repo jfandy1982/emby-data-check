@@ -9,9 +9,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{e2eProjectRoot}"],
       "options": {
-        "jestConfig": "apps/edc-api-e2e/jest.config.ts",
-        "passWithNoTests": true,
-        "codeCoverage": true
+        "jestConfig": "apps/edc-api-e2e/jest.config.ts"
       }
     }
   }
