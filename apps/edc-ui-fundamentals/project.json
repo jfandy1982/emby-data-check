@@ -114,11 +114,6 @@
         "buildTarget": "edc-ui-fundamentals:build"
       }
     },
-    "test": {
-      "options": {
-        "args": ["--passWithNoTests"]
-      }
-    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
