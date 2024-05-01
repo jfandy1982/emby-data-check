@@ -116,7 +116,7 @@
     "@angular/compiler-cli": "^17.0.0",
     "@angular/language-service": "^17.0.0",
     "@cspell/dict-de-de": "^4.0.0",
-    "@mockoon/cli": "^8.0.0",
+    "@mockoon/cli": "^8.1.1",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
     "@nx/cypress": "18.3.3",
