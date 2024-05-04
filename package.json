@@ -155,7 +155,7 @@
     "depcheck": "^1.0.0",
     "eslint": "^8.0.0",
     "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-cypress": "^2.0.0",
+    "eslint-plugin-cypress": "^3.0.0",
     "eslint-plugin-import": "^2.0.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "husky": "^9.0.0",
