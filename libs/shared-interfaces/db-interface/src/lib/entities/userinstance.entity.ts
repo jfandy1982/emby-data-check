@@ -1,11 +1,12 @@
 import { IsBoolean, IsString, Length } from 'class-validator';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, Index, ManyToOne, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { ServerInstanceEntity } from './serverinstance.entity';
 import { UserEntity } from './user.entity';
 import { WatchedInstanceEntity } from './watchedinstance.entity';
 
 @Entity('edc_userinstance')
+@Index(['userIdFromEmbyDb', 'serverinstance'], { unique: true })
 export class UserInstanceEntity extends AbstractEntity {
   @Column({
     type: 'varchar',
