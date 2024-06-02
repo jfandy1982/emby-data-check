@@ -2,7 +2,7 @@ name: Garbage Collection
 
 on:
   schedule:
-    - cron: '04 03 * * 1'
+    - cron: '08 11 * * 1'
 
   workflow_dispatch:
     inputs:
