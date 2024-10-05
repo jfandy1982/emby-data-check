@@ -31,11 +31,11 @@
       "@edc/shared-interfaces/enum": ["libs/shared-interfaces/enum/src/index.ts"],
       "@edc/shared-interfaces/pagination": ["libs/shared-interfaces/pagination/src/index.ts"],
       "@edc/shared-util/environment": ["libs/shared-util/environment/src/index.ts"],
-      "@edc/ui/footer/fundamentals": ["libs/client/footer/fundamentals/src/index.ts"],
       "@edc/ui/footer/ng": ["libs/client/footer/ng/src/index.ts"],
+      "@edc/ui/footer/ngx": ["libs/client/footer/fundamentals/src/index.ts"],
       "@edc/ui/footer/nord": ["libs/client/footer/nord/src/index.ts"],
-      "@edc/ui/header/fundamentals": ["libs/client/header/fundamentals/src/index.ts"],
       "@edc/ui/header/ng": ["libs/client/header/ng/src/index.ts"],
+      "@edc/ui/header/ngx": ["libs/client/header/fundamentals/src/index.ts"],
       "@edc/ui/header/nord": ["libs/client/header/nord/src/index.ts"]
     }
   },
