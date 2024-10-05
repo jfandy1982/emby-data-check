@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'edc-api',
   preset: '../../jest.preset.js',

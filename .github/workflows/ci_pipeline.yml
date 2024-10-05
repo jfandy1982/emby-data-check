@@ -10,9 +10,19 @@ on:
 
 permissions:
   actions: read
+  attestations: read
+  checks: read
   contents: read
+  deployments: read
+  id-token: none
   issues: write
+  discussions: read
+  packages: read
+  pages: read
   pull-requests: write
+  repository-projects: read
+  security-events: read
+  statuses: read
 
 jobs:
   build:
@@ -22,7 +32,7 @@ jobs:
 
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
         with:
           fetch-depth: 0
 
@@ -48,7 +58,7 @@ jobs:
 
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.0
         with:
           fetch-depth: 0
 

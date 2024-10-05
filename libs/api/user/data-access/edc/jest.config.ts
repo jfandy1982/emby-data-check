@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'user-data-access-edc',
   preset: '../../../../../jest.preset.js',

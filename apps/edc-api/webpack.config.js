@@ -1,12 +1,12 @@
+const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
 const { join } = require('path');
-const { NxWebpackPlugin } = require('@nx/webpack');
 
 module.exports = {
   output: {
     path: join(__dirname, '../../dist/apps/edc-api'),
   },
   plugins: [
-    new NxWebpackPlugin({
+    new NxAppWebpackPlugin({
       target: 'node',
       compiler: 'tsc',
       main: './src/main.ts',
@@ -14,6 +14,7 @@ module.exports = {
       assets: ['./src/assets'],
       optimization: false,
       outputHashing: 'none',
+      generatePackageJson: true,
     }),
   ],
 };

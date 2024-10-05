@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'server-data-access-emby',
   preset: '../../../../../jest.preset.js',

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'client-header-fundamentals',
   preset: '../../../../jest.preset.js',

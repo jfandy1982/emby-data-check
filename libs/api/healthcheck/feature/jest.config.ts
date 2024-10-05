@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'healthcheck-feature',
   preset: '../../../../jest.preset.js',

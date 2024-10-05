@@ -16,14 +16,17 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/edc-ui-fundamentals/src/favicon.ico", "apps/edc-ui-fundamentals/src/assets"],
-        "styles": [
-          "apps/edc-ui-fundamentals/src/styles.scss",
-          "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css",
-          "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
-          "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
-          "./node_modules/fundamental-styles/dist/fundamental-styles.css"
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-fundamentals/public"
+          }
         ],
+        "styles": ["apps/edc-ui-fundamentals/src/styles.scss",
+          "./node_modules/@sap-theming/theming-base-content/content/Base/baseLib/sap_horizon/css_variables.css",
+        "./node_modules/fundamental-styles/dist/theming/sap_horizon.css",
+        "./node_modules/fundamental-styles/dist/fonts/sap_horizon_fonts.css",
+        "./node_modules/fundamental-styles/dist/fundamental-styles.css"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style/fundamentals/src/lib/scss"]
         },
@@ -39,7 +42,7 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "4mb",
+              "maximumWarning": "500kb",
               "maximumError": "5mb"
             },
             {
@@ -114,12 +117,23 @@
         "buildTarget": "edc-ui-fundamentals:build"
       }
     },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts"
+      }
+    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-fundamentals:build",
         "port": 4201,
-        "staticFilePath": "dist/apps/edc-ui-fundamentals/browser"
+        "staticFilePath": "dist/apps/edc-ui-fundamentals/browser",
+        "spa": true
       }
     },
     "stack": {
@@ -141,6 +155,55 @@
           }
         ],
         "parallel": true
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/edc-ui-fundamentals/.storybook",
+        "browserTarget": "edc-ui-fundamentals:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/edc-ui-fundamentals",
+        "configDir": "apps/edc-ui-fundamentals/.storybook",
+        "browserTarget": "edc-ui-fundamentals:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c apps/edc-ui-fundamentals/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "edc-ui-fundamentals:build-storybook",
+        "staticFilePath": "dist/storybook/edc-ui-fundamentals",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "edc-ui-fundamentals:build-storybook:ci"
+        }
       }
     }
   }

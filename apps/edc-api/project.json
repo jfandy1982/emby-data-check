@@ -3,12 +3,15 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/edc-api/src",
   "projectType": "application",
+  "tags": ["type:app", "scope:api"],
   "targets": {
     "serve": {
       "executor": "@nx/js:node",
       "defaultConfiguration": "development",
+      "dependsOn": ["build"],
       "options": {
-        "buildTarget": "edc-api:build"
+        "buildTarget": "edc-api:build",
+        "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
@@ -42,6 +45,5 @@
         "parallel": true
       }
     }
-  },
-  "tags": ["type:app", "scope:api"]
+  }
 }

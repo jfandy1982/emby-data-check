@@ -3,20 +3,18 @@
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/client/ui-style/ng/src",
   "projectType": "library",
+  "tags": ["type:ui", "scope:client"],
   "targets": {
-    "lint": {
-      "options": {
-        "args": ["--no-error-on-unmatched-pattern"]
-      }
-    },
     "stylelint": {
       "executor": "nx-stylelint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/client/ui-style/ng/**/*.css", "libs/client/ui-style/ng/**/*.scss"],
+        "lintFilePatterns": [
+          "libs/client/ui-style/ng/**/*.css",
+          "libs/client/ui-style/ng/**/*.scss"
+        ],
         "formatter": "compact"
       }
     }
-  },
-  "tags": ["type:ui", "scope:client"]
+  }
 }
