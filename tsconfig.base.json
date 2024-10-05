@@ -15,56 +15,26 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@edc/api/healthcheck/feature": [
-        "libs/api/healthcheck/feature/src/index.ts"
-      ],
-      "@edc/api/mediaitem/data-access/edc": [
-        "libs/api/mediaitem/data-access/edc/src/index.ts"
-      ],
-      "@edc/api/mediaitem/data-access/emby": [
-        "libs/api/mediaitem/data-access/emby/src/index.ts"
-      ],
+      "@edc/api/healthcheck/feature": ["libs/api/healthcheck/feature/src/index.ts"],
+      "@edc/api/mediaitem/data-access/edc": ["libs/api/mediaitem/data-access/edc/src/index.ts"],
+      "@edc/api/mediaitem/data-access/emby": ["libs/api/mediaitem/data-access/emby/src/index.ts"],
       "@edc/api/mediaitem/feature": ["libs/api/mediaitem/feature/src/index.ts"],
-      "@edc/api/server/data-access/edc": [
-        "libs/api/server/data-access/edc/src/index.ts"
-      ],
-      "@edc/api/server/data-access/emby": [
-        "libs/api/server/data-access/emby/src/index.ts"
-      ],
+      "@edc/api/server/data-access/edc": ["libs/api/server/data-access/edc/src/index.ts"],
+      "@edc/api/server/data-access/emby": ["libs/api/server/data-access/emby/src/index.ts"],
       "@edc/api/server/feature": ["libs/api/server/feature/src/index.ts"],
-      "@edc/api/user/data-access/edc": [
-        "libs/api/user/data-access/edc/src/index.ts"
-      ],
-      "@edc/api/user/data-access/emby": [
-        "libs/api/user/data-access/emby/src/index.ts"
-      ],
+      "@edc/api/user/data-access/edc": ["libs/api/user/data-access/edc/src/index.ts"],
+      "@edc/api/user/data-access/emby": ["libs/api/user/data-access/emby/src/index.ts"],
       "@edc/api/user/feature": ["libs/api/user/feature/src/index.ts"],
-      "@edc/shared-interfaces/api-interface": [
-        "libs/shared-interfaces/api-interface/src/index.ts"
-      ],
-      "@edc/shared-interfaces/db-interface": [
-        "libs/shared-interfaces/db-interface/src/index.ts"
-      ],
-      "@edc/shared-interfaces/emby-interface": [
-        "libs/shared-interfaces/emby-interface/src/index.ts"
-      ],
-      "@edc/shared-interfaces/enum": [
-        "libs/shared-interfaces/enum/src/index.ts"
-      ],
-      "@edc/shared-interfaces/pagination": [
-        "libs/shared-interfaces/pagination/src/index.ts"
-      ],
-      "@edc/shared-util/environment": [
-        "libs/shared-util/environment/src/index.ts"
-      ],
-      "@edc/ui/footer/fundamentals": [
-        "libs/client/footer/fundamentals/src/index.ts"
-      ],
+      "@edc/shared-interfaces/api-interface": ["libs/shared-interfaces/api-interface/src/index.ts"],
+      "@edc/shared-interfaces/db-interface": ["libs/shared-interfaces/db-interface/src/index.ts"],
+      "@edc/shared-interfaces/emby-interface": ["libs/shared-interfaces/emby-interface/src/index.ts"],
+      "@edc/shared-interfaces/enum": ["libs/shared-interfaces/enum/src/index.ts"],
+      "@edc/shared-interfaces/pagination": ["libs/shared-interfaces/pagination/src/index.ts"],
+      "@edc/shared-util/environment": ["libs/shared-util/environment/src/index.ts"],
+      "@edc/ui/footer/fundamentals": ["libs/client/footer/fundamentals/src/index.ts"],
       "@edc/ui/footer/ng": ["libs/client/footer/ng/src/index.ts"],
       "@edc/ui/footer/nord": ["libs/client/footer/nord/src/index.ts"],
-      "@edc/ui/header/fundamentals": [
-        "libs/client/header/fundamentals/src/index.ts"
-      ],
+      "@edc/ui/header/fundamentals": ["libs/client/header/fundamentals/src/index.ts"],
       "@edc/ui/header/ng": ["libs/client/header/ng/src/index.ts"],
       "@edc/ui/header/nord": ["libs/client/header/nord/src/index.ts"]
     }

@@ -9,10 +9,7 @@
       "executor": "nx-stylelint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": [
-          "libs/client/ui-style/nord/**/*.css",
-          "libs/client/ui-style/nord/**/*.scss"
-        ],
+        "lintFilePatterns": ["libs/client/ui-style/nord/**/*.css", "libs/client/ui-style/nord/**/*.scss"],
         "formatter": "compact"
       }
     }
