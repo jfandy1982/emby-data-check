@@ -13,13 +13,26 @@ on:
 
 permissions:
   actions: write
+  attestations: read
+  checks: read
+  contents: read
+  deployments: read
+  id-token: none
+  issues: read
+  discussions: read
+  packages: read
+  pages: read
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read
 
 jobs:
   del_runs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Delete outdated workflow runs'
-        uses: Mattraks/delete-workflow-runs@v2
+        uses: Mattraks/delete-workflow-runs@v2.0.6
 
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}

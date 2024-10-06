@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'edc-ui-ng',
   preset: '../../jest.preset.js',

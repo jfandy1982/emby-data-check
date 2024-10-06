@@ -3,6 +3,7 @@
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/shared-interfaces/api-interface/src",
   "projectType": "library",
-  "targets": {},
-  "tags": ["type:util", "scope:shared"]
+  "tags": ["type:util", "scope:shared"],
+  "// targets": "to see all targets run: nx show project shared-interfaces-api --web",
+  "targets": {}
 }

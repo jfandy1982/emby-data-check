@@ -16,7 +16,12 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/edc-ui-nord/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/edc-ui-nord/src/favicon.ico", "apps/edc-ui-nord/src/assets"],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-nord/public"
+          }
+        ],
         "styles": ["apps/edc-ui-nord/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["libs/client/ui-style/nord/src/lib/scss"]
@@ -108,12 +113,23 @@
         "buildTarget": "edc-ui-nord:build"
       }
     },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/edc-ui-nord/jest.config.ts"
+      }
+    },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-nord:build",
         "port": 4202,
-        "staticFilePath": "dist/apps/edc-ui-nord/browser"
+        "staticFilePath": "dist/apps/edc-ui-nord/browser",
+        "spa": true
       }
     },
     "stack": {
@@ -135,6 +151,55 @@
           }
         ],
         "parallel": true
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "apps/edc-ui-nord/.storybook",
+        "browserTarget": "edc-ui-nord:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/edc-ui-nord",
+        "configDir": "apps/edc-ui-nord/.storybook",
+        "browserTarget": "edc-ui-nord:build",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c apps/edc-ui-nord/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "edc-ui-nord:build-storybook",
+        "staticFilePath": "dist/storybook/edc-ui-nord",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "edc-ui-nord:build-storybook:ci"
+        }
       }
     }
   }

@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'mediaitem-feature',
   preset: '../../../../jest.preset.js',

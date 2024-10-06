@@ -1,9 +1,8 @@
-/* eslint-disable */
 export default {
   displayName: 'client-footer-nord',
   preset: '../../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/client/header/nord',
+  coverageDirectory: '../../../../coverage/libs/client/footer/nord',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

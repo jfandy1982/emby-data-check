@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'mediaitem-data-access-edc',
   preset: '../../../../../jest.preset.js',

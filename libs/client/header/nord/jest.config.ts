@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
   displayName: 'client-header-nord',
   preset: '../../../../jest.preset.js',

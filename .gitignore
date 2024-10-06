@@ -39,6 +39,8 @@ testem.log
 Thumbs.db
 
 .nx/cache
+.nx/workspace-data
+
 
 storybook-static
 .angular

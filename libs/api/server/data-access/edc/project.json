@@ -3,6 +3,7 @@
   "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/api/server/data-access/edc/src",
   "projectType": "library",
-  "targets": {},
-  "tags": ["type:data-access", "scope:api"]
+  "tags": ["type:data-access", "scope:api"],
+  "// targets": "to see all targets run: nx show project server-data-access-edc --web",
+  "targets": {}
 }
