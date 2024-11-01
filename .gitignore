@@ -46,4 +46,4 @@ storybook-static
 .angular
 
 # project-specific exceptions
-notes.txt
+.pnotes/
