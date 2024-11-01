@@ -32,12 +32,12 @@ jobs:
 
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
 
       - name: 'Setup project-specific Node.js version'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.1.0
         with:
           node-version-file: '.nvmrc'
 
@@ -58,7 +58,7 @@ jobs:
 
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.2
         with:
           fetch-depth: 0
 
