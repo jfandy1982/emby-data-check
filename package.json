@@ -146,7 +146,7 @@
     "@types/lodash-es": "^4.0.0",
     "@types/node": "^22.0.0",
     "@types/uuid": "^10.0.0",
-    "@typescript-eslint/utils": "^8.0.0",
+    "@typescript-eslint/utils": "^8.12.2",
     "angular-eslint": "^18.0.0",
     "cspell": "^8.0.0",
     "cypress": "^13.0.0",
