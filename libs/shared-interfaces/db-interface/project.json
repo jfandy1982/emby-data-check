@@ -1,9 +1,0 @@
-{
-  "name": "shared-interfaces-db",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared-interfaces/db-interface/src",
-  "projectType": "library",
-  "tags": ["type:types_edc", "scope:shared"],
-  "// targets": "to see all targets run: nx show project shared-interfaces-db --web",
-  "targets": {}
-}
