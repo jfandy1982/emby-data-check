@@ -126,6 +126,10 @@ This repository enables the [cSpell](https://cspell.org/) spellchecker tool. The
 
 The search option might identify a dictionary, which should be enabled for the project.
 
+### Add new Nx apps into CI-workflow
+
+Beside the automatic trigger, the CI-workflow of this repository can be triggered manually as well. New apps created in this Nx monorepo need to be added to the list of inputs for the `workflow_dispatch`-trigger. It should be an optional boolean value.
+
 ## License
 
 Check-out the license in the file [LICENSE.md](LICENSE.md) within this repository.
