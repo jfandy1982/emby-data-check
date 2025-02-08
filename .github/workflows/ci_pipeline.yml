@@ -3,7 +3,6 @@ name: Continuous Integration Pipeline
 on:
   push:
     branches:
-      - dev
       - main
       - test
       - prod
@@ -67,7 +66,6 @@ jobs:
         shell: bash
         run: |
           npm install
-          npm install -g nx
 
       - name: 'Extract branch name'
         id: extract-branch
@@ -81,7 +79,7 @@ jobs:
 
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-      - name: 'Get affected apps (plain option)'
+      - name: 'Get affected apps'
         id: check-affected-apps
         env:
           headSha: ${{ github.sha }}
@@ -95,25 +93,6 @@ jobs:
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
           echo "$affected"
 
-      - name: 'Get affected apps (nx-set-shas option)'
-        id: setSHAs
-        uses: nrwl/nx-set-shas@v4
-        with:
-          main-branch-name: ${{ steps.extract-branch.outputs.branch }}
-
-      - run: |
-          echo "BASE: ${{ steps.setSHAs.outputs.base }}"
-          echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
-
-      - name: Get affected apps (dkhunt27 option)
-        id: checkForAffected
-        uses: dkhunt27/action-nx-affected-list@v6.1
-        with:
-          base: ${{ steps.extract-branch.outputs.nxBase }}
-          head: ${{ steps.extract-branch.outputs.branch }}
-      - run: |
-          echo "Affected Apps/Libs: ${{ steps.checkForAffected.outputs.affected }}"
-
       - name: 'Print outputs'
         shell: bash
         run: |
@@ -124,7 +103,6 @@ jobs:
           echo "Git information"
           echo "Target branch: ${{ steps.extract-branch.outputs.branch }}"
           echo "Base branch: ${{ steps.extract-branch.outputs.nxBase }}"
-          echo "Head SHA: ${{ github.sha }}"
           echo ""
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
