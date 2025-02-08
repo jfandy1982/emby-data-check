@@ -1,6 +1,7 @@
 # Emby Data Check Tool
 
 [![GitHub](https://img.shields.io/github/license/jfandy1982/emby-data-check?logo=GitHub)](https://github.com/jfandy1982/emby-data-check/blob/main/LICENSE.md)
+[![CI Pipeline](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline.yml/badge.svg?branch=main&event=push)](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline.yml)
 
 An end user documentation for this specific Emby Data Check Tool is published [here](https://jfandy1982.github.io/emby-data-check/) - it is still 'work in progress'. For more detailed information about the Emby Media Server itself, visit its website [emby.media](https://emby.media/).
 
