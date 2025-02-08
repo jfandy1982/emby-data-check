@@ -1,0 +1,3 @@
+{
+  "**/*.*": ["npm run format:affected", "npm run checks:lint:secretlint", "npm run spell:check"]
+}

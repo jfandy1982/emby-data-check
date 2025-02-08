@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "dictionaries": [
+    "css",
+    "dictionary-edc",
+    "docker",
+    "en-common-misspellings",
+    "fonts",
+    "fullstack",
+    "html",
+    "html-symbol-entities",
+    "lorem-ipsum",
+    "npm",
+    "sql",
+    "typescript"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "addWords": true,
+      "description": "Dictionary with terms from context 'Emby Data Check' (EDC)",
+      "name": "dictionary-edc",
+      "path": "./dictionary-edc.txt"
+    }
+  ],
+  "files": ["**/{*,.*}/**/*.*"],
+  "flagWords": [],
+  "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", ".gitignore", "dictionary-edc.txt"],
+  "ignoreWords": ["buildable", "devcontainers", "dkhunt", "pgadmin", "secretlint"],
+  "import": ["@cspell/dict-de-de/cspell-ext.json"],
+  "language": "en-US,de-DE",
+  "loadDefaultConfiguration": true,
+  "useGitignore": true,
+  "words": []
+}
