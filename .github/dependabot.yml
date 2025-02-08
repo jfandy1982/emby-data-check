@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 3
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
 
@@ -14,7 +14,7 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 3
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
 
@@ -23,7 +23,7 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 3
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
 
@@ -32,7 +32,7 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 5
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
     groups:
