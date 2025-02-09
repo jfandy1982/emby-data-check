@@ -46,8 +46,8 @@ permissions:
   statuses: read
 
 jobs:
-  get-affected-projects:
-    name: 'Get affected projects from Nx monorepo'
+  build:
+    name: 'Build all projects'
 
     runs-on: ubuntu-latest
 
