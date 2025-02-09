@@ -67,6 +67,9 @@ jobs:
         run: |
           npm install
 
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --target=build
+
       - name: 'Extract branch name'
         id: extract-branch
         shell: bash
