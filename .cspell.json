@@ -25,7 +25,7 @@
   ],
   "files": ["**/{*,.*}/**/*.*"],
   "flagWords": [],
-  "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", ".gitignore", "dictionary-edc.txt"],
+  "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", ".gitignore", "dictionary-edc.txt", "package-lock.json"],
   "ignoreWords": ["buildable", "devcontainers", "dkhunt", "pgadmin", "secretlint"],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
   "language": "en-US,de-DE",
