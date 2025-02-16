@@ -28,7 +28,7 @@
     "ng": "nx",
     "nx": "nx",
     "prepare": "husky || true",
-    "spell:check": "cspell lint --dot --show-suggestions --no-progress --config ./.cspell.json",
+    "spell:check": "cspell lint --dot --show-suggestions --no-progress --no-must-find-files --config ./.cspell.json",
     "spell:search:dict": "cspell trace --all --config ./.cspell.json",
     "upgrade": "nx migrate latest --interactive",
     "upgrade:doit": "npm install && nx migrate --run-migrations --if-exists"
