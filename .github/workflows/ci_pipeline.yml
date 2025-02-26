@@ -110,3 +110,10 @@ jobs:
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
+
+      - name: 'Check formatting'
+        id: formatting-check
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+        run: npx nx format:check --base=remotes/origin/$nxBase --head=$headSha
