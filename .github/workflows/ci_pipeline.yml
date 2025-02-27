@@ -116,4 +116,6 @@ jobs:
         env:
           headSha: ${{ github.sha }}
           nxBase: ${{ steps.extract-branch.outputs.nxBase }}
-        run: npx nx format:check --base=remotes/origin/$nxBase --head=$headSha
+        run: |
+          output=$(npx nx format:check --base=remotes/origin/$nxBase --head=$headSha)
+          echo "$output"
