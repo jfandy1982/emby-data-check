@@ -1,9 +1,11 @@
 const nx = require('@nx/eslint-plugin');
+const sheriff = require('@softarc/eslint-plugin-sheriff');
 
 module.exports = [
   ...nx.configs['flat/base'],
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
+  sheriff.configs.all,
   {
     ignores: ['**/dist'],
   },
