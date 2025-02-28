@@ -29,6 +29,12 @@
         "development": {
           "buildTarget": "edc-api:build:development"
         },
+        "ci": {
+          "buildTarget": "edc-api:build:ci"
+        },
+        "test": {
+          "buildTarget": "edc-api:build:test"
+        },
         "production": {
           "buildTarget": "edc-api:build:production"
         }

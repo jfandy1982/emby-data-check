@@ -44,12 +44,40 @@
               "maximumError": "8kb"
             }
           ],
+          "fileReplacements": [
+            {
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.production.ts"
+            }
+          ],
           "outputHashing": "all"
+        },
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.test.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared-util/environment/src/lib/environment.ts",
+              "with": "libs/shared-util/environment/src/lib/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -63,6 +91,12 @@
       "configurations": {
         "production": {
           "buildTarget": "edc-ui-ng:build:production"
+        },
+        "ci": {
+          "buildTarget": "edc-ui-ng:build:ci"
+        },
+        "test": {
+          "buildTarget": "edc-ui-ng:build:test"
         },
         "development": {
           "buildTarget": "edc-ui-ng:build:development"
