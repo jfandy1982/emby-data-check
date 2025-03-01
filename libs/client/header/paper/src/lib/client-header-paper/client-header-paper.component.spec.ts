@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClientHeaderPaperComponent } from './client-header-paper.component';
+import { HeaderComponent } from './client-header-paper.component';
 
-describe('ClientHeaderPaperComponent', () => {
-  let component: ClientHeaderPaperComponent;
-  let fixture: ComponentFixture<ClientHeaderPaperComponent>;
+describe('Header Component for Angular UI using the Paper Design', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientHeaderPaperComponent],
+      imports: [HeaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClientHeaderPaperComponent);
+    fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
