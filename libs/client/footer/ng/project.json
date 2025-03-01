@@ -4,7 +4,7 @@
   "sourceRoot": "libs/client/footer/ng/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["domain:edc-ui-ng"],
+  "tags": ["type:ui", "domain:edc-ui-ng", "ui:angular"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
