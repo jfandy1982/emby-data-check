@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClientHeaderNgComponent } from './client-header-ng.component';
+import { HeaderComponent } from './client-header-ng.component';
 
-describe('ClientHeaderNgComponent', () => {
-  let component: ClientHeaderNgComponent;
-  let fixture: ComponentFixture<ClientHeaderNgComponent>;
+describe('Header Component for Angular Material UI', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientHeaderNgComponent],
+      imports: [HeaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClientHeaderNgComponent);
+    fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -7,4 +7,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './client-footer-ng.component.html',
   styleUrl: './client-footer-ng.component.scss',
 })
-export class ClientFooterNgComponent {}
+export class FooterComponent {}

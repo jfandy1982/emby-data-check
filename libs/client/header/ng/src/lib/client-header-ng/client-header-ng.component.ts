@@ -7,4 +7,4 @@ import { CommonModule } from '@angular/common';
   templateUrl: './client-header-ng.component.html',
   styleUrl: './client-header-ng.component.scss',
 })
-export class ClientHeaderNgComponent {}
+export class HeaderComponent {}
