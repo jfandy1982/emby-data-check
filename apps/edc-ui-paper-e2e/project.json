@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/edc-ui-paper-e2e/src",
-  "tags": [],
+  "tags": ["type:e2e", "ui:paper"],
   "implicitDependencies": ["edc-ui-paper"],
   "// targets": "to see all targets run: nx show project edc-ui-paper-e2e --web",
   "targets": {}
