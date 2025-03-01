@@ -4,7 +4,7 @@
   "sourceRoot": "libs/client/footer/nord/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["domain:edc-ui-nord"],
+  "tags": ["type:ui", "domain:edc-ui-nord", "ui:nord"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

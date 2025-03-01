@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClientHeaderNordComponent } from './client-header-nord.component';
+import { HeaderComponent } from './client-header-nord.component';
 
-describe('ClientHeaderNordComponent', () => {
-  let component: ClientHeaderNordComponent;
-  let fixture: ComponentFixture<ClientHeaderNordComponent>;
+describe('Header Component for Angular UI using the Nord Theme', () => {
+  let component: HeaderComponent;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientHeaderNordComponent],
+      imports: [HeaderComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClientHeaderNordComponent);
+    fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
