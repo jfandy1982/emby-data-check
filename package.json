@@ -111,10 +111,14 @@
     "@nestjs/common": "^11.0.0",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
+    "@nestjs/swagger": "^11.0.0",
     "axios": "^1.0.0",
+    "class-transformer": "^0.5.0",
+    "class-validator": "^0.14.0",
     "express": "^4.0.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.0.0",
+    "typeorm": "^0.3.0",
     "zone.js": "^0.15.0"
   }
 }
