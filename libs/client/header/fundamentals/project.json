@@ -4,7 +4,7 @@
   "sourceRoot": "libs/client/header/fundamentals/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["domain:edc-ui-fundamentals"],
+  "tags": ["type:ui", "domain:edc-ui-fundamentals", "ui:fundamentals"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

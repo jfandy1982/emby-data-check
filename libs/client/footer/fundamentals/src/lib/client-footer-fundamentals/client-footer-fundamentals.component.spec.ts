@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClientFooterFundamentalsComponent } from './client-footer-fundamentals.component';
+import { FooterComponent } from './client-footer-fundamentals.component';
 
-describe('ClientFooterFundamentalsComponent', () => {
-  let component: ClientFooterFundamentalsComponent;
-  let fixture: ComponentFixture<ClientFooterFundamentalsComponent>;
+describe('Footer Component for Angular UI using SAP Fundamentals Design', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientFooterFundamentalsComponent],
+      imports: [FooterComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ClientFooterFundamentalsComponent);
+    fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
