@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "edc-ng",
   "sourceRoot": "apps/edc-ui-ng/src",
-  "tags": ["type:app", "scope:ui", "ui:angular"],
+  "tags": ["type:app", "ui:angular"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",

@@ -42,6 +42,22 @@ module.exports = [
               sourceTag: 'domain:shared',
               onlyDependOnLibsWithTags: ['domain:shared'],
             },
+            {
+              sourceTag: 'ui:angular',
+              onlyDependOnLibsWithTags: ['ui:angular'],
+            },
+            {
+              sourceTag: 'ui:fundamentals',
+              onlyDependOnLibsWithTags: ['ui:fundamentals'],
+            },
+            {
+              sourceTag: 'ui:nord',
+              onlyDependOnLibsWithTags: ['ui:nord'],
+            },
+            {
+              sourceTag: 'ui:paper-design',
+              onlyDependOnLibsWithTags: ['ui:paper-design'],
+            },
           ],
         },
       ],
