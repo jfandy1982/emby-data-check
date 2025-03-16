@@ -22,7 +22,6 @@
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "scripts": {
     "checks:lint:npmPkgJsonLint": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
-    "checks:lint:secretlint": "secretlint --maskSecrets --secretlintrc .github/linters/.secretlintrc.json",
     "format:affected": "nx format:write",
     "format:all": "nx format:write --all",
     "ng": "nx",
@@ -58,7 +57,6 @@
     "@nx/webpack": "20.6.0",
     "@nx/workspace": "20.6.0",
     "@schematics/angular": "^19.0.0",
-    "@secretlint/secretlint-rule-preset-recommend": "^9.0.0",
     "@softarc/eslint-plugin-sheriff": "^0.18.0",
     "@softarc/sheriff-core": "^0.18.0",
     "@swc-node/register": "^1.0.0",
@@ -87,7 +85,6 @@
     "nx": "20.6.0",
     "prettier": "^3.0.0",
     "rimraf": "^6.0.0",
-    "secretlint": "^9.0.0",
     "ts-jest": "^29.0.0",
     "ts-node": "^10.0.0",
     "tslib": "^2.0.0",
