@@ -1,0 +1,20 @@
+{
+  "name": "client-header-ng",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/header/ng/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:ui", "domain:edc-ui-ng", "ui:angular"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/client/header/ng/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
