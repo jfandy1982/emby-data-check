@@ -34,6 +34,12 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      nestjs:
+        patterns:
+          - '@nestjs/*'
+        update-types:
+          - 'minor'
+          - 'patch'
       nx:
         patterns:
           - '@nx*'
@@ -46,13 +52,6 @@ updates:
           - '@fundamental-ngx*'
           - '@sap-theming*'
           - 'fundamental-styles'
-        update-types:
-          - 'minor'
-          - 'patch'
-      secretlint:
-        patterns:
-          - '@secretlint*'
-          - 'secretlint'
         update-types:
           - 'minor'
           - 'patch'
