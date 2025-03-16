@@ -1,7 +1,7 @@
-import { IEnvironment } from './environment.interface';
+import { IEnvironment } from './interfaces/environment.interface';
 
 export const environment: IEnvironment = {
-  apiUrl: '/api/v1',
+  database_name: 'edc_ci',
   landscape: 'ci',
   production: true,
 };

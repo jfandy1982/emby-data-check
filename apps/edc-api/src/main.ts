@@ -4,21 +4,18 @@
  */
 
 import { Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
+import { environment, IApiConfigEnvVars, IEnvironment } from '@edc/shared/environment';
 import { AppModule } from './app/app.module';
-import { environment } from '@edc/shared/environment';
-import { setupSwagger } from './util';
+import { setupEnvironment, setupSwagger } from './util';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  setupEnvironment(app);
 
-  const configService = app.get(ConfigService);
-
-  // TODO: ensure type-safety by using a wrapper for the config service.
-  // Currently, it my reply with undefined as well. As we don't want to duplicate default values across the implementation,
-  //  some better mechanism is required here.
-  const port = configService.get<number>('config.port') || 3000;
+  // For typing reasons, the access to the prepared environment object is not possible here. EnvVars configs are potentially undefined.
+  const port = app.get(ConfigService<IEnvironment, true>).get<IApiConfigEnvVars>('apiConfigEnvVars').api_port;
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
 
