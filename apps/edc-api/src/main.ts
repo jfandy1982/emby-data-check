@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from '@nestjs/config';
 import { environment, IApiConfigEnvVars, IEnvironment } from '@edc/shared/environment';
@@ -29,6 +29,13 @@ async function bootstrap() {
       });
 
   setupSwagger(app, globalPrefix);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+    }),
+  );
 
   await app.listen(port, () => {
     Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
