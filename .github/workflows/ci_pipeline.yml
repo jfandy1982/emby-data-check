@@ -1,4 +1,4 @@
-name: Continuous Integration Pipeline
+7name: Continuous Integration Pipeline
 
 on:
   push:
@@ -91,10 +91,62 @@ jobs:
         shell: bash
         run: |
           git fetch origin $branch
-          output=$(npx nx show projects --affected --base=remotes/origin/$nxBase --head=$headSha --json)
+          output=$(npx nx show projects --affected --type app --base=remotes/origin/$nxBase --head=$headSha --json)
           echo "$output"
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
           echo "$affected"
+
+      - name: 'Get affected libs'
+        id: check-affected-libs
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type lib --base=remotes/origin/$nxBase --head=$headSha --json)
+          echo "$output"
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "$affected"
+
+      - name: 'Get affected e2e'
+        id: check-affected-e2e
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type e2e --base=remotes/origin/$nxBase --head=$headSha --json)
+          echo "$output"
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "$affected"
+
+      - name: Evaluate affected with DepGraph for edc-api
+        uses: leanix/nx-affected-dependencies-action@v0.2.1
+        id: affected-dep-graph-edc-api
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+        with:
+          project: 'edc-api'
+          base: ${{ env.nxBase }}
+          head: ${{ env.headSha }}
+          target: 'test'
+
+      - name: Evaluate affected with DepGraph for edc-ui-ng
+        uses: leanix/nx-affected-dependencies-action@v0.2.1
+        id: affected-dep-graph-edc-ui-ng
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+        with:
+          project: 'edc-ui-ng'
+          base: ${{ env.nxBase }}
+          head: ${{ env.headSha }}
+          target: 'test'
 
       - name: 'Print outputs'
         shell: bash
@@ -110,6 +162,10 @@ jobs:
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
+          echo ""
+          echo "Affected Dependencies"
+          echo "App [edc-api]: ${{ steps.affected-dep-graph-edc-api.outputs.affectedDeps }}"
+          echo "App [edc-ui-ng]: ${{ steps.affected-dep-graph-edc-ui-ng.outputs.affectedDeps }}"
 
       - name: 'Check formatting'
         id: formatting-check
