@@ -1,4 +1,4 @@
-7name: Continuous Integration Pipeline
+name: Continuous Integration Pipeline
 
 on:
   push:
