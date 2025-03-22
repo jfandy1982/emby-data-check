@@ -23,8 +23,26 @@ on:
         type: boolean
         default: false
 
+      edc-ui-fundamentals-manual:
+        description: 'Is app [edc-ui-fundamentals] affected?'
+        required: false
+        type: boolean
+        default: false
+
+      edc-ui-nord-manual:
+        description: 'Is app [edc-ui-nord] affected?'
+        required: false
+        type: boolean
+        default: false
+
       edc-ui-ng-manual:
         description: 'Is app [edc-ui-ng] affected?'
+        required: false
+        type: boolean
+        default: false
+
+      edc-ui-paper-manual:
+        description: 'Is app [edc-ui-paper] affected?'
         required: false
         type: boolean
         default: false
@@ -137,7 +155,10 @@ jobs:
           echo ""
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
+          echo "Is app [edc-ui-fundamentals] affected? ${{ inputs.edc-ui-fundamentals-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
+          echo "Is app [edc-ui-nord] affected? ${{ inputs.edc-ui-nord-manual }}"
+          echo "Is app [edc-ui-paper] affected? ${{ inputs.edc-ui-paper-manual }}"
 
       - name: 'Check formatting'
         id: formatting-check
