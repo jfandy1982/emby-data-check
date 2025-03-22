@@ -1,0 +1,10 @@
+{
+  "name": "edc-ui-nord-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/edc-ui-nord-e2e/src",
+  "tags": ["type:e2e", "ui:nord"],
+  "implicitDependencies": ["edc-ui-nord"],
+  "// targets": "to see all targets run: nx show project edc-ui-nord-e2e --web",
+  "targets": {}
+}

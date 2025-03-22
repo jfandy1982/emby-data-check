@@ -4,7 +4,7 @@
   "projectType": "application",
   "prefix": "edc-ng",
   "sourceRoot": "apps/edc-ui-ng/src",
-  "tags": ["type:app", "scope:ui", "ui:angular"],
+  "tags": ["type:app", "domain:edc-ui-ng", "ui:angular"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
@@ -23,12 +23,7 @@
           }
         ],
         "styles": ["@angular/material/prebuilt-themes/indigo-pink.css", "apps/edc-ui-ng/src/styles.scss"],
-        "scripts": [],
-        "server": "apps/edc-ui-ng/src/main.server.ts",
-        "ssr": {
-          "entry": "apps/edc-ui-ng/src/server.ts"
-        },
-        "prerender": true
+        "scripts": []
       },
       "configurations": {
         "production": {
@@ -44,12 +39,40 @@
               "maximumError": "8kb"
             }
           ],
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.production.ts"
+            }
+          ],
           "outputHashing": "all"
+        },
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.test.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production"

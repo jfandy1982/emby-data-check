@@ -8,7 +8,7 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 echo ""
 echo "Current Branch is [${BRANCH}]"
 
-if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "test" ] || [ "$BRANCH" = "prod" ]; then
+if [ "$BRANCH" = "test" ] || [ "$BRANCH" = "prod" ]; then
   echo "You can't commit directly to branch [${BRANCH}] - a PR is required for changing that branch."
   exit 1
 fi

@@ -1,0 +1,9 @@
+{
+  "name": "client-ui-style-ng",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/ui-style/ng/src",
+  "projectType": "library",
+  "tags": ["domain:edc-ui-ng"],
+  "// targets": "to see all targets run: nx show project client-ui-style-ng --web",
+  "targets": {}
+}

@@ -1,0 +1,9 @@
+{
+  "name": "shared-model-emby",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/model/emby/src",
+  "projectType": "library",
+  "tags": ["type:util", "domain:shared"],
+  "// targets": "to see all targets run: nx show project shared-model-emby --web",
+  "targets": {}
+}

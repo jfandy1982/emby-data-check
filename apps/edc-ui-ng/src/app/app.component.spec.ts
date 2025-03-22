@@ -1,15 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 
-describe('AppComponent', () => {
+describe('Emby Data Check: AppComponent for Angular Material UI', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterModule.forRoot([])],
+      imports: [AppComponent],
     }).compileComponents();
   });
 
-  it('should create AppComponent', () => {
+  it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     expect(fixture).toBeTruthy();
   });

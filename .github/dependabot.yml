@@ -1,14 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: 'docker'
-    directory: '/apps/**/Dockerfile'
-    schedule:
-      interval: 'monthly'
-    open-pull-requests-limit: 3
-    target-branch: 'main'
-    labels:
-      - 'dependencies'
-
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
@@ -43,6 +34,12 @@ updates:
         update-types:
           - 'minor'
           - 'patch'
+      nestjs:
+        patterns:
+          - '@nestjs/*'
+        update-types:
+          - 'minor'
+          - 'patch'
       nx:
         patterns:
           - '@nx*'
@@ -55,13 +52,6 @@ updates:
           - '@fundamental-ngx*'
           - '@sap-theming*'
           - 'fundamental-styles'
-        update-types:
-          - 'minor'
-          - 'patch'
-      secretlint:
-        patterns:
-          - '@secretlint*'
-          - 'secretlint'
         update-types:
           - 'minor'
           - 'patch'
