@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
 import { ApiConfig, DbConfig, EmbyConfig } from './configEnvVars';
+import { ServerFeatureModule } from '@edc/api/server/feature';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,6 +22,7 @@ import { ApiConfig, DbConfig, EmbyConfig } from './configEnvVars';
       validatePredefined: true,
     }),
     HealthcheckFeatureModule,
+    ServerFeatureModule,
   ],
   controllers: [],
   providers: [],
