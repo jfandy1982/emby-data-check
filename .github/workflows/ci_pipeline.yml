@@ -3,7 +3,6 @@ name: Continuous Integration Pipeline
 on:
   push:
     branches:
-      - dev
       - main
       - test
       - prod
@@ -24,8 +23,26 @@ on:
         type: boolean
         default: false
 
+      edc-ui-fundamentals-manual:
+        description: 'Is app [edc-ui-fundamentals] affected?'
+        required: false
+        type: boolean
+        default: false
+
+      edc-ui-nord-manual:
+        description: 'Is app [edc-ui-nord] affected?'
+        required: false
+        type: boolean
+        default: false
+
       edc-ui-ng-manual:
         description: 'Is app [edc-ui-ng] affected?'
+        required: false
+        type: boolean
+        default: false
+
+      edc-ui-paper-manual:
+        description: 'Is app [edc-ui-paper] affected?'
         required: false
         type: boolean
         default: false
@@ -47,8 +64,8 @@ permissions:
   statuses: read
 
 jobs:
-  get-affected-projects:
-    name: 'Get affected projects from Nx monorepo'
+  build:
+    name: 'Build all projects'
 
     runs-on: ubuntu-latest
 
@@ -59,7 +76,7 @@ jobs:
           fetch-depth: 0
 
       - name: 'Setup Node.js environment'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.2.0
         with:
           node-version-file: '.nvmrc'
 
@@ -67,7 +84,9 @@ jobs:
         shell: bash
         run: |
           npm install
-          npm install -g nx
+
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --target=build
 
       - name: 'Extract branch name'
         id: extract-branch
@@ -81,7 +100,7 @@ jobs:
 
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-      - name: 'Get affected apps (plain option)'
+      - name: 'Get affected apps'
         id: check-affected-apps
         env:
           headSha: ${{ github.sha }}
@@ -90,42 +109,64 @@ jobs:
         shell: bash
         run: |
           git fetch origin $branch
-          output=$(npx nx show projects --affected --base=remotes/origin/$nxBase --head=$headSha --json)
-          echo "$output"
+          output=$(npx nx show projects --affected --type app --base=remotes/origin/$nxBase --head=$headSha --json)
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
-          echo "$affected"
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
 
-      - name: 'Get affected apps (nx-set-shas option)'
-        id: setSHAs
-        uses: nrwl/nx-set-shas@v4
-        with:
-          main-branch-name: ${{ steps.extract-branch.outputs.branch }}
+      - name: 'Get affected libs'
+        id: check-affected-libs
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type lib --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
 
-      - run: |
-          echo "BASE: ${{ steps.setSHAs.outputs.base }}"
-          echo "HEAD: ${{ steps.setSHAs.outputs.head }}"
-
-      - name: Get affected apps (dkhunt27 option)
-        id: checkForAffected
-        uses: dkhunt27/action-nx-affected-list@v6.1
-        with:
-          base: ${{ steps.extract-branch.outputs.nxBase }}
-          head: ${{ steps.extract-branch.outputs.branch }}
-      - run: |
-          echo "Affected Apps/Libs: ${{ steps.checkForAffected.outputs.affected }}"
+      - name: 'Get affected e2e'
+        id: check-affected-e2e
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type e2e --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
 
       - name: 'Print outputs'
         shell: bash
         run: |
-          echo "Event information:"
+          echo "Event information"
           echo "Event name: ${{ github.event_name }}"
           echo "Event Action: ${{ github.event.action }}"
           echo ""
           echo "Git information"
           echo "Target branch: ${{ steps.extract-branch.outputs.branch }}"
           echo "Base branch: ${{ steps.extract-branch.outputs.nxBase }}"
-          echo "Head SHA: ${{ github.sha }}"
+          echo ""
+          echo "Affected projects detected by Nx Tooling"
+          echo "Affected apps: ${{ steps.check-affected-apps.outputs.affected }}"
+          echo "Affected libs: ${{ steps.check-affected-libs.outputs.affected }}"
+          echo "Affected e2e: ${{ steps.check-affected-e2e.outputs.affected }}"
           echo ""
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
+          echo "Is app [edc-ui-fundamentals] affected? ${{ inputs.edc-ui-fundamentals-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
+          echo "Is app [edc-ui-nord] affected? ${{ inputs.edc-ui-nord-manual }}"
+          echo "Is app [edc-ui-paper] affected? ${{ inputs.edc-ui-paper-manual }}"
+
+      - name: 'Check formatting'
+        id: formatting-check
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+        run: |
+          output=$(npx nx format:check --base=remotes/origin/$nxBase --head=$headSha)
+          echo "$output"

@@ -1,0 +1,20 @@
+{
+  "name": "client-header-fundamentals",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/header/fundamentals/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["type:ui", "domain:edc-ui-fundamentals", "ui:fundamentals"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/client/header/fundamentals/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

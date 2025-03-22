@@ -1,20 +1,11 @@
 version: 2
 updates:
-  - package-ecosystem: 'docker'
-    directory: '/apps/**/Dockerfile'
-    schedule:
-      interval: 'monthly'
-    open-pull-requests-limit: 3
-    target-branch: 'dev'
-    labels:
-      - 'dependencies'
-
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 3
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
 
@@ -23,7 +14,7 @@ updates:
     schedule:
       interval: monthly
     open-pull-requests-limit: 3
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
 
@@ -32,7 +23,7 @@ updates:
     schedule:
       interval: 'monthly'
     open-pull-requests-limit: 5
-    target-branch: 'dev'
+    target-branch: 'main'
     labels:
       - 'dependencies'
     groups:
@@ -40,6 +31,12 @@ updates:
         patterns:
           - '@angular/*'
           - '@angular-devkit/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      nestjs:
+        patterns:
+          - '@nestjs/*'
         update-types:
           - 'minor'
           - 'patch'
@@ -55,13 +52,6 @@ updates:
           - '@fundamental-ngx*'
           - '@sap-theming*'
           - 'fundamental-styles'
-        update-types:
-          - 'minor'
-          - 'patch'
-      secretlint:
-        patterns:
-          - '@secretlint*'
-          - 'secretlint'
         update-types:
           - 'minor'
           - 'patch'

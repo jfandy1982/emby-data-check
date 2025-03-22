@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/edc-api/src",
   "projectType": "application",
-  "tags": ["type:app", "scope:api"],
+  "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -12,14 +12,44 @@
         "args": ["node-env=production"]
       },
       "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.production.ts"
+            }
+          ]
+        },
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.test.ts"
+            }
+          ]
+        },
         "development": {
-          "args": ["node-env=development"]
+          "args": ["node-env=development"],
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.development.ts"
+            }
+          ]
         }
       }
     },
     "serve": {
       "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
+      "defaultConfiguration": "production",
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "edc-api:build",
@@ -29,9 +59,28 @@
         "development": {
           "buildTarget": "edc-api:build:development"
         },
+        "ci": {
+          "buildTarget": "edc-api:build:ci"
+        },
+        "test": {
+          "buildTarget": "edc-api:build:test"
+        },
         "production": {
           "buildTarget": "edc-api:build:production"
         }
+      }
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run edc-api:serve:development",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          }
+        ],
+        "parallel": true
       }
     },
     "test": {
