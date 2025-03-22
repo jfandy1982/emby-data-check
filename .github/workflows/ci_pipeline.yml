@@ -110,9 +110,8 @@ jobs:
         run: |
           git fetch origin $branch
           output=$(npx nx show projects --affected --type app --base=remotes/origin/$nxBase --head=$headSha --json)
-          echo "$output"
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
-          echo "$affected"
+          echo "affected-apps=${affected}" >> $GITHUB_OUTPUT
 
       - name: 'Get affected libs'
         id: check-affected-libs
@@ -124,9 +123,8 @@ jobs:
         run: |
           git fetch origin $branch
           output=$(npx nx show projects --affected --type lib --base=remotes/origin/$nxBase --head=$headSha --json)
-          echo "$output"
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
-          echo "$affected"
+          echo "affected-libs=${affected}" >> $GITHUB_OUTPUT
 
       - name: 'Get affected e2e'
         id: check-affected-e2e
@@ -138,20 +136,24 @@ jobs:
         run: |
           git fetch origin $branch
           output=$(npx nx show projects --affected --type e2e --base=remotes/origin/$nxBase --head=$headSha --json)
-          echo "$output"
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
-          echo "$affected"
+          echo "affected-e2e=${affected}" >> $GITHUB_OUTPUT
 
       - name: 'Print outputs'
         shell: bash
         run: |
-          echo "Event information:"
+          echo "Event information"
           echo "Event name: ${{ github.event_name }}"
           echo "Event Action: ${{ github.event.action }}"
           echo ""
           echo "Git information"
           echo "Target branch: ${{ steps.extract-branch.outputs.branch }}"
           echo "Base branch: ${{ steps.extract-branch.outputs.nxBase }}"
+          echo ""
+          echo "Affected projects detected by Nx Tooling"
+          echo "Affected apps: ${{ steps.check-affected-apps.outputs.affected-apps }}"
+          echo "Affected libs: ${{ steps.check-affected-apps.outputs.affected-libs }}"
+          echo "Affected e2e: ${{ steps.check-affected-apps.outputs.affected-e2e }}"
           echo ""
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
