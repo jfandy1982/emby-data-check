@@ -34,7 +34,7 @@
     "upgrade:doit": "npm install && nx migrate --run-migrations --if-exists"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^19.0.0",
+    "@angular-devkit/build-angular": "^19.2.3",
     "@angular-devkit/core": "^19.0.0",
     "@angular-devkit/schematics": "^19.0.0",
     "@angular/cli": "^19.0.0",
