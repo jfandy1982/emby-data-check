@@ -3,6 +3,9 @@
 </header>
 <main>
   <router-outlet></router-outlet>
+  <div>
+    {{ dataFromApi | json }}
+  </div>
 </main>
 <footer>
   <lib-edc-footer-paper></lib-edc-footer-paper>
