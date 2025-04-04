@@ -15,10 +15,10 @@ import { JsonPipe } from '@angular/common';
 export class AppComponent implements OnInit {
   dataFromApi: unknown;
 
-  constructor(private http: HttpClient) {}
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/api/servers/publicSystemInfo').subscribe({
+    this.httpClient.get('http://localhost:3000/api/servers/publicSystemInfo').subscribe({
       next: (data) => {
         this.dataFromApi = data;
       },

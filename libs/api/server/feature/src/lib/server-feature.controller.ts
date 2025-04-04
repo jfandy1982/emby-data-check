@@ -2,7 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ServerFeatureService } from './server-feature.service';
 import { environment } from '@edc/shared/environment';
 import { EmbyPublicSystemInfoInterface } from '@edc/shared/model/emby';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Controller('servers')
 export class ServerFeatureController {
