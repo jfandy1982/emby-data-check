@@ -1,7 +1,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { EmbyPublicSystemInfoInterface } from '@edc/shared/model/emby';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ServerDataAccessEmbyService {
