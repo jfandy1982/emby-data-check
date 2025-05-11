@@ -3,10 +3,10 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
 import { environment, IApiConfigEnvVars, IEnvironment } from '@edc/shared/environment';
+import { Logger, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { setupEnvironment, setupSwagger } from './util';
 

@@ -1,38 +1,17 @@
 {
-  "name": "edc-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/edc-api/src",
+  "name": "edc-api",
   "projectType": "application",
+  "sourceRoot": "apps/edc-api/src",
   "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "webpack-cli build",
-        "args": ["node-env=production"]
-      },
       "configurations": {
-        "production": {
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.production.ts"
-            }
-          ]
-        },
         "ci": {
           "fileReplacements": [
             {
               "replace": "libs/shared/environment/src/lib/environment.ts",
               "with": "libs/shared/environment/src/lib/environment.ci.ts"
-            }
-          ]
-        },
-        "test": {
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.test.ts"
             }
           ]
         },
@@ -44,30 +23,51 @@
               "with": "libs/shared/environment/src/lib/environment.development.ts"
             }
           ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.production.ts"
+            }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.test.ts"
+            }
+          ]
         }
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "args": ["node-env=production"],
+        "command": "webpack-cli build"
       }
     },
     "serve": {
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "production",
-      "dependsOn": ["build"],
-      "options": {
-        "buildTarget": "edc-api:build",
-        "runBuildTargetDependencies": false
-      },
       "configurations": {
-        "development": {
-          "buildTarget": "edc-api:build:development"
-        },
         "ci": {
           "buildTarget": "edc-api:build:ci"
         },
-        "test": {
-          "buildTarget": "edc-api:build:test"
+        "development": {
+          "buildTarget": "edc-api:build:development"
         },
         "production": {
           "buildTarget": "edc-api:build:production"
+        },
+        "test": {
+          "buildTarget": "edc-api:build:test"
         }
+      },
+      "defaultConfiguration": "production",
+      "dependsOn": ["build"],
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "edc-api:build",
+        "runBuildTargetDependencies": false
       }
     },
     "stack": {
@@ -80,6 +80,9 @@
             "forwardAllArgs": false
           }
         ],
+        "env": {
+          "NEST_DEBUG": "true"
+        },
         "parallel": true
       }
     },
