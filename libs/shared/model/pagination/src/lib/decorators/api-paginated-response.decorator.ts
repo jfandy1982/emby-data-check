@@ -1,4 +1,4 @@
-import { MediaItemDto, ServerDto, UserDto } from '@edc/shared-interfaces/api-interface';
+import { MediaItemDto, ServerDto, UserDto } from '@edc/shared/model/api';
 import { applyDecorators, Type } from '@nestjs/common';
 import { ApiExtraModels, ApiOkResponse, getSchemaPath } from '@nestjs/swagger';
 import { PageDto } from '../dtos/page.dto';

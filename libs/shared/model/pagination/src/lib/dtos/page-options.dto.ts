@@ -1,4 +1,4 @@
-import { SortOrder } from '@edc/shared-interfaces/enum';
+import { SortOrder } from '@edc/shared/model/enum';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsEnum, IsInt, IsOptional, Max, Min } from 'class-validator';

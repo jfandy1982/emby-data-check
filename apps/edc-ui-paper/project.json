@@ -1,42 +1,43 @@
 {
-  "name": "edc-ui-paper",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
+  "name": "edc-ui-paper",
   "prefix": "edc-paper",
+  "projectType": "application",
   "sourceRoot": "apps/edc-ui-paper/src",
   "tags": ["type:app", "domain:edc-ui-paper", "ui:paper"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/edc-ui-paper",
-        "index": "apps/edc-ui-paper/src/index.html",
-        "browser": "apps/edc-ui-paper/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ui-paper/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/edc-ui-paper/public"
-          }
-        ],
-        "styles": ["apps/edc-ui-paper/src/styles.scss"],
-        "scripts": []
-      },
       "configurations": {
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "development": {
+          "extractLicenses": false,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.development.ts"
+            }
+          ],
+          "optimization": false,
+          "sourceMap": true
+        },
         "production": {
           "budgets": [
             {
-              "type": "initial",
+              "maximumError": "1mb",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "type": "initial"
             },
             {
-              "type": "anyComponentStyle",
+              "maximumError": "8kb",
               "maximumWarning": "4kb",
-              "maximumError": "8kb"
+              "type": "anyComponentStyle"
             }
           ],
           "fileReplacements": [
@@ -47,14 +48,6 @@
           ],
           "outputHashing": "all"
         },
-        "ci": {
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.ci.ts"
-            }
-          ]
-        },
         "test": {
           "fileReplacements": [
             {
@@ -62,36 +55,27 @@
               "with": "libs/shared/environment/src/lib/environment.test.ts"
             }
           ]
-        },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.development.ts"
-            }
-          ]
         }
       },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "port": 4203,
-        "proxyConfig": "apps/edc-ui-paper/proxy.conf.json"
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-paper/public"
+          }
+        ],
+        "browser": "apps/edc-ui-paper/src/main.ts",
+        "index": "apps/edc-ui-paper/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "outputPath": "dist/apps/edc-ui-paper",
+        "polyfills": ["zone.js"],
+        "scripts": [],
+        "styles": ["apps/edc-ui-paper/src/styles.scss"],
+        "tsConfig": "apps/edc-ui-paper/tsconfig.app.json"
       },
-      "configurations": {
-        "production": {
-          "buildTarget": "edc-ui-paper:build:production"
-        },
-        "development": {
-          "buildTarget": "edc-ui-paper:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
+      "outputs": ["{options.outputPath}"]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -102,11 +86,21 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+    "serve": {
+      "configurations": {
+        "development": {
+          "buildTarget": "edc-ui-paper:build:development"
+        },
+        "production": {
+          "buildTarget": "edc-ui-paper:build:production"
+        }
+      },
+      "continuous": true,
+      "defaultConfiguration": "development",
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "jestConfig": "apps/edc-ui-paper/jest.config.ts"
+        "port": 4203,
+        "proxyConfig": "apps/edc-ui-paper/proxy.conf.json"
       }
     },
     "serve-static": {
@@ -114,9 +108,16 @@
       "options": {
         "buildTarget": "edc-ui-paper:build",
         "port": 4203,
-        "staticFilePath": "dist/apps/edc-ui-paper/browser",
-        "spa": true
+        "spa": true,
+        "staticFilePath": "dist/apps/edc-ui-paper/browser"
       }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/edc-ui-paper/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     }
   }
 }

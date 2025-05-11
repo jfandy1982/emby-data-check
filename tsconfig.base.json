@@ -1,19 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
+    "baseUrl": ".",
     "declaration": false,
-    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
     "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "module": "esnext",
+    "moduleResolution": "node",
     "paths": {
       "@edc/api/healthcheck/feature": ["libs/api/healthcheck/feature/src/index.ts"],
       "@edc/api/mediaitem/data-access/edc": ["libs/api/mediaitem/data-access/edc/src/index.ts"],
@@ -39,7 +34,12 @@
       "@edc/ui/header/ng": ["libs/client/header/ng/src/index.ts"],
       "@edc/ui/header/nord": ["libs/client/header/nord/src/index.ts"],
       "@edc/ui/header/paper": ["libs/client/header/paper/src/index.ts"]
-    }
+    },
+    "rootDir": ".",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es2015"
   },
   "exclude": ["node_modules", "tmp"]
 }

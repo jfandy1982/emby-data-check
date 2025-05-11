@@ -1,9 +1,10 @@
-import * as joi from 'joi';
+import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
+import { ServerFeatureModule } from '@edc/api/server/feature';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { HealthcheckFeatureModule } from '@edc/api/healthcheck/feature';
+import * as joi from 'joi';
 import { ApiConfig, DbConfig, EmbyConfig } from './configEnvVars';
-import { ServerFeatureModule } from '@edc/api/server/feature';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
