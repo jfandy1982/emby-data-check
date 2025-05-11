@@ -1,42 +1,43 @@
 {
-  "name": "edc-ui-fundamentals",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "projectType": "application",
+  "name": "edc-ui-fundamentals",
   "prefix": "edc-fundamentals",
+  "projectType": "application",
   "sourceRoot": "apps/edc-ui-fundamentals/src",
   "tags": ["type:app", "domain:edc-ui-fundamentals", "ui:fundamentals"],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/edc-ui-fundamentals",
-        "index": "apps/edc-ui-fundamentals/src/index.html",
-        "browser": "apps/edc-ui-fundamentals/src/main.ts",
-        "polyfills": ["zone.js"],
-        "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json",
-        "inlineStyleLanguage": "scss",
-        "assets": [
-          {
-            "glob": "**/*",
-            "input": "apps/edc-ui-fundamentals/public"
-          }
-        ],
-        "styles": ["apps/edc-ui-fundamentals/src/styles.scss"],
-        "scripts": []
-      },
       "configurations": {
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "development": {
+          "extractLicenses": false,
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.development.ts"
+            }
+          ],
+          "optimization": false,
+          "sourceMap": true
+        },
         "production": {
           "budgets": [
             {
-              "type": "initial",
+              "maximumError": "1mb",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "type": "initial"
             },
             {
-              "type": "anyComponentStyle",
+              "maximumError": "8kb",
               "maximumWarning": "4kb",
-              "maximumError": "8kb"
+              "type": "anyComponentStyle"
             }
           ],
           "fileReplacements": [
@@ -47,14 +48,6 @@
           ],
           "outputHashing": "all"
         },
-        "ci": {
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.ci.ts"
-            }
-          ]
-        },
         "test": {
           "fileReplacements": [
             {
@@ -62,36 +55,27 @@
               "with": "libs/shared/environment/src/lib/environment.test.ts"
             }
           ]
-        },
-        "development": {
-          "optimization": false,
-          "extractLicenses": false,
-          "sourceMap": true,
-          "fileReplacements": [
-            {
-              "replace": "libs/shared/environment/src/lib/environment.ts",
-              "with": "libs/shared/environment/src/lib/environment.development.ts"
-            }
-          ]
         }
       },
-      "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:application",
       "options": {
-        "port": 4201,
-        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-fundamentals/public"
+          }
+        ],
+        "browser": "apps/edc-ui-fundamentals/src/main.ts",
+        "index": "apps/edc-ui-fundamentals/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "outputPath": "dist/apps/edc-ui-fundamentals",
+        "polyfills": ["zone.js"],
+        "scripts": [],
+        "styles": ["apps/edc-ui-fundamentals/src/styles.scss"],
+        "tsConfig": "apps/edc-ui-fundamentals/tsconfig.app.json"
       },
-      "configurations": {
-        "production": {
-          "buildTarget": "edc-ui-fundamentals:build:production"
-        },
-        "development": {
-          "buildTarget": "edc-ui-fundamentals:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
+      "outputs": ["{options.outputPath}"]
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -102,11 +86,21 @@
     "lint": {
       "executor": "@nx/eslint:lint"
     },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+    "serve": {
+      "configurations": {
+        "development": {
+          "buildTarget": "edc-ui-fundamentals:build:development"
+        },
+        "production": {
+          "buildTarget": "edc-ui-fundamentals:build:production"
+        }
+      },
+      "continuous": true,
+      "defaultConfiguration": "development",
+      "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts"
+        "port": 4201,
+        "proxyConfig": "apps/edc-ui-fundamentals/proxy.conf.json"
       }
     },
     "serve-static": {
@@ -114,9 +108,16 @@
       "options": {
         "buildTarget": "edc-ui-fundamentals:build",
         "port": 4201,
-        "staticFilePath": "dist/apps/edc-ui-fundamentals/browser",
-        "spa": true
+        "spa": true,
+        "staticFilePath": "dist/apps/edc-ui-fundamentals/browser"
       }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/edc-ui-fundamentals/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     }
   }
 }
