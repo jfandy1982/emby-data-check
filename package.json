@@ -107,7 +107,7 @@
     "format:all": "nx format:write --all",
     "ng": "nx",
     "nx": "nx",
-    "prepare": "husky || true",
+    "prepare": "husky",
     "spell:check": "cspell lint --dot --show-suggestions --no-progress --no-must-find-files --config ./.cspell.json",
     "spell:search:dict": "cspell trace --all --config ./.cspell.json",
     "upgrade": "nx migrate latest --interactive",

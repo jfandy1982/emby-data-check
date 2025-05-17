@@ -1,38 +1,74 @@
 {
-  "name": "edc-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/edc-api/src",
+  "name": "edc-api",
   "projectType": "application",
-  "tags": ["type:app", "scope:api"],
+  "sourceRoot": "apps/edc-api/src",
+  "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
+      "configurations": {
+        "ci": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.ci.ts"
+            }
+          ]
+        },
+        "development": {
+          "args": ["node-env=development"],
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.development.ts"
+            }
+          ]
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.production.ts"
+            }
+          ]
+        },
+        "test": {
+          "fileReplacements": [
+            {
+              "replace": "libs/shared/environment/src/lib/environment.ts",
+              "with": "libs/shared/environment/src/lib/environment.test.ts"
+            }
+          ]
+        }
+      },
       "executor": "nx:run-commands",
       "options": {
-        "command": "webpack-cli build",
-        "args": ["node-env=production"]
-      },
-      "configurations": {
-        "development": {
-          "args": ["node-env=development"]
-        }
+        "args": ["node-env=production"],
+        "command": "webpack-cli build"
       }
     },
     "serve": {
-      "continuous": true,
-      "executor": "@nx/js:node",
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
-      "options": {
-        "buildTarget": "edc-api:build",
-        "runBuildTargetDependencies": false
-      },
       "configurations": {
+        "ci": {
+          "buildTarget": "edc-api:build:ci"
+        },
         "development": {
           "buildTarget": "edc-api:build:development"
         },
         "production": {
           "buildTarget": "edc-api:build:production"
+        },
+        "test": {
+          "buildTarget": "edc-api:build:test"
         }
+      },
+      "continuous": true,
+      "defaultConfiguration": "production",
+      "dependsOn": ["build"],
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "edc-api:build",
+        "runBuildTargetDependencies": false
       }
     },
     "test": {

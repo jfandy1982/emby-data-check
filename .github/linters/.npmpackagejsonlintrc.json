@@ -17,9 +17,6 @@
     "require-name": "error",
     "require-repository": "error",
     "require-version": "error",
-    "valid-values-author": [
-      "error",
-      ["Andreas Ziegler (dev@andreasziegler.net)"]
-    ]
+    "valid-values-author": ["error", ["Andreas Ziegler (dev@andreasziegler.net)"]]
   }
 }

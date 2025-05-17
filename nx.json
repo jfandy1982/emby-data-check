@@ -1,5 +1,13 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "generators": {
+    "@nx/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "style": "scss",
+      "unitTestRunner": "jest"
+    }
+  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
@@ -10,45 +18,43 @@
       "!{projectRoot}/tsconfig.spec.json",
       "!{projectRoot}/jest.config.[jt]s",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/test-setup.[jt]s",
-      "!{projectRoot}/cypress/**/*",
-      "!{projectRoot}/**/*.cy.[jt]s?(x)",
-      "!{projectRoot}/cypress.config.[jt]s"
+      "!{projectRoot}/test-setup.[jt]s"
     ],
     "sharedGlobals": []
   },
+  "nxCloudId": "64b257d46076e12694613331",
   "plugins": [
     {
-      "plugin": "@nx/webpack/plugin",
       "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview",
         "buildDepsTargetName": "build-deps",
+        "buildTargetName": "build",
+        "previewTargetName": "preview",
+        "serveTargetName": "serve",
         "watchDepsTargetName": "watch-deps"
-      }
+      },
+      "plugin": "@nx/webpack/plugin"
     },
     {
-      "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
-      }
+      },
+      "plugin": "@nx/eslint/plugin"
     },
     {
-      "plugin": "@nx/jest/plugin",
+      "exclude": ["apps/edc-api-e2e/**/*"],
       "options": {
         "targetName": "test"
       },
-      "exclude": ["apps-e2e/**/*", "apps/edc-api-e2e/**/*"]
+      "plugin": "@nx/jest/plugin"
     },
     {
-      "plugin": "@nx/cypress/plugin",
       "options": {
-        "targetName": "e2e",
-        "openTargetName": "open-cypress",
+        "ciTargetName": "e2e-ci",
         "componentTestingTargetName": "component-test",
-        "ciTargetName": "e2e-ci"
-      }
+        "openTargetName": "open-cypress",
+        "targetName": "e2e"
+      },
+      "plugin": "@nx/cypress/plugin"
     }
   ],
   "targetDefaults": {
@@ -56,14 +62,6 @@
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
-    }
-  },
-  "generators": {
-    "@nx/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
-      "style": "scss",
-      "unitTestRunner": "jest"
     }
   }
 }
