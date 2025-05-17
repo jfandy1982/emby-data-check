@@ -43,6 +43,7 @@
     "@cspell/dict-de-de": "^4.1.0",
     "@cypress/code-coverage": "^3.14.2",
     "@eslint/js": "^9.8.0",
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@nestjs/schematics": "^11.0.5",
     "@nestjs/testing": "^11.1.1",
     "@nx/cypress": "21.0.3",
@@ -71,6 +72,7 @@
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-cypress": "^3.5.0",
     "husky": "^9.1.7",
+    "istanbul-lib-coverage": "^3.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-environment-node": "^29.7.0",
@@ -79,6 +81,7 @@
     "lint-staged": "^16.0.0",
     "npm-package-json-lint": "^8.0.0",
     "nx": "21.0.3",
+    "nyc": "^17.1.0",
     "prettier": "^3.5.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.1.0",
@@ -99,6 +102,16 @@
   ],
   "license": "MIT",
   "name": "emby-data-check",
+  "nyc": {
+    "all": true,
+    "excludeAfterRemap": false,
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "reporter": [
+      "lcov",
+      "cobertura",
+      "text-summary"
+    ]
+  },
   "private": true,
   "repository": {
     "type": "git",
