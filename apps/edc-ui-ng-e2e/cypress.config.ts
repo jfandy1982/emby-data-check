@@ -14,7 +14,6 @@ export default defineConfig({
         production: 'npx nx run edc-ui-ng:serve-static',
       },
       ciWebServerCommand: 'npx nx run edc-ui-ng:serve-static',
-      ciBaseUrl: 'http://localhost:4200',
     }),
     baseUrl: 'http://localhost:4200',
     specPattern: './src/e2e/**/*.feature',
@@ -40,6 +39,6 @@ export default defineConfig({
   chromeWebSecurity: false,
 
   env: {
-    tsConfig: 'tsconfig.json',
+    TAGS: 'not @ignore',
   },
 });
