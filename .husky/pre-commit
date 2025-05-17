@@ -1,0 +1,21 @@
+#!/bin/bash
+echo "Running git pre-commit hook"
+
+# branch protection rules
+echo "Check for branch protection rules..."
+BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+
+echo ""
+echo "Current Branch is [${BRANCH}]"
+
+if [ "$BRANCH" = "test" ] || [ "$BRANCH" = "prod" ]; then
+  echo "You can't commit directly to branch [${BRANCH}] - a PR is required for changing that branch."
+  exit 1
+fi
+
+echo "The branch [${BRANCH}] is valid, moving onto next step..."
+
+echo ""
+echo "Invoke lint-staged tasks..."
+npx lint-staged --relative --concurrent false
+npx lint-staged --config ./.lintstagedrc_absolute.json --concurrent false
