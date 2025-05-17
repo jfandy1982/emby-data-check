@@ -17,6 +17,7 @@
       "@edc/shared/model/enum": ["libs/shared/model/enum/src/index.ts"],
       "@edc/shared/model/interface": ["libs/shared/model/interface/src/index.ts"],
       "@edc/shared/model/pagination": ["libs/shared/model/pagination/src/index.ts"],
+      "@edc/shared/model/types": ["libs/shared/model/types/src/index.ts"],
       "@edc/test/cucumber": ["libs/test-util/cucumber/src/index.ts"],
       "@edc/test/defaults": ["libs/test-util/defaults/src/index.ts"],
       "@edc/test/fake-factory": ["libs/test-util/fake-factory/src/index.ts"]
