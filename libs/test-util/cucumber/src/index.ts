@@ -1,1 +1,1 @@
-export * from './lib/test-utils-cucumber';
+export * from './lib/cypress/user-interaction';
