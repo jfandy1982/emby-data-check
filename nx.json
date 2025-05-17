@@ -20,25 +20,10 @@
   "plugins": [
     {
       "plugin": "@nx/webpack/plugin",
-      "options": {
-        "buildTargetName": "build",
-        "serveTargetName": "serve",
-        "previewTargetName": "preview"
-      }
+      "options": { "buildTargetName": "build", "serveTargetName": "serve", "previewTargetName": "preview" }
     },
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      },
-      "exclude": ["apps/edc-api-e2e/**/*"]
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
+    { "plugin": "@nx/jest/plugin", "options": { "targetName": "test" }, "exclude": ["apps/edc-api-e2e/**/*"] },
     {
       "plugin": "@nx/cypress/plugin",
       "options": {
@@ -50,28 +35,13 @@
     }
   ],
   "targetDefaults": {
-    "@angular-devkit/build-angular:application": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
-    },
-    "e2e-ci--**/*": {
-      "dependsOn": ["^build"]
-    }
+    "@angular-devkit/build-angular:application": { "cache": true, "dependsOn": ["^build"], "inputs": ["production", "^production"] },
+    "e2e-ci--**/*": { "dependsOn": ["^build"] }
   },
   "generators": {
-    "@nx/angular:application": {
-      "e2eTestRunner": "cypress",
-      "linter": "eslint",
-      "style": "scss",
-      "unitTestRunner": "jest"
-    },
-    "@nx/angular:library": {
-      "linter": "eslint",
-      "unitTestRunner": "jest"
-    },
-    "@nx/angular:component": {
-      "style": "scss"
-    }
-  }
+    "@nx/angular:application": { "e2eTestRunner": "cypress", "linter": "eslint", "style": "scss", "unitTestRunner": "jest" },
+    "@nx/angular:library": { "linter": "eslint", "unitTestRunner": "jest" },
+    "@nx/angular:component": { "style": "scss" }
+  },
+  "nxCloudId": "64b257d46076e12694613331"
 }
