@@ -14,4 +14,4 @@
 // ***********************************************************
 
 // Import commands.ts using ES2015 syntax:
-import '@badeball/cypress-cucumber-preprocessor';
+import './commands';

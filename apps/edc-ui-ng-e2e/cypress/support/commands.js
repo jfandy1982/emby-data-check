@@ -9,17 +9,6 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Cypress {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    interface Chainable<Subject> {
-      login(email: string, password: string): void;
-    }
-  }
-}
-
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => {
 //   //console.log('Custom command example: Login', email, password);

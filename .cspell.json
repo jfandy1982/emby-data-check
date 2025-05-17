@@ -25,7 +25,7 @@
   "files": ["**/{*,.*}/**/*.*"],
   "flagWords": [],
   "ignorePaths": ["**/.git/**", "**/.vscode/**", ".cspell.json", ".gitignore", "dictionary-edc.txt", "package-lock.json"],
-  "ignoreWords": ["buildable", "devcontainers", "dkhunt", "healthcheck", "nord", "pgadmin", "softarc"],
+  "ignoreWords": ["bahmutov", "buildable", "devcontainers", "dkhunt", "healthcheck", "nord", "pgadmin", "softarc"],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
   "language": "en-US,de-DE",
   "loadDefaultConfiguration": true,
