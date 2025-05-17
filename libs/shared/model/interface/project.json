@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "name": "shared-model-interface",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/model/interface/src",
+  "tags": ["domain:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": ["libs/shared/model/interface/*.md"],
+        "main": "libs/shared/model/interface/src/index.ts",
+        "outputPath": "dist/libs/shared/model/interface",
+        "tsConfig": "libs/shared/model/interface/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  }
+}

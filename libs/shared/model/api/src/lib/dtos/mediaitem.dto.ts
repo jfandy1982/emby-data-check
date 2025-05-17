@@ -1,7 +1,7 @@
 import { ItemType, ProviderType } from '@edc/shared/model/enum';
+import { MediaItemInterface } from '@edc/shared/model/interface';
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { IsArray, IsEnum, IsString, IsUUID, Length, MaxLength } from 'class-validator';
-import { MediaItemInterface } from '../interfaces/mediaitem.interface';
 
 export class MediaItemDto implements MediaItemInterface {
   @IsString()

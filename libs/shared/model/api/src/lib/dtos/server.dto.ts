@@ -1,6 +1,6 @@
+import { ServerInterface } from '@edc/shared/model/interface';
 import { ApiProperty, OmitType, PartialType, PickType } from '@nestjs/swagger';
 import { IsBoolean, IsIP, IsPort, IsString, IsUUID, Length, MaxLength } from 'class-validator';
-import { ServerInterface } from '../interfaces/server.interface';
 
 export class ServerDto implements ServerInterface {
   @IsString()

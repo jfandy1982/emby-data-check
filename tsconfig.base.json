@@ -15,6 +15,7 @@
       "@edc/shared/model/db": ["libs/shared/model/db/src/index.ts"],
       "@edc/shared/model/emby": ["libs/shared/model/emby/src/index.ts"],
       "@edc/shared/model/enum": ["libs/shared/model/enum/src/index.ts"],
+      "@edc/shared/model/interface": ["libs/shared/model/interface/src/index.ts"],
       "@edc/shared/model/pagination": ["libs/shared/model/pagination/src/index.ts"]
     },
     "rootDir": ".",
