@@ -1,11 +1,11 @@
 import { UserRole } from '@edc/shared/model/enum';
-import { MediaItemDto } from '../dtos/mediaitem.dto';
+import { MediaItemInterface } from './mediaitem.interface';
 
 export interface UserWatchedInterface {
   id: string;
   isWatched: boolean;
   lastWatchedAt: Date;
-  mediaItem: MediaItemDto;
+  mediaItem: MediaItemInterface;
 }
 
 export interface UserInterface {
