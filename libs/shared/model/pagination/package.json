@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@edc/shared/model/api": "0.0.1",
+    "@edc/shared/model/enum": "0.0.1",
+    "@nestjs/common": "^11.1.1",
+    "tslib": "^2.3.0"
+  },
+  "main": "./src/index.js",
+  "name": "@edc/shared/model/pagination",
+  "private": true,
+  "type": "commonjs",
+  "types": "./src/index.d.ts",
+  "version": "0.0.1"
+}

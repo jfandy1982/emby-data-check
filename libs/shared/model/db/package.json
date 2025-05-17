@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "class-validator": "^0.14.0",
+    "tslib": "^2.3.0",
+    "typeorm": "^0.3.24"
+  },
+  "main": "./src/index.js",
+  "name": "@edc/shared/model/db",
+  "private": true,
+  "type": "commonjs",
+  "types": "./src/index.d.ts",
+  "version": "0.0.1"
+}

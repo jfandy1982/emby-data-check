@@ -1,0 +1,19 @@
+{
+  "name": "shared-model-emby",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/model/emby/src",
+  "projectType": "library",
+  "tags": ["domain:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/model/emby",
+        "main": "libs/shared/model/emby/src/index.ts",
+        "tsConfig": "libs/shared/model/emby/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

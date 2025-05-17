@@ -1,3 +1,3 @@
 {
-  "**/package.json": ["npm run checks:lint:npmPkgJsonLint"]
+  "./package.json": ["npm run checks:lint:npmPkgJsonLint"]
 }

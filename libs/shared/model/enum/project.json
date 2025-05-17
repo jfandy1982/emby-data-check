@@ -1,0 +1,19 @@
+{
+  "name": "shared-model-enum",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/shared/model/enum/src",
+  "projectType": "library",
+  "tags": ["domain:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared/model/enum",
+        "main": "libs/shared/model/enum/src/index.ts",
+        "tsConfig": "libs/shared/model/enum/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

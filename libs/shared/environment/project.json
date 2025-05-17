@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "shared-environment",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/environment/src",
+  "tags": ["type:util", "domain:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": [],
+        "main": "libs/shared/environment/src/index.ts",
+        "outputPath": "dist/libs/shared/environment",
+        "tsConfig": "libs/shared/environment/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  }
+}
