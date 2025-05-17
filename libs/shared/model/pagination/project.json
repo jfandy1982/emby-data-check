@@ -1,9 +1,0 @@
-{
-  "// targets": "to see all targets run: nx show project shared-model-pagination --web",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "name": "shared-model-pagination",
-  "projectType": "library",
-  "sourceRoot": "libs/shared/model/pagination/src",
-  "tags": ["domain:shared"],
-  "targets": {}
-}

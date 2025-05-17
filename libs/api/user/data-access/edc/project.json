@@ -1,9 +1,0 @@
-{
-  "name": "user-data-access-edc",
-  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/user/data-access/edc/src",
-  "projectType": "library",
-  "tags": ["domain:api"],
-  "// targets": "to see all targets run: nx show project user-data-access-edc --web",
-  "targets": {}
-}

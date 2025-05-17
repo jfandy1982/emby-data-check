@@ -1,3 +1,0 @@
-{
-  "**/*.*": ["npm run format:affected", "npm run spell:check"]
-}

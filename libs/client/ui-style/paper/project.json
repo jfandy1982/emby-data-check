@@ -1,9 +1,0 @@
-{
-  "name": "client-ui-style-paper",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/client/ui-style/paper/src",
-  "projectType": "library",
-  "tags": ["domain:edc-ui-paper"],
-  "// targets": "to see all targets run: nx show project client-ui-style-paper --web",
-  "targets": {}
-}

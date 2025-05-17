@@ -1,9 +1,0 @@
-{
-  "name": "client-ui-style-nord",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/client/ui-style/nord/src",
-  "projectType": "library",
-  "tags": ["domain:edc-ui-nord"],
-  "// targets": "to see all targets run: nx show project client-ui-style-nord --web",
-  "targets": {}
-}
