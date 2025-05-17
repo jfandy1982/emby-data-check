@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "main": "./src/index.js",
+  "name": "@edc/test/cucumber",
+  "private": true,
+  "type": "commonjs",
+  "types": "./src/index.d.ts",
+  "version": "0.0.1"
+}

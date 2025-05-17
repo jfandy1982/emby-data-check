@@ -1,0 +1,19 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "name": "test-utils-cucumber",
+  "projectType": "library",
+  "sourceRoot": "libs/test-util/cucumber/src",
+  "tags": ["domain:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "assets": ["libs/test-util/cucumber/*.md"],
+        "main": "libs/test-util/cucumber/src/index.ts",
+        "outputPath": "dist/libs/test-util/cucumber",
+        "tsConfig": "libs/test-util/cucumber/tsconfig.lib.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    }
+  }
+}
