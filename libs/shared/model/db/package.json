@@ -1,9 +1,5 @@
 {
-  "dependencies": {
-    "class-validator": "^0.14.0",
-    "tslib": "^2.3.0",
-    "typeorm": "^0.3.24"
-  },
+  "dependencies": {},
   "main": "./src/index.js",
   "name": "@edc/shared/model/db",
   "private": true,
