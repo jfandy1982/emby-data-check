@@ -1,19 +1,8 @@
 {
-  "name": "shared-model-pagination",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/model/pagination/src",
+  "name": "shared-model-pagination",
   "projectType": "library",
+  "sourceRoot": "libs/shared/model/pagination/src",
   "tags": ["domain:shared"],
-  "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/shared/model/pagination",
-        "main": "libs/shared/model/pagination/src/index.ts",
-        "tsConfig": "libs/shared/model/pagination/tsconfig.lib.json",
-        "assets": []
-      }
-    }
-  }
+  "targets": {}
 }

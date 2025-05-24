@@ -1,19 +1,8 @@
 {
-  "name": "shared-model-db",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/shared/model/db/src",
+  "name": "shared-model-db",
   "projectType": "library",
+  "sourceRoot": "libs/shared/model/db/src",
   "tags": ["domain:shared"],
-  "targets": {
-    "build": {
-      "executor": "@nx/js:tsc",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/libs/shared/model/db",
-        "main": "libs/shared/model/db/src/index.ts",
-        "tsConfig": "libs/shared/model/db/tsconfig.lib.json",
-        "assets": []
-      }
-    }
-  }
+  "targets": {}
 }

@@ -1,9 +1,0 @@
-{
-  "dependencies": {},
-  "main": "./src/index.js",
-  "name": "@edc/shared/model/db",
-  "private": true,
-  "type": "commonjs",
-  "types": "./src/index.d.ts",
-  "version": "0.0.1"
-}
