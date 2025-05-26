@@ -5,6 +5,8 @@ export default {
   globalTeardown: '<rootDir>/src/support/global-teardown.ts',
   setupFiles: ['<rootDir>/src/support/test-setup.ts'],
   testEnvironment: 'node',
+  collectCoverage: true,
+  passWithNoTests: true,
   transform: {
     '^.+\\.[tj]s$': [
       'ts-jest',
