@@ -1,23 +1,15 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
-import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
+import { DbType } from './app/db-type.enum';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const appDataDb = (process.env.APP_DATA_DB as DbType) ?? DbType.IN_MEMORY;
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3000;
+  const app = await NestFactory.create(AppModule.register({ appDataDb, appAnalyticsDb: appDataDb }));
 
   app.enableShutdownHooks();
 
-  await app.listen(port);
-  Logger.log(`🚀 Application is running on: http://localhost:${port}/${globalPrefix}`);
+  await app.listen(process.env.PORT || 3000);
 }
 
-bootstrap();
+void bootstrap();
