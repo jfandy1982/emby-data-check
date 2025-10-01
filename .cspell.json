@@ -25,7 +25,7 @@
   "files": ["**/{*,.*}/**/*.*"],
   "flagWords": [],
   "ignorePaths": ["**/.git/**", "**/.husky/**", "**/.vscode/**", ".cspell.json", ".gitignore", "dictionary-edc.txt", "package-lock.json"],
-  "ignoreWords": ["bahmutov", "jfandy1982", "pgadmin", "softarc"],
+  "ignoreWords": ["bahmutov", "jfandy1982", "pgadmin", "softarc", "sonarcloud", "sonarqube", "sonarsource"],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
   "language": "en-US,de-DE",
   "loadDefaultConfiguration": true,
