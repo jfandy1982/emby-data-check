@@ -71,7 +71,12 @@ jobs:
         run: npm run test:affected
 
       - name: 'Merge Coverage Results'
-        run: npm run coverage:merge
+        run: |
+          if ls coverage/apps/*/lcov.info 1> /dev/null 2>&1; then
+            npm run coverage:merge
+          else
+            echo "No coverage files found to merge"
+          fi
 
       - name: 'Extract branch name'
         id: extract-branch
