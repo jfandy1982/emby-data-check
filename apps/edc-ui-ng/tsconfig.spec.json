@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "outDir": "../../dist/out-tsc",
+    "target": "es2016",
+    "types": ["jest", "node"]
+  },
+  "extends": "./tsconfig.json",
+  "files": ["src/test-setup.ts"],
+  "include": ["jest.config.ts", "src/**/*.test.ts", "src/**/*.spec.ts", "src/**/*.d.ts"]
+}

@@ -1,0 +1,6 @@
+{
+  "/edc-api": {
+    "secure": false,
+    "target": "http://localhost:3000"
+  }
+}

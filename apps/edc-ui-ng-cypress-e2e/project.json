@@ -1,0 +1,9 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": ["edc-ui-ng"],
+  "name": "edc-ui-ng-cypress-e2e",
+  "projectType": "application",
+  "sourceRoot": "apps/edc-ui-ng-cypress-e2e/src",
+  "tags": ["type:e2e", "ui:angular"],
+  "targets": {}
+}

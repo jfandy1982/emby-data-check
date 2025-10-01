@@ -1,0 +1,123 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "edc-ui-ng",
+  "prefix": "edc-ng",
+  "projectType": "application",
+  "sourceRoot": "apps/edc-ui-ng/src",
+  "tags": ["type:app", "domain:edc-ui-ng", "ui:angular"],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "buildOptimizer": false,
+          "extractLicenses": false,
+          "namedChunks": true,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "budgets": [
+            {
+              "maximumError": "1mb",
+              "maximumWarning": "500kb",
+              "type": "initial"
+            },
+            {
+              "maximumError": "8kb",
+              "maximumWarning": "4kb",
+              "type": "anyComponentStyle"
+            }
+          ],
+          "outputHashing": "all"
+        }
+      },
+      "defaultConfiguration": "production",
+      "executor": "@angular-devkit/build-angular:browser",
+      "options": {
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/edc-ui-ng/public"
+          }
+        ],
+        "index": "apps/edc-ui-ng/src/index.html",
+        "inlineStyleLanguage": "scss",
+        "main": "apps/edc-ui-ng/src/main.ts",
+        "outputPath": "dist/apps/edc-ui-ng",
+        "polyfills": ["zone.js"],
+        "styles": ["apps/edc-ui-ng/src/styles.scss"],
+        "tsConfig": "apps/edc-ui-ng/tsconfig.app.json"
+      },
+      "outputs": ["{options.outputPath}"]
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "edc-ui-ng:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "serve": {
+      "configurations": {
+        "development": {
+          "buildTarget": "edc-ui-ng:build:development"
+        },
+        "production": {
+          "buildTarget": "edc-ui-ng:build:production"
+        }
+      },
+      "continuous": true,
+      "defaultConfiguration": "development",
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "port": 4200,
+        "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
+      }
+    },
+    "serve-static": {
+      "continuous": true,
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "edc-ui-ng:build",
+        "port": 4200,
+        "spa": true
+      }
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npm run cleanup:cache:angular",
+            "description": "Remove Angular cache"
+          },
+          {
+            "command": "npm run stack:api",
+            "description": "Start API Stack (as prerequisite)",
+            "forwardAllArgs": false,
+            "prefix": "EDC-API",
+            "prefixColor": "cyan"
+          },
+          {
+            "command": "wait-on tcp:3000 && nx run edc-ui-ng:serve:development",
+            "description": "Start the Emby Data Check UI (Angular Material)",
+            "prefix": "EDC-UI-NG",
+            "prefixColor": "magenta"
+          }
+        ],
+        "parallel": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/edc-ui-ng/jest.config.ts",
+        "tsConfig": "apps/edc-ui-ng/tsconfig.spec.json"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    }
+  }
+}
