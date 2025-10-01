@@ -1,0 +1,71 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "generators": {
+    "@nx/angular:application": {
+      "e2eTestRunner": "cypress",
+      "linter": "eslint",
+      "style": "scss",
+      "unitTestRunner": "jest"
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/eslint.config.mjs",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/src/test-setup.[jt]s",
+      "!{projectRoot}/test-setup.[jt]s",
+      "!{projectRoot}/cypress/**/*",
+      "!{projectRoot}/**/*.cy.[jt]s?(x)",
+      "!{projectRoot}/cypress.config.[jt]s"
+    ],
+    "sharedGlobals": []
+  },
+  "nxCloudId": "64b257d46076e12694613331",
+  "plugins": [
+    {
+      "options": {
+        "buildDepsTargetName": "build-deps",
+        "buildTargetName": "build",
+        "previewTargetName": "preview",
+        "serveStaticTargetName": "serve-static",
+        "serveTargetName": "serve",
+        "watchDepsTargetName": "watch-deps"
+      },
+      "plugin": "@nx/webpack/plugin"
+    },
+    {
+      "options": {
+        "targetName": "lint"
+      },
+      "plugin": "@nx/eslint/plugin"
+    },
+    {
+      "exclude": ["apps/edc-api-e2e/**/*"],
+      "options": {
+        "targetName": "test"
+      },
+      "plugin": "@nx/jest/plugin"
+    },
+    {
+      "options": {
+        "ciTargetName": "e2e-ci",
+        "componentTestingTargetName": "component-test",
+        "openTargetName": "open-cypress",
+        "targetName": "e2e"
+      },
+      "plugin": "@nx/cypress/plugin"
+    }
+  ],
+  "targetDefaults": {
+    "@angular-devkit/build-angular:browser": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  }
+}

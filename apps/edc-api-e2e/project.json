@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "implicitDependencies": ["edc-api"],
+  "name": "edc-api-e2e",
+  "projectType": "application",
+  "tags": ["type:e2e"],
+  "targets": {
+    "e2e": {
+      "dependsOn": ["edc-api:build", "edc-api:serve"],
+      "executor": "@nx/jest:jest",
+      "options": {
+        "jestConfig": "apps/edc-api-e2e/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "outputs": ["{workspaceRoot}/coverage/apps/{e2eProjectRoot}"]
+    }
+  }
+}

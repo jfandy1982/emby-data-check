@@ -1,0 +1,84 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "edc-api",
+  "projectType": "application",
+  "sourceRoot": "apps/edc-api/src",
+  "tags": ["type:app", "domain:api"],
+  "targets": {
+    "build": {
+      "configurations": {
+        "development": {
+          "args": ["--node-env=development"]
+        }
+      },
+      "executor": "nx:run-commands",
+      "options": {
+        "args": ["--node-env=production"],
+        "command": "webpack-cli build",
+        "cwd": "apps/edc-api"
+      }
+    },
+    "copy-workspace-modules": {
+      "cache": true,
+      "dependsOn": ["build"],
+      "executor": "@nx/js:copy-workspace-modules",
+      "options": {
+        "buildTarget": "build"
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/edc-api/workspace_modules"]
+    },
+    "prune": {
+      "dependsOn": ["prune-lockfile", "copy-workspace-modules"],
+      "executor": "nx:noop"
+    },
+    "prune-lockfile": {
+      "cache": true,
+      "dependsOn": ["build"],
+      "executor": "@nx/js:prune-lockfile",
+      "options": {
+        "buildTarget": "build"
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/edc-api/package.json", "{workspaceRoot}/dist/apps/edc-api/package-lock.json"]
+    },
+    "serve": {
+      "configurations": {
+        "development": {
+          "buildTarget": "edc-api:build:development"
+        },
+        "production": {
+          "buildTarget": "edc-api:build:production"
+        }
+      },
+      "continuous": true,
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "executor": "@nx/js:node",
+      "options": {
+        "buildTarget": "edc-api:build",
+        "runBuildTargetDependencies": false
+      }
+    },
+    "stack": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "nx run edc-api:serve:development",
+            "description": "Start the Emby Data Check API",
+            "forwardAllArgs": false
+          }
+        ],
+        "continuous": true,
+        "env": {
+          "NEST_DEBUG": "true"
+        },
+        "parallel": true
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    }
+  }
+}

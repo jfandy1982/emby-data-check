@@ -1,0 +1,22 @@
+{
+  "rules": {
+    "no-duplicate-properties": "error",
+    "no-repeated-dependencies": "error",
+    "prefer-absolute-version-dependencies": "off",
+    "prefer-absolute-version-devDependencies": "off",
+    "prefer-alphabetical-dependencies": "error",
+    "prefer-alphabetical-devDependencies": "error",
+    "prefer-alphabetical-scripts": "error",
+    "require-author": "error",
+    "require-bugs": "error",
+    "require-description": "error",
+    "require-engines": "error",
+    "require-homepage": "error",
+    "require-keywords": "error",
+    "require-license": "error",
+    "require-name": "error",
+    "require-repository": "error",
+    "require-version": "error",
+    "valid-values-author": ["error", ["Andreas Ziegler (dev@andreasziegler.net)"]]
+  }
+}

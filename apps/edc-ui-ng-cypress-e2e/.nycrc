@@ -1,0 +1,4 @@
+{
+  "report-dir": "../../coverage/apps/edc-ui-ng-cypress-e2e",
+  "temp-dir": "../../coverage/temp/edc-ui-ng-cypress-e2e/.nyc_output"
+}

@@ -1,0 +1,3 @@
+{
+  "./package.json": ["npm run lint:npmPkgJsonLint:check"]
+}
