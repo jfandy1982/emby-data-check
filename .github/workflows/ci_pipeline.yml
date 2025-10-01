@@ -64,6 +64,15 @@ jobs:
       - name: 'Build all projects'
         run: npx nx run-many --parallel --target=build
 
+      - name: 'Check Linting status of affected projects'
+        run: npm run lint:affected:check
+
+      - name: 'Run all tests of affected projects'
+        run: npm run test:affected
+
+      - name: 'Merge Coverage Results'
+        run: npm run coverage:merge
+
       - name: 'Extract branch name'
         id: extract-branch
         shell: bash
