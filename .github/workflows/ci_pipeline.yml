@@ -51,6 +51,18 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: 'Fetch default branch'
+        run: get fetch origin/main
+
+      - name: 'Setup Node.js environment'
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 #v5.0.0
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: 'Install dependencies (via npm)'
+        shell: bash
+        run: npm install
+
       - name: 'Extract branch name'
         id: extract-branch
         shell: bash
@@ -121,18 +133,6 @@ jobs:
           echo "Triggered manually (from workflow inputs)"
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
-
-      - name: 'Setup Node.js environment'
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 #v5.0.0
-        with:
-          node-version-file: '.nvmrc'
-
-      - name: 'Fetch default branch'
-        run: get fetch origin/main
-
-      - name: 'Install dependencies (via npm)'
-        shell: bash
-        run: npm install
 
       - name: 'Build all projects'
         run: npx nx run-many --parallel --target=build
