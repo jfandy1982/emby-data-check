@@ -133,17 +133,13 @@ jobs:
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
 
       - name: 'Build all projects'
-        run: npx nx run-many --parallel --target=build
+        run: npm run build:all
 
-      - name: 'Check Linting status of affected projects'
-        run: |
-          git fetch origin main
-          npm run lint:affected:check
+      - name: 'Check Linting status of all projects'
+        run: npm run lint:all:check
 
-      - name: 'Run all tests of affected projects'
-        run: |
-          git fetch origin main
-          npm run test:affected
+      - name: 'Run all tests of all projects'
+        run: npm run test:all
 
       - name: 'Merge Coverage Results'
         run: |
