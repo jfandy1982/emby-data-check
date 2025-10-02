@@ -64,6 +64,7 @@ jobs:
         id: extract-branch
         shell: bash
         run: |
+          git branch -a
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
               echo "nxBase=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
           else
