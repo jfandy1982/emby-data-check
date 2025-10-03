@@ -10,8 +10,7 @@
       "executor": "@nx/cypress:cypress",
       "options": {
         "browser": "chrome",
-        "cypressConfig": "apps/edc-ui-ng-cucumber-e2e/cypress.config.ts",
-        "headless": true
+        "cypressConfig": "apps/edc-ui-ng-cucumber-e2e/cypress.config.ts"
       }
     }
   }
