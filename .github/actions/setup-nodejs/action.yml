@@ -20,12 +20,12 @@ runs:
         echo "need_cache_npm=$([[ '${{ inputs.need-cache-npm }}' == 'true' ]] && echo true || echo false)" >> $GITHUB_ENV
         echo "need_cache_cypress=$([[ '${{ inputs.need-cache-cypress }}' == 'true' ]] && echo true || echo false)" >> $GITHUB_ENV
 
-    - name: 'Setup project-specific Node.js version'
+    - name: '📥 Setup project-specific Node.js version'
       uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 #v5.0.0
       with:
         node-version-file: '.nvmrc'
 
-    - name: 'Check cache for NPM dependencies (w/o cypress binaries)'
+    - name: '🔍 Check cache for NPM dependencies (w/o cypress binaries)'
       if: env.need_cache_npm == 'true'
       id: cache-npm
       uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4.3.0
@@ -37,7 +37,7 @@ runs:
         restore-keys: |
           ${{ runner.os }}-node-
 
-    - name: 'Check cache for Cypress binaries'
+    - name: '🔍 Check cache for Cypress binaries'
       if: env.need_cache_cypress == 'true'
       id: cache-cypress
       uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4.3.0
@@ -47,8 +47,13 @@ runs:
         restore-keys: |
           ${{ runner.os }}-cypress-
 
-    - name: 'Install dependencies (via npm)'
+    - name: '📥 Install dependencies (via npm)'
       shell: bash
       if: (env.need_cache_npm == 'true' && steps.cache-npm.outputs.cache-hit != 'true') || (env.need_cache_cypress == 'true' && steps.cache-cypress.outputs.cache-hit != 'true')
       run: |
         npm ci
+
+    - name: 'Set up Node.js environment'
+      shell: bash
+      if: success()
+      run: echo "✅ Node.js environment setup completed successfully."
