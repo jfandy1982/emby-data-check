@@ -7,6 +7,7 @@
   "tags": ["type:e2e", "ui:angular"],
   "targets": {
     "e2e-ci": {
+      "dependsOn": ["edc-ui-ng:build", "edc-ui-ng:serve-static"],
       "executor": "@nx/cypress:cypress",
       "options": {
         "browser": "chrome",
