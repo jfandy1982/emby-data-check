@@ -1,6 +1,6 @@
-name: 'Set up repository workspace'
+name: 'Set up Node.js environment'
 
-description: 'Checkout the GitHub Repository, set up Node.js version as defined in `.nvmrc`-file, install all dependencies (via npm) and cache them.'
+description: 'Set up Node.js version as defined in `.nvmrc`-file, install all dependencies (via npm) and cache them.'
 
 inputs:
   need-cache-npm:
@@ -13,7 +13,8 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: 'Convert inputs to booleans'
+    - name: 'Convert boolean input values'
+      shell: bash
       id: convert-inputs
       run: |
         echo "need_cache_npm=$([[ '${{ inputs.need-cache-npm }}' == 'true' ]] && echo true || echo false)" >> $GITHUB_ENV

@@ -51,8 +51,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 'Prepare repository and initialize Node.js environment'
-        uses: ./.github/actions/setup-repository-workspace
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
         with:
           need-cache-npm: true
           need-cache-cypress: false
