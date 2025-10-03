@@ -139,7 +139,7 @@ jobs:
         run: npm run lint:all:check
 
       - name: 'Run all tests of all projects'
-        run: npm run test:all
+        run: npm run test:all:ci
 
       - name: 'Merge Coverage Results'
         run: |

@@ -138,6 +138,7 @@
     "stack:ng": "nx run edc-ui-ng:stack",
     "test:affected": "nx affected --parallel --targets=test,e2e",
     "test:all": "nx run-many --parallel --targets=test,e2e --all",
+    "test:all:ci": "nx run-many --parallel --targets=test,e2e-ci --all",
     "upgrade:nx:doit": "rimraf ./package-lock.json && npm run cleanup:deps && npm install && nx migrate --run-migrations --if-exists",
     "upgrade:nx:prepare": "nx migrate latest --interactive"
   },
