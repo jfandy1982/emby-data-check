@@ -1,0 +1,163 @@
+name: Continuous Integration Pipeline
+
+on:
+  push:
+
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+  workflow_dispatch:
+    inputs:
+      edc-api-manual:
+        description: 'Is app [edc-api] affected?'
+        required: false
+        type: boolean
+        default: false
+
+      edc-ui-ng-manual:
+        description: 'Is app [edc-ui-ng] affected?'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  actions: read
+  attestations: read
+  checks: read
+  contents: read
+  deployments: read
+  id-token: none
+  issues: write
+  discussions: read
+  packages: read
+  pages: read
+  pull-requests: write
+  repository-projects: read
+  security-events: read
+  statuses: read
+
+jobs:
+  simple-ci-pipeline:
+    name: 'CI Pipeline (simple)'
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 #v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: true
+
+      - name: 'Extract branch name'
+        id: extract-branch
+        shell: bash
+        run: |
+          git branch -a
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+              echo "nxBase=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          else
+              echo "nxBase=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}~1" >> $GITHUB_OUTPUT
+          fi
+
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
+      - name: 'Get affected apps'
+        id: check-affected-apps
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type app --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
+      - name: 'Get affected libs'
+        id: check-affected-libs
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type lib --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
+      - name: 'Get affected e2e'
+        id: check-affected-e2e
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type e2e --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
+      - name: 'Print outputs'
+        shell: bash
+        run: |
+          echo "Event information"
+          echo "Event name: ${{ github.event_name }}"
+          echo "Event Action: ${{ github.event.action }}"
+          echo ""
+          echo "Git information"
+          echo "Target branch: ${{ steps.extract-branch.outputs.branch }}"
+          echo "Base branch: ${{ steps.extract-branch.outputs.nxBase }}"
+          echo ""
+          echo "Affected projects detected by Nx Tooling"
+          echo "Affected apps: ${{ steps.check-affected-apps.outputs.affected }}"
+          echo "Affected libs: ${{ steps.check-affected-libs.outputs.affected }}"
+          echo "Affected e2e: ${{ steps.check-affected-e2e.outputs.affected }}"
+          echo ""
+          echo "Triggered manually (from workflow inputs)"
+          echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
+          echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
+
+      - name: 'Check linting rules'
+        run: npx nx run-many --parallel --targets=lint --all --skip-nx-cache
+
+      - name: 'Check formatting'
+        run: npm run format:all:check
+
+      - name: 'Check for spell errors'
+        run: npm run spell:check:all
+
+      - name: 'Run SonarQube static code checks'
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 #v6.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --targets=build --all --skip-nx-cache
+
+      - name: 'Run all tests of all projects'
+        run: npx nx run-many --parallel --targets=test,e2e-ci --all --skip-nx-cache
+
+      - name: 'Merge Coverage Results'
+        run: |
+          if ls coverage/apps/*/lcov.info 1> /dev/null 2>&1; then
+            npm run coverage:merge
+          else
+            echo "No coverage files found to merge"
+          fi
+
+      - name: 'Upload results to Codecov.io'
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 #v5.5.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

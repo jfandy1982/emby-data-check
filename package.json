@@ -127,7 +127,6 @@
     "format:all:check": "nx format:check --all",
     "lint:affected:check": "nx affected --parallel --targets=lint",
     "lint:all:check": "nx run-many --parallel --targets=lint --all",
-    "lint:all:check2": "nx run-many --parallel --targets=lint --all --skip-nx-cache",
     "lint:npmPkgJsonLint:check": "npmPkgJsonLint --configFile .github/linters/.npmpackagejsonlintrc.json .",
     "ng": "nx",
     "nx": "nx",
