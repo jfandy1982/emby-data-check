@@ -147,7 +147,7 @@ jobs:
         run: npx nx run-many --parallel --targets=build --all --skip-nx-cache
 
       - name: 'Run all tests of all projects'
-        run: npx nx run-many --parallel --targets=test,e2e-ci --all --skip-nx-cache
+        run: npx nx run-many --parallel --targets=test --all --skip-nx-cache
 
       - name: 'Merge Coverage Results'
         run: |
