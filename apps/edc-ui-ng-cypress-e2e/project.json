@@ -5,5 +5,14 @@
   "projectType": "application",
   "sourceRoot": "apps/edc-ui-ng-cypress-e2e/src",
   "tags": ["type:e2e", "ui:angular"],
-  "targets": {}
+  "targets": {
+    "e2e-ci": {
+      "dependsOn": ["edc-ui-ng:build", "edc-ui-ng:serve-static"],
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "browser": "chrome",
+        "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts"
+      }
+    }
+  }
 }

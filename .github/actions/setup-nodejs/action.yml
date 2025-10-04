@@ -1,0 +1,59 @@
+name: 'Set up Node.js environment'
+
+description: 'Set up Node.js version as defined in `.nvmrc`-file, install all dependencies (via npm) and cache them.'
+
+inputs:
+  need-cache-npm:
+    description: 'Cache for NPM dependencies is requested? (true/false)'
+    default: true
+  need-cache-cypress:
+    description: 'Cache for Cypress binaries is requested? (true/false)'
+    default: false
+
+runs:
+  using: 'composite'
+  steps:
+    - name: 'Convert boolean input values'
+      shell: bash
+      id: convert-inputs
+      run: |
+        echo "need_cache_npm=$([[ '${{ inputs.need-cache-npm }}' == 'true' ]] && echo true || echo false)" >> $GITHUB_ENV
+        echo "need_cache_cypress=$([[ '${{ inputs.need-cache-cypress }}' == 'true' ]] && echo true || echo false)" >> $GITHUB_ENV
+
+    - name: '📥 Setup project-specific Node.js version'
+      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 #v5.0.0
+      with:
+        node-version-file: '.nvmrc'
+
+    - name: '🔍 Check cache for NPM dependencies (w/o cypress binaries)'
+      if: env.need_cache_npm == 'true'
+      id: cache-npm
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4.3.0
+      with:
+        path: |
+          ~/.npm
+          node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: '🔍 Check cache for Cypress binaries'
+      if: env.need_cache_cypress == 'true'
+      id: cache-cypress
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 #v4.3.0
+      with:
+        path: ~/.cache/Cypress
+        key: ${{ runner.os }}-cypress-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-cypress-
+
+    - name: '📥 Install dependencies (via npm)'
+      shell: bash
+      if: (env.need_cache_npm == 'true' && steps.cache-npm.outputs.cache-hit != 'true') || (env.need_cache_cypress == 'true' && steps.cache-cypress.outputs.cache-hit != 'true')
+      run: |
+        npm ci
+
+    - name: 'Set up Node.js environment'
+      shell: bash
+      if: success()
+      run: echo "✅ Node.js environment setup completed successfully."

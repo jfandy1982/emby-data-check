@@ -6,8 +6,8 @@ on:
   pull_request:
     types:
       - opened
-      - synchronize
       - reopened
+      - synchronize
 
   workflow_dispatch:
     inputs:
@@ -40,8 +40,8 @@ permissions:
   statuses: read
 
 jobs:
-  build:
-    name: 'Build all projects'
+  simple-ci-pipeline:
+    name: 'CI Pipeline (simple)'
 
     runs-on: ubuntu-latest
 
@@ -51,32 +51,17 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 'Setup Node.js environment'
-        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 #v5.0.0
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
         with:
-          node-version-file: '.nvmrc'
-
-      - name: 'Install dependencies (via npm)'
-        shell: bash
-        run: |
-          npm install
-
-      - name: 'Build all projects'
-        run: npx nx run-many --parallel --target=build
-
-      - name: 'Check Linting status of affected projects'
-        run: npm run lint:affected:check
-
-      - name: 'Run all tests of affected projects'
-        run: npm run test:affected
-
-      - name: 'Merge Coverage Results'
-        run: npm run coverage:merge
+          need-cache-npm: true
+          need-cache-cypress: true
 
       - name: 'Extract branch name'
         id: extract-branch
         shell: bash
         run: |
+          git branch -a
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
               echo "nxBase=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
           else
@@ -144,21 +129,38 @@ jobs:
           echo "Is app [edc-api] affected? ${{ inputs.edc-api-manual }}"
           echo "Is app [edc-ui-ng] affected? ${{ inputs.edc-ui-ng-manual }}"
 
-  sonarcloud:
-    name: 'Static code checks'
+      - name: 'Check linting rules'
+        run: npx nx run-many --parallel --targets=lint --all --skip-nx-cache
 
-    runs-on: ubuntu-latest
+      - name: 'Check formatting'
+        run: npm run format:all:check
 
-    if: github.actor != 'dependabot[bot]'
+      - name: 'Check for spell errors'
+        run: npm run spell:check:all
 
-    steps:
-      - name: 'Checkout repository'
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 #v5.0.0
-        with:
-          fetch-depth: 0
-
-      - name: 'Run static code checks on `sonarcloud.io`'
+      - name: 'Run SonarQube static code checks'
         uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602 #v6.0.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --targets=build --all --skip-nx-cache
+
+      - name: 'Run all tests of all projects'
+        run: npx nx run-many --parallel --targets=test --all --skip-nx-cache
+
+      - name: 'Run all E2E tests of all projects'
+        run: npx nx run-many --targets=e2e-ci --all --skip-nx-cache
+
+      - name: 'Merge Coverage Results'
+        run: |
+          if ls coverage/apps/*/lcov.info 1> /dev/null 2>&1; then
+            npm run coverage:merge
+          else
+            echo "No coverage files found to merge"
+          fi
+
+      - name: 'Upload results to Codecov.io'
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 #v5.5.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

@@ -9,8 +9,7 @@
       "dependsOn": ["edc-api:build", "edc-api:serve"],
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/edc-api-e2e/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/edc-api-e2e/jest.config.ts"
       },
       "outputs": ["{workspaceRoot}/coverage/apps/{e2eProjectRoot}"]
     }
