@@ -82,7 +82,6 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-ng:build",
-        "no404": true,
         "port": 4200,
         "spa": true
       }
