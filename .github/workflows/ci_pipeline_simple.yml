@@ -150,7 +150,7 @@ jobs:
         run: npx nx run-many --parallel --targets=test --all --skip-nx-cache
 
       - name: 'Run all E2E tests of all projects'
-        run: npx nx run-many --targets=e2e-ci --all --skip-nx-cache -- --headless --browser chrome
+        run: npx nx run-many --targets=e2e-ci --all --skip-nx-cache --parallel=false
 
       - name: 'Merge Coverage Results'
         run: |
