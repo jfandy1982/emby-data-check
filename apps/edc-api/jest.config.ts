@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'edc-api',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',

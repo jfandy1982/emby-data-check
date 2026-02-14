@@ -7,10 +7,8 @@ describe('App', () => {
       imports: [App],
     }).compileComponents();
   });
-
   it('should render title', () => {
     expect.hasAssertions();
-
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
