@@ -66,5 +66,19 @@
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
+  },
+  "watchOptions": {
+    "ignored": [
+      "**/node_modules/**",
+      "**/.git/**",
+      "**/.idea/**",
+      "**/.vscode/**",
+      "**/dist/**",
+      "**/coverage/**",
+      "**/.nx/**",
+      "**/.angular/**",
+      "**/cypress/**",
+      "**/.nyc_output/**"
+    ]
   }
 }
