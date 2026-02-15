@@ -38,24 +38,45 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
+  "files.exclude": {
+    "**/.git/**": true,
+    "**/.idea/**": true,
+    "**/.nx/**": true,
+    "**/.nyc_output/**": true,
+    "**/.angular/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/coverage/**": true,
+    "**/tmp/**": true,
+    "**/cypress/videos/**": true,
+    "**/cypress/screenshots/**": true
+  },
+
   "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
+    "**/.git/**": true,
+    "**/.idea/**": true,
     "**/node_modules/**": true,
     "**/.nx/**": true,
     "**/dist/**": true,
     "**/coverage/**": true,
     "**/.angular/**": true,
-    "**/cypress/**": true,
-    "**/.nyc_output/**": true
+    "**/.nyc_output/**": true,
+    "**/tmp/**": true,
+    "**/cypress/videos/**": true,
+    "**/cypress/screenshots/**": true
   },
 
   "search.exclude": {
-    "**/node_modules": true,
-    "**/dist": true,
-    "**/coverage": true,
-    "**/.nx": true,
-    "**/.angular": true,
-    "**/cypress": true
+    "**/.git/**": true,
+    "**/.idea/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/coverage/**": true,
+    "**/.nx/**": true,
+    "**/.angular/**": true,
+    "**/.nyc_output/**": true,
+    "**/tmp/**": true,
+    "**/cypress/videos/**": true,
+    "**/cypress/screenshots/**": true
   }
 }
