@@ -1,3 +1,4 @@
 {
-  "**/*.*": ["npm run format:affected", "npm run spell:check"]
+  "**/*.{ts,tsx,js,jsx,mjs,cjs}": ["prettier --write", "eslint --fix", "cspell lint --no-must-find-files --no-progress"],
+  "**/*.{json,md,html,css,scss,yml,yaml}": ["prettier --write", "cspell lint --no-must-find-files --no-progress"]
 }

@@ -2,7 +2,9 @@ import nx from '@nx/eslint-plugin';
 import cypressPlugin from 'eslint-plugin-cypress';
 import importPlugin from 'eslint-plugin-import';
 import jestPlugin from 'eslint-plugin-jest';
+import noOnlyTests from 'eslint-plugin-no-only-tests';
 import unusedImports from 'eslint-plugin-unused-imports';
+import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   ...nx.configs['flat/base'],
@@ -127,8 +129,18 @@ export default [
     },
   },
   {
+    files: ['**/*.spec.ts', '**/*.spec.js', '**/*.test.ts', '**/*.test.js', '**/*.cy.ts', '**/*.cy.js'],
+    plugins: {
+      'no-only-tests': noOnlyTests,
+    },
+    rules: {
+      'no-only-tests/no-only-tests': 'error',
+    },
+  },
+  {
     files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
     // Override or add rules here
     rules: {},
   },
+  eslintConfigPrettier,
 ];
