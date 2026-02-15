@@ -9,13 +9,20 @@ out-tsc
 node_modules
 
 # IDEs and editors
-/.idea
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+
+# IDE - JetBrains
+.idea/*
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/prettier.xml
+!.idea/nx-angular-config.xml
+!.idea/.gitignore
 
 # IDE - VSCode
 .vscode/*
