@@ -1,8 +1,32 @@
 # Add files here to ignore them from prettier formatting
-/dist
-/coverage
-/cypress
-/.nx/cache
-/.nx/workspace-data
-.angular
+
+# Dependencies
+node_modules
+
+# Compiled output
+dist
+tmp
+out-tsc
+*.tsbuildinfo
+
+# Coverage
+coverage
 .nyc_output
+
+# Cypress artifacts
+cypress/screenshots
+cypress/videos
+cypress/downloads
+
+# Nx cache
+.nx/cache
+.nx/workspace-data
+
+# Angular cache
+.angular
+
+# Nx migrations (temporary)
+migrations.json
+
+# experiments / temporary workspace
+experiments

@@ -11,7 +11,22 @@ export default [
   ...nx.configs['flat/typescript'],
   ...nx.configs['flat/javascript'],
   {
-    ignores: ['**/.angular/**', '**/.nx/**', '**/coverage/**', '**/dist/**', '**/node_modules/**'],
+    ignores: [
+      '**/dist/**',
+      '**/tmp/**',
+      '**/out-tsc/**',
+      '**/*.tsbuildinfo',
+      '**/.angular/**',
+      '**/.nx/**',
+      '**/node_modules/**',
+      '**/coverage/**',
+      '**/.nyc_output/**',
+      '**/cypress/screenshots/**',
+      '**/cypress/videos/**',
+      '**/cypress/downloads/**',
+      '**/migrations.json',
+      '**/experiments/**',
+    ],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],

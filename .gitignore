@@ -55,6 +55,9 @@ testem.log
 .env.local
 .env.*.local
 
+# experiments / temporary workspace
+experiments
+
 # System Files
 .DS_Store
 Thumbs.db

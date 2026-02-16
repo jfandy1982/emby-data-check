@@ -37,7 +37,6 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
   "files.exclude": {
     "**/.git/**": true,
     "**/.idea/**": true,
@@ -46,37 +45,46 @@
     "**/.angular/**": true,
     "**/node_modules/**": true,
     "**/dist/**": true,
-    "**/coverage/**": true,
     "**/tmp/**": true,
+    "**/out-tsc/**": true,
+    "**/*.tsbuildinfo": true,
+    "**/coverage/**": true,
     "**/cypress/videos/**": true,
-    "**/cypress/screenshots/**": true
+    "**/cypress/screenshots/**": true,
+    "**/cypress/downloads/**": true
   },
-
   "files.watcherExclude": {
     "**/.git/**": true,
     "**/.idea/**": true,
     "**/node_modules/**": true,
     "**/.nx/**": true,
     "**/dist/**": true,
+    "**/tmp/**": true,
+    "**/out-tsc/**": true,
+    "**/*.tsbuildinfo": true,
     "**/coverage/**": true,
     "**/.angular/**": true,
     "**/.nyc_output/**": true,
-    "**/tmp/**": true,
     "**/cypress/videos/**": true,
-    "**/cypress/screenshots/**": true
+    "**/cypress/screenshots/**": true,
+    "**/cypress/downloads/**": true,
+    "**/migrations.json": true,
+    "**/experiments/**": true
   },
-
   "search.exclude": {
     "**/.git/**": true,
     "**/.idea/**": true,
     "**/node_modules/**": true,
     "**/dist/**": true,
+    "**/tmp/**": true,
+    "**/out-tsc/**": true,
+    "**/*.tsbuildinfo": true,
     "**/coverage/**": true,
     "**/.nx/**": true,
     "**/.angular/**": true,
     "**/.nyc_output/**": true,
-    "**/tmp/**": true,
     "**/cypress/videos/**": true,
-    "**/cypress/screenshots/**": true
+    "**/cypress/screenshots/**": true,
+    "**/cypress/downloads/**": true
   }
 }
