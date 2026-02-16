@@ -149,8 +149,11 @@ jobs:
       - name: 'Run all tests of all projects'
         run: npx nx run-many --parallel --targets=test --all --skip-nx-cache
 
-      - name: 'Run all E2E tests of all projects'
-        run: npx nx run-many --targets=e2e-ci --all --skip-nx-cache --parallel=false
+      - name: 'Run Cypress E2E tests'
+        run: npx nx e2e-ci edc-ui-ng-cypress-e2e --skip-nx-cache
+
+      - name: 'Run Cucumber E2E tests'
+        run: npx nx e2e-ci edc-ui-ng-cucumber-e2e --skip-nx-cache
 
       - name: 'Merge Coverage Results'
         run: |
