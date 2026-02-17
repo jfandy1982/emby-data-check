@@ -153,9 +153,18 @@ export default [
     },
   },
   {
-    files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
-    // Override or add rules here
-    rules: {},
+    files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
+    rules: {
+      '@typescript-eslint/array-type': ['warn', { default: 'array' }],
+      '@typescript-eslint/consistent-type-assertions': ['warn', { assertionStyle: 'as' }],
+      '@typescript-eslint/consistent-indexed-object-style': ['warn', 'record'],
+    },
+  },
+  {
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.cts', '**/*.mts', '**/*.cjs', '**/*.mjs'],
+    rules: {
+      eqeqeq: 'error',
+    },
   },
   eslintConfigPrettier,
 ];
