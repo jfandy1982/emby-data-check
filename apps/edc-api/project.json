@@ -51,7 +51,6 @@
       },
       "continuous": true,
       "defaultConfiguration": "development",
-      "dependsOn": ["build"],
       "executor": "@nx/js:node",
       "options": {
         "buildTarget": "edc-api:build",
