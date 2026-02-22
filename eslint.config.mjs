@@ -1,5 +1,4 @@
 import nx from '@nx/eslint-plugin';
-import cypressPlugin from 'eslint-plugin-cypress';
 import importPlugin from 'eslint-plugin-import';
 import jestPlugin from 'eslint-plugin-jest';
 import noOnlyTests from 'eslint-plugin-no-only-tests';
@@ -118,32 +117,6 @@ export default [
     },
   },
   {
-    files: ['**/*.cy.ts', '**/*.cy.js'],
-    plugins: {
-      cypress: cypressPlugin,
-    },
-    languageOptions: {
-      globals: {
-        cy: true,
-        Cypress: true,
-        before: true,
-        after: true,
-        beforeEach: true,
-        afterEach: true,
-        context: true,
-        describe: true,
-        it: true,
-      },
-    },
-    rules: {
-      'cypress/no-unnecessary-waiting': 'warn',
-      'cypress/no-force': 'warn',
-      'cypress/assertion-before-screenshot': 'warn',
-      'cypress/no-assigning-return-values': 'error',
-      'cypress/no-pause': 'error',
-    },
-  },
-  {
     files: ['**/*.spec.ts', '**/*.spec.js', '**/*.test.ts', '**/*.test.js', '**/*.cy.ts', '**/*.cy.js'],
     plugins: {
       'no-only-tests': noOnlyTests,
@@ -158,12 +131,22 @@ export default [
       '@typescript-eslint/array-type': ['warn', { default: 'array' }],
       '@typescript-eslint/consistent-type-assertions': ['warn', { assertionStyle: 'as' }],
       '@typescript-eslint/consistent-indexed-object-style': ['warn', 'record'],
+      '@typescript-eslint/no-shadow': 'error',
     },
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx', '**/*.cts', '**/*.mts', '**/*.cjs', '**/*.mjs'],
     rules: {
       eqeqeq: 'error',
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-var': 'error',
+      'prefer-const': 'error',
+      curly: 'error',
+      'guard-for-in': 'error',
+      'no-new-wrappers': 'error',
+      'one-var': ['error', 'never'],
+      'prefer-arrow-callback': 'error',
     },
   },
   eslintConfigPrettier,
