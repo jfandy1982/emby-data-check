@@ -3,7 +3,7 @@ import baseConfig from '../../eslint.config.mjs';
 
 export default [
   ...baseConfig,
-  ...cypress.configs['recommended'],
+  cypress.configs.recommended,
   {
     files: ['**/*.cy.ts', '**/*.cy.js'],
     rules: {
