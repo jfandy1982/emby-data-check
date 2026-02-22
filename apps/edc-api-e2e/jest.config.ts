@@ -15,7 +15,7 @@ export default {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   collectCoverage: true,
-  coverageDirectory: '../../coverage/apps/edc-api-e2e',
+  coverageDirectory: '<rootDir>/../../coverage/apps/edc-api-e2e',
   coverageReporters: ['lcov', 'text', 'text-summary'],
   reporters: [
     'default',
@@ -24,7 +24,7 @@ export default {
       {
         suiteName: 'edc-api e2e test results',
         outputName: 'junit-e2e-edc-api.xml',
-        outputDirectory: '../../coverage/apps/edc-api',
+        outputDirectory: '<rootDir>/../../coverage/apps/edc-api-e2e',
       },
     ],
   ],

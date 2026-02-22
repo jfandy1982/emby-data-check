@@ -7,7 +7,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   collectCoverage: true,
-  coverageDirectory: '../../coverage/apps/edc-api',
+  coverageDirectory: '<rootDir>/../../coverage/apps/edc-api',
   coverageReporters: ['lcov', 'text', 'text-summary'],
   reporters: [
     'default',
@@ -16,7 +16,7 @@ module.exports = {
       {
         suiteName: 'edc-api unit test results',
         outputName: 'junit-edc-api.xml',
-        outputDirectory: '../../coverage/apps/edc-api',
+        outputDirectory: '<rootDir>/../../coverage/apps/edc-api',
       },
     ],
   ],
