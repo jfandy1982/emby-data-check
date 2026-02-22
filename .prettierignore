@@ -1,32 +1,33 @@
 # Add files here to ignore them from prettier formatting
 
 # Dependencies
-node_modules
+**/node_modules/**
+**/package-lock.json
 
 # Compiled output
-dist
-tmp
-out-tsc
-*.tsbuildinfo
+**/dist/**
+**/tmp/**
+**/out-tsc/**
+**/*.tsbuildinfo
 
 # Coverage
-coverage
-.nyc_output
+**/coverage/**
+**/.nyc_output/**
 
 # Cypress artifacts
-cypress/screenshots
-cypress/videos
-cypress/downloads
+**/cypress/screenshots/**
+**/cypress/videos/**
+**/cypress/downloads/**
 
 # Nx cache
-.nx/cache
-.nx/workspace-data
+**/.nx/cache/**
+**/.nx/workspace-data/**
 
 # Angular cache
-.angular
+**/.angular/**
 
 # Nx migrations (temporary)
-migrations.json
+**/migrations.json
 
 # experiments / temporary workspace
-experiments
+**/experiments/**

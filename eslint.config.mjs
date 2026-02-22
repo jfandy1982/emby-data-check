@@ -25,6 +25,7 @@ export default [
       '**/cypress/downloads/**',
       '**/migrations.json',
       '**/experiments/**',
+      '**/package-lock.json',
     ],
   },
   {
