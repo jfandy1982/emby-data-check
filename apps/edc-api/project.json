@@ -6,6 +6,7 @@
   "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
+      "cache": true,
       "configurations": {
         "development": {
           "args": ["--node-env=development"]
@@ -15,7 +16,8 @@
       "options": {
         "command": "webpack-cli build",
         "cwd": "apps/edc-api"
-      }
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/edc-api"]
     },
     "copy-workspace-modules": {
       "cache": true,
