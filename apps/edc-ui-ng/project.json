@@ -17,19 +17,26 @@
           "vendorChunk": true
         },
         "production": {
+          "aot": true,
+          "buildOptimizer": true,
+          "extractLicenses": true,
+          "namedChunks": false,
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "vendorChunk": true,
           "budgets": [
             {
-              "maximumError": "1mb",
+              "type": "initial",
               "maximumWarning": "500kb",
-              "type": "initial"
+              "maximumError": "1mb"
             },
             {
-              "maximumError": "8kb",
-              "maximumWarning": "4kb",
-              "type": "anyComponentStyle"
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
             }
-          ],
-          "outputHashing": "all"
+          ]
         }
       },
       "defaultConfiguration": "production",
@@ -69,8 +76,8 @@
           "buildTarget": "edc-ui-ng:build:production"
         }
       },
-      "continuous": true,
-      "defaultConfiguration": "development",
+      "continuous": false,
+      "defaultConfiguration": "production",
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
         "port": 4200,
@@ -78,7 +85,7 @@
       }
     },
     "serve-static": {
-      "continuous": true,
+      "continuous": false,
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-ng:build",
