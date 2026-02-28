@@ -3,7 +3,7 @@
     "module": "preserve",
     "moduleResolution": "bundler",
     "outDir": "../../dist/out-tsc",
-    "target": "es2016",
+    "target": "es2022",
     "types": ["jest", "node"]
   },
   "extends": "./tsconfig.json",
