@@ -7,6 +7,9 @@
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
+      "metadata": {
+        "description": "Local: headless, requires API running on port 3000"
+      },
       "options": {
         "jestConfig": "apps/edc-api-e2e/jest.config.ts"
       },
@@ -14,6 +17,9 @@
     },
     "e2e-ci": {
       "executor": "nx:run-commands",
+      "metadata": {
+        "description": "CI/Pipeline: starts API via start-server-and-test, then runs headless"
+      },
       "options": {
         "command": "npm run e2e:api:ci"
       }
