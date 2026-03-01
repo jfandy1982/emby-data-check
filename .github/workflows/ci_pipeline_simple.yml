@@ -149,6 +149,9 @@ jobs:
       - name: 'Run all tests of all projects'
         run: npx nx run-many --parallel --targets=test --all --skip-nx-cache
 
+      - name: 'Run API E2E tests'
+        run: npm run e2e:api:ci
+
       - name: 'Run Cypress E2E tests'
         run: npx nx e2e-ci edc-ui-ng-cypress-e2e --skip-nx-cache
 
