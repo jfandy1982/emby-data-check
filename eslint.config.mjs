@@ -16,6 +16,7 @@ export default [
       '**/out-tsc/**',
       '**/*.tsbuildinfo',
       '**/.angular/**',
+      '**/.claude/**',
       '**/.nx/**',
       '**/node_modules/**',
       '**/coverage/**',

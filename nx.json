@@ -103,7 +103,8 @@
       "**/.nx/**",
       "**/.angular/**",
       "**/cypress/**",
-      "**/.nyc_output/**"
+      "**/.nyc_output/**",
+      "**/.claude/**"
     ]
   }
 }
