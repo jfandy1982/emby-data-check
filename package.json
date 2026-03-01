@@ -112,9 +112,9 @@
   "scripts": {
     "build:affected": "nx affected --parallel --targets=build",
     "build:all": "nx run-many --parallel --targets=build --all",
-    "checks:all:conf:default": "nx run-many --parallel --targets=lint,build,test,e2e",
-    "checks:all:conf:dev": "nx run-many --parallel --targets=lint,build,test,e2e --configuration=development",
-    "checks:all:conf:prod": "nx run-many --parallel --targets=lint,build,test,e2e --configuration=production",
+    "checks:all:conf:default": "nx run-many --parallel --targets=typecheck,lint,build,test,e2e",
+    "checks:all:conf:dev": "nx run-many --parallel --targets=typecheck,lint,build,test,e2e --configuration=development",
+    "checks:all:conf:prod": "nx run-many --parallel --targets=typecheck,lint,build,test,e2e --configuration=production",
     "cleanup:all": "npm run cleanup:generated && npm run cleanup:deps && npm ci",
     "cleanup:cache:angular": "rimraf ./.angular",
     "cleanup:cache:nx": "rimraf ./.nx/cache",
@@ -139,6 +139,8 @@
     "test:affected": "nx affected --parallel --targets=test",
     "test:all": "nx run-many --parallel --targets=test --all",
     "test:all:ci": "nx run-many --parallel --targets=test --all",
+    "typecheck:affected": "nx affected --parallel --targets=typecheck",
+    "typecheck:all": "nx run-many --parallel --targets=typecheck --all",
     "upgrade:nx:doit": "rimraf ./package-lock.json && npm run cleanup:deps && npm install && nx migrate --run-migrations --if-exists",
     "upgrade:nx:prepare": "nx migrate latest --interactive"
   },

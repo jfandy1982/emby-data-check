@@ -90,6 +90,9 @@
     },
     "e2e-ci": {
       "cache": true
+    },
+    "typecheck": {
+      "cache": true
     }
   },
   "watchOptions": {

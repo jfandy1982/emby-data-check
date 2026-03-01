@@ -58,6 +58,15 @@
         "runBuildTargetDependencies": false
       }
     },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "inputs": ["production", "^production"],
+      "options": {
+        "command": "tsc --noEmit -p tsconfig.app.json",
+        "cwd": "apps/edc-api"
+      },
+      "outputs": []
+    },
     "stack": {
       "executor": "nx:run-commands",
       "options": {
