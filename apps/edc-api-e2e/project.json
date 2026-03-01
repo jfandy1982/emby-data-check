@@ -6,7 +6,6 @@
   "tags": ["type:e2e"],
   "targets": {
     "e2e": {
-      "dependsOn": ["edc-api:build", "edc-api:serve"],
       "executor": "@nx/jest:jest",
       "options": {
         "jestConfig": "apps/edc-api-e2e/jest.config.ts"
