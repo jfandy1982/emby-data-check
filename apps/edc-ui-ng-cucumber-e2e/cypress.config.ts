@@ -8,11 +8,6 @@ export default defineConfig({
   e2e: {
     ...nxE2EPreset(__filename, {
       cypressDir: 'src',
-      webServerCommands: {
-        default: 'npx nx run edc-ui-ng:serve',
-        production: 'npx nx run edc-ui-ng:serve-static',
-      },
-      ciWebServerCommand: 'npx nx run edc-ui-ng:serve-static',
       ciBaseUrl: 'http://localhost:4200',
     }),
     chromeWebSecurity: false,

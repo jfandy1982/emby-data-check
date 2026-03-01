@@ -10,6 +10,7 @@
       "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts",
+        "devServerTarget": "edc-ui-ng:serve",
         "testingType": "e2e"
       }
     },
@@ -19,6 +20,7 @@
       "options": {
         "browser": "chrome",
         "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts",
+        "devServerTarget": "edc-ui-ng:serve-static",
         "testingType": "e2e"
       }
     },
@@ -26,6 +28,7 @@
       "executor": "@nx/cypress:cypress",
       "options": {
         "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts",
+        "devServerTarget": "edc-ui-ng:serve:development",
         "testingType": "e2e",
         "watch": true
       }
