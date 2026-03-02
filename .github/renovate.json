@@ -3,15 +3,53 @@
   "automerge": false,
   "extends": ["config:recommended"],
   "labels": ["dependencies"],
+  "schedule": ["after 2pm and before 4pm on Friday"],
   "packageRules": [
     {
-      "automerge": false,
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "automerge": false,
-      "matchUpdateTypes": ["major"]
+      "description": "Nx-managed packages — update via 'npm run upgrade:nx:prepare' instead",
+      "matchPackageNames": [
+        "@angular/**",
+        "@angular-devkit/**",
+        "@schematics/angular",
+        "angular-eslint",
+        "zone.js",
+        "rxjs",
+        "@nx/**",
+        "nx",
+        "@nestjs/**",
+        "jest",
+        "@types/jest",
+        "jest-environment-jsdom",
+        "jest-environment-node",
+        "jest-junit",
+        "jest-preset-angular",
+        "jest-util",
+        "ts-jest",
+        "istanbul-lib-coverage",
+        "cypress",
+        "@cypress/**",
+        "@badeball/cypress-cucumber-preprocessor",
+        "@bahmutov/cypress-esbuild-preprocessor",
+        "eslint",
+        "@eslint/**",
+        "typescript-eslint",
+        "@typescript-eslint/**",
+        "eslint-config-prettier",
+        "eslint-import-resolver-typescript",
+        "eslint-plugin-cypress",
+        "eslint-plugin-import",
+        "eslint-plugin-jest",
+        "eslint-plugin-no-only-tests",
+        "eslint-plugin-unused-imports",
+        "@swc/**",
+        "@swc-node/**",
+        "typescript",
+        "tslib",
+        "ts-node",
+        "@types/node",
+        "webpack-cli"
+      ],
+      "enabled": false
     }
-  ],
-  "schedule": ["after 2pm and before 4pm on Friday"]
+  ]
 }
