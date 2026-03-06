@@ -22,7 +22,8 @@
       },
       "options": {
         "command": "npm run e2e:api:ci"
-      }
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     }
   }
 }
