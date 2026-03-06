@@ -15,7 +15,8 @@
         "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts",
         "devServerTarget": "edc-ui-ng:serve",
         "testingType": "e2e"
-      }
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "e2e-ci": {
       "dependsOn": ["edc-ui-ng:build"],
@@ -28,7 +29,8 @@
         "cypressConfig": "apps/edc-ui-ng-cypress-e2e/cypress.config.ts",
         "devServerTarget": "edc-ui-ng:serve-static",
         "testingType": "e2e"
-      }
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "open-cypress": {
       "executor": "@nx/cypress:cypress",
