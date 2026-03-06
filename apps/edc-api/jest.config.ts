@@ -14,7 +14,7 @@ module.exports = {
     [
       'jest-junit',
       {
-        suiteName: 'edc-api unit test results',
+        suiteName: 'Test Results of app [edc-api]',
         outputName: 'junit-edc-api.xml',
         outputDirectory: '<rootDir>/../../coverage/apps/edc-api',
       },

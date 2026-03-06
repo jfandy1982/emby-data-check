@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   displayName: 'edc-api-e2e',
   preset: '../../jest.preset.js',
   globalSetup: '<rootDir>/src/support/global-setup.ts',
@@ -6,12 +6,7 @@ export default {
   setupFiles: ['<rootDir>/src/support/test-setup.ts'],
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': [
-      'ts-jest',
-      {
-        tsconfig: '<rootDir>/tsconfig.spec.json',
-      },
-    ],
+    '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   collectCoverage: true,
@@ -22,8 +17,8 @@ export default {
     [
       'jest-junit',
       {
-        suiteName: 'edc-api e2e test results',
-        outputName: 'junit-e2e-edc-api.xml',
+        suiteName: 'Test Results of app [edc-api-e2e]',
+        outputName: 'junit-edc-api-e2e.xml',
         outputDirectory: '<rootDir>/../../coverage/apps/edc-api-e2e',
       },
     ],
