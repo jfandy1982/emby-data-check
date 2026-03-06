@@ -95,7 +95,8 @@
       "inputs": ["default", "^production"]
     },
     "typecheck": {
-      "cache": true
+      "cache": true,
+      "inputs": ["production", "^production"]
     }
   },
   "watchOptions": {
