@@ -107,7 +107,8 @@
       "**/.angular/**",
       "**/cypress/**",
       "**/.nyc_output/**",
-      "**/.claude/**"
+      "**/.claude/**",
+      "**/experiments/**"
     ]
   }
 }
