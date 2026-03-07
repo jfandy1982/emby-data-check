@@ -1,10 +1,10 @@
 {
   "recommendations": [
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
+    "angular.ng-template",
     "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
     "firsttris.vscode-jest-runner",
-    "streetsidesoftware.code-spell-checker",
-    "angular.ng-template"
+    "nrwl.angular-console",
+    "streetsidesoftware.code-spell-checker"
   ]
 }
