@@ -6,6 +6,7 @@
   "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
+      "cache": true,
       "configurations": {
         "development": {
           "args": ["--node-env=development"]
@@ -13,10 +14,10 @@
       },
       "executor": "nx:run-commands",
       "options": {
-        "args": ["--node-env=production"],
         "command": "webpack-cli build",
         "cwd": "apps/edc-api"
-      }
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/edc-api"]
     },
     "copy-workspace-modules": {
       "cache": true,
@@ -49,14 +50,21 @@
           "buildTarget": "edc-api:build:production"
         }
       },
-      "continuous": true,
-      "defaultConfiguration": "development",
-      "dependsOn": ["build"],
+      "continuous": false,
+      "defaultConfiguration": "production",
       "executor": "@nx/js:node",
       "options": {
         "buildTarget": "edc-api:build",
         "runBuildTargetDependencies": false
       }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p tsconfig.app.json",
+        "cwd": "apps/edc-api"
+      },
+      "outputs": []
     },
     "stack": {
       "executor": "nx:run-commands",

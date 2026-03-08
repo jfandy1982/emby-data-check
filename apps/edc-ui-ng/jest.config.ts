@@ -2,8 +2,7 @@ module.exports = {
   displayName: 'edc-ui-ng',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/edc-ui-ng',
-  coverageReporters: ['lcov', 'text', 'text-summary'],
+  coverageDirectory: '<rootDir>/../../coverage/apps/edc-ui-ng',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',
@@ -14,9 +13,15 @@ module.exports = {
     ],
   },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-  snapshotSerializers: [
-    'jest-preset-angular/build/serializers/no-ng-attributes',
-    'jest-preset-angular/build/serializers/ng-snapshot',
-    'jest-preset-angular/build/serializers/html-comment',
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        suiteName: 'Test Results of app [edc-ui-ng]',
+        outputName: 'junit-edc-ui-ng.xml',
+        outputDirectory: '<rootDir>/../../coverage/apps/edc-ui-ng',
+      },
+    ],
   ],
 };

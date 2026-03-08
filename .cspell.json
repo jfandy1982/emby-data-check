@@ -34,7 +34,19 @@
     "dictionary-edc.txt",
     "package-lock.json"
   ],
-  "ignoreWords": ["bahmutov", "cipe", "claude", "jfandy1982", "pgadmin", "softarc", "sonarcloud", "sonarqube", "sonarsource", "testid"],
+  "ignoreWords": [
+    "bahmutov",
+    "cipe",
+    "claude",
+    "jfandy1982",
+    "ngsrc",
+    "pgadmin",
+    "softarc",
+    "sonarcloud",
+    "sonarqube",
+    "sonarsource",
+    "testid"
+  ],
   "import": ["@cspell/dict-de-de/cspell-ext.json"],
   "language": "en-US,de-DE",
   "loadDefaultConfiguration": true,

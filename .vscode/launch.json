@@ -3,18 +3,24 @@
   "configurations": [
     {
       "type": "node",
-      "request": "launch",
-      "name": "Debug edc-api with Nx",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["nx", "serve", "edc-api"],
-      "env": {
-        "NODE_OPTIONS": "--inspect=9229"
-      },
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
+      "request": "attach",
+      "name": "Attach to edc-api",
+      "port": 9229,
+      "restart": true,
       "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "outFiles": ["${workspaceFolder}/apps/edc-api/dist/**/*.(m|c|)js", "!**/node_modules/**"]
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Attach to edc-ui-ng (Chrome)",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}/apps/edc-ui-ng",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:/*": "${workspaceFolder}/*"
+      }
     }
   ]
 }

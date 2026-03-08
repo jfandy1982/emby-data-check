@@ -5,11 +5,6 @@ export default defineConfig({
   e2e: {
     ...nxE2EPreset(__filename, {
       cypressDir: 'src',
-      webServerCommands: {
-        default: 'npx nx run edc-ui-ng:serve',
-        production: 'npx nx run edc-ui-ng:serve-static',
-      },
-      ciWebServerCommand: 'npx nx run edc-ui-ng:serve-static',
       ciBaseUrl: 'http://localhost:4200',
     }),
     chromeWebSecurity: false,
@@ -22,8 +17,9 @@ export default defineConfig({
     supportFile: './src/support/e2e.ts',
     video: false,
     videosFolder: '../../cypress/edc-ui-ng-cypress-e2e/videos',
-    setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config);
+    async setupNodeEvents(on, config) {
+      const { default: codeCoverageTask } = await import('@cypress/code-coverage/task');
+      codeCoverageTask(on, config);
       return config;
     },
   },

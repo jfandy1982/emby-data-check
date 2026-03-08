@@ -17,23 +17,41 @@
           "vendorChunk": true
         },
         "production": {
+          "aot": true,
+          "buildOptimizer": true,
+          "extractLicenses": true,
+          "namedChunks": false,
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "vendorChunk": true,
           "budgets": [
             {
-              "maximumError": "1mb",
+              "type": "initial",
               "maximumWarning": "500kb",
-              "type": "initial"
+              "maximumError": "1mb"
             },
             {
-              "maximumError": "8kb",
-              "maximumWarning": "4kb",
-              "type": "anyComponentStyle"
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
             }
-          ],
-          "outputHashing": "all"
+          ]
+        },
+        "coverage": {
+          "buildOptimizer": false,
+          "extractLicenses": false,
+          "namedChunks": true,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "customWebpackConfig": {
+            "path": "apps/edc-ui-ng/webpack.coverage.ts"
+          }
         }
       },
       "defaultConfiguration": "production",
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-builders/custom-webpack:browser",
       "options": {
         "assets": [
           {
@@ -67,24 +85,40 @@
         },
         "production": {
           "buildTarget": "edc-ui-ng:build:production"
+        },
+        "coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage"
         }
       },
-      "continuous": true,
-      "defaultConfiguration": "development",
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "continuous": false,
+      "defaultConfiguration": "production",
+      "executor": "@angular-builders/custom-webpack:dev-server",
       "options": {
         "port": 4200,
         "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
       }
     },
     "serve-static": {
-      "continuous": true,
+      "configurations": {
+        "coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage"
+        }
+      },
+      "continuous": false,
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "edc-ui-ng:build",
         "port": 4200,
         "spa": true
       }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p tsconfig.app.json",
+        "cwd": "apps/edc-ui-ng"
+      },
+      "outputs": []
     },
     "stack": {
       "executor": "nx:run-commands",

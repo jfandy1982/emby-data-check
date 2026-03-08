@@ -6,17 +6,15 @@ module.exports = {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  collectCoverage: true,
-  coverageDirectory: '../../coverage/apps/edc-api',
-  coverageReporters: ['lcov', 'text', 'text-summary'],
+  coverageDirectory: '<rootDir>/../../coverage/apps/edc-api',
   reporters: [
     'default',
     [
       'jest-junit',
       {
-        suiteName: 'edc-api unit test results',
+        suiteName: 'Test Results of app [edc-api]',
         outputName: 'junit-edc-api.xml',
-        outputDirectory: '../../coverage/apps/edc-api',
+        outputDirectory: '<rootDir>/../../coverage/apps/edc-api',
       },
     ],
   ],

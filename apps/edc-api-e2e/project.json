@@ -6,12 +6,24 @@
   "tags": ["type:e2e"],
   "targets": {
     "e2e": {
-      "dependsOn": ["edc-api:build", "edc-api:serve"],
       "executor": "@nx/jest:jest",
+      "metadata": {
+        "description": "Local: headless, requires API running on port 3000"
+      },
       "options": {
         "jestConfig": "apps/edc-api-e2e/jest.config.ts"
       },
-      "outputs": ["{workspaceRoot}/coverage/apps/{e2eProjectRoot}"]
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
+    "e2e-ci": {
+      "executor": "nx:run-commands",
+      "metadata": {
+        "description": "CI/Pipeline: starts API via start-server-and-test, then runs headless"
+      },
+      "options": {
+        "command": "npm run e2e:api:ci"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     }
   }
 }

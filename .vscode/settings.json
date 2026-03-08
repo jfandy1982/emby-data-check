@@ -1,0 +1,97 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.addMissingImports": "never",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never",
+    "source.removeUnusedImports": "never",
+    "source.sortImports": "never"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": false,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.exclude": {
+    "**/*.tsbuildinfo": true,
+    "**/.angular/**": true,
+    "**/.git/**": true,
+    "**/.idea/**": true,
+    "**/.nx/**": true,
+    "**/.nyc_output/**": true,
+    "**/coverage/**": true,
+    "**/cypress/downloads/**": true,
+    "**/cypress/screenshots/**": true,
+    "**/cypress/videos/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/out-tsc/**": true,
+    "**/tmp/**": true
+  },
+  "files.watcherExclude": {
+    "**/*.tsbuildinfo": true,
+    "**/.angular/**": true,
+    "**/.git/**": true,
+    "**/.idea/**": true,
+    "**/.nx/**": true,
+    "**/.nyc_output/**": true,
+    "**/coverage/**": true,
+    "**/cypress/downloads/**": true,
+    "**/cypress/screenshots/**": true,
+    "**/cypress/videos/**": true,
+    "**/dist/**": true,
+    "**/experiments/**": true,
+    "**/migrations.json": true,
+    "**/node_modules/**": true,
+    "**/out-tsc/**": true,
+    "**/tmp/**": true
+  },
+  "npm.exclude": ["**/experiments/**"],
+  "search.exclude": {
+    "**/*.tsbuildinfo": true,
+    "**/.angular/**": true,
+    "**/.git/**": true,
+    "**/.idea/**": true,
+    "**/.nx/**": true,
+    "**/.nyc_output/**": true,
+    "**/coverage/**": true,
+    "**/cypress/downloads/**": true,
+    "**/cypress/screenshots/**": true,
+    "**/cypress/videos/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/out-tsc/**": true,
+    "**/tmp/**": true
+  }
+}

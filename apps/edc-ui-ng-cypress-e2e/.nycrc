@@ -1,4 +1,7 @@
 {
   "report-dir": "../../coverage/apps/edc-ui-ng-cypress-e2e",
-  "temp-dir": "../../coverage/temp/edc-ui-ng-cypress-e2e/.nyc_output"
+  "temp-dir": "../../coverage/temp/edc-ui-ng-cypress-e2e/.nyc_output",
+  "reporter": ["lcov", "text", "text-summary"],
+  "instrument": false,
+  "sourceMap": false
 }

@@ -5,17 +5,32 @@ dist
 tmp
 out-tsc
 
+# TypeScript incremental compilation
+*.tsbuildinfo
+
 # dependencies
 node_modules
 
+# Cypress artifacts
+cypress/screenshots
+cypress/videos
+cypress/downloads
+
 # IDEs and editors
-/.idea
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+
+# IDE - JetBrains
+.idea/*
+!.idea/codeStyles/
+!.idea/inspectionProfiles/
+!.idea/prettier.xml
+!.idea/nx-angular-config.xml
+!.idea/.gitignore
 
 # IDE - VSCode
 .vscode/*
@@ -30,9 +45,18 @@ node_modules
 /coverage
 /libpeerconnection.log
 npm-debug.log
+.nyc_output
 yarn-error.log
 testem.log
 /typings
+
+# environment variables
+.env
+.env.local
+.env.*.local
+
+# experiments / temporary workspace
+experiments
 
 # System Files
 .DS_Store
@@ -42,11 +66,9 @@ Thumbs.db
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
+.claude/settings.local.json
+.claude/**/*.local.*
 
 .angular
-
-cypress
-
-.nyc_output
 
 migrations.json
