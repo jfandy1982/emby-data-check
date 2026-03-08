@@ -48,6 +48,12 @@
         },
         "production": {
           "buildTarget": "edc-api:build:production"
+        },
+        "e2e-cypress": {
+          "buildTarget": "edc-api:build:development"
+        },
+        "e2e-cucumber": {
+          "buildTarget": "edc-api:build:development"
         }
       },
       "continuous": false,

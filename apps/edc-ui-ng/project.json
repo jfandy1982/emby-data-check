@@ -88,6 +88,14 @@
         },
         "coverage": {
           "buildTarget": "edc-ui-ng:build:coverage"
+        },
+        "e2e-cypress": {
+          "buildTarget": "edc-ui-ng:build:development",
+          "port": 4201
+        },
+        "e2e-cucumber": {
+          "buildTarget": "edc-ui-ng:build:development",
+          "port": 4202
         }
       },
       "continuous": false,
@@ -95,13 +103,21 @@
       "executor": "@angular-builders/custom-webpack:dev-server",
       "options": {
         "port": 4200,
-        "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
+        "proxyConfig": "apps/edc-ui-ng/proxy.conf.js"
       }
     },
     "serve-static": {
       "configurations": {
         "coverage": {
           "buildTarget": "edc-ui-ng:build:coverage"
+        },
+        "e2e-cypress": {
+          "buildTarget": "edc-ui-ng:build:development",
+          "port": 4201
+        },
+        "e2e-cucumber": {
+          "buildTarget": "edc-ui-ng:build:development",
+          "port": 4202
         }
       },
       "continuous": false,

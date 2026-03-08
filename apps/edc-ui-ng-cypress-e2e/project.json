@@ -10,6 +10,9 @@
       "configurations": {
         "coverage": {
           "devServerTarget": "edc-ui-ng:serve:coverage"
+        },
+        "e2e-cypress": {
+          "devServerTarget": "edc-ui-ng:serve:e2e-cypress"
         }
       },
       "executor": "@nx/cypress:cypress",
@@ -27,6 +30,9 @@
       "configurations": {
         "coverage": {
           "devServerTarget": "edc-ui-ng:serve-static:coverage"
+        },
+        "e2e-cypress": {
+          "devServerTarget": "edc-ui-ng:serve-static:e2e-cypress"
         }
       },
       "dependsOn": ["edc-ui-ng:build"],
