@@ -24,7 +24,8 @@ export default defineConfig({
     video: false,
     videosFolder: '../../cypress/edc-ui-ng-cucumber-e2e/videos',
     async setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config);
+      const { default: codeCoverageTask } = await import('@cypress/code-coverage/task');
+      codeCoverageTask(on, config);
       await addCucumberPreprocessorPlugin(on, config);
       on(
         'file:preprocessor',

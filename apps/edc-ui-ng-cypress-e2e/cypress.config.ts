@@ -17,8 +17,9 @@ export default defineConfig({
     supportFile: './src/support/e2e.ts',
     video: false,
     videosFolder: '../../cypress/edc-ui-ng-cypress-e2e/videos',
-    setupNodeEvents(on, config) {
-      require('@cypress/code-coverage/task')(on, config);
+    async setupNodeEvents(on, config) {
+      const { default: codeCoverageTask } = await import('@cypress/code-coverage/task');
+      codeCoverageTask(on, config);
       return config;
     },
   },

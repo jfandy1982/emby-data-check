@@ -37,10 +37,21 @@
               "maximumError": "4kb"
             }
           ]
+        },
+        "coverage": {
+          "buildOptimizer": false,
+          "extractLicenses": false,
+          "namedChunks": true,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true,
+          "customWebpackConfig": {
+            "path": "apps/edc-ui-ng/webpack.coverage.ts"
+          }
         }
       },
       "defaultConfiguration": "production",
-      "executor": "@angular-devkit/build-angular:browser",
+      "executor": "@angular-builders/custom-webpack:browser",
       "options": {
         "assets": [
           {
@@ -74,17 +85,25 @@
         },
         "production": {
           "buildTarget": "edc-ui-ng:build:production"
+        },
+        "coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage"
         }
       },
       "continuous": false,
       "defaultConfiguration": "production",
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@angular-builders/custom-webpack:dev-server",
       "options": {
         "port": 4200,
         "proxyConfig": "apps/edc-ui-ng/proxy.conf.json"
       }
     },
     "serve-static": {
+      "configurations": {
+        "coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage"
+        }
+      },
       "continuous": false,
       "executor": "@nx/web:file-server",
       "options": {

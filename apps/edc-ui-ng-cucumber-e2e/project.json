@@ -7,6 +7,11 @@
   "tags": ["type:e2e", "ui:angular"],
   "targets": {
     "e2e": {
+      "configurations": {
+        "coverage": {
+          "devServerTarget": "edc-ui-ng:serve:coverage"
+        }
+      },
       "executor": "@nx/cypress:cypress",
       "metadata": {
         "description": "Local: headless, dev-server on port 4200 (no build required)"
@@ -19,6 +24,11 @@
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "e2e-ci": {
+      "configurations": {
+        "coverage": {
+          "devServerTarget": "edc-ui-ng:serve-static:coverage"
+        }
+      },
       "dependsOn": ["edc-ui-ng:build"],
       "executor": "@nx/cypress:cypress",
       "metadata": {
