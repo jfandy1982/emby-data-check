@@ -1,0 +1,59 @@
+name: API Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        type: string
+        required: true
+
+jobs:
+  test-api-unit:
+    name: 'Unit Tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Run unit tests'
+        run: npx nx test ${{ inputs.project }} --skip-nx-cache
+
+      - name: 'Upload coverage artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.project }}-unit
+          path: coverage/apps/${{ inputs.project }}/
+
+  test-api-e2e:
+    name: 'API E2E Tests'
+    runs-on: ubuntu-latest
+    env:
+      API_PORT: 3000
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Run API E2E tests'
+        run: npx start-server-and-test 'npx nx serve ${{ inputs.project }} --configuration=production' "http://localhost:${API_PORT}/api" 'npx nx e2e ${{ inputs.project }}-e2e'
+
+      - name: 'Upload coverage artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.project }}-e2e
+          path: coverage/apps/${{ inputs.project }}-e2e/

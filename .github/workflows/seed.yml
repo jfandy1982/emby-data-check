@@ -1,0 +1,249 @@
+name: Continuous Integration Pipeline
+
+on:
+  push:
+
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+  workflow_dispatch:
+    inputs:
+      edc-api-manual:
+        description: 'Is app [edc-api] affected?'
+        required: false
+        type: boolean
+        default: false
+      edc-ui-ng-manual:
+        description: 'Is app [edc-ui-ng] affected?'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  actions: read
+  attestations: read
+  checks: read
+  contents: read
+  deployments: read
+  id-token: none
+  issues: write
+  discussions: read
+  packages: read
+  pages: read
+  pull-requests: write
+  repository-projects: read
+  security-events: read
+  statuses: read
+
+jobs:
+  detect-affected:
+    name: 'Detect Affected Projects'
+    runs-on: ubuntu-latest
+    outputs:
+      is-api-relevant: ${{ steps.evaluate.outputs.is-api-relevant }}
+      is-ui-relevant: ${{ steps.evaluate.outputs.is-ui-relevant }}
+      is-libs-relevant: ${{ steps.evaluate.outputs.is-libs-relevant }}
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Extract branch name'
+        id: extract-branch
+        shell: bash
+        run: |
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "nxBase=${{ github.event.pull_request.base.ref }}" >> $GITHUB_OUTPUT
+          else
+            echo "nxBase=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}~1" >> $GITHUB_OUTPUT
+          fi
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+
+      - name: 'Get affected apps'
+        id: check-affected-apps
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type app --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
+      - name: 'Get affected libs'
+        id: check-affected-libs
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type lib --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
+      - name: 'Evaluate relevance per app and libs'
+        id: evaluate
+        shell: bash
+        run: |
+          affected_apps="${{ steps.check-affected-apps.outputs.affected }}"
+          affected_libs="${{ steps.check-affected-libs.outputs.affected }}"
+
+          if echo "$affected_apps" | grep -q 'edc-api' || [[ "${{ inputs.edc-api-manual }}" == "true" ]]; then
+            echo "is-api-relevant=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-api-relevant=false" >> $GITHUB_OUTPUT
+          fi
+
+          if echo "$affected_apps" | grep -q 'edc-ui-ng' || [[ "${{ inputs.edc-ui-ng-manual }}" == "true" ]]; then
+            echo "is-ui-relevant=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-ui-relevant=false" >> $GITHUB_OUTPUT
+          fi
+
+          if [[ -n "$affected_libs" ]]; then
+            echo "is-libs-relevant=true" >> $GITHUB_OUTPUT
+          else
+            echo "is-libs-relevant=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 'Print outputs'
+        shell: bash
+        run: |
+          echo "Event information"
+          echo "Event name:        ${{ github.event_name }}"
+          echo "Event action:      ${{ github.event.action }}"
+          echo ""
+          echo "Git information"
+          echo "Branch:            ${{ steps.extract-branch.outputs.branch }}"
+          echo "Base branch:       ${{ steps.extract-branch.outputs.nxBase }}"
+          echo ""
+          echo "Affected projects detected by Nx Tooling"
+          echo "Affected apps:     ${{ steps.check-affected-apps.outputs.affected }}"
+          echo "Affected libs:     ${{ steps.check-affected-libs.outputs.affected }}"
+          echo ""
+          echo "Relevance evaluation"
+          echo "is-api-relevant:   ${{ steps.evaluate.outputs.is-api-relevant }}"
+          echo "is-ui-relevant:    ${{ steps.evaluate.outputs.is-ui-relevant }}"
+          echo "is-libs-relevant:  ${{ steps.evaluate.outputs.is-libs-relevant }}"
+          echo ""
+          echo "Triggered manually (from workflow inputs)"
+          echo "Is app [edc-api] affected?    ${{ inputs.edc-api-manual }}"
+          echo "Is app [edc-ui-ng] affected?  ${{ inputs.edc-ui-ng-manual }}"
+
+  quality-checks:
+    name: 'Quality Checks'
+    needs: detect-affected
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Check formatting'
+        run: npx nx format:check --all
+
+      - name: 'Check for spell errors'
+        run: npx cspell lint --dot --show-suggestions --no-progress --no-must-find-files --config ./.cspell.json .
+
+      - name: 'Check linting rules'
+        run: npx nx run-many --parallel --targets=lint --all --skip-nx-cache
+
+      - name: 'Check types'
+        run: npx nx run-many --parallel --targets=typecheck --all --skip-nx-cache
+
+      - name: 'Build all projects'
+        run: npx nx run-many --parallel --targets=build --all --skip-nx-cache
+
+  run-api:
+    name: 'API Pipeline'
+    needs: [detect-affected, quality-checks]
+    if: needs.detect-affected.outputs.is-api-relevant == 'true'
+    uses: ./.github/workflows/ci-api.yml
+    with:
+      project: edc-api
+    secrets: inherit
+
+  run-ui:
+    name: 'UI Pipeline'
+    needs: [detect-affected, quality-checks]
+    if: needs.detect-affected.outputs.is-ui-relevant == 'true'
+    uses: ./.github/workflows/ci-ui.yml
+    with:
+      project: edc-ui-ng
+    secrets: inherit
+
+  run-libs:
+    name: 'Libs Pipeline'
+    needs: [detect-affected, quality-checks]
+    if: needs.detect-affected.outputs.is-libs-relevant == 'true'
+    uses: ./.github/workflows/ci-libs.yml
+    with:
+      project: not-existing-yet
+    secrets: inherit
+
+  coverage-and-sonar:
+    name: 'Coverage & SonarQube'
+    needs: [run-api, run-ui, run-libs]
+    if: always() && !cancelled() && !contains(needs.*.result, 'failure')
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Download coverage artifacts'
+        id: download-coverage
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          pattern: coverage-*
+          path: coverage/
+          merge-multiple: true
+
+      - name: 'Merge Coverage Results'
+        if: steps.download-coverage.outcome == 'success'
+        run: |
+          if ls coverage/**/lcov.info 1> /dev/null 2>&1; then
+            npx lcov-result-merger "coverage/**/lcov.info" > coverage/merged-lcov.info
+          else
+            echo "No coverage files found to merge"
+          fi
+
+      - name: 'Upload results to Codecov.io'
+        if: steps.download-coverage.outcome == 'success'
+        uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: 'Run SonarQube static code checks'
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

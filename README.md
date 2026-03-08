@@ -4,7 +4,7 @@
 
 <!-- Build & Quality -->
 
-[![CI](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline_simple.yml/badge.svg)](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline_simple.yml)
+[![CI](https://github.com/jfandy1982/emby-data-check/actions/workflows/seed.yml/badge.svg)](https://github.com/jfandy1982/emby-data-check/actions/workflows/seed.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jfandy1982_emby-data-check&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jfandy1982_emby-data-check)
 [![Coverage](https://codecov.io/gh/jfandy1982/emby-data-check/branch/main/graph/badge.svg)](https://codecov.io/gh/jfandy1982/emby-data-check)
 

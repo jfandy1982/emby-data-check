@@ -1,14 +1,6 @@
 name: Continuous Integration Pipeline
 
 on:
-  push:
-
-  pull_request:
-    types:
-      - opened
-      - reopened
-      - synchronize
-
   workflow_dispatch:
     inputs:
       edc-api-manual:
