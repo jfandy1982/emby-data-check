@@ -2,9 +2,7 @@ module.exports = {
   displayName: 'edc-ui-ng',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  collectCoverage: true,
   coverageDirectory: '<rootDir>/../../coverage/apps/edc-ui-ng',
-  coverageReporters: ['lcov', 'text', 'text-summary'],
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

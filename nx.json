@@ -81,7 +81,8 @@
     },
     "test": {
       "cache": true,
-      "inputs": ["default", "^production"]
+      "inputs": ["default", "^production"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "lint": {
       "cache": true
