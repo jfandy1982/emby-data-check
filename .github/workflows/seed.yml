@@ -240,12 +240,12 @@ jobs:
         with:
           pattern: coverage-*
           path: coverage/
-          merge-multiple: true
 
       - name: 'Merge Coverage Results'
         if: steps.download-coverage.outcome == 'success'
         run: |
-          if ls coverage/**/lcov.info 1> /dev/null 2>&1; then
+          files=$(find coverage/ -name "lcov.info")
+          if [ -n "$files" ]; then
             npx lcov-result-merger "coverage/**/lcov.info" > coverage/merged-lcov.info
           else
             echo "No coverage files found to merge"
