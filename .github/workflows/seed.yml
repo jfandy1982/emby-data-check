@@ -95,6 +95,19 @@ jobs:
           affected=$(echo "$output" | yq eval 'select(. != null)' -)
           echo "affected=${affected}" >> $GITHUB_OUTPUT
 
+      - name: 'Get affected e2e'
+        id: check-affected-e2e
+        env:
+          headSha: ${{ github.sha }}
+          nxBase: ${{ steps.extract-branch.outputs.nxBase }}
+          branch: ${{ steps.extract-branch.outputs.branch }}
+        shell: bash
+        run: |
+          git fetch origin $branch
+          output=$(npx nx show projects --affected --type e2e --base=remotes/origin/$nxBase --head=$headSha --json)
+          affected=$(echo "$output" | yq eval 'select(. != null)' -)
+          echo "affected=${affected}" >> $GITHUB_OUTPUT
+
       - name: 'Evaluate relevance per app and libs'
         id: evaluate
         shell: bash
@@ -134,6 +147,7 @@ jobs:
           echo "Affected projects detected by Nx Tooling"
           echo "Affected apps:     ${{ steps.check-affected-apps.outputs.affected }}"
           echo "Affected libs:     ${{ steps.check-affected-libs.outputs.affected }}"
+          echo "Affected e2e:      ${{ steps.check-affected-e2e.outputs.affected }}"
           echo ""
           echo "Relevance evaluation"
           echo "is-api-relevant:   ${{ steps.evaluate.outputs.is-api-relevant }}"
