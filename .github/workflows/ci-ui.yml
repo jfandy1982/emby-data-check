@@ -50,7 +50,7 @@ jobs:
           need-cache-cypress: true
 
       - name: 'Run Cypress E2E tests'
-        run: npx nx e2e-ci ${{ inputs.project }}-cypress-e2e --configuration=e2e-cypress --skip-nx-cache
+        run: npx nx e2e-ci ${{ inputs.project }}-cypress-e2e --configuration=e2e-cypress-coverage --skip-nx-cache
 
       - name: 'Upload coverage artifacts'
         uses: actions/upload-artifact@v4
@@ -76,7 +76,7 @@ jobs:
           need-cache-cypress: true
 
       - name: 'Run Cucumber E2E tests'
-        run: npx nx e2e-ci ${{ inputs.project }}-cucumber-e2e --configuration=e2e-cucumber --skip-nx-cache
+        run: npx nx e2e-ci ${{ inputs.project }}-cucumber-e2e --configuration=e2e-cucumber-coverage --skip-nx-cache
 
       - name: 'Upload coverage artifacts'
         uses: actions/upload-artifact@v4

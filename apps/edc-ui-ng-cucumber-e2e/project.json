@@ -10,9 +10,6 @@
       "configurations": {
         "coverage": {
           "devServerTarget": "edc-ui-ng:serve:coverage"
-        },
-        "e2e-cucumber": {
-          "devServerTarget": "edc-ui-ng:serve:e2e-cucumber"
         }
       },
       "executor": "@nx/cypress:cypress",
@@ -21,24 +18,21 @@
       },
       "options": {
         "cypressConfig": "apps/edc-ui-ng-cucumber-e2e/cypress.config.ts",
-        "devServerTarget": "edc-ui-ng:serve",
+        "devServerTarget": "edc-ui-ng:serve:development",
         "testingType": "e2e"
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },
     "e2e-ci": {
       "configurations": {
-        "coverage": {
-          "devServerTarget": "edc-ui-ng:serve-static:coverage"
-        },
-        "e2e-cucumber": {
-          "devServerTarget": "edc-ui-ng:serve-static:e2e-cucumber"
+        "e2e-cucumber-coverage": {
+          "devServerTarget": "edc-ui-ng:serve-static:e2e-cucumber-coverage"
         }
       },
       "dependsOn": ["edc-ui-ng:build"],
       "executor": "@nx/cypress:cypress",
       "metadata": {
-        "description": "CI/Pipeline: headless, Chrome, serve-static on port 4200 (requires build)"
+        "description": "CI/Pipeline: headless, Chrome, serve-static on port 4202 with coverage (requires build)"
       },
       "options": {
         "browser": "chrome",

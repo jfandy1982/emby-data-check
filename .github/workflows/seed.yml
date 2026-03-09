@@ -114,7 +114,7 @@ jobs:
             echo "is-ui-relevant=false" >> $GITHUB_OUTPUT
           fi
 
-          if [[ -n "$affected_libs" ]]; then
+          if [[ -n "$affected_libs" && "$affected_libs" != "[]" ]]; then
             echo "is-libs-relevant=true" >> $GITHUB_OUTPUT
           else
             echo "is-libs-relevant=false" >> $GITHUB_OUTPUT

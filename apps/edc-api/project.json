@@ -48,12 +48,6 @@
         },
         "production": {
           "buildTarget": "edc-api:build:production"
-        },
-        "e2e-cypress": {
-          "buildTarget": "edc-api:build:development"
-        },
-        "e2e-cucumber": {
-          "buildTarget": "edc-api:build:development"
         }
       },
       "continuous": false,
@@ -71,23 +65,6 @@
         "cwd": "apps/edc-api"
       },
       "outputs": []
-    },
-    "stack": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run edc-api:serve:development",
-            "description": "Start the Emby Data Check API",
-            "forwardAllArgs": false
-          }
-        ],
-        "continuous": true,
-        "env": {
-          "NEST_DEBUG": "true"
-        },
-        "parallel": true
-      }
     }
   }
 }

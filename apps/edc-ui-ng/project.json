@@ -88,14 +88,6 @@
         },
         "coverage": {
           "buildTarget": "edc-ui-ng:build:coverage"
-        },
-        "e2e-cypress": {
-          "buildTarget": "edc-ui-ng:build:development",
-          "port": 4201
-        },
-        "e2e-cucumber": {
-          "buildTarget": "edc-ui-ng:build:development",
-          "port": 4202
         }
       },
       "continuous": false,
@@ -108,15 +100,12 @@
     },
     "serve-static": {
       "configurations": {
-        "coverage": {
-          "buildTarget": "edc-ui-ng:build:coverage"
-        },
-        "e2e-cypress": {
-          "buildTarget": "edc-ui-ng:build:development",
+        "e2e-cypress-coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage",
           "port": 4201
         },
-        "e2e-cucumber": {
-          "buildTarget": "edc-ui-ng:build:development",
+        "e2e-cucumber-coverage": {
+          "buildTarget": "edc-ui-ng:build:coverage",
           "port": 4202
         }
       },
@@ -141,18 +130,18 @@
       "options": {
         "commands": [
           {
-            "command": "npm run cleanup:cache:angular",
+            "command": "rimraf ./.angular",
             "description": "Remove Angular cache"
           },
           {
-            "command": "npm run stack:api",
+            "command": "nx run edc-api:serve:development",
             "description": "Start API Stack (as prerequisite)",
             "forwardAllArgs": false,
             "prefix": "EDC-API",
             "prefixColor": "cyan"
           },
           {
-            "command": "wait-on tcp:3000 && nx run edc-ui-ng:serve:development",
+            "command": "wait-on tcp:${API_PORT:-3000} && nx run edc-ui-ng:serve:development",
             "description": "Start the Emby Data Check UI (Angular Material)",
             "prefix": "EDC-UI-NG",
             "prefixColor": "magenta"
