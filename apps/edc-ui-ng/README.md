@@ -27,11 +27,20 @@ This frontend communicates with the NestJS backend (`edc-api`) which handles Emb
 
 ## Local Development
 
+### Prerequisites
+
+- `.env` file configured in the repository root (copy from `.env.sample`)
+- `npm run stack:ng` starts both API and UI — no separate prerequisite needed
+- `npm run stack:ui:ng` starts UI only — requires `edc-api` already running separately
+
 ### Start the Development Server
 
 ```bash
-# From repository root
+# From repository root — starts API + UI together
 npm run stack:ng
+
+# Or start UI only (requires API already running)
+npm run stack:ui:ng
 ```
 
 The application will be available at `http://localhost:4200`
@@ -39,16 +48,9 @@ The application will be available at `http://localhost:4200`
 **Features:**
 
 - Port: `4200`
-- Proxied API requests to `http://localhost:3000/api`
+- Proxied API requests to `http://localhost:${API_PORT:-3000}/api`
 - Hot module replacement for instant updates
 - Automatic browser refresh on changes
-
-### Development Server Only (Without API)
-
-```bash
-# Start UI without starting the API
-nx serve edc-ui-ng
-```
 
 ## Architecture
 
@@ -157,11 +159,11 @@ End-to-end tests are located in two separate applications:
 **Cypress E2E (`apps/edc-ui-ng-cypress-e2e`):**
 
 ```bash
-# Run Cypress E2E tests
+# Run Cypress E2E tests (local, sequential on port 4200)
 nx e2e edc-ui-ng-cypress-e2e
 
-# Run in headless mode for CI
-nx e2e-ci edc-ui-ng-cypress-e2e
+# Run in CI mode with coverage (port 4201, requires build)
+nx e2e-ci edc-ui-ng-cypress-e2e --configuration=e2e-cypress-coverage
 ```
 
 **Cucumber BDD E2E (`apps/edc-ui-ng-cucumber-e2e`):**
@@ -181,7 +183,6 @@ nx e2e edc-ui-ng-cucumber-e2e
 - **Unit Tests:** Test component logic, services, and utilities in isolation
 - **Cypress E2E:** Test user flows and interactions
 - **Cucumber BDD:** Behavior-driven tests with natural language scenarios
-- **Coverage:** Merged coverage reports via `npm run coverage:merge`
 
 ## Build & Deployment
 
@@ -236,7 +237,8 @@ The generated e2e app was renamed and copied to support both Cypress and Cucumbe
 
 ## Related Documentation
 
-- **Workspace:** See root `CLAUDE.md` for workspace-level commands
-- **Backend:** See `apps/edc-api/README.md` for NestJS API
-- **Nx Guidelines:** See root `AGENTS.md` for Nx-specific workflows
+- **Overview:** See root [README.md](../../README.md) for quick start and environment variables
+- **Workspace:** See root [CLAUDE.md](../../CLAUDE.md) for workspace-level commands
+- **Backend:** See [apps/edc-api/README.md](../edc-api/README.md) for NestJS API
+- **Nx Guidelines:** See root [AGENTS.md](../../AGENTS.md) for Nx-specific workflows
 - **Angular Material:** https://material.angular.io/

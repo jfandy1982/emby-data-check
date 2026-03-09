@@ -23,6 +23,11 @@ This backend acts as the bridge between the Angular frontend and the Emby Media 
 
 ## Local Development
 
+### Prerequisites
+
+- `.env` file configured in the repository root (copy from `.env.sample`)
+- No other service needs to be running — the API is the base layer
+
 ### Start the API Server
 
 ```bash
@@ -30,7 +35,7 @@ This backend acts as the bridge between the Angular frontend and the Emby Media 
 npm run stack:api
 ```
 
-The API will be available at `http://localhost:3000/api`
+The API will be available at `http://localhost:${API_PORT:-3000}/api`
 
 ### Environment Variables
 
@@ -38,7 +43,7 @@ Configure the API via `.env` file in the repository root. Use `.env.sample` as a
 
 **Default Configuration:**
 
-- Port: `3000` (configurable via `PORT` environment variable)
+- Port: `3000` (configurable via `API_PORT` environment variable)
 - Global API prefix: `/api`
 
 ## API Endpoints
@@ -112,9 +117,6 @@ End-to-end tests are located in `apps/edc-api-e2e`.
 ```bash
 # E2E tests for this app
 nx e2e edc-api-e2e
-
-# E2E tests for CI
-nx e2e-ci edc-api-e2e
 ```
 
 **E2E Test Location:**
@@ -125,7 +127,7 @@ nx e2e-ci edc-api-e2e
 
 - **Unit Tests:** Test individual components (controllers, services)
 - **E2E Tests:** Test HTTP endpoints with actual HTTP requests
-- **Coverage:** Merged coverage reports available via `npm run coverage:merge`
+- **Coverage:** Run `nx test edc-api --coverage` for per-app coverage
 
 ## Development Notes
 
@@ -147,6 +149,7 @@ nx g @nx/nest:application --directory=apps/edc-api --linter=eslint --name=edc-ap
 
 ## Related Documentation
 
-- **Workspace:** See root `CLAUDE.md` for workspace-level commands
-- **Frontend:** See `apps/edc-ui-ng/README.md` for Angular UI
-- **Nx Guidelines:** See root `AGENTS.md` for Nx-specific workflows
+- **Overview:** See root [README.md](../../README.md) for quick start and environment variables
+- **Workspace:** See root [CLAUDE.md](../../CLAUDE.md) for workspace-level commands
+- **Frontend:** See [apps/edc-ui-ng/README.md](../edc-ui-ng/README.md) for Angular UI
+- **Nx Guidelines:** See root [AGENTS.md](../../AGENTS.md) for Nx-specific workflows

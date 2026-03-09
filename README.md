@@ -90,7 +90,25 @@ It might be wrong to implement that on my own, because there might be already to
 ```bash
 npm install
 cp .env.sample .env
+# Edit .env and fill in the values for your environment
 ```
+
+**Environment Variables (`.env.sample`):**
+
+| Variable                   | Section    | Description                                 |
+| -------------------------- | ---------- | ------------------------------------------- |
+| `API_PORT`                 | NestJS API | Port for the backend API (default: `3000`)  |
+| `NEST_DEBUG`               | NestJS API | Enable NestJS debug logging (`true`/empty)  |
+| `DATABASE_HOST`            | Database   | PostgreSQL host                             |
+| `DATABASE_NAME`            | Database   | Database name                               |
+| `DATABASE_PASSWORD`        | Database   | Database password                           |
+| `DATABASE_PORT`            | Database   | PostgreSQL port (typically `5432`)          |
+| `DATABASE_USERNAME`        | Database   | Database user                               |
+| `PGADMIN_DEFAULT_EMAIL`    | PgAdmin4   | Admin email for PgAdmin web console         |
+| `PGADMIN_DEFAULT_PASSWORD` | PgAdmin4   | Admin password for PgAdmin web console      |
+| `PGADMIN_VERSION`          | PgAdmin4   | PgAdmin Docker image version                |
+| `POSTGRES_VERSION`         | PostgreSQL | PostgreSQL Docker image version             |
+| `NX_CLOUD_ACCESS_TOKEN`    | Nx Cloud   | Access token for distributed task execution |
 
 ### Upgrading
 

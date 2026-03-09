@@ -43,19 +43,17 @@ This is an Nx monorepo with the following structure:
 ### Local Development
 
 ```bash
-npm run stack:api      # Start NestJS API server on port 3000
+npm run stack:api      # Start NestJS API server on port $API_PORT:-3000
 npm run stack:ng       # Start Angular UI with proxied API on port 4200
 ```
 
 ### Build & Test
 
 ```bash
-npm run build:all                # Build all applications
-npm run test:all                 # Run all unit tests and E2E tests
-npm run test:all:ci              # Run tests with CI-specific E2E targets
-npm run lint:all:check           # Check for linting violations in the entire workspace
-npm run format:all:check         # Check code formatting with Prettier in the entire workspace
-npm run checks:all:conf:default  # Run lint, build, test, e2e in parallel with default configuration
+npm run build:all         # Build all applications
+npm run test:all          # Run all unit tests
+npm run lint:all:check    # Check for linting violations in the entire workspace
+npm run format:all:check  # Check code formatting with Prettier in the entire workspace
 ```
 
 ### Maintenance
@@ -112,11 +110,6 @@ Create a `.env` file in the root directory using `.env.sample` as a template.
 - **UI E2E:** Cypress 15.9-based tests in `apps/edc-ui-ng-cypress-e2e`
 - **Alternative:** Cucumber BDD tests in `apps/edc-ui-ng-cucumber-e2e`
 
-**Coverage:**
-
-- Coverage reports merged via `lcov-result-merger`
-- Command: `npm run coverage:merge`
-
 ## Code Quality
 
 **ESLint:**
@@ -159,6 +152,10 @@ Create a `.env` file in the root directory using `.env.sample` as a template.
 - Examples: `feat:`, `fix:`, `docs:`, `test:`, `chore:`
 
 ## App-Specific Documentation
+
+**Repository Overview:**
+
+- See `README.md` for quick start, environment variables, and documentation index
 
 **Main Applications:**
 
