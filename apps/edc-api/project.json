@@ -58,6 +58,15 @@
         "runBuildTargetDependencies": false
       }
     },
+    "test": {
+      "cache": true,
+      "executor": "@nx/jest:jest",
+      "inputs": ["default", "^production"],
+      "options": {
+        "jestConfig": "apps/edc-api/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {
