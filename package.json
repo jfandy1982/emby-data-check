@@ -99,8 +99,8 @@
     "webpack-cli": "^5.1.4"
   },
   "engines": {
-    "node": "22.21.1",
-    "npm": "10.9.4"
+    "node": "24.14.0",
+    "npm": "11.9.0"
   },
   "homepage": "https://jfandy1982.github.io/emby-data-check/",
   "keywords": [

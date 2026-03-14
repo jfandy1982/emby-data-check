@@ -16,8 +16,8 @@
 
 <!-- Tech Stack -->
 
-[![Node.js](https://img.shields.io/badge/node-22.21.1-brightgreen.svg)](https://nodejs.org/)
-[![npm](https://img.shields.io/badge/npm-10.9.4-blue.svg)](https://www.npmjs.com/)
+[![Node.js](https://img.shields.io/badge/node-24.14.0-brightgreen.svg)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-11.9.0-blue.svg)](https://www.npmjs.com/)
 [![Nx](https://img.shields.io/badge/Nx-22.5-orange.svg)](https://nx.dev/)
 [![Angular](https://img.shields.io/badge/Angular-21.1-red.svg)](https://angular.io/)
 [![NestJS](https://img.shields.io/badge/NestJS-11-ea2845.svg)](https://nestjs.com/)
