@@ -7,6 +7,7 @@ export default defineConfig({
       cypressDir: 'src',
       ciBaseUrl: 'http://localhost:4200',
     }),
+    allowCypressEnv: false,
     chromeWebSecurity: false,
     downloadsFolder: '../../cypress/edc-ui-ng-cypress-e2e/downloads',
     baseUrl: 'http://localhost:4200',

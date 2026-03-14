@@ -10,6 +10,7 @@ export default defineConfig({
       cypressDir: 'src',
       ciBaseUrl: 'http://localhost:4200',
     }),
+    allowCypressEnv: false,
     chromeWebSecurity: false,
     cucumber: {
       stepDefinitions: './src/e2e/step_definitions/**/*.ts',
