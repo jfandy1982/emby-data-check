@@ -64,6 +64,7 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+.nx/polygraph
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 .claude/settings.local.json
