@@ -34,6 +34,7 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-unit
           path: coverage/apps/${{ inputs.project }}/
+          retention-days: 3
 
   test-ui-cypress-e2e:
     name: 'Cypress E2E Tests'
@@ -65,6 +66,7 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-cypress-e2e
           path: coverage/apps/${{ inputs.project }}-cypress-e2e/
+          retention-days: 3
 
   test-ui-cucumber-e2e:
     name: 'Cucumber E2E Tests'
@@ -96,3 +98,4 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-cucumber-e2e
           path: coverage/apps/${{ inputs.project }}-cucumber-e2e/
+          retention-days: 3
