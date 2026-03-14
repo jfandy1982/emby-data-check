@@ -244,7 +244,7 @@ jobs:
       - name: 'Merge Coverage Results'
         if: steps.download-coverage.outcome == 'success'
         run: |
-          files=$(find coverage/ -name "lcov.info" 2>/dev/null)
+          files=$(find coverage/ -name "lcov.info" 2>/dev/null || true)
           if [ -n "$files" ]; then
             npx lcov-result-merger "coverage/**/lcov.info" > coverage/merged-lcov.info
           else
