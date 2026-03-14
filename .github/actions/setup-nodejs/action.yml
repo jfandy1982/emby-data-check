@@ -51,7 +51,7 @@ runs:
       shell: bash
       if: (env.need_cache_npm == 'true' && steps.cache-npm.outputs.cache-hit != 'true') || (env.need_cache_cypress == 'true' && steps.cache-cypress.outputs.cache-hit != 'true')
       run: |
-        npm install
+        npm ci
 
     - name: 'Set up Node.js environment'
       shell: bash
