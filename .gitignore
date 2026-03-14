@@ -12,9 +12,9 @@ out-tsc
 node_modules
 
 # Cypress artifacts
-cypress/screenshots
-cypress/videos
-cypress/downloads
+cypress/**/screenshots
+cypress/**/videos
+cypress/**/downloads
 
 # IDEs and editors
 .project
