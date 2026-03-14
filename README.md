@@ -4,7 +4,7 @@
 
 <!-- Build & Quality -->
 
-[![CI](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline_simple.yml/badge.svg)](https://github.com/jfandy1982/emby-data-check/actions/workflows/ci_pipeline_simple.yml)
+[![CI](https://github.com/jfandy1982/emby-data-check/actions/workflows/seed.yml/badge.svg)](https://github.com/jfandy1982/emby-data-check/actions/workflows/seed.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jfandy1982_emby-data-check&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jfandy1982_emby-data-check)
 [![Coverage](https://codecov.io/gh/jfandy1982/emby-data-check/branch/main/graph/badge.svg)](https://codecov.io/gh/jfandy1982/emby-data-check)
 
@@ -90,7 +90,25 @@ It might be wrong to implement that on my own, because there might be already to
 ```bash
 npm install
 cp .env.sample .env
+# Edit .env and fill in the values for your environment
 ```
+
+**Environment Variables (`.env.sample`):**
+
+| Variable                   | Section    | Description                                 |
+| -------------------------- | ---------- | ------------------------------------------- |
+| `API_PORT`                 | NestJS API | Port for the backend API (default: `3000`)  |
+| `NEST_DEBUG`               | NestJS API | Enable NestJS debug logging (`true`/empty)  |
+| `DATABASE_HOST`            | Database   | PostgreSQL host                             |
+| `DATABASE_NAME`            | Database   | Database name                               |
+| `DATABASE_PASSWORD`        | Database   | Database password                           |
+| `DATABASE_PORT`            | Database   | PostgreSQL port (typically `5432`)          |
+| `DATABASE_USERNAME`        | Database   | Database user                               |
+| `PGADMIN_DEFAULT_EMAIL`    | PgAdmin4   | Admin email for PgAdmin web console         |
+| `PGADMIN_DEFAULT_PASSWORD` | PgAdmin4   | Admin password for PgAdmin web console      |
+| `PGADMIN_VERSION`          | PgAdmin4   | PgAdmin Docker image version                |
+| `POSTGRES_VERSION`         | PostgreSQL | PostgreSQL Docker image version             |
+| `NX_CLOUD_ACCESS_TOKEN`    | Nx Cloud   | Access token for distributed task execution |
 
 ### Upgrading
 

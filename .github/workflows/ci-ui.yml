@@ -1,0 +1,98 @@
+name: UI Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test-ui-unit:
+    name: 'Unit Tests'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: false
+
+      - name: 'Run unit tests'
+        run: npx nx test ${{ inputs.project }} --skip-nx-cache
+
+      - name: 'Upload coverage artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.project }}-unit
+          path: coverage/apps/${{ inputs.project }}/
+
+  test-ui-cypress-e2e:
+    name: 'Cypress E2E Tests'
+    runs-on: ubuntu-latest
+    env:
+      API_PORT: 3001
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: true
+
+      - name: 'Run Cypress E2E tests'
+        run: npx nx e2e-ci ${{ inputs.project }}-cypress-e2e --configuration=e2e-cypress-coverage --skip-nx-cache
+
+      - name: 'Fix lcov SF paths'
+        run: |
+          sed -i "s|^SF:\\.\\./\${{ inputs.project }}/|SF:apps/${{ inputs.project }}/|g" \
+            coverage/apps/${{ inputs.project }}-cypress-e2e/lcov.info
+
+      - name: 'Upload coverage artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.project }}-cypress-e2e
+          path: coverage/apps/${{ inputs.project }}-cypress-e2e/
+
+  test-ui-cucumber-e2e:
+    name: 'Cucumber E2E Tests'
+    runs-on: ubuntu-latest
+    env:
+      API_PORT: 3002
+    steps:
+      - name: 'Checkout repository'
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        with:
+          fetch-depth: 0
+
+      - name: 'Set up Node.js environment'
+        uses: ./.github/actions/setup-nodejs
+        with:
+          need-cache-npm: true
+          need-cache-cypress: true
+
+      - name: 'Run Cucumber E2E tests'
+        run: npx nx e2e-ci ${{ inputs.project }}-cucumber-e2e --configuration=e2e-cucumber-coverage --skip-nx-cache
+
+      - name: 'Fix lcov SF paths'
+        run: |
+          sed -i "s|^SF:\\.\\./\${{ inputs.project }}/|SF:apps/${{ inputs.project }}/|g" \
+            coverage/apps/${{ inputs.project }}-cucumber-e2e/lcov.info
+
+      - name: 'Upload coverage artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.project }}-cucumber-e2e
+          path: coverage/apps/${{ inputs.project }}-cucumber-e2e/

@@ -30,6 +30,12 @@ This is a dedicated E2E testing application that validates user interactions and
 
 ## Running Tests
 
+### Prerequisites
+
+- `.env` file configured in the repository root (copy from `.env.sample`)
+- **Local:** Nx starts the Angular dev server automatically — no manual prerequisite needed
+- **CI mode:** requires a prior build: `nx build edc-ui-ng --configuration=coverage`
+
 ### Local Development (Interactive Mode)
 
 ```bash
@@ -47,17 +53,12 @@ nx e2e edc-ui-ng-cypress-e2e --spec=src/e2e/smoke.cy.ts
 - Automatic screenshots
 - Live reloading
 
-### Headless Mode (CI/CD)
+### CI Mode (with coverage, requires build)
 
 ```bash
-# Run in headless mode
-nx e2e-ci edc-ui-ng-cypress-e2e
-
-# Run all E2E tests in CI
-npm run test:all:ci
+# Run in CI mode with coverage on port 4201
+nx e2e-ci edc-ui-ng-cypress-e2e --configuration=e2e-cypress-coverage
 ```
-
-**Note:** The Angular UI (`edc-ui-ng`) must be running for E2E tests to execute. Nx handles starting the dev server automatically.
 
 ## Test Structure
 
@@ -307,7 +308,7 @@ afterEach(() => {
 
 - Location: `cypress.config.ts`
 - Base URL configured to Angular dev server
-- Viewport size, video recording, screenshot settings
+- Screenshots on failure enabled, video disabled by default
 
 **Environment Variables:**
 
@@ -336,17 +337,18 @@ cy.log('Message'); // Log to command log
 **GitHub Actions / CI Pipelines:**
 
 ```bash
-# Run in headless mode with video recording
-nx e2e-ci edc-ui-ng-cypress-e2e
+# Run in CI mode with coverage (port 4201, requires prior build)
+nx e2e-ci edc-ui-ng-cypress-e2e --configuration=e2e-cypress-coverage
 
-# Videos and screenshots saved to:
-# - dist/cypress/apps/edc-ui-ng-cypress-e2e/videos/
-# - dist/cypress/apps/edc-ui-ng-cypress-e2e/screenshots/
+# Artifacts saved to:
+# - cypress/edc-ui-ng-cypress-e2e/screenshots/
+# - cypress/edc-ui-ng-cypress-e2e/videos/  (video: false by default)
 ```
 
 ## Related Documentation
 
-- **UI Application:** See `apps/edc-ui-ng/README.md` for Angular UI details
-- **Cucumber E2E:** See `apps/edc-ui-ng-cucumber-e2e/README.md` for BDD approach
-- **Workspace:** See root `CLAUDE.md` for workspace-level commands
+- **Overview:** See root [README.md](../../README.md) for quick start and environment variables
+- **UI Application:** See [apps/edc-ui-ng/README.md](../edc-ui-ng/README.md) for Angular UI details
+- **Cucumber E2E:** See [apps/edc-ui-ng-cucumber-e2e/README.md](../edc-ui-ng-cucumber-e2e/README.md) for BDD approach
+- **Workspace:** See root [CLAUDE.md](../../CLAUDE.md) for workspace-level commands
 - **Cypress Docs:** https://docs.cypress.io/

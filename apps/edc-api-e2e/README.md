@@ -22,6 +22,11 @@ This is a dedicated E2E testing application that validates the API endpoints of 
 
 ## Running Tests
 
+### Prerequisites
+
+- `.env` file configured in the repository root (copy from `.env.sample`)
+- The API server starts and stops automatically via `global-setup.ts` / `global-teardown.ts` — no manual prerequisite needed
+
 ### Local Development
 
 ```bash
@@ -34,15 +39,6 @@ nx e2e edc-api-e2e --watch
 # Run with coverage
 nx e2e edc-api-e2e --coverage
 ```
-
-### CI/CD
-
-```bash
-# Run E2E tests optimized for CI
-nx e2e-ci edc-api-e2e
-```
-
-**Note:** The API server (`edc-api`) must be running for E2E tests to execute. Jest's global setup/teardown handles starting and stopping the server automatically.
 
 ## Test Structure
 
@@ -214,22 +210,9 @@ src/edc-api/
 - Extends workspace base configuration
 - Test-specific compiler options
 
-## CI/CD Integration
-
-The `e2e-ci` target is optimized for continuous integration:
-
-- Runs in headless mode
-- Generates JUnit XML reports
-- Faster execution with CI-specific settings
-
-**Example CI command:**
-
-```bash
-npm run test:all:ci  # Runs all tests including e2e-ci targets
-```
-
 ## Related Documentation
 
-- **API Application:** See `apps/edc-api/README.md` for API implementation details
-- **Workspace:** See root `CLAUDE.md` for workspace-level commands
-- **Nx Guidelines:** See root `AGENTS.md` for Nx-specific workflows
+- **Overview:** See root [README.md](../../README.md) for quick start and environment variables
+- **API Application:** See [apps/edc-api/README.md](../edc-api/README.md) for API implementation details
+- **Workspace:** See root [CLAUDE.md](../../CLAUDE.md) for workspace-level commands
+- **Nx Guidelines:** See root [AGENTS.md](../../AGENTS.md) for Nx-specific workflows

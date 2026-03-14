@@ -58,6 +58,15 @@
         "runBuildTargetDependencies": false
       }
     },
+    "test": {
+      "cache": true,
+      "executor": "@nx/jest:jest",
+      "inputs": ["default", "^production"],
+      "options": {
+        "jestConfig": "apps/edc-api/jest.config.ts"
+      },
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
+    },
     "typecheck": {
       "executor": "nx:run-commands",
       "options": {
@@ -65,23 +74,6 @@
         "cwd": "apps/edc-api"
       },
       "outputs": []
-    },
-    "stack": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "nx run edc-api:serve:development",
-            "description": "Start the Emby Data Check API",
-            "forwardAllArgs": false
-          }
-        ],
-        "continuous": true,
-        "env": {
-          "NEST_DEBUG": "true"
-        },
-        "parallel": true
-      }
     }
   }
 }

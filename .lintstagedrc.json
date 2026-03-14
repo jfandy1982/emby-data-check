@@ -1,6 +1,6 @@
 {
   "**/*.{ts,tsx,js,jsx,mjs,cjs}": [
-    "bash -c 'npm run typecheck:affected'",
+    "bash -c 'npx nx affected --parallel --targets=typecheck'",
     "prettier --write",
     "eslint --fix",
     "cspell lint --no-must-find-files --no-progress"
