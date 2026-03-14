@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -30,7 +30,7 @@ jobs:
         run: npx nx test ${{ inputs.project }} --skip-nx-cache
 
       - name: 'Upload coverage artifacts'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: coverage-${{ inputs.project }}-unit
           path: coverage/apps/${{ inputs.project }}/
@@ -42,7 +42,7 @@ jobs:
       API_PORT: 3000
     steps:
       - name: 'Checkout repository'
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
@@ -56,7 +56,7 @@ jobs:
         run: npx start-server-and-test 'npx nx serve ${{ inputs.project }} --configuration=production' "http://localhost:${API_PORT}/api" 'npx nx e2e ${{ inputs.project }}-e2e'
 
       - name: 'Upload coverage artifacts'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: coverage-${{ inputs.project }}-e2e
           path: coverage/apps/${{ inputs.project }}-e2e/
