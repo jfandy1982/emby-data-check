@@ -2,7 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "allowJs": true,
-    "esModuleInterop": true,
     "module": "commonjs",
     "moduleResolution": "node10",
     "noFallthroughCasesInSwitch": true,
