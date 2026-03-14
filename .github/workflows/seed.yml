@@ -251,13 +251,6 @@ jobs:
             echo "No coverage files found to merge"
           fi
 
-      - name: 'Upload merged coverage artifact'
-        if: steps.download-coverage.outcome == 'success'
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-merged
-          path: coverage/merged-lcov.info
-
       - name: 'Upload results to Codecov.io'
         if: steps.download-coverage.outcome == 'success'
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7
