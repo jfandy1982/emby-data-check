@@ -34,3 +34,4 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-unit
           path: coverage/libs/${{ inputs.project }}/
+          retention-days: 3

@@ -34,6 +34,7 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-unit
           path: coverage/apps/${{ inputs.project }}/
+          retention-days: 3
 
   test-api-e2e:
     name: 'API E2E Tests'
@@ -60,3 +61,4 @@ jobs:
         with:
           name: coverage-${{ inputs.project }}-e2e
           path: coverage/apps/${{ inputs.project }}-e2e/
+          retention-days: 3
