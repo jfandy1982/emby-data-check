@@ -55,6 +55,11 @@ jobs:
       - name: 'Run Cypress E2E tests'
         run: npx nx e2e-ci ${{ inputs.project }}-cypress-e2e --configuration=e2e-cypress-coverage --skip-nx-cache
 
+      - name: 'Fix lcov SF paths'
+        run: |
+          sed -i "s|^SF:\\.\\./\${{ inputs.project }}/|SF:apps/${{ inputs.project }}/|g" \
+            coverage/apps/${{ inputs.project }}-cypress-e2e/lcov.info
+
       - name: 'Upload coverage artifacts'
         uses: actions/upload-artifact@v4
         with:
@@ -80,6 +85,11 @@ jobs:
 
       - name: 'Run Cucumber E2E tests'
         run: npx nx e2e-ci ${{ inputs.project }}-cucumber-e2e --configuration=e2e-cucumber-coverage --skip-nx-cache
+
+      - name: 'Fix lcov SF paths'
+        run: |
+          sed -i "s|^SF:\\.\\./\${{ inputs.project }}/|SF:apps/${{ inputs.project }}/|g" \
+            coverage/apps/${{ inputs.project }}-cucumber-e2e/lcov.info
 
       - name: 'Upload coverage artifacts'
         uses: actions/upload-artifact@v4
