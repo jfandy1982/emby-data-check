@@ -27,6 +27,7 @@ export default [
       '**/migrations.json',
       '**/experiments/**',
       '**/package-lock.json',
+      '.github/skills/monitor-ci/scripts/**',
     ],
   },
   {
