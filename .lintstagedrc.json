@@ -1,5 +1,5 @@
 {
-  "**/*.{ts,tsx,js,jsx,mjs,cjs}": [
+  "**/*.{ts,tsx,cts,mts,js,jsx,mjs,cjs}": [
     "bash -c 'npx nx affected --parallel --targets=typecheck'",
     "prettier --write",
     "eslint --fix",

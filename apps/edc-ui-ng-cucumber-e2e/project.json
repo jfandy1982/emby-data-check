@@ -1,10 +1,10 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["edc-ui-ng"],
   "name": "edc-ui-ng-cucumber-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/edc-ui-ng-cucumber-e2e/src",
   "tags": ["type:e2e", "ui:angular"],
+  "implicitDependencies": ["edc-ui-ng"],
   "targets": {
     "e2e": {
       "configurations": {

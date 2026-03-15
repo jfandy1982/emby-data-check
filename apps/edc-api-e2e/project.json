@@ -1,9 +1,9 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "implicitDependencies": ["edc-api"],
   "name": "edc-api-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "tags": ["type:e2e"],
+  "implicitDependencies": ["edc-api"],
   "targets": {
     "e2e": {
       "executor": "@nx/jest:jest",
@@ -11,7 +11,7 @@
         "description": "Local: headless, requires API running on port $API_PORT (default: 3000)"
       },
       "options": {
-        "jestConfig": "apps/edc-api-e2e/jest.config.ts"
+        "jestConfig": "apps/edc-api-e2e/jest.config.cts"
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     }

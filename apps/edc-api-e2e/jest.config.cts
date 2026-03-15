@@ -9,6 +9,7 @@ module.exports = {
     '^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
+  collectCoverageFrom: [],
   coverageDirectory: '<rootDir>/../../coverage/apps/edc-api-e2e',
   reporters: [
     'default',

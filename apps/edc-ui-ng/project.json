@@ -1,8 +1,8 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "edc-ui-ng",
-  "prefix": "edc-ng",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
+  "prefix": "edc-ng",
   "sourceRoot": "apps/edc-ui-ng/src",
   "tags": ["type:app", "domain:edc-ui-ng", "ui:angular"],
   "targets": {
@@ -153,7 +153,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "options": {
-        "jestConfig": "apps/edc-ui-ng/jest.config.ts",
+        "jestConfig": "apps/edc-ui-ng/jest.config.cts",
         "tsConfig": "apps/edc-ui-ng/tsconfig.spec.json"
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]

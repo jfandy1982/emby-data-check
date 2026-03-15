@@ -1,8 +1,8 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "edc-api",
-  "projectType": "application",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/edc-api/src",
+  "projectType": "application",
   "tags": ["type:app", "domain:api"],
   "targets": {
     "build": {
@@ -63,7 +63,7 @@
       "executor": "@nx/jest:jest",
       "inputs": ["default", "^production"],
       "options": {
-        "jestConfig": "apps/edc-api/jest.config.ts"
+        "jestConfig": "apps/edc-api/jest.config.cts"
       },
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"]
     },

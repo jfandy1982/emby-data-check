@@ -1,11 +1,5 @@
 {
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "typeCheckHostBindings": true
-  },
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "emitDecoratorMetadata": false,
     "isolatedModules": true,
@@ -16,10 +10,15 @@
     "noImplicitReturns": true,
     "noPropertyAccessFromIndexSignature": true,
     "strict": true,
-    "target": "es2022",
-    "lib": ["dom", "es2022"]
+    "target": "es2022"
   },
-  "extends": "../../tsconfig.base.json",
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "typeCheckHostBindings": true
+  },
   "files": [],
   "include": [],
   "references": [

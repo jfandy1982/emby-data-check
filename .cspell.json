@@ -26,6 +26,9 @@
   "flagWords": [],
   "ignorePaths": [
     "**/.git/**",
+    "**/.github/agents/**",
+    "**/.github/prompts/**",
+    "**/.github/skills/**",
     "**/.husky/**",
     "**/.vscode/**",
     ".cspell.json",
