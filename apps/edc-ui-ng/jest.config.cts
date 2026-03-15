@@ -2,7 +2,15 @@ module.exports = {
   displayName: 'edc-ui-ng',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  collectCoverageFrom: ['src/**/*.ts', 'src/**/*.html', '!src/main.ts', '!src/index.html', '!src/test-setup.ts', '!src/app/app.config.ts', '!src/**/*.spec.ts'],
+  collectCoverageFrom: [
+    'src/**/*.ts',
+    'src/**/*.html',
+    '!src/main.ts',
+    '!src/index.html',
+    '!src/test-setup.ts',
+    '!src/app/app.config.ts',
+    '!src/**/*.spec.ts',
+  ],
   coverageDirectory: '<rootDir>/../../coverage/apps/edc-ui-ng',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
