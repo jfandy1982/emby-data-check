@@ -27,7 +27,9 @@ jobs:
           need-cache-cypress: false
 
       - name: 'Run unit tests'
-        run: npx nx test ${{ inputs.project }} --skip-nx-cache
+        run: npx nx test ${{ inputs.project }}
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: 'Upload coverage artifacts'
         uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0

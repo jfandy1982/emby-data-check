@@ -185,13 +185,19 @@ jobs:
         run: npx cspell lint --dot --show-suggestions --no-progress --no-must-find-files --config ./.cspell.json .
 
       - name: 'Check linting rules'
-        run: npx nx run-many --parallel --targets=lint --all --skip-nx-cache
+        run: npx nx run-many --parallel --targets=lint --all
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: 'Check types'
-        run: npx nx run-many --parallel --targets=typecheck --all --skip-nx-cache
+        run: npx nx run-many --parallel --targets=typecheck --all
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
       - name: 'Build all projects'
-        run: npx nx run-many --parallel --targets=build --all --skip-nx-cache
+        run: npx nx run-many --parallel --targets=build --all
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
 
   run-api:
     name: 'API Pipeline'
